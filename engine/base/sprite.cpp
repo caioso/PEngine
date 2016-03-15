@@ -3,6 +3,7 @@
 Sprite::Sprite (unsigned char const* asset) :
                 _x(0), _y(0), _width(0), _height(0), _rotation(0), _asset(asset)
 {
+    _visibility = visible;
     _parent = NULL;
     DefineSprite ();
 }
@@ -10,6 +11,7 @@ Sprite::Sprite (unsigned char const* asset) :
 Sprite::Sprite (unsigned char const* asset, float width, float height) :
                 _x(0), _y(0), _width(width), _height(height), _rotation(0), _asset(asset)
 {
+    _visibility = visible;
     _parent = NULL;
     DefineSprite ();
 }
@@ -17,6 +19,7 @@ Sprite::Sprite (unsigned char const* asset, float width, float height) :
 Sprite::Sprite (unsigned char const* asset, float x, float y, float width, float height) :
                 _x(x), _y(y), _width(width), _height(height), _asset(asset)
 {
+    _visibility = visible;
     _parent = NULL;
     DefineSprite ();
 }
@@ -65,4 +68,10 @@ void Sprite::DefineSprite ()
     _tex = GRRLIB_LoadTexture(_asset);
     GRRLIB_InitTileSet(_tex, _width, _height, 0);
     GRRLIB_SetMidHandle(_tex, true);
+}
+
+Sprite::~Sprite()
+{
+  delete _parent;
+  delete _asset;
 }

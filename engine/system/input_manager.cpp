@@ -31,8 +31,8 @@ void InputManager::UpdateInput ()
         // Down keys
         _registered_controllers[i]->SetKeysDown(WPAD_ButtonsDown(_registered_controllers[i]->GetChannel()));
         // Up Keys
-        _registered_controllers[i]->SetKeysUp(WPAD_ButtonsDown(_registered_controllers[i]->GetChannel()));
+        _registered_controllers[i]->SetKeysUp(WPAD_ButtonsUp(_registered_controllers[i]->GetChannel()));
         // Held Keys
-        _registered_controllers[i]->SetKeysHeld(WPAD_ButtonsDown(_registered_controllers[i]->GetChannel()));
+        _registered_controllers[i]->SetKeysHeld(WPAD_ButtonsHeld(_registered_controllers[i]->GetChannel()));
     }
 }

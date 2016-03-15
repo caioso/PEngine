@@ -19,17 +19,17 @@ void Engine::Loop ()
     {
         if (finish_main_loop)
             break;
-        
+
         // Read Input - BEGIN
         InputManager::UpdateInput ();
-        
+
         // Update Scripts - MIDDLE
         ScriptManager::UpdateScripts();
-        
+
         // Update Graphics and Audio - END
-        Debug::Render();
         AudioEngine::StreamAudio();
         GraphicEngine::Render();
+        Debug::Render();
         GRRLIB_Render();
     }
 }

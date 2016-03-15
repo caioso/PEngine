@@ -26,21 +26,24 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
         RenderSprites(__tmp);
         if (__tmp->GetTexture() != NULL)
         {
-            // Correct Position in terms of all parents
-            float __x = 0, __y = 0;
-            Sprite * __ref = __tmp->_parent;
-            
-            // Compute Relative positions
-            while (__ref != NULL)
+            if (__tmp->_visibility == visible)
             {
-                __x += __ref->_x;
-                __y += __ref->_y;
-                __ref = __ref->_parent;
+                // Correct Position in terms of all parents
+                float __x = 0, __y = 0;
+                Sprite * __ref = __tmp->_parent;
+                
+                // Compute Relative positions
+                while (__ref != NULL)
+                {
+                    __x += __ref->_x;
+                    __y += __ref->_y;
+                    __ref = __ref->_parent;
+                }
+                
+                GRRLIB_DrawImg(__tmp->_x + __x, __tmp->_y + __y, __tmp->GetTexture(), __tmp->_rotation, 1, 1, PPL_COLOR_WHITE);
             }
-            
-            GRRLIB_DrawImg(__tmp->_x + __x, __tmp->_y + __y, __tmp->GetTexture(), __tmp->_rotation, 1, 1, PPL_COLOR_WHITE);
         }
-        else
-            Debug::LogWarning("Sprite without texture loaded. Skipped.");
+        //else
+        //    Debug::LogWarning("Sprite without texture loaded. Skipped.");
     }
 }

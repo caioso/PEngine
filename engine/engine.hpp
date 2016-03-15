@@ -5,6 +5,10 @@
 #include <grrlib.h>
 #include <stdlib.h>
 #include <wiiuse/wpad.h>
+#include <string>
+#include <time.h>
+#include <memory>
+#include <math.h>
 #include <sstream>
 #include <sdl/SDL_thread.h>
 #include <sdl/SDL_timer.h>
@@ -29,20 +33,24 @@
 #include "system/input_manager.hpp"
 #include "system/script_manager.hpp"
 
+// Type Includes
+#include "types/point2d.hpp"
+#include "types/dim2D.hpp"
+
 class Engine
 {
     // Control main loop execition.
     private: static bool finish_main_loop;
-    
+
     // Initialize engine
     public: static void Init ();
-    
+
     // Game Main Loop
     public: static void Loop ();
-    
+
     // Abort Loop in the next iteration of the main loop.
     public: static void AbortLoop ();
-    
+
     // Finalizes the engine resources.
     public: static void Finalize ();
 };
