@@ -127,6 +127,7 @@ board_task.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dgreen1.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dyellow1.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dpurple1.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dgarbage.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/cursor.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/normal_rules.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/rules_interface.hpp
@@ -384,6 +385,8 @@ board_task.o: \
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dyellow1.h:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dpurple1.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dgarbage.h:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/cursor.h:
 

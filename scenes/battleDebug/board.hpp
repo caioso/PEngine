@@ -22,6 +22,7 @@
 #include "../../assets/graphics/dgreen1.h"
 #include "../../assets/graphics/dyellow1.h"
 #include "../../assets/graphics/dpurple1.h"
+#include "../../assets/graphics/dgarbage.h"
 #include "../../assets/graphics/cursor.h"
 
 // Board class centers everything regarding rules and board presentation.
@@ -51,7 +52,7 @@ class Board
     // @param pos: the origin point used as reference for the board
     // coordinate system.
     // @param cur_pos: Initial cursor position.
-    public: Board(RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos);
+    public: Board(RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, int initial_height);
 
     // Updates cursor position and graphics position based on a point.
     // @param pos: relative position object, each unity in pos object
@@ -89,11 +90,18 @@ class Board
     // @return type buffer.
     private: const unsigned char *  decodeType (unsigned int type);
     
+    // Decodes a type image when the panel is being broken.
+    // @param type: panel type to be decode.
+    // @return type buffer.
     private: const unsigned char *  decodeLightType (unsigned int type);
 
     // Returns current cursor position.
     // @return Point2D: current cursor position.
     public: Point2D getCursorPosition() { return _cursorPosition; }
+    
+    public: void DropGargabe (unsigned int size, unsigned int position);
+    
+    public: void DEBUGGarbage ();
 
     // Default Constructor
     public: ~Board ();

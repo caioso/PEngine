@@ -12,7 +12,7 @@ BoardTask::BoardTask (std::string board_name,
     // For Now, We'll include normal rules
     NormalRules * _rules = new NormalRules(board_dim);
     _board_name = board_name;
-    _board = new Board(dynamic_cast<RulesInterface*>(_rules), board_dim, board_pos, cursor_pos);
+    _board = new Board(dynamic_cast<RulesInterface*>(_rules), board_dim, board_pos, cursor_pos, 6);
 
     // Configure Wiimotes
     _remote = new Controller(player_number);
@@ -50,6 +50,10 @@ void BoardTask::Update ()
     
     if (_remote->CheckKeysOR(PPL_KEY_UP, 1, PPL_BUTTON_B))
         _board->SlowDown();
+
+    if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_PLUS))
+        _board->DEBUGGarbage();
+
     
 #endif
 #if WII
