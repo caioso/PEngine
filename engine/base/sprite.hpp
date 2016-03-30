@@ -36,13 +36,13 @@ class Sprite
 
     // Asset defining constructor. The Sprite coordinates are set to (0,0). Width and height set null.
     // @param asset: unsigned char array of the asset.
-    public: Sprite (unsigned char const* asset);
+    public: Sprite (GRRLIB_texImg* asset);
 
     // Asset defining constructor. The Sprite coordinates are set to (0,0).
     // @param asset: unsigned char array of the asset.
     // @param width: sprite image width.
     // @param height: sprite image height.
-    public: Sprite (unsigned char const* asset, float width, float height);
+    public: Sprite (GRRLIB_texImg* asset, float width, float height);
 
     // Full definition constructor.
     // @param asset: unsigned char array of the asset.
@@ -50,14 +50,14 @@ class Sprite
     // @param y: asset y coordinate.
     // @param width: sprite image width.
     // @param height: sprite image height.
-    public: Sprite (unsigned char const* asset, float x, float y, float width, float height);
+    public: Sprite (GRRLIB_texImg* asset, float x, float y, float width, float height);
 
     // Return Texture Object
     public: GRRLIB_texImg*  GetTexture() { return _tex; }
 
     // Manually loads an asset object into the Sprite.
     // @param asset: asset array.
-    public: void SetAsset (unsigned char const* asset, float width, float height);
+    public: void SetAsset (GRRLIB_texImg* asset, float width, float height);
 
     // Add child Sprite to the current Sprite children list.
     // @param child: Child sprite to be stored in this Sprite children list.

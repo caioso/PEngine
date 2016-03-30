@@ -1,4 +1,4 @@
-how to convert MP3 images to bin:
+how to convert MP3 to bin:
 ffmpeg -i <sound_name>.mp3 -f s16be -acodec pcm_s16be <sound_name>.pcm
 
 /opt/devkitpro/devkitPPC/bin/raw2c <sound_name>.pcm

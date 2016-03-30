@@ -18,10 +18,10 @@ class LogicPanel
     public: int _wait;
     
     // Garbage only data
-    public: LogicPanel * _up;
-    public: LogicPanel * _down;
-    public: LogicPanel * _left;
-    public: LogicPanel * _right;
+    public: LogicPanel * _up = NULL;
+    public: LogicPanel * _down = NULL;
+    public: LogicPanel * _left = NULL;
+    public: LogicPanel * _right = NULL;
 };
 
 #endif // __LOGIC_PANEL__

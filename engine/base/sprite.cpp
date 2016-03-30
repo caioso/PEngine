@@ -1,35 +1,31 @@
 #include "sprite.hpp"
 
-Sprite::Sprite (unsigned char const* asset) :
-                _x(0), _y(0), _width(0), _height(0), _rotation(0), _asset(asset)
+Sprite::Sprite (GRRLIB_texImg* asset) :
+                _x(0), _y(0), _width(0), _height(0), _rotation(0), _tex(asset)
 {
     _visibility = visible;
     _parent = NULL;
-    DefineSprite ();
 }
 
-Sprite::Sprite (unsigned char const* asset, float width, float height) :
-                _x(0), _y(0), _width(width), _height(height), _rotation(0), _asset(asset)
+Sprite::Sprite (GRRLIB_texImg* asset, float width, float height) :
+                _x(0), _y(0), _width(width), _height(height), _rotation(0), _tex(asset)
 {
     _visibility = visible;
     _parent = NULL;
-    DefineSprite ();
 }
 
-Sprite::Sprite (unsigned char const* asset, float x, float y, float width, float height) :
-                _x(x), _y(y), _width(width), _height(height), _asset(asset)
+Sprite::Sprite (GRRLIB_texImg* asset, float x, float y, float width, float height) :
+                _x(x), _y(y), _width(width), _height(height), _tex(asset)
 {
     _visibility = visible;
     _parent = NULL;
-    DefineSprite ();
 }
 
-void Sprite::SetAsset (unsigned char const* asset, float width, float height)
+void Sprite::SetAsset (GRRLIB_texImg* asset, float width, float height)
 {
     _width = width;
     _height = height;
-    _asset = asset;
-    DefineSprite ();
+    _tex = asset;
 }
 
 void Sprite::AddChild (Sprite* child)
@@ -61,13 +57,6 @@ void Sprite::RemoveChild (Sprite* child)
         }
     }
     Debug::LogWarning("Child not found in children list.");
-}
-
-void Sprite::DefineSprite ()
-{
-    _tex = GRRLIB_LoadTexture(_asset);
-    GRRLIB_InitTileSet(_tex, _width, _height, 0);
-    GRRLIB_SetMidHandle(_tex, true);
 }
 
 Sprite::~Sprite()

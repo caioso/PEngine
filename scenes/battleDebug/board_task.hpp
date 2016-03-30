@@ -7,6 +7,10 @@
 #include "board.hpp"
 #include "rules/normal_rules.hpp"
 
+// Debug Audio
+#include "../../assets/audio/move.h"
+#include "../../assets/audio/swapfx.h"
+
 
 class BoardTask : public Runnable
 {
@@ -14,7 +18,10 @@ class BoardTask : public Runnable
     public: std::string _board_name;
     private: Board * _board;
     private: Controller * _remote;
-    //private: Panel * _p;
+    
+    //Debug
+    private: Sound * _move;
+    private: Sound * _swap;
 
     // Custom Methods
     // Prepares the board objects for further initializaiton

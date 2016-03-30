@@ -116,6 +116,7 @@ board.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/../types/panel.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/../types/changes.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/../types/logic_panel.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./sprite_manager.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dred.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dblue.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dgreen.h \
@@ -127,7 +128,8 @@ board.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dyellow1.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dpurple1.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dgarbage.h \
- /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/cursor.h
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/cursor.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/cursor1.h
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./board.hpp:
 
@@ -361,6 +363,8 @@ board.o: \
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/../types/logic_panel.hpp:
 
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./sprite_manager.hpp:
+
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dred.h:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dblue.h:
@@ -384,3 +388,5 @@ board.o: \
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/dgarbage.h:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/cursor.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/cursor1.h:

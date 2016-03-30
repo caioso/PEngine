@@ -18,6 +18,10 @@ BoardTask::BoardTask (std::string board_name,
     _remote = new Controller(player_number);
     // Register Controller
     InputManager::RegisterController(_remote);
+    
+    // Register Sound Effects
+    _swap = new Sound(swapfx, swapfx_size, 1, 48000);
+    _move = new Sound(move, move_size, 1, 48000);
 }
 
 void BoardTask::Start ()
@@ -35,17 +39,32 @@ void BoardTask::Update ()
     else
     {
         if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_LEFT))
-          _cursor_position.setX(_cursor_position.getX() - 1);
+        {
+            _cursor_position.setX(_cursor_position.getX() - 1);
+            AudioEngine::PlaySFX(_move);
+        }
         else if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_RIGHT))
-          _cursor_position.setX(_cursor_position.getX() + 1);
+        {
+            _cursor_position.setX(_cursor_position.getX() + 1);
+            AudioEngine::PlaySFX(_move);
+        }
 
         if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_UP))
-          _cursor_position.setY(_cursor_position.getY() - 1);
+        {
+            _cursor_position.setY(_cursor_position.getY() - 1);
+            AudioEngine::PlaySFX(_move);
+        }
         else if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_DOWN))
-          _cursor_position.setY(_cursor_position.getY() + 1);
+        {
+            _cursor_position.setY(_cursor_position.getY() + 1);
+            AudioEngine::PlaySFX(_move);
+        }
         
         if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_A))
+        {
             _board->Swap();
+            AudioEngine::PlaySFX(_swap);
+        }
     }
     
     if (_remote->CheckKeysOR(PPL_KEY_UP, 1, PPL_BUTTON_B))
@@ -62,21 +81,39 @@ void BoardTask::Update ()
     else
     {
         if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_UP ))
+        {
             _cursor_position.setX(_cursor_position.getX() - 1);
+            //AudioEngine::PlaySFX(_move);
+        }
         else if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_DOWN))
+        {
             _cursor_position.setX(_cursor_position.getX() + 1);
+            //AudioEngine::PlaySFX(_move);
+        }
         
         if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_RIGHT))
+        {
             _cursor_position.setY(_cursor_position.getY() - 1);
+            //AudioEngine::PlaySFX(_move);
+        }
         else if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_LEFT))
+        {
             _cursor_position.setY(_cursor_position.getY() + 1);
+            //AudioEngine::PlaySFX(_move);
+        }
         
         if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_2))
+        {
             _board->Swap();
+            //AudioEngine::PlaySFX(_swap);
+        }
     }
     
     if (_remote->CheckKeysOR(PPL_KEY_UP, 1, PPL_BUTTON_1))
         _board->SlowDown();
+    
+    if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_PLUS))
+        _board->DEBUGGarbage();
 #endif
 
     _board->UpdateCursorPosition(_cursor_position);

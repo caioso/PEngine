@@ -41,7 +41,8 @@ class AudioEngine
     // the songs are transitioned with a fade-out/fade-in effect.
     // @param music: Music/Sound object.
     // @param transition: enables/disables transition when playing differend songs.
-    public: static void PlayMusic (Music * music, bool transition = true);
+    // @param volume: Intended music volume.
+    public: static void PlayMusic (Music * music, bool transition = true, int volume = 255);
     
     // Stop MP3 Full music track. By default, the songs is transitioned with a fade-out effect.
     // @param music: Music/Sound object.
@@ -50,6 +51,10 @@ class AudioEngine
     
     // Fades volume out with easing transition.
     private: static bool VolumeFadeOut ();
+    
+    // Set global music volume to desired value.
+    // @param volume: intended music volume (range 0-255).
+    public: static void SetMusicVolume (int volume);
     
     // Fades volume in with easing transition.
     private: static bool VolumeFadeIn ();

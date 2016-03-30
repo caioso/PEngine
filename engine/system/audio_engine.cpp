@@ -101,7 +101,7 @@ void AudioEngine::StreamAudio ()
     }
 }
 
-void AudioEngine::PlayMusic (Music * music, bool transition)
+void AudioEngine::PlayMusic (Music * music, bool transition, int volume)
 {
     if (music == _current_music)
     {
@@ -125,7 +125,7 @@ void AudioEngine::PlayMusic (Music * music, bool transition)
     }
     else
     {
-        _music_volume = 255;
+        _music_volume = volume;
         MP3Player_Volume(_music_volume);
     }
     
@@ -159,6 +159,11 @@ bool AudioEngine::VolumeFadeOut ()
         return true;
     else
         return false;
+}
+
+void AudioEngine::SetMusicVolume (int volume)
+{
+    _music_volume = volume;
 }
 
 bool AudioEngine::VolumeFadeIn ()

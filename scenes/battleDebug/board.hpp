@@ -10,20 +10,7 @@
 #include "types/changes.hpp"
 #include "cursor.hpp"
 #include "rules/rules_interface.hpp"
-
-// Assets
-#include "../../assets/graphics/dred.h"
-#include "../../assets/graphics/dblue.h"
-#include "../../assets/graphics/dgreen.h"
-#include "../../assets/graphics/dyellow.h"
-#include "../../assets/graphics/dpurple.h"
-#include "../../assets/graphics/dred1.h"
-#include "../../assets/graphics/dblue1.h"
-#include "../../assets/graphics/dgreen1.h"
-#include "../../assets/graphics/dyellow1.h"
-#include "../../assets/graphics/dpurple1.h"
-#include "../../assets/graphics/dgarbage.h"
-#include "../../assets/graphics/cursor.h"
+#include "sprite_manager.hpp"
 
 // Board class centers everything regarding rules and board presentation.
 // Animations are also defined in this class.
@@ -41,7 +28,10 @@ class Board
     private: vector<Change> _changes;
     private: Sprite * _boardContainer;
     private: Sprite * _tmpContainer;
-
+    private: unsigned int _cursorFrame;
+    private: bool _changeCursorFrame;
+    private: SpriteManager * _spriteManager;
+    
     // Control Elements
     private: Point2D _cursorPosition;
 
@@ -55,6 +45,7 @@ class Board
     public: Board(RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, int initial_height);
 
     // Updates cursor position and graphics position based on a point.
+    // This method also update sthe cursor animation frames.
     // @param pos: relative position object, each unity in pos object
     // actually represents a columna and a row, which will be converted
     // to actual pixel values, in the function.
@@ -80,20 +71,15 @@ class Board
     
     public: void SlowDown();
     
-    // Helper function. Update the state of panels above targetY.
-    // @param targetX: horizontal position of the panel.
-    // @param targetY: vertical position of the panel.
-    private: void BlockAbove (unsigned int targetX, unsigned int targetY);
-    
     // Decodes a type and returns the buffer related to the type.
     // @param type: panel type to be decode.
     // @return type buffer.
-    private: const unsigned char *  decodeType (unsigned int type);
+    private: GRRLIB_texImg * decodeType (unsigned int type);
     
     // Decodes a type image when the panel is being broken.
     // @param type: panel type to be decode.
     // @return type buffer.
-    private: const unsigned char *  decodeLightType (unsigned int type);
+    private: GRRLIB_texImg *  decodeLightType (unsigned int type);
 
     // Returns current cursor position.
     // @return Point2D: current cursor position.
