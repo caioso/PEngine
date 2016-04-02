@@ -21,7 +21,6 @@ class Sprite
     public: float _rotation;
     public: Sprite * _parent;
     public: Visibility _visibility;
-    private: unsigned char const* _asset;
     private: GRRLIB_texImg* _tex;
     private: vector<Sprite*> _children;
 

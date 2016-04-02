@@ -11,6 +11,7 @@
 #include "cursor.hpp"
 #include "rules/rules_interface.hpp"
 #include "sprite_manager.hpp"
+#include "board_constants.hpp"
 
 // Board class centers everything regarding rules and board presentation.
 // Animations are also defined in this class.
@@ -18,16 +19,16 @@ class Board
 {
     // Graphics Elements
     private: Panel *** _boardGraphics;
-    private: Panel ** _tmpGraphics;
+    private: Panel ** _nextRowGraphics;
     private: LogicPanel *** _boardLogic;
-    private: LogicPanel ** _tmpLogic;
+    private: LogicPanel ** _nextRowLogic;
     private: Dim2D _dimensions;
     private: Point2D _position;
     private: Cursor * _cursor;
     private: RulesInterface * _rules;
     private: vector<Change> _changes;
     private: Sprite * _boardContainer;
-    private: Sprite * _tmpContainer;
+    private: Sprite * _nextRowContainer;
     private: unsigned int _cursorFrame;
     private: bool _changeCursorFrame;
     private: SpriteManager * _spriteManager;
@@ -54,10 +55,10 @@ class Board
     // Swap two panels based on the rules specification.
     public: void Swap();
     
-    // Update Board Graphics once at each frame. Uses change language to
+    // Update Board Graphics once at each frame. Uses change operation language to
     // parse each change the rules have commited and update the frame
     // accordingly.
-    public: void BindLogic();
+    public: void InterpretOperations();
     
     // Detect combos in the board and promp the related panels to be broken.
     public: void Detect();
@@ -65,30 +66,74 @@ class Board
     // Update panel position (vertically) to make the ilusion of gravity.
     public: void Fall();
     
+    // Update board update movement (Slide up/down depending on the rule).
     public: void Slide();
     
+    // Increases slide speed on key pressed
     public: void SpeedUp();
     
+    // Reduces slide speed on key released.
     public: void SlowDown();
     
     // Decodes a type and returns the buffer related to the type.
     // @param type: panel type to be decode.
-    // @return type buffer.
-    private: GRRLIB_texImg * decodeType (unsigned int type);
-    
-    // Decodes a type image when the panel is being broken.
-    // @param type: panel type to be decode.
-    // @return type buffer.
-    private: GRRLIB_texImg *  decodeLightType (unsigned int type);
+    // @param style: panel image type.
+    // @return Texture reference.
+    private: GRRLIB_texImg * DecodeType (unsigned int type, unsigned int style = PANEL_NORMAL_SPRITE);
 
     // Returns current cursor position.
     // @return Point2D: current cursor position.
     public: Point2D getCursorPosition() { return _cursorPosition; }
     
+    // Create new garbages of given size on a given position.
+    // @param size: Garbage size. This will stack up rows as the garbage size dont fit the row.
+    // @param position: initial garbage position.
     public: void DropGargabe (unsigned int size, unsigned int position);
     
+    // Debug function to drop garbage in the board.
     public: void DEBUGGarbage ();
-
+    
+    // Instantates System matrices.
+    private: void InstantiateMatrices ();
+    
+    // Return a panel type different from a previous type.
+    // Note: The number of types is meant to change in the future, as other dificulty modes are added.
+    // @param previous: previous type. The return type is guaranteed to be different from previous.
+    // @param above: above type. The return type is guaranteed to be different from panel above.
+    // @param mode: Number of panels to be considered in the random selection.
+    // @return random type without repetition.
+    private: char GetNextTypeWithoutRepetition (char previous, char above = PANEL_VOID_TYPE, int mode = EASY_MODE_PANEL_NUM);
+    
+    // Instantiates the main game matrices (board and next row) and intializes their logic and graphics.
+    // @param initial_height: Initial board height. Only this amount of rows are initialized.
+    private: void InstantiateAndIntializeGameMatrices(int initial_height);
+    
+    // Initializes cursor objects and set its correct position on screen.
+    private: void InitializeCursor ();
+    
+    // Implements Swap Operation.
+    // @param change: Change operation binary code.
+    private: void SwapOperation(Change change);
+    
+    // Implements Destroy Operation
+    // @param change: Change operation binary code.
+    private: void DestroyOperation(Change change);
+    
+    // Implements Fall Operation
+    // @param change: Change operation binary code.
+    private: void FallOperation (Change change);
+    
+    // Implements Panel Graphics Style
+    // @param change: Change operation binary code.
+    private: void PanelGraphicsStyleOperation(Change change);
+    
+    // Implements Transport Operation
+    private: void TransportOperation ();
+    
+    // Implements Garbage Operation
+    // @param change: Change operation binary code.
+    private: void GarbageOperation(Change change);
+    
     // Default Constructor
     public: ~Board ();
 };

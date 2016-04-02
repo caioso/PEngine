@@ -62,5 +62,4 @@ void Sprite::RemoveChild (Sprite* child)
 Sprite::~Sprite()
 {
   delete _parent;
-  delete _asset;
 }

@@ -115,10 +115,11 @@ class NormalRules : public RulesInterface
                     {
                         boardLogic[i][j]->_wait--;
                         Change __change = 0;
+                        __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
                         if (boardLogic[i][j]->_wait%6 >= 3)
-                            __change = AddChangeType(__change, LIGHT_IMAGE);
+                            __change = AddPanelImageStyle(__change, PANEL_NORMAL_SPRITE);
                         else
-                            __change = AddChangeType(__change, NORMAL_IMAGE);
+                            __change = AddPanelImageStyle(__change, PANEL_BRIGHT_SPRITE);
                         __change = AddTargetPanelX(__change, j);
                         __change = AddTargetPanelY(__change, i);
                         changes.push_back(__change);

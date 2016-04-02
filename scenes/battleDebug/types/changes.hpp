@@ -17,6 +17,9 @@ typedef uint32_t Change;
 // Extract Destination X
 #define ExtractDestinationPanelX(OP) (((OP>>8)&255)&15)
 
+// Extract Panel image style
+#define ExtractPanelImageStyle(OP) (((OP>>8)&255)&15)
+
 // Extract Destination Y
 #define ExtractDestinationPanelY(OP) ((((OP>>8)&255)>>4)&15)
 
@@ -44,6 +47,9 @@ typedef uint32_t Change;
 // Add Destination Panel X to Change
 #define AddDestinationPanelX(OP, A) ((OP) | ((A&15)<<8))
 
+// Add Panel Image Style
+#define AddPanelImageStyle(OP, A) ((OP) | ((A&15)<<8))
+
 // Add Destination Panel Y to Change
 #define AddDestinationPanelY(OP, A) ((OP) | (((A&15)<<4)<<8))
 
@@ -56,9 +62,7 @@ typedef uint32_t Change;
 
 #define TRANSPORT_OPERATION 0x4
 
-#define LIGHT_IMAGE 0x5
-
-#define NORMAL_IMAGE 0x6
+#define PANEL_GRAPHICS_STYLE_OPERATION 0x5
 
 #define GARBAGE_OPERATION 0x7
 

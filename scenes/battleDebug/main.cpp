@@ -15,12 +15,12 @@ int main(int argc, char **argv)
     // Declare and Subscribe your scripts here.
     BoardTask * __board_p1 = new BoardTask("P1 Board",
                                         Dim2D(7,12),
-                                        Point2D(32,48 + 32 + 16 + 3 + 48),
+                                        Point2D(32,48 + 32 + 16 + 3),
                                         Point2D(0,5),
                                         PPL_PLAYER_1);
     BoardTask * __board_p2 = new BoardTask("P2 Board",
                                         Dim2D(7,12),
-                                        Point2D(320,48 + 32 + 16 + 3 + 48),
+                                        Point2D(320,48 + 32 + 16 + 3),
                                         Point2D(3,5),
                                         PPL_PLAYER_2);
     

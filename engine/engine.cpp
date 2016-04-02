@@ -29,7 +29,7 @@ void Engine::Loop ()
         // Update Graphics and Audio - END
         AudioEngine::StreamAudio();
         GraphicEngine::Render();
-        //Debug::Render();
+        Debug::Render();
         GRRLIB_Render();
     }
 }

@@ -117,13 +117,13 @@ void BoardTask::Update ()
 #endif
 
     _board->UpdateCursorPosition(_cursor_position);
-    _board->BindLogic();
+    _board->InterpretOperations();
     _board->Detect();
-    _board->BindLogic();
+    _board->InterpretOperations();
     _board->Fall();
-    _board->BindLogic();
+    _board->InterpretOperations();
     _board->Slide();
-    _board->BindLogic();
+    _board->InterpretOperations();
 }
 
 void BoardTask::End ()
