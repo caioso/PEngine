@@ -54,7 +54,7 @@ void Board::InstantiateAndIntializeGameMatrices(int initial_height)
     for (unsigned int i = 0; i < _dimensions.getWidth(); i++)
     {
         // Make sure the current panel is different from the previous.
-        char __random_type = GetNextTypeWithoutRepetition(__previous_type);
+        char __random_type = rand()%EASY_MODE_PANEL_NUM;//GetNextTypeWithoutRepetition(__previous_type);
         __previous_type = __random_type;
         
         // Instantiate Next-Row Panel Graphics
@@ -78,7 +78,7 @@ void Board::InstantiateAndIntializeGameMatrices(int initial_height)
         {
             // Make sure the current panel is different from the previous and the one above..
             __type_above = _boardLogic[i - 1][j]->_type;
-            char __random_type = GetNextTypeWithoutRepetition(__previous_type, i==0?PANEL_VOID_TYPE:__type_above);
+            char __random_type = rand()%EASY_MODE_PANEL_NUM; //GetNextTypeWithoutRepetition(__previous_type, i==0?PANEL_VOID_TYPE:__type_above);
             __previous_type = __random_type;
             
             // Instantiate and initialize new Logic Panel
@@ -280,6 +280,10 @@ void Board::SwapOperation(Change change)
     _boardLogic[__destinationY][__destinationX]->_type = __targetType;
     _boardLogic[__destinationY][__destinationX]->_state = __targetState;
     _boardLogic[__destinationY][__destinationX]->_wait = __targetWait;
+    
+    // Ignore Garbage Part
+    ClearGarbageData(_boardLogic[__targetY][__targetX]);
+    ClearGarbageData(_boardLogic[__destinationY][__destinationX]);
 }
 
 void Board::DestroyOperation(Change change)
@@ -295,6 +299,9 @@ void Board::DestroyOperation(Change change)
     _boardLogic[__targetY][__targetX]->_type = PANEL_VOID_TYPE;
     _boardLogic[__targetY][__targetX]->_state = 0;
     _boardLogic[__targetY][__targetX]->_wait = 0;
+    
+    // Ignore Garbage Part
+    ClearGarbageData(_boardLogic[__targetY][__targetX]);
 }
 
 void Board::FallOperation (Change change)
@@ -303,59 +310,36 @@ void Board::FallOperation (Change change)
     unsigned int __targetX = ExtractTargetPanelX(change);
     unsigned int __targetY = ExtractTargetPanelY(change);
     
-    // Extract extra derived information
+    // Extract derived and useful information
     int __targetType = _boardLogic[__targetY][__targetX]->_type;
     
-    // Update Panel below graphics
     _boardGraphics[__targetY + 1][__targetX]->_visibility = visible;
-    _boardGraphics[__targetY + 1][__targetX]->SetAsset(DecodeType(__targetType), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
-    
-    // Hide panel above
+    _boardGraphics[__targetY + 1][__targetX]->SetAsset(DecodeType(__targetType), 28, 28);
     _boardGraphics[__targetY][__targetX]->_visibility = hidden;
     
-    // If garbage, maintain its structure
-    if (__targetType == PANEL_GARBAGE_TYPE)
-    {
-        if (_boardLogic[__targetY][__targetX]->_left != NULL)
-        {
-            _boardLogic[__targetY + 1][__targetX]->_left = _boardLogic[__targetY + 1][__targetX - 1];
-            _boardLogic[__targetY][__targetX]->_left = NULL;
-        }
-        else
-            _boardLogic[__targetY + 1][__targetX]->_left = NULL;
-        
-        if (_boardLogic[__targetY][__targetX]->_right != NULL)
-        {
-            _boardLogic[__targetY + 1][__targetX]->_right = _boardLogic[__targetY + 1][__targetX + 1];
-            _boardLogic[__targetY][__targetX]->_right = NULL;
-        }
-        else
-            _boardLogic[__targetY + 1][__targetX]->_right = NULL;
-        
-        if (_boardLogic[__targetY][__targetX]->_up != NULL)
-        {
-            _boardLogic[__targetY + 1][__targetX]->_up = _boardLogic[__targetY][__targetX];
-            _boardLogic[__targetY][__targetX]->_up = NULL;
-        }
-        else
-            _boardLogic[__targetY + 1][__targetX]->_up = NULL;
-        
-        if (_boardLogic[__targetY][__targetX]->_down != NULL)
-        {
-            _boardLogic[__targetY + 1][__targetX]->_down = _boardLogic[__targetY + 2][__targetX];
-            _boardLogic[__targetY][__targetX]->_down = NULL;
-        }
-        else
-            _boardLogic[__targetY + 1][__targetX]->_down = NULL;
-    }
-    
-    // Update panel below logics
-    _boardLogic[__targetY + 1][__targetX]->_type = __targetType;
+    _boardLogic[__targetY + 1][__targetX]->_type = _boardLogic[__targetY][__targetX]->_type;
     _boardLogic[__targetY + 1][__targetX]->_state = 1;
+    _boardLogic[__targetY + 1][__targetX]->_wait = _boardLogic[__targetY][__targetX]->_wait;
+    _boardLogic[__targetY + 1][__targetX]->_positionX = _boardLogic[__targetY][__targetX]->_positionX;
+    _boardLogic[__targetY + 1][__targetX]->_positionY = _boardLogic[__targetY][__targetX]->_positionY;
+    _boardLogic[__targetY + 1][__targetX]->_sourceX = _boardLogic[__targetY][__targetX]->_sourceX;
+    _boardLogic[__targetY + 1][__targetX]->_sourceY = _boardLogic[__targetY][__targetX]->_sourceY;
+    _boardLogic[__targetY + 1][__targetX]->_width = _boardLogic[__targetY][__targetX]->_width;
+    _boardLogic[__targetY + 1][__targetX]->_height = _boardLogic[__targetY][__targetX]->_height;
+
+    if (__targetType == PANEL_GARBAGE_TYPE)
+        _boardLogic[__targetY + 1][__targetX]->_sourceY++;
     
-    // Update panel above logics
-    _boardLogic[__targetY][__targetX]->_type = PANEL_VOID_TYPE;
+    _boardLogic[__targetY][__targetX]->_type = -1;
     _boardLogic[__targetY][__targetX]->_state = 0;
+    _boardLogic[__targetY][__targetX]->_wait = -1;
+    _boardLogic[__targetY][__targetX]->_positionX = -1;
+    _boardLogic[__targetY][__targetX]->_positionY = -1;
+    _boardLogic[__targetY][__targetX]->_sourceX = -1;
+    _boardLogic[__targetY][__targetX]->_sourceY = -1;
+    _boardLogic[__targetY][__targetX]->_width = -1;
+    _boardLogic[__targetY][__targetX]->_height = -1;
+
 }
 
 void Board::PanelGraphicsStyleOperation(Change change)
@@ -394,22 +378,29 @@ void Board::TransportOperation ()
             // If garbage, maintain its structure
             if (_boardLogic[j][k]->_type == PANEL_GARBAGE_TYPE)
             {
-                _boardLogic[j][k]->_left = _boardLogic[j + 1][k]->_left;
-                _boardLogic[j][k]->_right = _boardLogic[j + 1][k]->_right;
-                _boardLogic[j][k]->_up = _boardLogic[j + 1][k]->_up;
-                _boardLogic[j][k]->_down = _boardLogic[j + 1][k]->_down;
+                _boardLogic[j][k]->_positionX = _boardLogic[j + 1][k]->_positionX;
+                _boardLogic[j][k]->_positionY = _boardLogic[j + 1][k]->_positionY;
+                _boardLogic[j][k]->_sourceX = _boardLogic[j + 1][k]->_sourceX;
+                _boardLogic[j][k]->_sourceY = _boardLogic[j + 1][k]->_sourceY + 1;
+                _boardLogic[j][k]->_width = _boardLogic[j + 1][k]->_width;
+                _boardLogic[j][k]->_height = _boardLogic[j + 1][k]->_height;
             }
             else
             {
-                _boardLogic[j][k]->_left = NULL;
-                _boardLogic[j][k]->_right = NULL;;
-                _boardLogic[j][k]->_up = NULL;
-                _boardLogic[j][k]->_down  = NULL;
+                // Ignore Garbage Part
+                ClearGarbageData(_boardLogic[j][k]);
+                _boardLogic[j][k]->_positionX = -1;
+                _boardLogic[j][k]->_positionY = -1;
+                _boardLogic[j][k]->_sourceX = -1;
+                _boardLogic[j][k]->_sourceY = -1;
+                _boardLogic[j][k]->_width = -1;
+                _boardLogic[j][k]->_height = -1;
             }
         }
     
     // Fill the first row with the next row and create a new nextRow with random types.
     char __previous_type = PANEL_VOID_TYPE;
+    char __type_above = PANEL_VOID_TYPE;
     for (unsigned int k = 0; k < _dimensions.getWidth(); k++)
     {
         // Update first row with nextRow content.
@@ -419,10 +410,14 @@ void Board::TransportOperation ()
         _boardGraphics[_dimensions.getHeight() - 1][k]->SetAsset(DecodeType(_nextRowLogic[k]->_type), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
         _boardGraphics[_dimensions.getHeight() - 1][k]->_visibility = visible;
         
+        // Ignore Garbage Part
+        ClearGarbageData(_boardLogic[_dimensions.getHeight() - 1][k]);
+
         // Make sure the current panel is different from the previous.
-        char __random_type = GetNextTypeWithoutRepetition(__previous_type);
+        __type_above = _boardLogic[_dimensions.getHeight() - 1][k]->_type;
+        char __random_type = rand()%EASY_MODE_PANEL_NUM;//GetNextTypeWithoutRepetition(__previous_type, __type_above);
         __previous_type = __random_type;
-        
+
         // Create next row graphics and update logics.
         _nextRowGraphics[k]->SetAsset(DecodeType(__random_type), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
         _nextRowLogic[k]->_type = __random_type;
@@ -437,7 +432,7 @@ void Board::TransportOperation ()
     
     // Update board container and next row position.
     _boardContainer->_y += PANEL_IMAGE_SIZE - 1;
-    _nextRowContainer->_y = (PANEL_IMAGE_SIZE+1) * _dimensions.getHeight();
+    _nextRowContainer->_y = (PANEL_IMAGE_SIZE + 1) * _dimensions.getHeight();
 }
 
 void Board::GarbageOperation(Change change)
@@ -448,7 +443,6 @@ void Board::GarbageOperation(Change change)
     
     // Build new garbage object.
     DropGargabe(__garbageSize, __garbagePosition);
-
 }
 
 // ----------------------------------------------------
@@ -457,7 +451,7 @@ void Board::DEBUGGarbage ()
 {
     Change __change = 0;
     __change = AddChangeType(__change, GARBAGE_OPERATION);
-    __change = AddGarbageSize(__change, PANEL_GARBAGE_TYPE);
+    __change = AddGarbageSize(__change, 4);
     __change = AddGarbagePosition(__change, 1);
     
     _changes.push_back(__change);
@@ -474,25 +468,16 @@ void Board::DropGargabe (unsigned int size, unsigned int position)
     {
         _boardLogic[0][i]->_type = PANEL_GARBAGE_TYPE;
         
-        // For now, no blocky garbage
-        _boardLogic[0][i]->_up = NULL;
-        _boardLogic[0][i]->_down = NULL;
-        
-        // Check the sides to connect the parts of the garbage
-        if (counter > 0)
-            _boardLogic[0][i]->_left = _boardLogic[0][i - 1];
-        else
-            _boardLogic[0][i]->_left = NULL;
-
-        if (counter < size - 1)
-            _boardLogic[0][i]->_right = _boardLogic[0][i + 1];
-        else
-            _boardLogic[0][i]->_right = NULL;
-        
+        _boardLogic[0][i]->_sourceX = position;
+        _boardLogic[0][i]->_sourceY = 0;
+        _boardLogic[0][i]->_width = size;
+        _boardLogic[0][i]->_height = 1;
+        _boardLogic[0][i]->_positionX = i;
+        _boardLogic[0][i]->_positionY = 0;
         counter++;
         _boardGraphics[0][i]->SetAsset(DecodeType(_boardLogic[0][i]->_type), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
         _boardGraphics[0][i]->_visibility = visible;
-        _boardLogic[0][i]->_state = 1;
+        //_boardLogic[0][i]->_state = 1;
     }
 }
 
@@ -555,6 +540,16 @@ void Board::Detect()
 void Board::Fall()
 {
     _rules->Fall(_boardLogic, _dimensions.getWidth(), _dimensions.getHeight(), _changes);
+}
+
+void Board::ClearGarbageData (LogicPanel * panel)
+{
+    panel->_sourceX = 0;
+    panel->_sourceY = 0;
+    panel->_width = 0;
+    panel->_height = 0;
+    panel->_positionX = 0;
+    panel->_positionY = 0;
 }
 
 Board::~Board ()

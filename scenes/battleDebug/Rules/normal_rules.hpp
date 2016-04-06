@@ -5,13 +5,28 @@
 #include "../types/changes.hpp"
 #include "../types/logic_panel.hpp"
 
+
+typedef struct WorkPanel_t
+{
+    int _type;
+    int _state;
+    int _positionX;
+    int _positionY;
+    int _sourceX;
+    int _sourceY;
+    int _width;
+    int _height;
+}
+WorkPanel;
+
 class NormalRules : public RulesInterface
 {
     enum Direction {up, down, left, right};
     
     std::vector<Point2D> _foundVertical;
     std::vector<Point2D> _foundHorizontal;
-    bool ** __checkBoard, ** __fallCheckBoard;
+    bool ** __checkBoard;
+    WorkPanel ** __fallCheckBoard;
     int _boardVerticalPosition;
     int _targetDelay;
     int _currentDelay;
@@ -19,18 +34,18 @@ class NormalRules : public RulesInterface
     public: NormalRules (Dim2D boardDim)
     {
         __checkBoard = new bool * [boardDim.getHeight()];
-        __fallCheckBoard = new bool * [boardDim.getHeight()];
+        __fallCheckBoard = new WorkPanel * [boardDim.getHeight()];
         for (unsigned int i = 0; i < boardDim.getHeight(); i++)
         {
             __checkBoard[i] = new bool[boardDim.getWidth()];
-            __fallCheckBoard [i] = new bool[boardDim.getWidth()];
+            __fallCheckBoard[i] = new WorkPanel[boardDim.getWidth()];
         }
         
         _boardVerticalPosition = 0;
         _targetDelay = 20;
         _currentDelay = 0;
     }
-    
+
     // Implements Swap logic.
     // @param changes: Reference to changes array.
     // @param cursorPosition: Refence to current cursor position.
@@ -42,16 +57,7 @@ class NormalRules : public RulesInterface
         if (_boardLogic[cursorPosition->getY()][cursorPosition->getX()]->_state == 3 ||
             _boardLogic[cursorPosition->getY()][cursorPosition->getX() + 1]->_state == 3)
             return;
-        
-        // This is blocking the waiting panel to fall
-        /*if ((int)cursorPosition->getY() < boardH - 1 &&
-            _boardLogic[cursorPosition->getY()][cursorPosition->getX()]->_type != -1 &&
-            _boardLogic[cursorPosition->getY() + 1][cursorPosition->getX()]->_type == -1)
-            return;
-        if ((int)cursorPosition->getY() < boardH - 1 &&
-            _boardLogic[cursorPosition->getY()][cursorPosition->getX() + 1]->_type != -1 &&
-            _boardLogic[cursorPosition->getY() + 1][cursorPosition->getX() + 1]->_type == -1)
-            return;*/
+
         Change __swap = 0;
         __swap = AddChangeType(__swap, SWAP_OPERATION);
         __swap = AddTargetPanelX(__swap, cursorPosition->getX());
@@ -195,146 +201,198 @@ class NormalRules : public RulesInterface
     // @param changes: change array.
     public: void Fall (LogicPanel *** _boardLogic, int boardW, int boardH, vector<Change> &changes)
     {
-        // Falling Checkboard
         for (int i = 0; i < boardH; i++)
-        {
             for (int j = 0; j < boardW; j++)
-                __fallCheckBoard[i][j] = false;
-        }
+            {
+                __fallCheckBoard[i][j]._type = _boardLogic[i][j]->_type;
+                __fallCheckBoard[i][j]._state = _boardLogic[i][j]->_state;
+                __fallCheckBoard[i][j]._positionX = _boardLogic[i][j]->_positionX;
+                __fallCheckBoard[i][j]._positionY = _boardLogic[i][j]->_positionY;
+                __fallCheckBoard[i][j]._sourceX = _boardLogic[i][j]->_sourceX;
+                __fallCheckBoard[i][j]._sourceY = _boardLogic[i][j]->_sourceY;
+                __fallCheckBoard[i][j]._width = _boardLogic[i][j]->_width;
+                __fallCheckBoard[i][j]._height = _boardLogic[i][j]->_height;
+            }
         
         // Detect Potential falls
-        for (int j = 0; j < boardW; j++)
+        for (int i = boardH - 1; i >= 0; i--)
         {
-            for (int i = boardH - 1; i >= 0; i--)
+            for (int j = 0; j < boardW; j++)
             {
-                // If the panel is not in the last row and the block below it is empty, make it fall.
-                if (_boardLogic[i][j]->_type == -1 && i > 0 && _boardLogic[i][j]->_state == 0)
+                if (i != boardH - 1)
                 {
-                    if (__fallCheckBoard[i][j])
-                        continue;
-                    
-                    // Sweep from this panel above to make them all fall.
-                    for (int k = i - 1; k >= 0; k--)
+                    // Start fall
+                    if (__fallCheckBoard[i][j]._type != -1 && __fallCheckBoard[i][j]._state == 0 && __fallCheckBoard[i + 1][j]._type == -1)
                     {
-                        if (__fallCheckBoard[k][j])
-                            continue;
-
-                        if (_boardLogic[k][j]->_type == -1 || _boardLogic[k][j]->_state != 0)
-                            break;
-                        
-                        if (_boardLogic[k][j]->_type == 5)
+                        if (__fallCheckBoard[i][j]._type != 5)
                         {
-                            bool __shouldFall = CanGarbageFall(_boardLogic, k, j);
+                            Change __fall = 0;
+                            __fall = AddChangeType(__fall, FALL_OPERATION);
+                            __fall = AddTargetPanelX(__fall, j);
+                            __fall = AddTargetPanelY(__fall, i);
+                            changes.push_back(__fall);
                             
-                            // If the garbage can fall, make it wait
-                            FallGarbage (_boardLogic, k, j, boardW, boardH, __shouldFall);
+                            // Update local work boards
+                            __fallCheckBoard[i + 1][j]._type= __fallCheckBoard[i][j]._type;
+                            __fallCheckBoard[i + 1][j]._state = __fallCheckBoard[i][j]._state;
+                            __fallCheckBoard[i + 1][j]._positionX = __fallCheckBoard[i][j]._positionX;
+                            __fallCheckBoard[i + 1][j]._positionY = __fallCheckBoard[i][j]._positionY;
+                            __fallCheckBoard[i + 1][j]._sourceX = __fallCheckBoard[i][j]._sourceX;
+                            __fallCheckBoard[i + 1][j]._sourceY = __fallCheckBoard[i][j]._sourceY;
+                            __fallCheckBoard[i + 1][j]._width = __fallCheckBoard[i][j]._width;
+                            __fallCheckBoard[i + 1][j]._height = __fallCheckBoard[i][j]._height;
+                            
+                            __fallCheckBoard[i][j]._type = -1;
+                            __fallCheckBoard[i][j]._state = -1;
+                            __fallCheckBoard[i][j]._positionX = -1;
+                            __fallCheckBoard[i][j]._positionY = -1;
+                            __fallCheckBoard[i][j]._sourceX = -1;
+                            __fallCheckBoard[i][j]._sourceY = -1;
+                            __fallCheckBoard[i][j]._width = -1;
+                            __fallCheckBoard[i][j]._height = -1;
+
                         }
                         else
                         {
-                            __fallCheckBoard[k][j] = true;
-                            _boardLogic[k][j]->_state = 4;
-                            _boardLogic[k][j]->_wait = 8;
+                            bool __canFall = CanGarbageFall (i, j);
+                            int __width = __fallCheckBoard[i][j]._width;
+                            if (__canFall)
+                                FallGarbage(i, j, changes);
+
+                            //j += __width - 1;
                         }
                     }
-                }
-            }
-        }
-        
-        for (int i = 0; i < boardH; i++)
-        {
-            for (int j = 0; j < boardW; j++)
-                __fallCheckBoard[i][j] = false;
-        }
-        
-        // Update Ongoing falls
-        for (int j = 0; j < boardW; j++)
-        {
-            for (int i = boardH - 1; i >= 0; i--)
-            {
-                if (__fallCheckBoard[i][j])
-                    continue;
-                
-                if (_boardLogic[i][j]->_state == 4)
-                {
-                    __fallCheckBoard[i][j] = true;
-                    _boardLogic[i][j]->_wait--;
-                    if (_boardLogic[i][j]->_wait == 0)
+                    // Update fall
+                    else if (__fallCheckBoard[i][j]._type != -1 && __fallCheckBoard[i][j]._state == 1 && __fallCheckBoard[i + 1][j]._type == -1)
                     {
-                        _boardLogic[i][j]->_state = 1;
-                    }
-                }
-                else if (_boardLogic[i][j]->_state == 1 && i < boardH - 1 && _boardLogic[i + 1][j]->_type == -1)
-                {
-                    for (int k = i; k >= 0; k--)
-                    {
-                        // If garbage, check wether the garbage panels can fall.
-                        if (_boardLogic[k][j]->_type == 5)
+                        if (__fallCheckBoard[i][j]._type != 5)
                         {
-                            bool __canFall = CanGarbageFall (_boardLogic, k, j);
-                            if (!__canFall)
-                            {
-                                FallGarbage (_boardLogic, k, j, boardW, boardH, false);
-                                break;
-                            }
-                            else
-                            {
-                            }
+                            Change __fall = 0;
+                            __fall = AddChangeType(__fall, FALL_OPERATION);
+                            __fall = AddTargetPanelX(__fall, j);
+                            __fall = AddTargetPanelY(__fall, i);
+                            changes.push_back(__fall);
+                            
+                            // Update local work boards
+                            __fallCheckBoard[i + 1][j]._type= __fallCheckBoard[i][j]._type;
+                            __fallCheckBoard[i + 1][j]._state = __fallCheckBoard[i][j]._state;
+                            __fallCheckBoard[i + 1][j]._positionX = __fallCheckBoard[i][j]._positionX;
+                            __fallCheckBoard[i + 1][j]._positionY = __fallCheckBoard[i][j]._positionY;
+                            __fallCheckBoard[i + 1][j]._sourceX = __fallCheckBoard[i][j]._sourceX;
+                            __fallCheckBoard[i + 1][j]._sourceY = __fallCheckBoard[i][j]._sourceY;
+                            __fallCheckBoard[i + 1][j]._width = __fallCheckBoard[i][j]._width;
+                            __fallCheckBoard[i + 1][j]._height = __fallCheckBoard[i][j]._height;
+                            
+                            __fallCheckBoard[i][j]._type = -1;
+                            __fallCheckBoard[i][j]._state = -1;
+                            __fallCheckBoard[i][j]._positionX = -1;
+                            __fallCheckBoard[i][j]._positionY = -1;
+                            __fallCheckBoard[i][j]._sourceX = -1;
+                            __fallCheckBoard[i][j]._sourceY = -1;
+                            __fallCheckBoard[i][j]._width = -1;
+                            __fallCheckBoard[i][j]._height = -1;
                         }
-                                
-                        if (_boardLogic[k][j]->_type == -1)
-                            break;
-                        
-                        __fallCheckBoard[k][j] = true;
-                        
-                        Change __change = 0;
-                        __change = AddChangeType(__change, FALL_OPERATION);
-                        __change = AddTargetPanelX(__change, j);
-                        __change = AddTargetPanelY(__change, k);
-                        changes.push_back(__change);
+                        else
+                        {
+                            bool __canFall = CanGarbageFall (i, j);
+                            int __width = __fallCheckBoard[i][j]._width;
+                            if (__canFall)
+                                FallGarbage(i, j, changes);
+                            
+                            //j += __width - 1;
+                        }
                     }
-                }
-                else if (_boardLogic[i][j]->_state == 1 && i < boardH - 1 && _boardLogic[i + 1][j]->_type != -1)
-                {
-                    for (int k = i; k >= 0; k--)
+                    // Stop fall
+                    else if (__fallCheckBoard[i][j]._type != -1 && __fallCheckBoard[i][j]._state == 1 && __fallCheckBoard[i + 1][j]._type != -1)
                     {
-                        if (_boardLogic[k][j]->_type == -1)
-                            break;
-                        
-                        __fallCheckBoard[k][j] = true;
-                        _boardLogic[k][j]->_state = 0;
+                        _boardLogic[i][j]->_state = 0;
+                        __fallCheckBoard[i][j]._state = 0;
                     }
                 }
-                else if (_boardLogic[i][j]->_state == 1 && i == boardH - 1)
+                else
                 {
-                    __fallCheckBoard[i][j] = true;
-                    _boardLogic[i][j]->_state = 0;
+                    // Stop fall hit the last line
+                    if (__fallCheckBoard[i][j]._state == 1)
+                    {
+                        _boardLogic[i][j]->_state = 0;
+                        __fallCheckBoard[i][j]._state = 0;
+                    }
                 }
             }
         }
     }
     
-    private: bool CanGarbageFall (LogicPanel *** _boardLogic, int i, int j)
+    private: void CopyLogicPanel (LogicPanel * target, LogicPanel * source)
     {
-        for (int l = j;; l++)
+        target->_type = source->_type;
+        target->_state = source->_state;
+        target->_wait = source->_wait;
+        target->_positionX = source->_positionX;
+        target->_positionY = source->_positionY;
+        target->_sourceX = source->_sourceX;
+        target->_sourceY = source->_sourceY;
+        target->_width = source->_width;
+        target->_height = source->_height;
+    }
+    
+    private: void ClearLogicPanel (LogicPanel * target)
+    {
+        target->_type = -1;
+        target->_state = 0;
+        target->_wait = 0;
+        target->_positionX = 0;
+        target->_positionY = 0;
+        target->_sourceX = 0;
+        target->_sourceY = 0;
+        target->_width = 0;
+        target->_height = 0;
+    }
+    
+    private: bool CanGarbageFall (int i, int j)
+    {
+        for (int k = __fallCheckBoard[i][j]._sourceX; k < __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width; k++)
         {
-            if (_boardLogic[i + 1][l]->_type != -1)
+            if (__fallCheckBoard[i + 1][k]._type != -1)
+            {
                 return false;
-            if (_boardLogic[i][l]->_right == NULL)
-                break;
+            }
         }
-        
-        for (int l = j;; l--)
-        {
-            if (_boardLogic[i + 1][l]->_type != -1)
-                return false;
-            if (_boardLogic[i][l]->_left == NULL)
-                break;
-        }
-        
         return true;
     }
     
-    private: void FallGarbage (LogicPanel *** _boardLogic, int i, int j, int boardW, int boardH, bool shouldFall)
+    private: void FallGarbage (int i, int j, vector<Change> &changes)
+    {
+        int __initialIndex = __fallCheckBoard[i][j]._sourceX;
+        int __lastIndex = __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width;
+        for (int k = __initialIndex; k < __lastIndex; k++)
+        {
+            Change __fall = 0;
+            __fall = AddChangeType(__fall, FALL_OPERATION);
+            __fall = AddTargetPanelX(__fall, k);
+            __fall = AddTargetPanelY(__fall, i);
+            changes.push_back(__fall);
+            
+            __fallCheckBoard[i + 1][k]._type= __fallCheckBoard[i][k]._type;
+            __fallCheckBoard[i + 1][k]._state = __fallCheckBoard[i][k]._state;
+            __fallCheckBoard[i + 1][k]._positionX = __fallCheckBoard[i][k]._positionX;
+            __fallCheckBoard[i + 1][k]._positionY = __fallCheckBoard[i][k]._positionY;
+            __fallCheckBoard[i + 1][k]._sourceX = __fallCheckBoard[i][k]._sourceX;
+            __fallCheckBoard[i + 1][k]._sourceY = __fallCheckBoard[i][k]._sourceY + 1;
+            __fallCheckBoard[i + 1][k]._width = __fallCheckBoard[i][k]._width;
+            __fallCheckBoard[i + 1][k]._height = __fallCheckBoard[i][k]._height;
+            
+            __fallCheckBoard[i][k]._type = -1;
+            __fallCheckBoard[i][k]._state = -1;
+            __fallCheckBoard[i][k]._positionX = -1;
+            __fallCheckBoard[i][k]._positionY = -1;
+            __fallCheckBoard[i][k]._sourceX = -1;
+            __fallCheckBoard[i][k]._sourceY = -1;
+            __fallCheckBoard[i][k]._width = -1;
+            __fallCheckBoard[i][k]._height = -1;
+        }
+    }
+    
+    /*private: void FallGarbage (LogicPanel *** _boardLogic, int i, int j, int boardW, int boardH, bool shouldFall)
     {
         if (__fallCheckBoard[i][j] || _boardLogic[i][j]->_type != 5)
             return;
@@ -361,7 +419,7 @@ class NormalRules : public RulesInterface
             if (_boardLogic[i][j]->_down != NULL)
                 FallGarbage (_boardLogic, i + 1, j, boardW, boardH, shouldFall);
         }
-    }
+    }*/
     
     public: void SpeedUp()
     {

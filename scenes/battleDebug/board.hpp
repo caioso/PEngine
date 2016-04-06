@@ -134,6 +134,10 @@ class Board
     // @param change: Change operation binary code.
     private: void GarbageOperation(Change change);
     
+    // Helper function: Ignore garbage only information in a logic panel object.
+    // @param panel: target logic panel.
+    private: void ClearGarbageData (LogicPanel * panel);
+    
     // Default Constructor
     public: ~Board ();
 };

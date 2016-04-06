@@ -7,7 +7,7 @@ void Engine::Init ()
     GraphicEngine::Init();
     AudioEngine::Init(255, 255);
     InputManager::Init();
-    //Debug::Init(300, 0);
+    Debug::Init(300, 0);
     ScriptManager::Init();
     Engine::finish_main_loop = false;
 }

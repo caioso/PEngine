@@ -1,7 +1,7 @@
 #include "board_task.hpp"
 
-#define WII 0
-#define MAC 1
+#define WII 1
+#define MAC 0
 
 BoardTask::BoardTask (std::string board_name,
                       Dim2D board_dim,
@@ -114,6 +114,7 @@ void BoardTask::Update ()
     
     if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_PLUS))
         _board->DEBUGGarbage();
+
 #endif
 
     _board->UpdateCursorPosition(_cursor_position);
