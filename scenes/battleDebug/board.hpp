@@ -27,6 +27,7 @@ class Board
     private: Cursor * _cursor;
     private: RulesInterface * _rules;
     private: vector<Change> _changes;
+    private: vector<LogicPanel **> _garbageList;
     private: Sprite * _boardContainer;
     private: Sprite * _nextRowContainer;
     private: unsigned int _cursorFrame;
@@ -86,10 +87,13 @@ class Board
     public: Point2D getCursorPosition() { return _cursorPosition; }
     
     // Create new garbages of given size on a given position.
-    // @param size: Garbage size. This will stack up rows as the garbage size dont fit the row.
+    // @param width: Garbage width. This will stack up rows as the garbage size dont fit the row.
+    // @param height: Garbage height.
     // @param position: initial garbage position.
-    public: void DropGargabe (unsigned int size, unsigned int position);
+    public: void MakeGargabe (unsigned int width, unsigned int height, unsigned int position);
     
+    public: void FallGarbage ();
+
     // Debug function to drop garbage in the board.
     public: void DEBUGGarbage ();
     
@@ -133,6 +137,10 @@ class Board
     // Implements Garbage Operation
     // @param change: Change operation binary code.
     private: void GarbageOperation(Change change);
+
+    // Implements Transform Garbage Operation
+    // @param change: Change operation binary code.
+    private: void TransformGarbageOperation(Change change);
     
     // Helper function: Ignore garbage only information in a logic panel object.
     // @param panel: target logic panel.

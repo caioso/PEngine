@@ -1,7 +1,7 @@
 #include "board_task.hpp"
 
-#define WII 1
-#define MAC 0
+#define WII 0
+#define MAC 1
 
 BoardTask::BoardTask (std::string board_name,
                       Dim2D board_dim,
@@ -26,7 +26,6 @@ BoardTask::BoardTask (std::string board_name,
 
 void BoardTask::Start ()
 {
-    srand(time(0));
     //Debug::LogWarning("Board Started.");
 }
 
@@ -123,6 +122,7 @@ void BoardTask::Update ()
     _board->InterpretOperations();
     _board->Fall();
     _board->InterpretOperations();
+    _board->FallGarbage();
     _board->Slide();
     _board->InterpretOperations();
 }

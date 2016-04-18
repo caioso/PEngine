@@ -4,20 +4,7 @@
 #include "rules_interface.hpp"
 #include "../types/changes.hpp"
 #include "../types/logic_panel.hpp"
-
-
-typedef struct WorkPanel_t
-{
-    int _type;
-    int _state;
-    int _positionX;
-    int _positionY;
-    int _sourceX;
-    int _sourceY;
-    int _width;
-    int _height;
-}
-WorkPanel;
+#include "../types/work_panel.hpp"
 
 class NormalRules : public RulesInterface
 {
@@ -25,7 +12,7 @@ class NormalRules : public RulesInterface
     
     std::vector<Point2D> _foundVertical;
     std::vector<Point2D> _foundHorizontal;
-    bool ** __checkBoard;
+    int ** __checkBoard;
     WorkPanel ** __fallCheckBoard;
     int _boardVerticalPosition;
     int _targetDelay;
@@ -33,11 +20,11 @@ class NormalRules : public RulesInterface
     
     public: NormalRules (Dim2D boardDim)
     {
-        __checkBoard = new bool * [boardDim.getHeight()];
+        __checkBoard = new int * [boardDim.getHeight()];
         __fallCheckBoard = new WorkPanel * [boardDim.getHeight()];
         for (unsigned int i = 0; i < boardDim.getHeight(); i++)
         {
-            __checkBoard[i] = new bool[boardDim.getWidth()];
+            __checkBoard[i] = new int[boardDim.getWidth()];
             __fallCheckBoard[i] = new WorkPanel[boardDim.getWidth()];
         }
         
@@ -68,17 +55,13 @@ class NormalRules : public RulesInterface
         return;
     };
     
-    public: void Detect (LogicPanel *** boardLogic, int boardW, int boardH, vector<Change> &changes)
+    public: void Detect (LogicPanel *** boardLogic, int boardW, int boardH, vector<Change> &changes, vector<LogicPanel **> &_garbageList)
     {
-        // Valid Panel list (those in more groups with more than 3 panels).
-        std::vector<Point2D> __validVertical;
-        std::vector<Point2D> __validHorizontal;
-        
         // Panel checkboard
         for (int i = 0; i < boardH; i++)
         {
             for (int j = 0; j < boardW; j++)
-                __checkBoard[i][j] = false;
+                __checkBoard[i][j] = 0;
         }
         
         for (int i = 0; i < boardH; i++)
@@ -91,13 +74,19 @@ class NormalRules : public RulesInterface
                 if (_foundVertical.size() >= 3)
                 {
                     for (unsigned int k = 0; k < _foundVertical.size(); k++)
-                        __checkBoard[_foundVertical[k].getX()][_foundVertical[k].getY()] = true;
+                    {
+                        __checkBoard[_foundVertical[k].getX()][_foundVertical[k].getY()] = 1;
+                        CheckGarbageContact(boardLogic, _foundVertical[k].getX(), _foundVertical[k].getY(), boardW, boardH, _garbageList);
+                    }
                 }
                 
                 if (_foundHorizontal.size() >= 3)
                 {
                     for (unsigned int k = 0; k < _foundHorizontal.size(); k++)
-                        __checkBoard[_foundHorizontal[k].getX()][_foundHorizontal[k].getY()] = true;
+                    {
+                        __checkBoard[_foundHorizontal[k].getX()][_foundHorizontal[k].getY()] = 1;
+                        CheckGarbageContact(boardLogic, _foundHorizontal[k].getX(), _foundHorizontal[k].getY(), boardW, boardH, _garbageList);
+                    }
                 }
                 
                 _foundVertical.clear();
@@ -105,6 +94,7 @@ class NormalRules : public RulesInterface
             }
         }
         
+        // Check panels to destroy them
         for (int i = 0; i < boardH; i++)
             for (int j = 0; j < boardW; j++)
                 if (boardLogic[i][j]->_state == 3)
@@ -134,10 +124,22 @@ class NormalRules : public RulesInterface
         
         for (int i = 0; i < boardH; i++)
             for (int j = 0; j < boardW; j++)
-                if (__checkBoard[i][j])
+                if (__checkBoard[i][j] != 0)
                 {
-                    boardLogic[i][j]->_state = 3;
-                    boardLogic[i][j]->_wait = 20;
+                    if (__checkBoard[i][j] == 1)
+                    {
+                        boardLogic[i][j]->_state = 3;
+                        boardLogic[i][j]->_wait = 20;
+                    }
+                    else if (__checkBoard[i][j] == 2)
+                    {
+                        Change __change = 0;
+                        __change = AddChangeType(__change, TRANSFORM_GARBAGE_OPERATION);
+                        __change = AddTargetPanelX(__change, j);
+                        __change = AddTargetPanelY(__change, i);
+                        changes.push_back(__change);
+                    }
+
                 }
     }
     
@@ -193,13 +195,163 @@ class NormalRules : public RulesInterface
         }
     }
     
+    // Check if a breaking panel is touching any sort of garbage
+    // @param _boardLogic: Board logic matrix reference.
+    // @param i: row index;
+    // @param j: column index;
+    // @param boardW: board width;
+    // @param boardH: board height;
+    private: void CheckGarbageContact (LogicPanel *** _boardLogic, int i, int j, int boardW, int boardH, vector<LogicPanel **> &_garbageList)
+    {
+        if (i > 0 && _boardLogic[i - 1][j]->_type == PANEL_GARBAGE_TYPE)
+        {
+            Debug::Log("Up");
+            MarkGarbage(_boardLogic, i - 1, j, _garbageList);
+            FindSurroudingGarbage(_boardLogic, i - 1, j, boardW, boardH, _garbageList);
+        }
+        
+        if (i < boardH - 1 && _boardLogic[i + 1][j]->_type == PANEL_GARBAGE_TYPE)
+        {
+            Debug::Log("Down");
+            MarkGarbage(_boardLogic, i + 1, j, _garbageList);
+            FindSurroudingGarbage(_boardLogic, i + 1, j, boardW, boardH, _garbageList);
+        }
+        
+        if (j > 0 && _boardLogic[i][j - 1]->_type == PANEL_GARBAGE_TYPE)
+        {
+            Debug::Log("Left");
+            MarkGarbage(_boardLogic, i, j - 1, _garbageList);
+            FindSurroudingGarbage(_boardLogic, i, j - 1, boardW, boardH, _garbageList);
+        }
+        
+        if (j < boardW - 1 && _boardLogic[i][j + 1]->_type == PANEL_GARBAGE_TYPE)
+        {
+            Debug::Log("Right");
+            MarkGarbage(_boardLogic, i, j + 1, _garbageList);
+            FindSurroudingGarbage(_boardLogic, i , j + 1, boardW, boardH, _garbageList);
+        }
+    }
+    
+    // Analyses the board to figure out if a target garbage is in contact with other garbage objects.
+    // @param _boardLogic: Board logic matrix reference.
+    // @param i: row index;
+    // @param j: column index;
+    // @param _garbageList: grabage list vecrtor;
+    private: void FindSurroudingGarbage (LogicPanel *** _boardLogic, int i, int j, int boardW, int boardH, vector<LogicPanel **> &_garbageList)
+    {
+        stringstream ss;
+        int __sourceY = _boardLogic[i][j]->_sourceY;
+        int __height = __sourceY - _boardLogic[i][j]->_height;
+        int __sourceX = _boardLogic[i][j]->_sourceX;
+        int __width = __sourceX + _boardLogic[i][j]->_width;
+        Debug::Log(ss.str());
+        for (int k = __sourceY; k > __height; k--)
+        {
+            if (k < 0)
+                break;
+            for (int l = __sourceX; l < __width; l++)
+            {
+                if (k > 0 && _boardLogic[k - 1][l]->_type == PANEL_GARBAGE_TYPE &&
+                    __checkBoard[_boardLogic[k - 1][l]->_sourceY][_boardLogic[k - 1][l]->_sourceX] != 2 &&
+                    __checkBoard[_boardLogic[k - 1][l]->_sourceY][_boardLogic[k - 1][l]->_sourceX] != 3)
+                {
+                    MarkGarbage(_boardLogic, k - 1, l, _garbageList);
+                    FindSurroudingGarbage(_boardLogic, k - 1, l, boardW, boardH, _garbageList);
+                }
+                
+                if (k < boardH - 1 && _boardLogic[k + 1][l]->_type == PANEL_GARBAGE_TYPE &&
+                    __checkBoard[_boardLogic[k + 1][l]->_sourceY][_boardLogic[k + 1][l]->_sourceX] != 2 &&
+                    __checkBoard[_boardLogic[k + 1][l]->_sourceY][_boardLogic[k + 1][l]->_sourceX] != 3)
+                {
+                    MarkGarbage(_boardLogic, k + 1, l, _garbageList);
+                    FindSurroudingGarbage(_boardLogic, k + 1, l, boardW, boardH, _garbageList);
+                }
+                
+                if (l > 0 && _boardLogic[k][l - 1]->_type == PANEL_GARBAGE_TYPE &&
+                    __checkBoard[_boardLogic[k][l - 1]->_sourceY][_boardLogic[k][l - 1]->_sourceX] != 2 &&
+                    __checkBoard[_boardLogic[k][l - 1]->_sourceY][_boardLogic[k][l - 1]->_sourceX] != 3)
+                {
+                    MarkGarbage(_boardLogic, k, l - 1, _garbageList);
+                    FindSurroudingGarbage(_boardLogic, k, l - 1, boardW, boardH, _garbageList);
+                }
+                
+                if (l < boardW - 1 && _boardLogic[k][l + 1]->_type == PANEL_GARBAGE_TYPE &&
+                    __checkBoard[_boardLogic[k][l + 1]->_sourceY][_boardLogic[k][l + 1]->_sourceX] != 2 &&
+                    __checkBoard[_boardLogic[k][l + 1]->_sourceY][_boardLogic[k][l + 1]->_sourceX] != 3)
+                {
+                    MarkGarbage(_boardLogic, k, l + 1, _garbageList);
+                    FindSurroudingGarbage(_boardLogic, k, l + 1, boardW, boardH, _garbageList);
+                }
+            }
+        }
+    }
+
+    // Set a garbage (first line) that it must be transformed into panels. It also updates
+    // the remaining panels in the garbage to reduce its height and source position.
+    // @param _boardLogic: Board logic matrix reference.
+    // @param i: row index;
+    // @param j: column index;
+    // @param _garbageList: grabage list vecrtor;
+    private: void MarkGarbage (LogicPanel *** _boardLogic, int i, int j, vector<LogicPanel **> &_garbageList)
+    {
+        int __initialY = _boardLogic[i][j]->_sourceY;
+        int __heightY = _boardLogic[i][j]->_height;
+        int __initialX =  _boardLogic[i][j]->_sourceX;
+        int __width = _boardLogic[i][j]->_width;
+        int __garbageCounter = 0;
+        
+        for ( int k = __initialY; k > __initialY - __heightY; k--)
+        {
+
+            for ( int l = __initialX; l < __initialX + __width; l++)
+            {
+                if (__checkBoard[k][l] == 2)
+                {
+                    return;
+                }
+                if (k == __initialY)
+                {
+                    // 2 represents garbage elements that should be transformed into panels.
+                    __checkBoard[k][l] = 2;
+                }
+                else if (k >= 0)
+                {
+                    _boardLogic[k][l]->_sourceY--;
+                    _boardLogic[k][l]->_height--;
+                    _boardLogic[k][l]->_positionY--;
+                    
+                    // Three represents elements from a already broken multi-layer garbage
+                    // that have already been analyzed.
+                    __checkBoard[k][l] = 3;
+                }
+                else if (k < 0)
+                {
+                    
+                    for (int m = __initialX; m < __initialX + __width; m++)
+                    {
+                        _garbageList[__garbageCounter][m]->_sourceY = __initialY- 1 >= 0? __initialY - 1: 0;
+                        _garbageList[__garbageCounter][m]->_height--;
+                        _garbageList[__garbageCounter][m]->_positionY--;
+                    }
+                    __garbageCounter++;
+                    break;
+                }
+            }
+        }
+    }
+    
     // Implements fall logic. Sweeps the board for panels in falling condition and update those
     // already falling.
     // @param _boardLogic: Pointer to logic board.
+    // @param _garbageList: garbage queue list.
     // @param boardW: Board Width.
     // @param boardH: Board Height.
     // @param changes: change array.
-    public: void Fall (LogicPanel *** _boardLogic, int boardW, int boardH, vector<Change> &changes)
+    public: void Fall (LogicPanel *** _boardLogic,
+                       int boardW,
+                       int boardH,
+                       vector<Change> &changes,
+                       vector<LogicPanel **> &_garbageList)
     {
         for (int i = 0; i < boardH; i++)
             for (int j = 0; j < boardW; j++)
@@ -255,11 +407,8 @@ class NormalRules : public RulesInterface
                         else
                         {
                             bool __canFall = CanGarbageFall (i, j);
-                            int __width = __fallCheckBoard[i][j]._width;
                             if (__canFall)
-                                FallGarbage(i, j, changes);
-
-                            //j += __width - 1;
+                                FallGarbage(i, j, changes, _garbageList);
                         }
                     }
                     // Update fall
@@ -295,11 +444,8 @@ class NormalRules : public RulesInterface
                         else
                         {
                             bool __canFall = CanGarbageFall (i, j);
-                            int __width = __fallCheckBoard[i][j]._width;
                             if (__canFall)
-                                FallGarbage(i, j, changes);
-                            
-                            //j += __width - 1;
+                                FallGarbage(i, j, changes, _garbageList);
                         }
                     }
                     // Stop fall
@@ -321,33 +467,11 @@ class NormalRules : public RulesInterface
             }
         }
     }
-    
-    private: void CopyLogicPanel (LogicPanel * target, LogicPanel * source)
-    {
-        target->_type = source->_type;
-        target->_state = source->_state;
-        target->_wait = source->_wait;
-        target->_positionX = source->_positionX;
-        target->_positionY = source->_positionY;
-        target->_sourceX = source->_sourceX;
-        target->_sourceY = source->_sourceY;
-        target->_width = source->_width;
-        target->_height = source->_height;
-    }
-    
-    private: void ClearLogicPanel (LogicPanel * target)
-    {
-        target->_type = -1;
-        target->_state = 0;
-        target->_wait = 0;
-        target->_positionX = 0;
-        target->_positionY = 0;
-        target->_sourceX = 0;
-        target->_sourceY = 0;
-        target->_width = 0;
-        target->_height = 0;
-    }
-    
+
+    // Determines if a garbage at location i, j can fall.
+    // @param i: row index;
+    // @param j: column index;
+    // @return true if the garbage can fall, false if not.
     private: bool CanGarbageFall (int i, int j)
     {
         for (int k = __fallCheckBoard[i][j]._sourceX; k < __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width; k++)
@@ -360,70 +484,63 @@ class NormalRules : public RulesInterface
         return true;
     }
     
-    private: void FallGarbage (int i, int j, vector<Change> &changes)
-    {
-        int __initialIndex = __fallCheckBoard[i][j]._sourceX;
-        int __lastIndex = __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width;
-        for (int k = __initialIndex; k < __lastIndex; k++)
-        {
-            Change __fall = 0;
-            __fall = AddChangeType(__fall, FALL_OPERATION);
-            __fall = AddTargetPanelX(__fall, k);
-            __fall = AddTargetPanelY(__fall, i);
-            changes.push_back(__fall);
-            
-            __fallCheckBoard[i + 1][k]._type= __fallCheckBoard[i][k]._type;
-            __fallCheckBoard[i + 1][k]._state = __fallCheckBoard[i][k]._state;
-            __fallCheckBoard[i + 1][k]._positionX = __fallCheckBoard[i][k]._positionX;
-            __fallCheckBoard[i + 1][k]._positionY = __fallCheckBoard[i][k]._positionY;
-            __fallCheckBoard[i + 1][k]._sourceX = __fallCheckBoard[i][k]._sourceX;
-            __fallCheckBoard[i + 1][k]._sourceY = __fallCheckBoard[i][k]._sourceY + 1;
-            __fallCheckBoard[i + 1][k]._width = __fallCheckBoard[i][k]._width;
-            __fallCheckBoard[i + 1][k]._height = __fallCheckBoard[i][k]._height;
-            
-            __fallCheckBoard[i][k]._type = -1;
-            __fallCheckBoard[i][k]._state = -1;
-            __fallCheckBoard[i][k]._positionX = -1;
-            __fallCheckBoard[i][k]._positionY = -1;
-            __fallCheckBoard[i][k]._sourceX = -1;
-            __fallCheckBoard[i][k]._sourceY = -1;
-            __fallCheckBoard[i][k]._width = -1;
-            __fallCheckBoard[i][k]._height = -1;
-        }
-    }
     
-    /*private: void FallGarbage (LogicPanel *** _boardLogic, int i, int j, int boardW, int boardH, bool shouldFall)
+    // Update grabage object in the board to make it fall as a single unit.
+    // @param i: row index;
+    // @param j: column index;
+    // @param _garbageList: grabage list vecrtor;
+    private: void FallGarbage (int i, int j, vector<Change> &changes, vector<LogicPanel **> &_garbageList)
     {
-        if (__fallCheckBoard[i][j] || _boardLogic[i][j]->_type != 5)
-            return;
-        else
+        int __initialIndexX = __fallCheckBoard[i][j]._sourceX;
+        int __initialIndexY = i;
+        int __lastIndexX = __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width;
+        int __lastIndexY = i - __fallCheckBoard[i][j]._height;
+        int __garbageCounter = 0;
+        for (int l = __initialIndexY; l > __lastIndexY; l--)
         {
-            __fallCheckBoard[i][j] = true;
-            if (shouldFall)
+            if (l >= 0)
             {
-                _boardLogic[i][j]->_state = 1;
-                _boardLogic[i][j]->_wait = 0;
+                for (int k = __initialIndexX; k < __lastIndexX; k++)
+                {
+                    Change __fall = 0;
+                    __fall = AddChangeType(__fall, FALL_OPERATION);
+                    __fall = AddTargetPanelX(__fall, k);
+                    __fall = AddTargetPanelY(__fall, l);
+                    changes.push_back(__fall);
+                    
+                    __fallCheckBoard[l + 1][k]._type= __fallCheckBoard[l][k]._type;
+                    __fallCheckBoard[l + 1][k]._state = __fallCheckBoard[l][k]._state;
+                    __fallCheckBoard[l + 1][k]._positionX = __fallCheckBoard[l][k]._positionX;
+                    __fallCheckBoard[l + 1][k]._positionY = __fallCheckBoard[l][k]._positionY;
+                    __fallCheckBoard[l + 1][k]._sourceX = __fallCheckBoard[l][k]._sourceX;
+                    __fallCheckBoard[l + 1][k]._sourceY = __fallCheckBoard[l][k]._sourceY + 1;
+                    __fallCheckBoard[l + 1][k]._width = __fallCheckBoard[l][k]._width;
+                    __fallCheckBoard[l + 1][k]._height = __fallCheckBoard[l][k]._height;
+                    
+                    __fallCheckBoard[l][k]._type = -1;
+                    __fallCheckBoard[l][k]._state = -1;
+                    __fallCheckBoard[l][k]._positionX = -1;
+                    __fallCheckBoard[l][k]._positionY = -1;
+                    __fallCheckBoard[l][k]._sourceX = -1;
+                    __fallCheckBoard[l][k]._sourceY = -1;
+                    __fallCheckBoard[l][k]._width = -1;
+                    __fallCheckBoard[l][k]._height = -1;
+                }
             }
             else
             {
-                _boardLogic[i][j]->_state = 0;
-                _boardLogic[i][j]->_wait = 0;
+                for (int k = __initialIndexX; k < __lastIndexX; k++)
+                {
+                    _garbageList[__garbageCounter][k]->_sourceY += 1;
+                }
+                __garbageCounter++;
             }
-            
-            if (_boardLogic[i][j]->_right != NULL)
-                FallGarbage (_boardLogic, i, j + 1, boardW, boardH, shouldFall);
-            if (_boardLogic[i][j]->_up != NULL)
-                FallGarbage (_boardLogic, i - 1, j, boardW, boardH, shouldFall);
-            if (_boardLogic[i][j]->_left != NULL)
-                FallGarbage (_boardLogic, i, j - 1, boardW, boardH, shouldFall);
-            if (_boardLogic[i][j]->_down != NULL)
-                FallGarbage (_boardLogic, i + 1, j, boardW, boardH, shouldFall);
         }
-    }*/
+    }
     
     public: void SpeedUp()
     {
-        _targetDelay = 1;
+        _targetDelay = 0;
     }
     
     public: void SlowDown()

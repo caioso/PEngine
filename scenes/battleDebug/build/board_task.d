@@ -134,6 +134,7 @@ board_task.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./board_constants.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/normal_rules.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/rules_interface.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/../types/work_panel.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/audio/move.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/audio/swapfx.h
 
@@ -404,6 +405,8 @@ board_task.o: \
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/normal_rules.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/rules_interface.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/../types/work_panel.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/audio/move.h:
 

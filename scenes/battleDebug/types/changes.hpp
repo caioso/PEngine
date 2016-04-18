@@ -23,11 +23,14 @@ typedef uint32_t Change;
 // Extract Destination Y
 #define ExtractDestinationPanelY(OP) ((((OP>>8)&255)>>4)&15)
 
-// Extarct Garbage Size
-#define ExtractGarbageSize(OP) ((OP&255)&15)
+// Extarct Garbage Width
+#define ExtractGarbageWidth(OP) ((OP&255)&15)
 
 // Extarct Garbage Position
 #define ExtractGarbagePosition(OP) (((OP&255)>>4)&15)
+
+// Extract Garbage Height
+#define ExtractGarbageHeight(OP) (((OP>>8)&255)&15)
 
 // Add Operation
 #define AddChangeType(OP, A) ((OP) | ((A&15)<<16))
@@ -38,8 +41,11 @@ typedef uint32_t Change;
 // Add Target Panel Y to Change
 #define AddTargetPanelY(OP, A) ((OP) | ((A&15)<<4))
 
-// Add Garbage size to change
-#define AddGarbageSize(OP, A) ((OP) | (A&15))
+// Add Garbage width to change
+#define AddGarbageWidth(OP, A) ((OP) | (A&15))
+
+// Add Garbage height to Change
+#define AddGarbageHeight(OP, A) ((OP) | ((A&15)<<8))
 
 // Add Garbage position to change
 #define AddGarbagePosition(OP, A) ((OP) | ((A&15)<<4))
@@ -65,5 +71,7 @@ typedef uint32_t Change;
 #define PANEL_GRAPHICS_STYLE_OPERATION 0x5
 
 #define GARBAGE_OPERATION 0x7
+
+#define TRANSFORM_GARBAGE_OPERATION 0x8
 
 #endif // __CHANGES__
