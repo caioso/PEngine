@@ -38,8 +38,11 @@ class NormalRules : public RulesInterface
     // @param cursorPosition: Refence to current cursor position.
     public: void Swap (LogicPanel *** _boardLogic, int boardW, int boardH, std::vector<Change> &changes, Point2D *cursorPosition)
     {
-        if (_boardLogic[cursorPosition->getY()][cursorPosition->getX()]->_type == 5 ||
-            _boardLogic[cursorPosition->getY()][cursorPosition->getX() + 1]->_type == 5)
+        if (_boardLogic[cursorPosition->getY()][cursorPosition->getX()]->_type == PANEL_GARBAGE_TYPE ||
+            _boardLogic[cursorPosition->getY()][cursorPosition->getX() + 1]->_type == PANEL_GARBAGE_TYPE)
+            return;
+        if (_boardLogic[cursorPosition->getY()][cursorPosition->getX()]->_type == PANEL_CONCRETE_GARBAGE_TYPE ||
+            _boardLogic[cursorPosition->getY()][cursorPosition->getX() + 1]->_type == PANEL_CONCRETE_GARBAGE_TYPE)
             return;
         if (_boardLogic[cursorPosition->getY()][cursorPosition->getX()]->_state == 3 ||
             _boardLogic[cursorPosition->getY()][cursorPosition->getX() + 1]->_state == 3)
@@ -152,7 +155,9 @@ class NormalRules : public RulesInterface
             return;
         if (i != boardH - 1 && boardLogic[i + 1][j]->_type == -1)
             return;
-        if (boardLogic[i][j]->_type != type || boardLogic[i][j]->_type == -1 || boardLogic[i][j]->_type == 5 || boardLogic[i][j]->_state == 1)
+        if (boardLogic[i][j]->_type != type || boardLogic[i][j]->_type == -1 ||
+            boardLogic[i][j]->_type == PANEL_CONCRETE_GARBAGE_TYPE ||
+            boardLogic[i][j]->_type == PANEL_GARBAGE_TYPE || boardLogic[i][j]->_state == 1)
         {
             return;
         }
@@ -178,7 +183,9 @@ class NormalRules : public RulesInterface
             return;
         if (i != boardH - 1 && boardLogic[i + 1][j]->_type == -1)
             return;
-        if (boardLogic[i][j]->_type != type || boardLogic[i][j]->_type == -1 || boardLogic[i][j]->_type == 5 || boardLogic[i][j]->_state == 1)
+        if (boardLogic[i][j]->_type != type || boardLogic[i][j]->_type == -1 ||
+            boardLogic[i][j]->_type == PANEL_GARBAGE_TYPE ||
+            boardLogic[i][j]->_type == PANEL_CONCRETE_GARBAGE_TYPE || boardLogic[i][j]->_state == 1)
         {
             return;
         }
@@ -205,30 +212,42 @@ class NormalRules : public RulesInterface
     {
         if (i > 0 && _boardLogic[i - 1][j]->_type == PANEL_GARBAGE_TYPE)
         {
-            Debug::Log("Up");
             MarkGarbage(_boardLogic, i - 1, j, _garbageList);
             FindSurroudingGarbage(_boardLogic, i - 1, j, boardW, boardH, _garbageList);
+        }
+        else if (i > 0 && _boardLogic[i - 1][j]->_type == PANEL_CONCRETE_GARBAGE_TYPE)
+        {
+            MarkGarbage(_boardLogic, i - 1, j, _garbageList);
         }
         
         if (i < boardH - 1 && _boardLogic[i + 1][j]->_type == PANEL_GARBAGE_TYPE)
         {
-            Debug::Log("Down");
             MarkGarbage(_boardLogic, i + 1, j, _garbageList);
             FindSurroudingGarbage(_boardLogic, i + 1, j, boardW, boardH, _garbageList);
+        }
+        else if (i < boardH - 1 && _boardLogic[i + 1][j]->_type == PANEL_CONCRETE_GARBAGE_TYPE)
+        {
+            MarkGarbage(_boardLogic, i + 1, j, _garbageList);
         }
         
         if (j > 0 && _boardLogic[i][j - 1]->_type == PANEL_GARBAGE_TYPE)
         {
-            Debug::Log("Left");
             MarkGarbage(_boardLogic, i, j - 1, _garbageList);
             FindSurroudingGarbage(_boardLogic, i, j - 1, boardW, boardH, _garbageList);
+        }
+        else if (j > 0 && _boardLogic[i][j - 1]->_type == PANEL_CONCRETE_GARBAGE_TYPE)
+        {
+            MarkGarbage(_boardLogic, i, j - 1, _garbageList);
         }
         
         if (j < boardW - 1 && _boardLogic[i][j + 1]->_type == PANEL_GARBAGE_TYPE)
         {
-            Debug::Log("Right");
             MarkGarbage(_boardLogic, i, j + 1, _garbageList);
             FindSurroudingGarbage(_boardLogic, i , j + 1, boardW, boardH, _garbageList);
+        }
+        else if (j < boardW - 1 && _boardLogic[i][j + 1]->_type == PANEL_CONCRETE_GARBAGE_TYPE)
+        {
+            MarkGarbage(_boardLogic, i, j + 1, _garbageList);
         }
     }
     
@@ -376,7 +395,8 @@ class NormalRules : public RulesInterface
                     // Start fall
                     if (__fallCheckBoard[i][j]._type != -1 && __fallCheckBoard[i][j]._state == 0 && __fallCheckBoard[i + 1][j]._type == -1)
                     {
-                        if (__fallCheckBoard[i][j]._type != 5)
+                        if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
+                            __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
                         {
                             Change __fall = 0;
                             __fall = AddChangeType(__fall, FALL_OPERATION);
@@ -414,7 +434,8 @@ class NormalRules : public RulesInterface
                     // Update fall
                     else if (__fallCheckBoard[i][j]._type != -1 && __fallCheckBoard[i][j]._state == 1 && __fallCheckBoard[i + 1][j]._type == -1)
                     {
-                        if (__fallCheckBoard[i][j]._type != 5)
+                        if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
+                            __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
                         {
                             Change __fall = 0;
                             __fall = AddChangeType(__fall, FALL_OPERATION);
@@ -554,7 +575,7 @@ class NormalRules : public RulesInterface
          {
              _currentDelay = 0;
              _boardVerticalPosition++;
-             if (_boardVerticalPosition == 28)
+             if (_boardVerticalPosition == PANEL_IMAGE_SIZE)
              {
                  _boardVerticalPosition = 0;
                  

@@ -222,7 +222,7 @@ void Board::InterpretOperations ()
                 break;
             }
             // GARBAGE OPERATION
-            // format: [TYPE][XXXX][XXXX][POSITION][SIZE]
+            // format: [TYPE][XXXX][POSITION][WIDTH][HEIGHT]
             // Update board when a new row is fully displayed (next row).
             case GARBAGE_OPERATION:
             {
@@ -237,6 +237,15 @@ void Board::InterpretOperations ()
                 TransformGarbageOperation(_changes[i]);
                 break;
             }
+            // CONCRETE GARBAGE OPERATION
+            // format: [TYPE][XXXX][XXXX][XXXX][XXXX]
+            // Update board when a new row is fully displayed (next row).
+            case CONCRETE_GARBAGE_OPERATION:
+            {
+                MakeConcreteGargabe();
+                break;
+            }
+
         }
     }
     _changes.clear();
@@ -325,7 +334,7 @@ void Board::FallOperation (Change change)
     int __targetType = _boardLogic[__targetY][__targetX]->_type;
     
     _boardGraphics[__targetY + 1][__targetX]->_visibility = visible;
-    _boardGraphics[__targetY + 1][__targetX]->SetAsset(DecodeType(__targetType), 28, 28);
+    _boardGraphics[__targetY + 1][__targetX]->SetAsset(DecodeType(__targetType), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
     _boardGraphics[__targetY][__targetX]->_visibility = hidden;
     
     _boardLogic[__targetY + 1][__targetX]->_type = _boardLogic[__targetY][__targetX]->_type;
@@ -338,7 +347,7 @@ void Board::FallOperation (Change change)
     _boardLogic[__targetY + 1][__targetX]->_width = _boardLogic[__targetY][__targetX]->_width;
     _boardLogic[__targetY + 1][__targetX]->_height = _boardLogic[__targetY][__targetX]->_height;
 
-    if (__targetType == PANEL_GARBAGE_TYPE)
+    if (__targetType == PANEL_GARBAGE_TYPE || __targetType == PANEL_CONCRETE_GARBAGE_TYPE)
         _boardLogic[__targetY + 1][__targetX]->_sourceY++;
     
     _boardLogic[__targetY][__targetX]->_type = -1;
@@ -387,7 +396,7 @@ void Board::TransportOperation ()
                 _boardGraphics[j][k]->_visibility = hidden;
             
             // If garbage, maintain its structure
-            if (_boardLogic[j][k]->_type == PANEL_GARBAGE_TYPE)
+            if (_boardLogic[j][k]->_type == PANEL_GARBAGE_TYPE || _boardLogic[j][k]->_type == PANEL_CONCRETE_GARBAGE_TYPE)
             {
                 _boardLogic[j][k]->_positionX = _boardLogic[j + 1][k]->_positionX;
                 _boardLogic[j][k]->_positionY = _boardLogic[j + 1][k]->_positionY;
@@ -458,10 +467,6 @@ void Board::TransformGarbageOperation(Change change)
     unsigned int __garbageSourceX = ExtractTargetPanelX(change);
     unsigned int __garbageSourceY = ExtractTargetPanelY(change);
     
-    stringstream ss;
-    ss<<"Decoded 	Garbage: "<<__garbageSourceY<<"."<<__garbageSourceX<<endl;
-    //Debug::Log(ss.str());
-    
     // Build new garbage object.
     char __previous_type = -1;
     // Make sure the current panel is different from the previous.
@@ -493,10 +498,20 @@ void Board::DEBUGGarbage ()
     _changes.push_back(__change);
     
     __change = 0;
+    __change = AddChangeType(__change, CONCRETE_GARBAGE_OPERATION);
+    
+    _changes.push_back(__change);
+    
+    __change = 0;
     __change = AddChangeType(__change, GARBAGE_OPERATION);
     __change = AddGarbageWidth(__change, 4);
     __change = AddGarbageHeight(__change, 1);
     __change = AddGarbagePosition(__change, 0);
+    
+    _changes.push_back(__change);
+    
+    __change = 0;
+    __change = AddChangeType(__change, CONCRETE_GARBAGE_OPERATION);
     
     _changes.push_back(__change);
     
@@ -548,6 +563,39 @@ void Board::MakeGargabe (unsigned int width, unsigned int height, unsigned int p
     }
 }
 
+void Board::MakeConcreteGargabe ()
+{
+    
+        LogicPanel ** __garbageSlice  = new LogicPanel *[_dimensions.getWidth()];
+        for (unsigned int i = 0; i < _dimensions.getWidth(); i++)
+        {
+            __garbageSlice[i] = new LogicPanel();
+            __garbageSlice[i]->_type = -1;
+            __garbageSlice[i]->_sourceX = -1;
+            __garbageSlice[i]->_sourceY = -1;
+            __garbageSlice[i]->_width = 0;
+            __garbageSlice[i]->_height = 0;
+            __garbageSlice[i]->_positionX = -1;
+            __garbageSlice[i]->_positionY = -1;
+            __garbageSlice[i]->_wait = 0;
+            __garbageSlice[i]->_state = 0;
+        }
+        
+        for (unsigned int i = 0; i < _dimensions.getWidth(); i++)
+        {
+            __garbageSlice[i]->_type = PANEL_CONCRETE_GARBAGE_TYPE;
+            __garbageSlice[i]->_sourceX = 0;
+            __garbageSlice[i]->_sourceY = 0;
+            __garbageSlice[i]->_width = _dimensions.getWidth();
+            __garbageSlice[i]->_height = 1;
+            __garbageSlice[i]->_positionX = i;
+            __garbageSlice[i]->_positionY = 0;
+            __garbageSlice[i]->_wait = 0;
+            __garbageSlice[i]->_state = 0;
+        }
+        _garbageList.push_back(__garbageSlice);
+}
+
 void Board::FallGarbage ()
 {
     if (_garbageList.size() == 0)
@@ -564,7 +612,7 @@ void Board::FallGarbage ()
     
     for (unsigned int i = 0; i < _dimensions.getWidth(); i++)
     {
-        if (_garbageList[0][i]->_type  == PANEL_GARBAGE_TYPE)
+        if (_garbageList[0][i]->_type  == PANEL_GARBAGE_TYPE || _garbageList[0][i]->_type == PANEL_CONCRETE_GARBAGE_TYPE)
         {
             _boardLogic[0][i]->_type = _garbageList[0][i]->_type;
             _boardLogic[0][i]->_sourceX = _garbageList[0][i]->_sourceX;
@@ -601,12 +649,13 @@ GRRLIB_texImg * Board::DecodeType (unsigned int type, unsigned int style)
         case PANEL_NORMAL_SPRITE:
             switch (type)
             {
-                case PANEL_RED_TYPE:     return _spriteManager->_dred; break;
-                case PANEL_CYAN_TYPE:    return _spriteManager->_dblue; break;
-                case PANEL_YELLOW_TYPE:  return _spriteManager->_dyellow; break;
-                case PANEL_GREEN_TYPE:   return _spriteManager->_dgreen; break;
-                case PANEL_PURPLE_TYPE:  return _spriteManager->_dpurple; break;
-                case PANEL_GARBAGE_TYPE: return _spriteManager->_dgarbage; break;
+                case PANEL_RED_TYPE:              return _spriteManager->_dred; break;
+                case PANEL_CYAN_TYPE:             return _spriteManager->_dblue; break;
+                case PANEL_YELLOW_TYPE:           return _spriteManager->_dyellow; break;
+                case PANEL_GREEN_TYPE:            return _spriteManager->_dgreen; break;
+                case PANEL_PURPLE_TYPE:           return _spriteManager->_dpurple; break;
+                case PANEL_GARBAGE_TYPE:          return _spriteManager->_dgarbage; break;
+                case PANEL_CONCRETE_GARBAGE_TYPE: return _spriteManager->_concrete; break;
             }
         break;
         case PANEL_BRIGHT_SPRITE:

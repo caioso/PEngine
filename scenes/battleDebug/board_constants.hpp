@@ -2,7 +2,7 @@
 #define __BOARD_CONSTANTS__
 
 // Panel graphics constants
-#define PANEL_IMAGE_SIZE 28
+#define PANEL_IMAGE_SIZE 32
 #define PANEL_IMAGE_SPACE 1
 
 // Game modes constants
@@ -16,6 +16,7 @@
 #define PANEL_GREEN_TYPE 3
 #define PANEL_PURPLE_TYPE 4
 #define PANEL_GARBAGE_TYPE 5
+#define PANEL_CONCRETE_GARBAGE_TYPE 6
 
 // PANEL GRAPHCIS STYLE
 #define PANEL_NORMAL_SPRITE 0

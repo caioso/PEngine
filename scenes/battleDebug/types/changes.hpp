@@ -74,4 +74,6 @@ typedef uint32_t Change;
 
 #define TRANSFORM_GARBAGE_OPERATION 0x8
 
+#define CONCRETE_GARBAGE_OPERATION 0x9
+
 #endif // __CHANGES__

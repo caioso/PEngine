@@ -13,6 +13,7 @@
 #include "../../assets/graphics/dyellow1.h"
 #include "../../assets/graphics/dpurple1.h"
 #include "../../assets/graphics/dgarbage.h"
+#include "../../assets/graphics/concrete.h"
 #include "../../assets/graphics/cursor.h"
 #include "../../assets/graphics/cursor1.h"
 
@@ -33,6 +34,7 @@ class SpriteManager
     public: GRRLIB_texImg* _dgarbage;
     public: GRRLIB_texImg* _cursor;
     public: GRRLIB_texImg* _cursor1;
+    public: GRRLIB_texImg* _concrete;
     
     public: SpriteManager ()
     {
@@ -49,6 +51,7 @@ class SpriteManager
         _dgarbage = GRRLIB_LoadTexture(dgarbage);
         _cursor = GRRLIB_LoadTexture(cursor);
         _cursor1 = GRRLIB_LoadTexture(cursor1);
+        _concrete = GRRLIB_LoadTexture(concrete);
     }
 };
 

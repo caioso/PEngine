@@ -1,5 +1,7 @@
 #include "board_task.hpp"
 
+#include "../../assets/graphics/BG1.h"
+
 #define WII 0
 #define MAC 1
 
@@ -13,7 +15,7 @@ BoardTask::BoardTask (std::string board_name,
     NormalRules * _rules = new NormalRules(board_dim);
     _board_name = board_name;
     _board = new Board(dynamic_cast<RulesInterface*>(_rules), board_dim, board_pos, cursor_pos, 6);
-
+    
     // Configure Wiimotes
     _remote = new Controller(player_number);
     // Register Controller
@@ -22,6 +24,11 @@ BoardTask::BoardTask (std::string board_name,
     // Register Sound Effects
     _swap = new Sound(swapfx, swapfx_size, 1, 48000);
     _move = new Sound(move, move_size, 1, 48000);
+    
+    GRRLIB_texImg* _bgText;
+    _bgText = GRRLIB_LoadTexture(BG1);
+    _bg = new Sprite(_bgText, 0, 0, 616, 480);
+    GraphicEngine::_stage->AddChild(_bg);
 }
 
 void BoardTask::Start ()
