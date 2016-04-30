@@ -11,6 +11,7 @@ class WorkPanel
     public: int _sourceY;
     public: int _width;
     public: int _height;
+    public: int _wait;
 };
 
 #endif // __WORK_PANEL__

@@ -6,7 +6,8 @@
 class Panel : public Sprite
 {
     // Default Constructor
-    public: Panel (GRRLIB_texImg * image, int width = PANEL_SIZE, int height = PANEL_SIZE) : Sprite (image, width, height) {};
+    public: Panel (GRRLIB_texImg * image, int width = PANEL_SIZE, int height = PANEL_SIZE) : Sprite (image, width, height)
+    {};
 };
 
 #endif // __PANEL__

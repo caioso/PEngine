@@ -27,4 +27,7 @@
 #define CURSOR_HEIGHT 36
 #define CURSOR_ANIMATION_LENGTH 40
 
+// Animation Constants
+#define FALL_DELAY 8
+
 #endif // __BOARD_CONSTANTS__

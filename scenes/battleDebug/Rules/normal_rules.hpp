@@ -383,6 +383,7 @@ class NormalRules : public RulesInterface
                 __fallCheckBoard[i][j]._sourceY = _boardLogic[i][j]->_sourceY;
                 __fallCheckBoard[i][j]._width = _boardLogic[i][j]->_width;
                 __fallCheckBoard[i][j]._height = _boardLogic[i][j]->_height;
+                __fallCheckBoard[i][j]._wait = _boardLogic[i][j]->_wait;
             }
         
         // Detect Potential falls
@@ -393,35 +394,16 @@ class NormalRules : public RulesInterface
                 if (i != boardH - 1)
                 {
                     // Start fall
-                    if (__fallCheckBoard[i][j]._type != -1 && __fallCheckBoard[i][j]._state == 0 && __fallCheckBoard[i + 1][j]._type == -1)
+                    if (__fallCheckBoard[i][j]._type != -1 && __fallCheckBoard[i][j]._state == 0 && (__fallCheckBoard[i + 1][j]._type == -1 || __fallCheckBoard[i + 1][j]._state == 4))
                     {
                         if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
                             __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
                         {
-                            Change __fall = 0;
-                            __fall = AddChangeType(__fall, FALL_OPERATION);
-                            __fall = AddTargetPanelX(__fall, j);
-                            __fall = AddTargetPanelY(__fall, i);
-                            changes.push_back(__fall);
+                            _boardLogic[i][j]->_state = 4;
+                            _boardLogic[i][j]->_wait = FALL_DELAY;
                             
-                            // Update local work boards
-                            __fallCheckBoard[i + 1][j]._type= __fallCheckBoard[i][j]._type;
-                            __fallCheckBoard[i + 1][j]._state = __fallCheckBoard[i][j]._state;
-                            __fallCheckBoard[i + 1][j]._positionX = __fallCheckBoard[i][j]._positionX;
-                            __fallCheckBoard[i + 1][j]._positionY = __fallCheckBoard[i][j]._positionY;
-                            __fallCheckBoard[i + 1][j]._sourceX = __fallCheckBoard[i][j]._sourceX;
-                            __fallCheckBoard[i + 1][j]._sourceY = __fallCheckBoard[i][j]._sourceY;
-                            __fallCheckBoard[i + 1][j]._width = __fallCheckBoard[i][j]._width;
-                            __fallCheckBoard[i + 1][j]._height = __fallCheckBoard[i][j]._height;
-                            
-                            __fallCheckBoard[i][j]._type = -1;
-                            __fallCheckBoard[i][j]._state = -1;
-                            __fallCheckBoard[i][j]._positionX = -1;
-                            __fallCheckBoard[i][j]._positionY = -1;
-                            __fallCheckBoard[i][j]._sourceX = -1;
-                            __fallCheckBoard[i][j]._sourceY = -1;
-                            __fallCheckBoard[i][j]._width = -1;
-                            __fallCheckBoard[i][j]._height = -1;
+                            __fallCheckBoard[i][j]._state = 4;
+                            __fallCheckBoard[i][j]._wait = FALL_DELAY;
 
                         }
                         else
@@ -429,6 +411,18 @@ class NormalRules : public RulesInterface
                             bool __canFall = CanGarbageFall (i, j);
                             if (__canFall)
                                 FallGarbage(i, j, changes, _garbageList);
+                        }
+                    }
+                    else if (__fallCheckBoard[i][j]._state == 4)
+                    {
+                        if (_boardLogic[i][j]->_wait == 0)
+                        {
+                            __fallCheckBoard[i][j]._state = 1;
+                            _boardLogic[i][j]->_state = 1;
+                        }
+                        else
+                        {
+                            _boardLogic[i][j]->_wait--;
                         }
                     }
                     // Update fall
