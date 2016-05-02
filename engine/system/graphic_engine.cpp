@@ -40,7 +40,7 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
                     __ref = __ref->_parent;
                 }
                 
-                GRRLIB_DrawImg(__tmp->_x + __x, __tmp->_y + __y, __tmp->GetTexture(), __tmp->_rotation, 1, 1, PPL_COLOR_WHITE);
+                GRRLIB_DrawImg(__tmp->_x + __x, __tmp->_y + __y, __tmp->GetTexture(), __tmp->_rotation, __tmp->_scaleX, __tmp->_scaleY, PPL_COLOR_WHITE);
             }
         }
         //else

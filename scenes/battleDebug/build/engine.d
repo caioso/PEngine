@@ -105,8 +105,18 @@ engine.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/controller.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/script_manager.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/runnable.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/animation_engine.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../types/sprite_properties.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../types/tween.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../types/../base/sprite.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../types/sprite_properties.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/utils/framerate_controller.hpp \
+ /opt/devkitpro/libogc/include/ogc/lwp_watchdog.h \
+ /opt/devkitpro/libogc/include/ogc/lwp_queue.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/utils/../system/debug.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/types/point2d.hpp \
- /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/types/dim2D.hpp
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/types/dim2D.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/types/sprite_properties.hpp
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/engine.hpp:
 
@@ -318,6 +328,26 @@ engine.o: \
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/runnable.hpp:
 
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/animation_engine.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../types/sprite_properties.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../types/tween.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../types/../base/sprite.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../types/sprite_properties.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/utils/framerate_controller.hpp:
+
+/opt/devkitpro/libogc/include/ogc/lwp_watchdog.h:
+
+/opt/devkitpro/libogc/include/ogc/lwp_queue.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/utils/../system/debug.hpp:
+
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/types/point2d.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/types/dim2D.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/types/sprite_properties.hpp:

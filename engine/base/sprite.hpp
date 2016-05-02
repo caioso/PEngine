@@ -14,24 +14,29 @@ using namespace std;
 // of the asset.
 class Sprite
 {
+    friend class AnimationEngine;
+    
     public: float _x;
     public: float _y;
     public: float _width;
     public: float _height;
     public: float _rotation;
+    public: float _scaleX;
+    public: float _scaleY;
     public: Sprite * _parent;
     public: Visibility _visibility;
+    private: bool _isAnimating;
     private: GRRLIB_texImg* _tex;
     private: vector<Sprite*> _children;
 
     // Generic Constructor Method.
     // This Constructor makes sure the Sprite position is set to (0,0).
-    public: Sprite () : _x(0), _y(0), _width(0), _height(0), _rotation(0), _parent(NULL), _tex(NULL) {}
+    public: Sprite () : _x(0), _y(0), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(1), _parent(NULL), _tex(NULL) {}
 
     // Coordinate defining constructor. Width and height set null.
     // @param x: asset x coordinate.
     // @param y: asset y coordinate.
-    public: Sprite (float x, float y) : _x(x), _y(y), _width(0), _height(0), _rotation(0), _parent(NULL), _tex(NULL) {}
+    public: Sprite (float x, float y) : _x(x), _y(y), _width(0), _height(0), _rotation(1), _scaleX(1), _scaleY(0), _parent(NULL), _tex(NULL) {}
 
     // Asset defining constructor. The Sprite coordinates are set to (0,0). Width and height set null.
     // @param asset: unsigned char array of the asset.

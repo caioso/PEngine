@@ -1,6 +1,9 @@
 #ifndef __CONSTANTS__
 #define __CONSTANTS__
 
+// Framerate
+#define PPL_TARGET_FRAMERATE 60
+
 // Debug Console Constant
 #define PPL_MAX_CONSOLE_LINES 31
 #define PPL_MAX_BUFFER_SIZE 300

@@ -20,7 +20,7 @@ include $(DEVKITPPC)/wii_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-SOURCES		:=	./ ../../engine/ ../../engine/common ../../engine/base ../../engine/system ../../assets/graphics ../../assets/audio
+SOURCES		:=	./ ../../engine/ ../../engine/common ../../engine/base ../../engine/system ../../engine/utils/ ../../assets/graphics ../../assets/audio
 DATA		:=	data
 INCLUDES	:=
 

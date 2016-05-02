@@ -80,7 +80,8 @@ sprite.o: \
  /opt/devkitpro/libogc/include/sdl/begin_code.h \
  /opt/devkitpro/libogc/include/sdl/close_code.h \
  /opt/devkitpro/libogc/include/sdl/SDL_error.h \
- /opt/devkitpro/libogc/include/sdl/SDL_mutex.h
+ /opt/devkitpro/libogc/include/sdl/SDL_mutex.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/base/../types/visibility.hpp
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/base/sprite.hpp:
 
@@ -243,3 +244,5 @@ sprite.o: \
 /opt/devkitpro/libogc/include/sdl/SDL_error.h:
 
 /opt/devkitpro/libogc/include/sdl/SDL_mutex.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/base/../types/visibility.hpp:

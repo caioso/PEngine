@@ -32,10 +32,15 @@
 #include "system/graphic_engine.hpp"
 #include "system/input_manager.hpp"
 #include "system/script_manager.hpp"
+#include "system/animation_engine.hpp"
+
+// Utils
+#include "utils/framerate_controller.hpp"
 
 // Type Includes
 #include "types/point2d.hpp"
 #include "types/dim2D.hpp"
+#include "types/sprite_properties.hpp"
 
 class Engine
 {

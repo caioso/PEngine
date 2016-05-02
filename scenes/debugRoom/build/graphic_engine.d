@@ -82,6 +82,7 @@ graphic_engine.o: \
  /opt/devkitpro/libogc/include/sdl/close_code.h \
  /opt/devkitpro/libogc/include/sdl/SDL_error.h \
  /opt/devkitpro/libogc/include/sdl/SDL_mutex.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../base/../types/visibility.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/debug.hpp
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/graphic_engine.hpp:
@@ -247,5 +248,7 @@ graphic_engine.o: \
 /opt/devkitpro/libogc/include/sdl/SDL_error.h:
 
 /opt/devkitpro/libogc/include/sdl/SDL_mutex.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../base/../types/visibility.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/debug.hpp:

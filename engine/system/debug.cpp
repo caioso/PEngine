@@ -2,6 +2,7 @@
 
 float Debug::_x_position;
 float Debug::_y_position;
+string Debug::_framerate;
 vector<LogData> Debug::_console_buffer;
 GRRLIB_texImg * Debug::_console_font;
 bool Debug::_edit_position;
@@ -83,6 +84,13 @@ void Debug::ToggleEdit ()
         Debug::LogNote ("Console in View Mode");
 };
 
+void Debug::RegisterFramerate (int p_framerate)
+{
+    stringstream ss;
+    ss<<"FPS: "<<p_framerate;
+    _framerate = ss.str();
+}
+
 void Debug::Render ()
 {
     for (size_t i = 0; i < _console_buffer.size(); i++)
@@ -91,4 +99,6 @@ void Debug::Render ()
                       _console_font,  _console_buffer[i]._color, 1,
                       _console_buffer[i]._message.c_str());
     }
+    
+    GRRLIB_Printf(0,10,_console_font,PPL_COLOR_WHITE, 1, _framerate.c_str());
 }

@@ -93,6 +93,7 @@ engine.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/base/../system/../common/fonts/BMfont5.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/base/../system/../common/constants.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/base/../system/../common/macros.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/base/../types/visibility.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/audio_engine.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/debug.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../base/sound.hpp \
@@ -103,7 +104,19 @@ engine.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/input_manager.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../base/controller.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/script_manager.hpp \
- /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../base/runnable.hpp
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../base/runnable.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/animation_engine.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../types/sprite_properties.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../types/tween.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../types/../base/sprite.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../types/sprite_properties.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/utils/framerate_controller.hpp \
+ /opt/devkitpro/libogc/include/ogc/lwp_watchdog.h \
+ /opt/devkitpro/libogc/include/ogc/lwp_queue.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/utils/../system/debug.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/types/point2d.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/types/dim2D.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/types/sprite_properties.hpp
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/engine.hpp:
 
@@ -291,6 +304,8 @@ engine.o: \
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/base/../system/../common/macros.h:
 
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/base/../types/visibility.hpp:
+
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/audio_engine.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/debug.hpp:
@@ -312,3 +327,27 @@ engine.o: \
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/script_manager.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../base/runnable.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/animation_engine.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../types/sprite_properties.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../types/tween.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../types/../base/sprite.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/system/../types/sprite_properties.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/utils/framerate_controller.hpp:
+
+/opt/devkitpro/libogc/include/ogc/lwp_watchdog.h:
+
+/opt/devkitpro/libogc/include/ogc/lwp_queue.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/utils/../system/debug.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/types/point2d.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/types/dim2D.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/debugRoom/../../engine/types/sprite_properties.hpp:

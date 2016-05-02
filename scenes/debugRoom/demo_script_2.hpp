@@ -18,6 +18,7 @@ class DemoScript2 : public Runnable
     private: Controller * __remote_1;
     private: Controller * __remote_2;
     
+    private: GRRLIB_texImg* _scott;
     private: Sprite * __lv1;
     private: Sprite * __lv2;
     private: Sprite * __lv3;

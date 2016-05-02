@@ -10,10 +10,12 @@ void DemoScript2::Start ()
     InputManager::RegisterController(__remote_1);
     InputManager::RegisterController(__remote_2);
     
+    _scott = GRRLIB_LoadTexture(scott);
+    
     // Sprite Test
-    __lv1 = new Sprite(scott, 80, 80, 96, 116);
-    __lv2 = new Sprite(scott, 50, 50, 96, 116);
-    __lv3 = new Sprite(scott, 50, 150, 96, 116);
+    __lv1 = new Sprite(_scott, 80, 80, 96, 116);
+    __lv2 = new Sprite(_scott, 50, 50, 96, 116);
+    __lv3 = new Sprite(_scott, 50, 150, 96, 116);
     
     // Sound Effect and Music Test
     __sfx = new Sound(airwing, airwing_size, 1, 48000);
@@ -37,24 +39,42 @@ void DemoScript2::Update ()
     // Check Behaviour
     if (__remote_1->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_LEFT))
     {
-        __lv2->_x -= 10;
-        AudioEngine::StopSFX(__sfx);
+        SpriteProperties __properties(__lv2);
+        __properties.RegisterPropertyFinalValue(SpriteX, 200);
+        __properties.RegisterPropertyFinalValue(SpriteY, 150);
+        __properties.RegisterPropertyFinalValue(SpriteScaleX, 3);
+        __properties.RegisterPropertyFinalValue(SpriteScaleY, 3);
+        AnimationEngine::RegisterTween(__lv2, __properties, 500.0);
+        //__lv2->_x -= 10;
+        //AudioEngine::StopSFX(__sfx);
 
     }
     if (__remote_1->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_RIGHT))
     {
-        AudioEngine::PlaySFX(__sfx1);
-        __lv2->_x += 10;
+        SpriteProperties __properties(__lv2);
+        __properties.RegisterPropertyFinalValue(SpriteX, 0);
+        __properties.RegisterPropertyFinalValue(SpriteY, 0);
+        __properties.RegisterPropertyFinalValue(SpriteScaleX, 1);
+        __properties.RegisterPropertyFinalValue(SpriteScaleY, 1);
+        AnimationEngine::RegisterTween(__lv2, __properties, 1000.0);
     }
     if (__remote_1->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_UP))
     {
-        AudioEngine::PlayMusic(__msc2);
-        __lv2->_y -= 10;
+        SpriteProperties __properties(__lv2);
+        __properties.RegisterPropertyFinalValue(SpriteX, 200);
+        __properties.RegisterPropertyFinalValue(SpriteY, 150);
+        __properties.RegisterPropertyFinalValue(SpriteScaleX, 3);
+        __properties.RegisterPropertyFinalValue(SpriteScaleY, 3);
+        AnimationEngine::RegisterTween(__lv2, __properties, 100.0);
     }
     if (__remote_1->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_DOWN))
     {
-        AudioEngine::PlayMusic(__msc);
-        __lv2->_y += 10;
+        SpriteProperties __properties(__lv2);
+        __properties.RegisterPropertyFinalValue(SpriteX, 0);
+        __properties.RegisterPropertyFinalValue(SpriteY, 0);
+        __properties.RegisterPropertyFinalValue(SpriteScaleX, 1);
+        __properties.RegisterPropertyFinalValue(SpriteScaleY, 1);
+        AnimationEngine::RegisterTween(__lv2, __properties, 5000.0);
     }
     if (__remote_1->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_HOME) ||
         __remote_2->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_HOME))

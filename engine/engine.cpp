@@ -9,6 +9,8 @@ void Engine::Init ()
     InputManager::Init();
     Debug::Init(300, 0);
     ScriptManager::Init();
+    AnimationEngine::Init();
+    FramerateController::Init();
     Engine::finish_main_loop = false;
 }
 
@@ -17,6 +19,8 @@ void Engine::Loop ()
 {
     while(1)
     {
+        FramerateController::StartCount();
+        
         if (finish_main_loop)
             break;
 
@@ -28,9 +32,12 @@ void Engine::Loop ()
 
         // Update Graphics and Audio - END
         AudioEngine::StreamAudio();
+        AnimationEngine::UpdateTweens();
         GraphicEngine::Render();
         Debug::Render();
         GRRLIB_Render();
+        
+        FramerateController::EndCount();
     }
 }
 

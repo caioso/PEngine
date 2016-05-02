@@ -1,15 +1,17 @@
 #include "sprite.hpp"
 
 Sprite::Sprite (GRRLIB_texImg* asset) :
-                _x(0), _y(0), _width(0), _height(0), _rotation(0), _tex(asset)
+                _x(0), _y(0), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(1), _tex(asset)
 {
+    _isAnimating = false;
     _visibility = visible;
     _parent = NULL;
 }
 
 Sprite::Sprite (GRRLIB_texImg* asset, float width, float height) :
-                _x(0), _y(0), _width(width), _height(height), _rotation(0), _tex(asset)
+                _x(0), _y(0), _width(width), _height(height), _rotation(0), _scaleX(1), _scaleY(1), _tex(asset)
 {
+    _isAnimating = false;
     _visibility = visible;
     _parent = NULL;
 }
@@ -17,6 +19,9 @@ Sprite::Sprite (GRRLIB_texImg* asset, float width, float height) :
 Sprite::Sprite (GRRLIB_texImg* asset, float x, float y, float width, float height) :
                 _x(x), _y(y), _width(width), _height(height), _tex(asset)
 {
+    _scaleX = 1;
+    _scaleY = 1;
+    _isAnimating = false;
     _visibility = visible;
     _parent = NULL;
 }

@@ -8,6 +8,7 @@
 
 #include <stdlib.h>
 #include <wiiuse/wpad.h>
+#include <sstream>
 #include <vector>
 #include <string>
 
@@ -28,6 +29,7 @@ class Debug
     private: static vector<LogData> _console_buffer;
     private: static GRRLIB_texImg * _console_font;
     private: static bool _edit_position;
+    private: static string _framerate;
     
     public: static void Init (int p_x, int p_y);
     
@@ -71,6 +73,10 @@ class Debug
     // The first line will be replced with teh second and so forth, so that
     // there will be room for a new entry.
     public: static void Render ();
+    
+    // Registers current framerate to show framestats at the corner of the screen.
+    // @param p_framerate: framerate value;
+    public: static void RegisterFramerate (int p_framerate);
     
 };
 
