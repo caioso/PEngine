@@ -47,6 +47,13 @@ class NormalRules : public RulesInterface
         if (_boardLogic[cursorPosition->getY()][cursorPosition->getX()]->_state == 3 ||
             _boardLogic[cursorPosition->getY()][cursorPosition->getX() + 1]->_state == 3)
             return;
+        if (_boardLogic[cursorPosition->getY()][cursorPosition->getX()]->_state == 1 ||
+            _boardLogic[cursorPosition->getY()][cursorPosition->getX() + 1]->_state == 1)
+            return;
+        if (cursorPosition->getY() != (unsigned)(boardH - 1) &&
+            _boardLogic[cursorPosition->getY() + 1][cursorPosition->getX()]->_type == -1 &&
+            _boardLogic[cursorPosition->getY() + 1][cursorPosition->getX() + 1]->_type == -1)
+            return;
 
         Change __swap = 0;
         __swap = AddChangeType(__swap, SWAP_OPERATION);
@@ -151,7 +158,7 @@ class NormalRules : public RulesInterface
     // @param j: column index.
     private: void DetectVertical (LogicPanel *** boardLogic, int type, int i, int j, Direction dir, int boardW, int boardH)
     {
-        if (boardLogic[i][j]->_state == 3)
+        if (boardLogic[i][j]->_state == 3 || boardLogic[i][j]->_state == 2)
             return;
         if (i != boardH - 1 && boardLogic[i + 1][j]->_type == -1)
             return;
@@ -179,7 +186,7 @@ class NormalRules : public RulesInterface
     // @param j: column index.
     private: void DetectHorizontal (LogicPanel *** boardLogic, int type, int i, int j, Direction dir, int boardW, int boardH)
     {
-        if (boardLogic[i][j]->_state == 3)
+        if (boardLogic[i][j]->_state == 3 || boardLogic[i][j]->_state == 2)
             return;
         if (i != boardH - 1 && boardLogic[i + 1][j]->_type == -1)
             return;
@@ -393,8 +400,12 @@ class NormalRules : public RulesInterface
             {
                 if (i != boardH - 1)
                 {
+                    // If Swapping, ignore the panel
+                    if (__fallCheckBoard[i][j]._state == 2)
+                        continue;
+                    
                     // Start fall
-                    if (__fallCheckBoard[i][j]._type != -1 && __fallCheckBoard[i][j]._state == 0 && (__fallCheckBoard[i + 1][j]._type == -1 || __fallCheckBoard[i + 1][j]._state == 4))
+                    if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 0 || IsInFallingAnimation(i,j)) && __fallCheckBoard[i][j]._state != 2 && (__fallCheckBoard[i + 1][j]._type == -1 || __fallCheckBoard[i + 1][j]._state == 4))
                     {
                         if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
                             __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
@@ -426,7 +437,7 @@ class NormalRules : public RulesInterface
                         }
                     }
                     // Update fall
-                    else if (__fallCheckBoard[i][j]._type != -1 && __fallCheckBoard[i][j]._state == 1 && __fallCheckBoard[i + 1][j]._type == -1)
+                    else if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 ||  IsInFallingAnimation(i,j)) && __fallCheckBoard[i][j]._state != 2 && __fallCheckBoard[i + 1][j]._type == -1)
                     {
                         if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
                             __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
@@ -464,22 +475,176 @@ class NormalRules : public RulesInterface
                         }
                     }
                     // Stop fall
-                    else if (__fallCheckBoard[i][j]._type != -1 && __fallCheckBoard[i][j]._state == 1 && __fallCheckBoard[i + 1][j]._type != -1)
+                    else if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 || (__fallCheckBoard[i][j]._state >= 5 && __fallCheckBoard[i][j]._state <= 14))&& __fallCheckBoard[i + 1][j]._type != -1)
                     {
-                        _boardLogic[i][j]->_state = 0;
-                        __fallCheckBoard[i][j]._state = 0;
+                        if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
+                            __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
+                        {
+                            UpdateFallSprite(i, j, changes, _boardLogic);
+                        }
+                        else
+                        {
+                            _boardLogic[i][j]->_state = 0;
+                            __fallCheckBoard[i][j]._state = 0;
+                        }
                     }
                 }
                 else
                 {
                     // Stop fall hit the last line
-                    if (__fallCheckBoard[i][j]._state == 1)
+                    if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
+                        __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
+                    {
+                        UpdateFallSprite(i, j, changes, _boardLogic);
+                    }
+                    else
                     {
                         _boardLogic[i][j]->_state = 0;
                         __fallCheckBoard[i][j]._state = 0;
                     }
                 }
             }
+        }
+    }
+    
+    private: bool IsInFallingAnimation (int i, int j)
+    {
+        return (__fallCheckBoard[i][j]._state >= 5 && __fallCheckBoard[i][j]._state <= 14);
+    }
+    
+    private: void UpdateFallSprite (int i, int j, vector<Change> &changes, LogicPanel *** _boardLogic)
+    {
+        if (__fallCheckBoard[i][j]._state == 1)
+        {
+            _boardLogic[i][j]->_state = 5;
+            __fallCheckBoard[i][j]._state = 5;
+            
+            Change __change = 0;
+            __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
+            __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_1);
+            __change = AddTargetPanelX(__change, j);
+            __change = AddTargetPanelY(__change, i);
+            changes.push_back(__change);
+        }
+        else if (__fallCheckBoard[i][j]._state == 5)
+        {
+            _boardLogic[i][j]->_state = 6;
+            __fallCheckBoard[i][j]._state = 6;
+            
+            Change __change = 0;
+            __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
+            __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_2);
+            __change = AddTargetPanelX(__change, j);
+            __change = AddTargetPanelY(__change, i);
+            changes.push_back(__change);
+        }
+        else if (__fallCheckBoard[i][j]._state == 6)
+        {
+            _boardLogic[i][j]->_state = 7;
+            __fallCheckBoard[i][j]._state = 7;
+            
+            Change __change = 0;
+            __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
+            __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_3);
+            __change = AddTargetPanelX(__change, j);
+            __change = AddTargetPanelY(__change, i);
+            changes.push_back(__change);
+        }
+        else if (__fallCheckBoard[i][j]._state == 7)
+        {
+            _boardLogic[i][j]->_state = 8;
+            __fallCheckBoard[i][j]._state = 8;
+            
+            Change __change = 0;
+            __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
+            __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_4);
+            __change = AddTargetPanelX(__change, j);
+            __change = AddTargetPanelY(__change, i);
+            changes.push_back(__change);
+        }
+        else if (__fallCheckBoard[i][j]._state == 8)
+        {
+            _boardLogic[i][j]->_state = 9;
+            __fallCheckBoard[i][j]._state = 9;
+            
+            Change __change = 0;
+            __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
+            __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_5);
+            __change = AddTargetPanelX(__change, j);
+            __change = AddTargetPanelY(__change, i);
+            changes.push_back(__change);
+        }
+        else if (__fallCheckBoard[i][j]._state == 9)
+        {
+            _boardLogic[i][j]->_state = 10;
+            __fallCheckBoard[i][j]._state = 10;
+            
+            Change __change = 0;
+            __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
+            __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_6);
+            __change = AddTargetPanelX(__change, j);
+            __change = AddTargetPanelY(__change, i);
+            changes.push_back(__change);
+        }
+        else if (__fallCheckBoard[i][j]._state == 10)
+        {
+            _boardLogic[i][j]->_state = 11;
+            __fallCheckBoard[i][j]._state = 11;
+            
+            Change __change = 0;
+            __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
+            __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_7);
+            __change = AddTargetPanelX(__change, j);
+            __change = AddTargetPanelY(__change, i);
+            changes.push_back(__change);
+        }
+        else if (__fallCheckBoard[i][j]._state == 11)
+        {
+            _boardLogic[i][j]->_state = 12;
+            __fallCheckBoard[i][j]._state = 12;
+            
+            Change __change = 0;
+            __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
+            __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_8);
+            __change = AddTargetPanelX(__change, j);
+            __change = AddTargetPanelY(__change, i);
+            changes.push_back(__change);
+        }
+        else if (__fallCheckBoard[i][j]._state == 12)
+        {
+            _boardLogic[i][j]->_state = 13;
+            __fallCheckBoard[i][j]._state = 13;
+            
+            Change __change = 0;
+            __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
+            __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_9);
+            __change = AddTargetPanelX(__change, j);
+            __change = AddTargetPanelY(__change, i);
+            changes.push_back(__change);
+        }
+        else if (__fallCheckBoard[i][j]._state == 13)
+        {
+            _boardLogic[i][j]->_state = 14;
+            __fallCheckBoard[i][j]._state = 14;
+            
+            Change __change = 0;
+            __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
+            __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_10);
+            __change = AddTargetPanelX(__change, j);
+            __change = AddTargetPanelY(__change, i);
+            changes.push_back(__change);
+        }
+        else if (__fallCheckBoard[i][j]._state == 14)
+        {
+            _boardLogic[i][j]->_state = 0;
+            __fallCheckBoard[i][j]._state = 0;
+            
+            Change __change = 0;
+            __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
+            __change = AddPanelImageStyle(__change, PANEL_NORMAL_SPRITE);
+            __change = AddTargetPanelX(__change, j);
+            __change = AddTargetPanelY(__change, i);
+            changes.push_back(__change);
         }
     }
 
@@ -560,7 +725,7 @@ class NormalRules : public RulesInterface
     
     public: void SlowDown()
     {
-        _targetDelay = 20;
+        //_targetDelay = 20;
     }
     
     public: void Slide (LogicPanel *** _boardLogic, int boardW, int boardH, std::vector<Change> &changes, Sprite * board)
@@ -576,6 +741,7 @@ class NormalRules : public RulesInterface
                  Change __change = 0;
                  __change = AddChangeType(__change, TRANSPORT_OPERATION);
                  changes.push_back(__change);
+                 _targetDelay = 20;
              }
              else
                  board->_y--;

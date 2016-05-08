@@ -24,6 +24,8 @@ Board::Board (RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, 
     _nextRowContainer = new Sprite();
     _nextRowContainer->_x = 0;
     _nextRowContainer->_y = (PANEL_IMAGE_SIZE + PANEL_IMAGE_SPACE) * _dimensions.getHeight();
+    
+    __delay = 0;
 
     // Instantiates main matrices and arrays.
     InstantiateMatrices();
@@ -31,8 +33,33 @@ Board::Board (RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, 
     // Creates the initial board and next-row.
     InstantiateAndIntializeGameMatrices(initial_height);
     
-    // Initialize Cursor.
-    InitializeCursor();
+    // Initialize Swap Sprites
+    InitializeSwapSprites();
+}
+
+void Board::InitializeSwapSprites ()
+{
+    // Swap Animation Sprite
+    _leftSwap = new Panel(_spriteManager->_dred, PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+    _rightSwap = new Panel(_spriteManager->_dgreen, PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+    
+    _leftSwap->_x = 0;
+    _leftSwap->_y = 0;
+    
+    _rightSwap->_x = 0;
+    _rightSwap->_y = 0;
+    
+    _leftState = 0;
+    _rightState = 0;
+    
+    _boardContainer->AddChild(_leftSwap);
+    _boardContainer->AddChild(_rightSwap);
+    
+    _rightSwap->_visibility = hidden;
+    _leftSwap->_visibility = hidden;
+    
+    _isSwapping = false;
+    _swapTarget = new Point2D();
 }
 
 void Board::InstantiateMatrices ()
@@ -106,25 +133,27 @@ void Board::InstantiateAndIntializeGameMatrices(int initial_height)
                 _boardLogic[i][j]->_type = PANEL_VOID_TYPE;
                 _boardGraphics[i][j]->_visibility = hidden;
             }
-            
         }
     
     // Show board and next-row on screen.
     _boardContainer->AddChild(_nextRowContainer);
-    GraphicEngine::_stage->AddChild(_boardContainer);
+    GraphicEngine::_stage->AddChildAt(_boardContainer, 0);
 }
 
 void Board::InitializeCursor ()
 {
     // Intialize Cursor control variables.
     _cursorFrame = 0;
-    _changeCursorFrame = false;
     
     // Instantiate Cursor Sprite.
-    _cursor = new Cursor(_spriteManager->_cursor, CURSOR_WIDTH, CURSOR_HEIGHT);
+    _cursor = new Cursor(_spriteManager->_cursor0001, CURSOR_WIDTH, CURSOR_HEIGHT);
+    
+    // Update Cursor Initial Position
+    _cursor->_x = _boardContainer->_x;
+    _cursor->_y = _boardContainer->_y;
     
     // Display Cursor on Screen.
-    _boardContainer->AddChild(_cursor);
+    GraphicEngine::_stage->AddChild(_cursor);
     
     // Update cursor position.
     UpdateCursorPosition (_cursorPosition);
@@ -147,24 +176,79 @@ void Board::UpdateCursorPosition (Point2D pos)
     if (pos.getY() < 0 || pos.getY() >= _dimensions.getHeight())
         return;
     
-    // Update Cursor Animation.
-    _cursorFrame++;
-    if (_cursorFrame == CURSOR_ANIMATION_LENGTH/2 && !_changeCursorFrame)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _changeCursorFrame = true;
-    }
-    else if (_cursorFrame == CURSOR_ANIMATION_LENGTH && _changeCursorFrame)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor1, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _changeCursorFrame = false;
-        _cursorFrame = 0;
-    }
-    
     // Update cursor position on screen.
     _cursorPosition = pos;
-    _cursor->_x = _cursorPosition.getX() * (PANEL_IMAGE_SIZE + PANEL_IMAGE_SPACE);
-    _cursor->_y = _cursorPosition.getY() * (PANEL_IMAGE_SIZE + PANEL_IMAGE_SPACE);
+    _cursor->_x = _boardContainer->_x + (_cursorPosition.getX() * (PANEL_IMAGE_SIZE + PANEL_IMAGE_SPACE)) - 3;
+    _cursor->_y = _boardContainer->_y + (_cursorPosition.getY() * (PANEL_IMAGE_SIZE + PANEL_IMAGE_SPACE)) - 4;
+}
+
+void Board::UpdateCursorSprites()
+{
+    
+    if (__delay != 2)
+    {
+        __delay++;
+        return;
+    }
+    
+    __delay = 0;
+    
+    // Update Cursor Animation.
+    if (_cursorFrame == 0)
+    {
+        _cursor->SetAsset(_spriteManager->_cursor0001, CURSOR_WIDTH, CURSOR_HEIGHT);
+        _cursorFrame++;
+    }
+    else if (_cursorFrame == 1)
+    {
+        _cursor->SetAsset(_spriteManager->_cursor0002, CURSOR_WIDTH, CURSOR_HEIGHT);
+        _cursorFrame++;
+    }
+    else if (_cursorFrame == 2)
+    {
+        _cursor->SetAsset(_spriteManager->_cursor0003, CURSOR_WIDTH, CURSOR_HEIGHT);
+        _cursorFrame++;
+    }
+    else if (_cursorFrame == 3)
+    {
+        _cursor->SetAsset(_spriteManager->_cursor0004, CURSOR_WIDTH, CURSOR_HEIGHT);
+        _cursorFrame++;
+    }
+    else if (_cursorFrame == 4)
+    {
+        _cursor->SetAsset(_spriteManager->_cursor0005, CURSOR_WIDTH, CURSOR_HEIGHT);
+        _cursorFrame++;
+    }
+    else if (_cursorFrame == 5)
+    {
+        _cursor->SetAsset(_spriteManager->_cursor0006, CURSOR_WIDTH, CURSOR_HEIGHT);
+        _cursorFrame++;
+    }
+    else if (_cursorFrame == 6)
+    {
+        _cursor->SetAsset(_spriteManager->_cursor0007, CURSOR_WIDTH, CURSOR_HEIGHT);
+        _cursorFrame++;
+    }
+    else if (_cursorFrame == 7)
+    {
+        _cursor->SetAsset(_spriteManager->_cursor0008, CURSOR_WIDTH, CURSOR_HEIGHT);
+        _cursorFrame++;
+    }
+    else if (_cursorFrame == 8)
+    {
+        _cursor->SetAsset(_spriteManager->_cursor0009, CURSOR_WIDTH, CURSOR_HEIGHT);
+        _cursorFrame++;
+    }
+    else if (_cursorFrame == 9)
+    {
+        _cursor->SetAsset(_spriteManager->_cursor0010, CURSOR_WIDTH, CURSOR_HEIGHT);
+        _cursorFrame++;
+    }
+    else if (_cursorFrame == 10)
+    {
+        _cursor->SetAsset(_spriteManager->_cursor0011, CURSOR_WIDTH, CURSOR_HEIGHT);
+        _cursorFrame = 0;
+    }
 }
 
 // ----------------------------------------------------
@@ -262,8 +346,81 @@ void Board::SwapOperation(Change change)
     // Extract derived and useful information
     int __targetType = _boardLogic[__targetY][__targetX]->_type;
     int __destinationType = _boardLogic[__destinationY][__destinationX]->_type;
-    int __targetState = _boardLogic[__targetY][__targetX]->_state;
-    int __targetWait = _boardLogic[__targetY][__targetX]->_wait;
+    _leftState = _boardLogic[__targetY][__targetX]->_state;
+    _rightState = _boardLogic[__targetY][__targetX + 1]->_state;
+    
+    _boardLogic[__targetY][__targetX]->_state = 2;
+    _boardLogic[__targetY][__targetX + 1]->_state = 2;
+    
+    if (__targetType == PANEL_VOID_TYPE)
+    {
+        _boardGraphics[__targetY][__targetX]->_visibility = hidden;
+    }
+    
+    if (__destinationType == PANEL_VOID_TYPE)
+        _boardGraphics[__destinationY][__destinationX]->_visibility = hidden;
+    
+    _swapTarget->setX(__targetX);
+    _swapTarget->setY(__targetY);
+    
+    _isSwapping = true;
+    
+    AnimateSwap(__targetY, __targetX);
+}
+
+void Board::AnimateSwap (unsigned int i, unsigned int j)
+{
+    // Swap Animation Sprite
+    _leftSwap->SetAsset(DecodeType(_boardLogic[i][j]->_type == PANEL_VOID_TYPE? PANEL_RED_TYPE : _boardLogic[i][j]->_type), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+    
+    if (_boardLogic[i][j]->_type != PANEL_VOID_TYPE)
+        _leftSwap->_visibility = visible;
+    else
+        _leftSwap->_visibility = hidden;
+    
+    _leftSwap->_x = _boardGraphics[i][j]->_x;
+    _leftSwap->_y = _boardGraphics[i][j]->_y;
+    
+    _boardGraphics[i][j]->_visibility = hidden;
+    
+    SpriteProperties __left_properties(_leftSwap);
+    __left_properties.RegisterPropertyFinalValue(SpriteX, _leftSwap->_x + PANEL_IMAGE_SIZE + PANEL_IMAGE_SPACE);
+    AnimationEngine::RegisterTween(_leftSwap, __left_properties, 85.0);
+    
+    
+    _rightSwap->SetAsset(DecodeType(_boardLogic[i][j + 1]->_type == PANEL_VOID_TYPE? PANEL_RED_TYPE : _boardLogic[i][j + 1]->_type), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+    
+    if (_boardLogic[i][j + 1]->_type != PANEL_VOID_TYPE)
+        _rightSwap->_visibility = visible;
+    else
+        _rightSwap->_visibility = hidden;
+    
+    _rightSwap->_x = _boardGraphics[i][j + 1]->_x;
+    _rightSwap->_y = _boardGraphics[i][j + 1]->_y;
+    
+    _boardGraphics[i][j + 1]->_visibility = hidden;
+    
+    SpriteProperties __right_properties(_rightSwap);
+    __right_properties.RegisterPropertyFinalValue(SpriteX, _rightSwap->_x - PANEL_IMAGE_SIZE - PANEL_IMAGE_SPACE);
+    AnimationEngine::RegisterTween(_rightSwap, __right_properties, 85.0);
+}
+
+void Board::CompleteSwap ()
+{
+    if (!_isSwapping)
+        return;
+    
+    if (_leftSwap->GetIsAnimating() || _rightSwap->GetIsAnimating())
+        return;
+    
+    unsigned int __targetX = _swapTarget->getX();
+    unsigned int __targetY = _swapTarget->getY();
+    unsigned int __destinationX = __targetX + 1;
+    unsigned int __destinationY = __targetY;
+    
+    // Extract derived and useful information
+    int __targetType = _boardLogic[__targetY][__targetX]->_type;
+    int __destinationType = _boardLogic[__destinationY][__destinationX]->_type;
     
     if (__destinationType != PANEL_VOID_TYPE)
     {
@@ -293,17 +450,22 @@ void Board::SwapOperation(Change change)
     
     // Update target logic data.
     _boardLogic[__targetY][__targetX]->_type = __destinationType;
-    _boardLogic[__targetY][__targetX]->_state = _boardLogic[__destinationY][__destinationX]->_state;
-    _boardLogic[__targetY][__targetX]->_wait = _boardLogic[__destinationY][__destinationX]->_wait;
+    _boardLogic[__targetY][__targetX]->_state = 0;
+    _boardLogic[__targetY][__targetX]->_wait = 0;//_boardLogic[__destinationY][__destinationX]->_wait;
     
     // Update destination logic data.
     _boardLogic[__destinationY][__destinationX]->_type = __targetType;
-    _boardLogic[__destinationY][__destinationX]->_state = __targetState;
-    _boardLogic[__destinationY][__destinationX]->_wait = __targetWait;
+    _boardLogic[__destinationY][__destinationX]->_state = 0;
+    _boardLogic[__destinationY][__destinationX]->_wait = 0;//__targetWait;
     
     // Ignore Garbage Part
     ClearGarbageData(_boardLogic[__targetY][__targetX]);
     ClearGarbageData(_boardLogic[__destinationY][__destinationX]);
+    
+    _leftSwap->_visibility = hidden;
+    _rightSwap->_visibility = hidden;
+    
+    _isSwapping = false;
 }
 
 void Board::DestroyOperation(Change change)
@@ -444,10 +606,23 @@ void Board::TransportOperation ()
         _cursorPosition.setY(_cursorPosition.getY()-1);
         UpdateCursorPosition(_cursorPosition);
     }
+
+    // Update Swap Animation
+    if (_isSwapping)
+    {
+        _swapTarget->setY(_swapTarget->getY() - 1);
+        
+        _boardGraphics[_swapTarget->getY()][_swapTarget->getX()]->_visibility = hidden;
+        _boardGraphics[_swapTarget->getY()][_swapTarget->getX() + 1]->_visibility = hidden;
+        
+        _leftSwap->_y -= PANEL_IMAGE_SIZE;
+        _rightSwap->_y -= PANEL_IMAGE_SIZE;
+    }
     
     // Update board container and next row position.
-    _boardContainer->_y += PANEL_IMAGE_SIZE - 1;
-    _nextRowContainer->_y = (PANEL_IMAGE_SIZE + 1) * _dimensions.getHeight();
+    _boardContainer->_y += PANEL_IMAGE_SIZE + PANEL_IMAGE_SPACE;
+    _cursor->_y += PANEL_IMAGE_SIZE + PANEL_IMAGE_SPACE;
+    _nextRowContainer->_y = (PANEL_IMAGE_SIZE + PANEL_IMAGE_SPACE) * _dimensions.getHeight();
 }
 
 void Board::GarbageOperation(Change change)
@@ -632,7 +807,6 @@ void Board::FallGarbage ()
         delete _garbageList[0][i];
     delete[] _garbageList[0];
     _garbageList.erase (_garbageList.begin());
-
 }
 
 void Board::Slide()
@@ -668,12 +842,118 @@ GRRLIB_texImg * Board::DecodeType (unsigned int type, unsigned int style)
                 case PANEL_PURPLE_TYPE:  return _spriteManager->_dpurple1; break;
             }
         break;
+        case PANEL_FALL_FRAME_1:
+            switch (type)
+            {
+                case PANEL_RED_TYPE:     return _spriteManager->_dRedFalling0001; break;
+                case PANEL_CYAN_TYPE:    return _spriteManager->_dBlueFalling0001; break;
+                case PANEL_YELLOW_TYPE:  return _spriteManager->_dYellowFalling0001; break;
+                case PANEL_GREEN_TYPE:   return _spriteManager->_dGreenFalling0001; break;
+                case PANEL_PURPLE_TYPE:  return _spriteManager->_dPurpleFalling0001; break;
+            }
+        break;
+        case PANEL_FALL_FRAME_2:
+            switch (type)
+            {
+                case PANEL_RED_TYPE:     return _spriteManager->_dRedFalling0002; break;
+                case PANEL_CYAN_TYPE:    return _spriteManager->_dBlueFalling0002; break;
+                case PANEL_YELLOW_TYPE:  return _spriteManager->_dYellowFalling0002; break;
+                case PANEL_GREEN_TYPE:   return _spriteManager->_dGreenFalling0002; break;
+                case PANEL_PURPLE_TYPE:  return _spriteManager->_dPurpleFalling0002; break;
+            }
+        break;
+        case PANEL_FALL_FRAME_3:
+            switch (type)
+            {
+                case PANEL_RED_TYPE:     return _spriteManager->_dRedFalling0003; break;
+                case PANEL_CYAN_TYPE:    return _spriteManager->_dBlueFalling0003; break;
+                case PANEL_YELLOW_TYPE:  return _spriteManager->_dYellowFalling0003; break;
+                case PANEL_GREEN_TYPE:   return _spriteManager->_dGreenFalling0003; break;
+                case PANEL_PURPLE_TYPE:  return _spriteManager->_dPurpleFalling0003; break;
+            }
+        break;
+        case PANEL_FALL_FRAME_4:
+            switch (type)
+            {
+                case PANEL_RED_TYPE:     return _spriteManager->_dRedFalling0004; break;
+                case PANEL_CYAN_TYPE:    return _spriteManager->_dBlueFalling0004; break;
+                case PANEL_YELLOW_TYPE:  return _spriteManager->_dYellowFalling0004; break;
+                case PANEL_GREEN_TYPE:   return _spriteManager->_dGreenFalling0004; break;
+                case PANEL_PURPLE_TYPE:  return _spriteManager->_dPurpleFalling0004; break;
+            }
+        break;
+        case PANEL_FALL_FRAME_5:
+            switch (type)
+            {
+                case PANEL_RED_TYPE:     return _spriteManager->_dRedFalling0005; break;
+                case PANEL_CYAN_TYPE:    return _spriteManager->_dBlueFalling0005; break;
+                case PANEL_YELLOW_TYPE:  return _spriteManager->_dYellowFalling0005; break;
+                case PANEL_GREEN_TYPE:   return _spriteManager->_dGreenFalling0005; break;
+                case PANEL_PURPLE_TYPE:  return _spriteManager->_dPurpleFalling0005; break;
+            }
+        break;
+        case PANEL_FALL_FRAME_6:
+            switch (type)
+            {
+                case PANEL_RED_TYPE:     return _spriteManager->_dRedFalling0006; break;
+                case PANEL_CYAN_TYPE:    return _spriteManager->_dBlueFalling0006; break;
+                case PANEL_YELLOW_TYPE:  return _spriteManager->_dYellowFalling0006; break;
+                case PANEL_GREEN_TYPE:   return _spriteManager->_dGreenFalling0006; break;
+                case PANEL_PURPLE_TYPE:  return _spriteManager->_dPurpleFalling0006; break;
+            }
+        break;
+        case PANEL_FALL_FRAME_7:
+            switch (type)
+            {
+                case PANEL_RED_TYPE:     return _spriteManager->_dRedFalling0007; break;
+                case PANEL_CYAN_TYPE:    return _spriteManager->_dBlueFalling0007; break;
+                case PANEL_YELLOW_TYPE:  return _spriteManager->_dYellowFalling0007; break;
+                case PANEL_GREEN_TYPE:   return _spriteManager->_dGreenFalling0007; break;
+                case PANEL_PURPLE_TYPE:  return _spriteManager->_dPurpleFalling0007; break;
+            }
+        break;
+        case PANEL_FALL_FRAME_8:
+            switch (type)
+            {
+                case PANEL_RED_TYPE:     return _spriteManager->_dRedFalling0008; break;
+                case PANEL_CYAN_TYPE:    return _spriteManager->_dBlueFalling0008; break;
+                case PANEL_YELLOW_TYPE:  return _spriteManager->_dYellowFalling0008; break;
+                case PANEL_GREEN_TYPE:   return _spriteManager->_dGreenFalling0008; break;
+                case PANEL_PURPLE_TYPE:  return _spriteManager->_dPurpleFalling0008; break;
+            }
+        break;
+        case PANEL_FALL_FRAME_9:
+            switch (type)
+            {
+                case PANEL_RED_TYPE:     return _spriteManager->_dRedFalling0009; break;
+                case PANEL_CYAN_TYPE:    return _spriteManager->_dBlueFalling0009; break;
+                case PANEL_YELLOW_TYPE:  return _spriteManager->_dYellowFalling0009; break;
+                case PANEL_GREEN_TYPE:   return _spriteManager->_dGreenFalling0009; break;
+                case PANEL_PURPLE_TYPE:  return _spriteManager->_dPurpleFalling0009; break;
+            }
+        break;
+        case PANEL_FALL_FRAME_10:
+            switch (type)
+            {
+                case PANEL_RED_TYPE:     return _spriteManager->_dRedFalling0010; break;
+                case PANEL_CYAN_TYPE:    return _spriteManager->_dBlueFalling0010; break;
+                case PANEL_YELLOW_TYPE:  return _spriteManager->_dYellowFalling0010; break;
+                case PANEL_GREEN_TYPE:   return _spriteManager->_dGreenFalling0010; break;
+                case PANEL_PURPLE_TYPE:  return _spriteManager->_dPurpleFalling0010; break;
+            }
+        break;
     }
     return NULL;
 }
 
 void Board::Swap ()
 {
+    //stringstream ss;
+    // ss<<_boardLogic[_cursorPosition.getY()][_cursorPosition.getX()]->_state<<" "<<_boardLogic[_cursorPosition.getY()][_cursorPosition.getX() + 1]->_state<<endl;
+    //Debug::Log(ss.str());
+    if (_isSwapping)
+        return;
+    
     _rules->Swap(_boardLogic, _dimensions.getWidth(), _dimensions.getHeight(), _changes, &_cursorPosition);
 }
 
@@ -695,6 +975,12 @@ void Board::Detect()
 void Board::Fall()
 {
     _rules->Fall(_boardLogic, _dimensions.getWidth(), _dimensions.getHeight(), _changes, _garbageList);
+}
+
+void Board::UpdateGraphics ()
+{
+    UpdateCursorSprites();
+    CompleteSwap();
 }
 
 void Board::ClearGarbageData (LogicPanel * panel)

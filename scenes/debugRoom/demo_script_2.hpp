@@ -37,6 +37,8 @@ class DemoScript2 : public Runnable
 
     // Prints finalization text
     public: void End ();
+    
+    public: static void Test();
 };
 
 #endif // __DEMO_SCRIPT_2__

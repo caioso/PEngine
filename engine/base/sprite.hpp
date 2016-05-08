@@ -58,6 +58,9 @@ class Sprite
 
     // Return Texture Object
     public: GRRLIB_texImg*  GetTexture() { return _tex; }
+    
+    // Return IsAnimating attribute
+    public: bool GetIsAnimating() { return _isAnimating; }
 
     // Manually loads an asset object into the Sprite.
     // @param asset: asset array.
@@ -67,6 +70,11 @@ class Sprite
     // @param child: Child sprite to be stored in this Sprite children list.
     public: void AddChild (Sprite* child);
 
+    // Add child Sprite to the current Sprite children list at a specific position.
+    // @param child: Child sprite to be stored in this Sprite children list.
+    // @param index: Inteded child index.
+    public: void AddChildAt (Sprite* child, int index);
+    
     // Remove child Sprite to the current Sprite children list, based on a Sprite reference.
     // @param child: Child sprite to be removed in this Sprite children list.
     public: void RemoveChild (Sprite* child);
@@ -76,6 +84,10 @@ class Sprite
 
     // Initializes the sprite object in GRRLIB.
     private: void DefineSprite ();
+    
+    // Returns the number of children in a sprite list.
+    // @return: children list size.
+    public: size_t GetChildrenNumber () { return _children.size(); }
 
     // Standard Destructir
     public: ~Sprite();

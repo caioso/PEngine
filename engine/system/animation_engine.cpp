@@ -2,7 +2,7 @@
 
 vector<Tween> AnimationEngine::_tween_list;
 
-void AnimationEngine::RegisterTween (Sprite * object, SpriteProperties properties, float duration)
+void AnimationEngine::RegisterTween (Sprite * object, SpriteProperties properties, float duration, void (*completion_completion)(void))
 {
     if (object->_isAnimating == false)
     {
@@ -11,6 +11,7 @@ void AnimationEngine::RegisterTween (Sprite * object, SpriteProperties propertie
         __tween._sprite_properties = properties;
         __tween._duration = duration;
         __tween._total_frames = (duration/1000)*PPL_TARGET_FRAMERATE;
+        __tween._completion = completion_completion;
         _tween_list.push_back(__tween);
         
         object->_isAnimating = true;
@@ -21,20 +22,16 @@ void AnimationEngine::UpdateTweens ()
 {
     for (unsigned int i = 0; i < _tween_list.size(); i++)
     {
-        if (_tween_list[i]._current_frame == _tween_list[i]._total_frames - 1)
+        if (_tween_list[i]._current_frame == _tween_list[i]._total_frames)
         {
-            //stringstream ss;
-            //ss<<_tween_list[i]._current_frame;
-            //Debug::Log(ss.str());
             _tween_list[i]._sprite_reference->_isAnimating = false;
+            if (_tween_list[i]._completion != NULL)
+                _tween_list[i]._completion();
             _tween_list.erase(_tween_list.begin() + i);
             i--;
         }
         else
         {
-            stringstream ss;
-            ss<<_tween_list[i]._current_frame;
-            Debug::Log(ss.str());
             UpdateTweenPropertiesLinear(i);
         }
     }

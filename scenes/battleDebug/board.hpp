@@ -30,10 +30,17 @@ class Board
     private: vector<LogicPanel **> _garbageList;
     private: Sprite * _boardContainer;
     private: Sprite * _nextRowContainer;
+    private: Panel * _leftSwap;
+    private: Panel * _rightSwap;
     private: unsigned int _cursorFrame;
-    private: bool _changeCursorFrame;
     private: SpriteManager * _spriteManager;
     
+    // Graphics Variables
+    private: Point2D * _swapTarget;
+    private: bool _isSwapping;
+    private: int _leftState;
+    private: int _rightState;
+    private: int __delay;
     // Control Elements
     private: Point2D _cursorPosition;
 
@@ -113,7 +120,7 @@ class Board
     private: void InstantiateAndIntializeGameMatrices(int initial_height);
     
     // Initializes cursor objects and set its correct position on screen.
-    private: void InitializeCursor ();
+    public: void InitializeCursor ();
     
     // Implements Swap Operation.
     // @param change: Change operation binary code.
@@ -142,11 +149,27 @@ class Board
     // @param change: Change operation binary code.
     private: void TransformGarbageOperation(Change change);
     
+    // Create a concrete garbage object.
     private: void MakeConcreteGargabe ();
     
     // Helper function: Ignore garbage only information in a logic panel object.
     // @param panel: target logic panel.
     private: void ClearGarbageData (LogicPanel * panel);
+    
+    // Initialize Swap sprites.
+    private: void InitializeSwapSprites ();
+    
+    // Performs swap animation.
+    private: void AnimateSwap (unsigned int i, unsigned int j);
+    
+    // Frees swap animation.
+    private: void CompleteSwap ();
+    
+    // Update graphics attributes at each frame.
+    public: void UpdateGraphics ();
+    
+    // Selects adequate cursor animation frame and implements delay on animation.
+    private: void UpdateCursorSprites();
     
     // Default Constructor
     public: ~Board ();

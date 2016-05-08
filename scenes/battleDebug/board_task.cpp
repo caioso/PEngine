@@ -1,7 +1,5 @@
 #include "board_task.hpp"
 
-#include "../../assets/graphics/BG1.h"
-
 #define WII 0
 #define MAC 1
 
@@ -25,10 +23,8 @@ BoardTask::BoardTask (std::string board_name,
     _swap = new Sound(swapfx, swapfx_size, 1, 48000);
     _move = new Sound(move, move_size, 1, 48000);
     
-    GRRLIB_texImg* _bgText;
-    _bgText = GRRLIB_LoadTexture(BG1);
-    _bg = new Sprite(_bgText, 0, 0, 616, 480);
-    GraphicEngine::_stage->AddChild(_bg);
+    // Initialize Cursor.
+    _board->InitializeCursor();
 }
 
 void BoardTask::Start ()
@@ -123,6 +119,7 @@ void BoardTask::Update ()
 
 #endif
 
+    _board->UpdateGraphics();
     _board->UpdateCursorPosition(_cursor_position);
     _board->InterpretOperations();
     _board->Detect();

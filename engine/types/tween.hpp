@@ -20,9 +20,12 @@ class Tween
     
     // Total Frames given target framerate
     public: long long int _current_frame;
+
+    // Completion callback
+    public: void (*_completion)(void);
     
     // Default Constructor
-    public: Tween () : _duration(0.0), _total_frames(0), _current_frame(0) {};
+    public: Tween () : _duration(0.0), _total_frames(0), _current_frame(0), _completion(NULL){};
 };
 
 #endif // __TWEEN__

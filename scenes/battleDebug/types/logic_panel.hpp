@@ -12,6 +12,16 @@ class LogicPanel
     // 2: Swapping
     // 3: Breaking
     // 4: Waiting to fall
+    // 5: fall frame 1
+    // 6: fall frame 2
+    // 7: fall frame 3
+    // 8: fall frame 4
+    // 9: fall frame 5
+    // 10: fall frame 6
+    // 11: fall frame 7
+    // 12: fall frame 8
+    // 13: fall frame 9
+    // 14: fall frame 10
     public: int _state;
     
     // Fall delay counter

@@ -3,7 +3,7 @@
 
 // Panel graphics constants
 #define PANEL_IMAGE_SIZE 32
-#define PANEL_IMAGE_SPACE 1
+#define PANEL_IMAGE_SPACE -1
 
 // Game modes constants
 #define EASY_MODE_PANEL_NUM 5
@@ -21,11 +21,21 @@
 // PANEL GRAPHCIS STYLE
 #define PANEL_NORMAL_SPRITE 0
 #define PANEL_BRIGHT_SPRITE 1
+#define PANEL_FALL_FRAME_1 2
+#define PANEL_FALL_FRAME_2 3
+#define PANEL_FALL_FRAME_3 4
+#define PANEL_FALL_FRAME_4 5
+#define PANEL_FALL_FRAME_5 6
+#define PANEL_FALL_FRAME_6 7
+#define PANEL_FALL_FRAME_7 8
+#define PANEL_FALL_FRAME_8 9
+#define PANEL_FALL_FRAME_9 10
+#define PANEL_FALL_FRAME_10 11
 
 // Cursor Constants
-#define CURSOR_WIDTH 64
-#define CURSOR_HEIGHT 36
-#define CURSOR_ANIMATION_LENGTH 40
+#define CURSOR_WIDTH 68
+#define CURSOR_HEIGHT 40
+#define CURSOR_ANIMATION_LENGTH 11
 
 // Animation Constants
 #define FALL_DELAY 8

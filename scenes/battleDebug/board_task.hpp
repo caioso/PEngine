@@ -18,7 +18,6 @@ class BoardTask : public Runnable
     public: std::string _board_name;
     private: Board * _board;
     private: Controller * _remote;
-    private: Sprite * _bg;
     
     //Debug
     private: Sound * _move;

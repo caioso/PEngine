@@ -32,6 +32,11 @@ void DemoScript2::Start ()
     AudioEngine::PlayMusic(__msc);
 }
 
+void DemoScript2::Test()
+{
+    Debug::Log("Test");
+}
+
 void DemoScript2::Update ()
 {
     __lv1->_rotation++;
@@ -44,7 +49,7 @@ void DemoScript2::Update ()
         __properties.RegisterPropertyFinalValue(SpriteY, 150);
         __properties.RegisterPropertyFinalValue(SpriteScaleX, 3);
         __properties.RegisterPropertyFinalValue(SpriteScaleY, 3);
-        AnimationEngine::RegisterTween(__lv2, __properties, 500.0);
+        AnimationEngine::RegisterTween(__lv2, __properties, 500.0, DemoScript2::Test);
         //__lv2->_x -= 10;
         //AudioEngine::StopSFX(__sfx);
 

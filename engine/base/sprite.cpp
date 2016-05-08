@@ -50,6 +50,28 @@ void Sprite::AddChild (Sprite* child)
     child->_parent = this;
 }
 
+void Sprite::AddChildAt (Sprite* child, int index)
+{
+    // Child already in other parent
+    if (child->_parent == this)
+    {
+        Debug::LogWarning("Child already belongs to this Sprite.");
+        return;
+    }
+    else if (_children.size() < index)
+    {
+        Debug::LogWarning("Child index out of bounds.");
+        return;
+    }
+    else if (child->_parent != NULL)
+    {
+        Debug::LogWarning("Child already in some list. Changing it.");
+        child->_parent->RemoveChild(child);
+    }
+    _children.insert(_children.begin() + index, child);
+    child->_parent = this;
+}
+
 void Sprite::RemoveChild (Sprite* child)
 {
     for (size_t i = 0; i < _children.size(); i++)
