@@ -15,8 +15,10 @@ class NormalRules : public RulesInterface
     int ** __checkBoard;
     WorkPanel ** __fallCheckBoard;
     int _boardVerticalPosition;
-    int _targetDelay;
+    int _levelDelay;
     int _currentDelay;
+    int _pixelsShown;
+    bool _showNextLine;
     
     public: NormalRules (Dim2D boardDim)
     {
@@ -29,8 +31,10 @@ class NormalRules : public RulesInterface
         }
         
         _boardVerticalPosition = 0;
-        _targetDelay = 20;
+        _levelDelay = 32;
         _currentDelay = 0;
+        _pixelsShown = 0;
+        _showNextLine = false;
     }
 
     // Implements Swap logic.
@@ -720,35 +724,57 @@ class NormalRules : public RulesInterface
     
     public: void SpeedUp()
     {
-        _targetDelay = 0;
-    }
-    
-    public: void SlowDown()
-    {
-        //_targetDelay = 20;
+        _showNextLine = true;
     }
     
     public: void Slide (LogicPanel *** _boardLogic, int boardW, int boardH, std::vector<Change> &changes, Sprite * board)
     {
-         if (_currentDelay >= _targetDelay)
-         {
-             _currentDelay = 0;
-             _boardVerticalPosition++;
-             if (_boardVerticalPosition == PANEL_IMAGE_SIZE)
-             {
-                 _boardVerticalPosition = 0;
-                 
-                 Change __change = 0;
-                 __change = AddChangeType(__change, TRANSPORT_OPERATION);
-                 changes.push_back(__change);
-                 _targetDelay = 20;
-             }
-             else
-                 board->_y--;
-         }
-        else
+        if (_showNextLine)
         {
-            _currentDelay++;
+            
+            if (_pixelsShown >= PANEL_IMAGE_SIZE - 1)
+            {
+                if (_pixelsShown > PANEL_IMAGE_SIZE - 1)
+                {
+                    board->_y+= 1;
+                }
+                _pixelsShown = 0;
+                Change __change = 0;
+                __change = AddChangeType(__change, TRANSPORT_OPERATION);
+                changes.push_back(__change);
+                _currentDelay = 0;
+                _showNextLine = false;
+            }
+            else
+            {
+                board->_y-=2;
+                _pixelsShown+=2;
+            }
+        }
+        else // _showNextLine == false
+        {
+            // If you shoudl wait to rise a pixel, do this respect the level delay
+            if (_currentDelay < _levelDelay)
+            {
+                _currentDelay++;
+            }
+            else
+            {
+                _currentDelay = 0;
+                
+                if (_pixelsShown == PANEL_IMAGE_SIZE - 1)
+                {
+                    _pixelsShown = 0;
+                    Change __change = 0;
+                    __change = AddChangeType(__change, TRANSPORT_OPERATION);
+                    changes.push_back(__change);
+                }
+                else
+                {
+                    board->_y--;
+                    _pixelsShown++;
+                }
+            }
         }
     }
     

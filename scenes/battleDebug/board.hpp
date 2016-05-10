@@ -80,9 +80,6 @@ class Board
     // Increases slide speed on key pressed
     public: void SpeedUp();
     
-    // Reduces slide speed on key released.
-    public: void SlowDown();
-    
     // Decodes a type and returns the buffer related to the type.
     // @param type: panel type to be decode.
     // @param style: panel image type.

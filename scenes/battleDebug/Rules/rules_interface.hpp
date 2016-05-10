@@ -12,7 +12,6 @@ class RulesInterface
     public: virtual void Fall (LogicPanel *** _boardLogic, int boardW, int boardH, vector<Change> &changes, vector<LogicPanel **> &_garbageList) = 0;
     public: virtual void Slide (LogicPanel *** _boardLogic, int boardW, int boardH, std::vector<Change> &changes, Sprite * board) = 0;
     public: virtual void SpeedUp() = 0;
-    public: virtual void SlowDown() = 0;
 };
 
 #endif // __RULES_INTERFACE__

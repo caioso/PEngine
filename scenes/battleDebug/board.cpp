@@ -962,11 +962,6 @@ void Board::SpeedUp()
     _rules->SpeedUp();
 }
 
-void Board::SlowDown()
-{
-    _rules->SlowDown();
-}
-
 void Board::Detect()
 {
     _rules->Detect(_boardLogic, _dimensions.getWidth(), _dimensions.getHeight(), _changes, _garbageList);
