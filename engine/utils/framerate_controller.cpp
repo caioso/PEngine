@@ -30,6 +30,7 @@ void FramerateController::EndCount ()
     if(_deltaTime>1000.0)
     {
         Debug::RegisterFramerate(_frames);
+        _beginFrame = ticks_to_millisecs(gettime());
         _deltaTime = 0;
         _frames = 0;
     }

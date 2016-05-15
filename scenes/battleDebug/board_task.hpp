@@ -6,6 +6,7 @@
 // Custom Includes
 #include "board.hpp"
 #include "rules/normal_rules.hpp"
+#include "sprite_manager.hpp"
 
 // Debug Audio
 #include "../../assets/audio/move.h"
@@ -33,7 +34,8 @@ class BoardTask : public Runnable
                        Dim2D board_dim,
                        Point2D board_pos,
                        Point2D cursor_pos,
-                       char player_number);
+                       char player_number,
+                       SpriteManager * spriteManager);
 
     // Required Methods
     // Initializes control variable

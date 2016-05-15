@@ -51,7 +51,7 @@ class Board
     // @param pos: the origin point used as reference for the board
     // coordinate system.
     // @param cur_pos: Initial cursor position.
-    public: Board(RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, int initial_height);
+    public: Board(RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, int initial_height, SpriteManager *spriteManager);
 
     // Updates cursor position and graphics position based on a point.
     // This method also update sthe cursor animation frames.
@@ -142,9 +142,12 @@ class Board
     // @param change: Change operation binary code.
     private: void GarbageOperation(Change change);
 
-    // Implements Transform Garbage Operation
+    // Implements Transform Garbage Operation.
     // @param change: Change operation binary code.
     private: void TransformGarbageOperation(Change change);
+    
+    // Implements Rise Board Operation.
+    private: void RiseBoardOperation();
     
     // Create a concrete garbage object.
     private: void MakeConcreteGargabe ();

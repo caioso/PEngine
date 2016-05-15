@@ -7,12 +7,13 @@ BoardTask::BoardTask (std::string board_name,
                       Dim2D board_dim,
                       Point2D board_pos,
                       Point2D cursor_pos,
-                      char player_number)
+                      char player_number,
+                      SpriteManager * spriteManager)
 {
     // For Now, We'll include normal rules
     NormalRules * _rules = new NormalRules(board_dim);
     _board_name = board_name;
-    _board = new Board(dynamic_cast<RulesInterface*>(_rules), board_dim, board_pos, cursor_pos, 6);
+    _board = new Board(dynamic_cast<RulesInterface*>(_rules), board_dim, board_pos, cursor_pos, 6, spriteManager);
     
     // Configure Wiimotes
     _remote = new Controller(player_number);

@@ -2,6 +2,7 @@
 #define __GRAPHIC_ENGINE__
 
 #include "../base/sprite.hpp"
+#include "../base/animated_sprite.hpp"
 #include "debug.hpp"
 #include <string>
 #include <grrlib.h>
@@ -9,6 +10,8 @@
 // Handles graphics and image rendering in the system.
 class GraphicEngine
 {
+    friend class AnimatedSprite;
+    
     public: static Sprite * _stage;
     
     // Initialization Function
@@ -23,6 +26,10 @@ class GraphicEngine
     // Renders Sprite lists for all children of _stage.
     // Must be called once each frame.
     private: static void RenderSprites (Sprite * sprite);
+    
+    // Update animation frames.
+    // Is called internally in RenderSprites.
+    private: static void UpdateSpriteAnimation(AnimatedSprite* tmp);
 };
 
 #endif // __GRAPHIC_ENGINE__

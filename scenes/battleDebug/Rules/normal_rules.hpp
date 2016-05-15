@@ -727,17 +727,13 @@ class NormalRules : public RulesInterface
         _showNextLine = true;
     }
     
-    public: void Slide (LogicPanel *** _boardLogic, int boardW, int boardH, std::vector<Change> &changes, Sprite * board)
+    public: void Slide (int boardW, int boardH, std::vector<Change> &changes)
     {
         if (_showNextLine)
         {
             
             if (_pixelsShown >= PANEL_IMAGE_SIZE - 1)
             {
-                if (_pixelsShown > PANEL_IMAGE_SIZE - 1)
-                {
-                    board->_y+= 1;
-                }
                 _pixelsShown = 0;
                 Change __change = 0;
                 __change = AddChangeType(__change, TRANSPORT_OPERATION);
@@ -747,8 +743,17 @@ class NormalRules : public RulesInterface
             }
             else
             {
-                board->_y-=2;
-                _pixelsShown+=2;
+                Change __change = 0;
+                __change = AddChangeType(__change, RISE_BOARD_OPERATION);
+                changes.push_back(__change);
+                _pixelsShown++;
+                if (_pixelsShown < PANEL_IMAGE_SIZE - 1)
+                {
+                    Change __change = 0;
+                    __change = AddChangeType(__change, RISE_BOARD_OPERATION);
+                    changes.push_back(__change);
+                    _pixelsShown++;
+                }
             }
         }
         else // _showNextLine == false
@@ -771,7 +776,9 @@ class NormalRules : public RulesInterface
                 }
                 else
                 {
-                    board->_y--;
+                    Change __change = 0;
+                    __change = AddChangeType(__change, RISE_BOARD_OPERATION);
+                    changes.push_back(__change);
                     _pixelsShown++;
                 }
             }

@@ -94,6 +94,8 @@ main.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../system/../common/constants.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../system/../common/macros.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../types/visibility.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/animated_sprite.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/sprite.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/audio_engine.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/debug.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/../base/sound.hpp \
@@ -101,6 +103,7 @@ main.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/debug.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/graphic_engine.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/../base/sprite.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/../base/animated_sprite.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/input_manager.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/../base/controller.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/script_manager.hpp \
@@ -201,12 +204,24 @@ main.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/cursor0009.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/cursor0010.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/cursor0011.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n0.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n1.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n2.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n3.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n4.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n5.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n6.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n7.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n8.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n9.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/points.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./board_constants.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/normal_rules.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/rules_interface.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/../types/work_panel.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/audio/move.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/audio/swapfx.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./clock.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/audio/battleTheme.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/BG1.h
 
@@ -398,6 +413,10 @@ main.o: \
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../types/visibility.hpp:
 
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/animated_sprite.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/sprite.hpp:
+
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/audio_engine.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/debug.hpp:
@@ -411,6 +430,8 @@ main.o: \
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/graphic_engine.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/../base/sprite.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/../base/animated_sprite.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/input_manager.hpp:
 
@@ -612,6 +633,28 @@ main.o: \
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/cursor0011.h:
 
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n0.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n1.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n2.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n3.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n4.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n5.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n6.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n7.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n8.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/n9.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/points.h:
+
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./board_constants.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./rules/normal_rules.hpp:
@@ -623,6 +666,8 @@ main.o: \
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/audio/move.h:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/audio/swapfx.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./clock.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/audio/battleTheme.h:
 

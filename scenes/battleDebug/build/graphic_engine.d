@@ -83,6 +83,8 @@ graphic_engine.o: \
  /opt/devkitpro/libogc/include/sdl/SDL_error.h \
  /opt/devkitpro/libogc/include/sdl/SDL_mutex.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/visibility.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/animated_sprite.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/sprite.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/debug.hpp
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/graphic_engine.hpp:
@@ -250,5 +252,9 @@ graphic_engine.o: \
 /opt/devkitpro/libogc/include/sdl/SDL_mutex.h:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/visibility.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/animated_sprite.hpp:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/sprite.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/debug.hpp:

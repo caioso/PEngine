@@ -82,6 +82,18 @@
 #include "../../assets/graphics/cursor0010.h"
 #include "../../assets/graphics/cursor0011.h"
 
+#include "../../assets/graphics/n0.h"
+#include "../../assets/graphics/n1.h"
+#include "../../assets/graphics/n2.h"
+#include "../../assets/graphics/n3.h"
+#include "../../assets/graphics/n4.h"
+#include "../../assets/graphics/n5.h"
+#include "../../assets/graphics/n6.h"
+#include "../../assets/graphics/n7.h"
+#include "../../assets/graphics/n8.h"
+#include "../../assets/graphics/n9.h"
+#include "../../assets/graphics/points.h"
+
 // Sprite manager class handles texture instances. It keeps a static reference to
 // each assets reference and deploy them as needed.
 class SpriteManager
@@ -159,7 +171,7 @@ class SpriteManager
     public: GRRLIB_texImg* _dYellowFalling0009;
     public: GRRLIB_texImg* _dYellowFalling0010;
     
-    // Yellow Falling Sprites
+    // Cursor Sprites
     public: GRRLIB_texImg* _cursor0001;
     public: GRRLIB_texImg* _cursor0002;
     public: GRRLIB_texImg* _cursor0003;
@@ -171,6 +183,19 @@ class SpriteManager
     public: GRRLIB_texImg* _cursor0009;
     public: GRRLIB_texImg* _cursor0010;
     public: GRRLIB_texImg* _cursor0011;
+    
+    // Clock Sprites
+    public: GRRLIB_texImg* _n0;
+    public: GRRLIB_texImg* _n1;
+    public: GRRLIB_texImg* _n2;
+    public: GRRLIB_texImg* _n3;
+    public: GRRLIB_texImg* _n4;
+    public: GRRLIB_texImg* _n5;
+    public: GRRLIB_texImg* _n6;
+    public: GRRLIB_texImg* _n7;
+    public: GRRLIB_texImg* _n8;
+    public: GRRLIB_texImg* _n9;
+    public: GRRLIB_texImg* _points;
     
     public: SpriteManager ()
     {
@@ -259,6 +284,36 @@ class SpriteManager
         _dYellowFalling0008 = GRRLIB_LoadTexture(dYellowFalling0008);
         _dYellowFalling0009 = GRRLIB_LoadTexture(dYellowFalling0009);
         _dYellowFalling0010 = GRRLIB_LoadTexture(dYellowFalling0010);
+        
+        // Clock Sprites
+        _n0 = GRRLIB_LoadTexture(n0);
+        _n1 = GRRLIB_LoadTexture(n1);
+        _n2 = GRRLIB_LoadTexture(n2);
+        _n3 = GRRLIB_LoadTexture(n3);
+        _n4 = GRRLIB_LoadTexture(n4);
+        _n5 = GRRLIB_LoadTexture(n5);
+        _n6 = GRRLIB_LoadTexture(n6);
+        _n7 = GRRLIB_LoadTexture(n7);
+        _n8 = GRRLIB_LoadTexture(n8);
+        _n9 = GRRLIB_LoadTexture(n9);
+        _points = GRRLIB_LoadTexture(points);
+    }
+    
+    public: GRRLIB_texImg * DecodeNumber (int number)
+    {
+        switch (number)
+        {
+            case 1: return _n1; break;
+            case 2: return _n2; break;
+            case 3: return _n3; break;
+            case 4: return _n4; break;
+            case 5: return _n5; break;
+            case 6: return _n6; break;
+            case 7: return _n7; break;
+            case 8: return _n8; break;
+            case 9: return _n9; break;
+            default: return _n0;
+        }
     }
 };
 

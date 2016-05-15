@@ -90,7 +90,7 @@ class Sprite
     public: size_t GetChildrenNumber () { return _children.size(); }
 
     // Standard Destructir
-    public: ~Sprite();
+    public: virtual ~Sprite();
 };
 
 #endif // __SPRITE__

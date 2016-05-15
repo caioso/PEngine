@@ -76,4 +76,6 @@ typedef uint32_t Change;
 
 #define CONCRETE_GARBAGE_OPERATION 0x9
 
+#define RISE_BOARD_OPERATION 0xa
+
 #endif // __CHANGES__

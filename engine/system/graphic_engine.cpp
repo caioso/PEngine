@@ -40,10 +40,33 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
                     __ref = __ref->_parent;
                 }
                 
+                // Compute sprite animations if this is the case.
+                if (dynamic_cast<AnimatedSprite*>(__tmp) != NULL)
+                    UpdateSpriteAnimation(dynamic_cast<AnimatedSprite*>(__tmp));
+                
                 GRRLIB_DrawImg(__tmp->_x + __x, __tmp->_y + __y, __tmp->GetTexture(), __tmp->_rotation, __tmp->_scaleX, __tmp->_scaleY, PPL_COLOR_WHITE);
             }
         }
         //else
         //    Debug::LogWarning("Sprite without texture loaded. Skipped.");
+    }
+}
+
+void GraphicEngine::UpdateSpriteAnimation(AnimatedSprite* tmp)
+{
+    if (!tmp->_is_playing)
+        return;
+    else
+    {
+        if (tmp->_current_frame == tmp->_total_frames - 1 && tmp->_repeat)
+        {
+            tmp->GotoFrame(0);
+        }
+        else if (tmp->_current_frame != tmp->_total_frames - 1)
+        {
+            tmp->NextFrame();
+        }
+        else
+            return;
     }
 }

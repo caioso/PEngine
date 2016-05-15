@@ -25,6 +25,7 @@
 #include "base/music.hpp"
 #include "base/runnable.hpp"
 #include "base/sprite.hpp"
+#include "base/animated_sprite.hpp"
 
 // System Includes
 #include "system/audio_engine.hpp"

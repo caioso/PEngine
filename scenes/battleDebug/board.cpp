@@ -1,6 +1,6 @@
 #include "board.hpp"
 
-Board::Board (RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, int initial_height) :
+Board::Board (RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, int initial_height, SpriteManager *spriteManager) :
                                         _dimensions(dim),
                                         _position(pos),
                                         _cursorPosition(cur_pos)
@@ -10,7 +10,7 @@ Board::Board (RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, 
     
     // Initializes Sprite manager.
     // Load basic texture objects on demand.
-    _spriteManager = new SpriteManager();
+    _spriteManager = spriteManager;
     
     // save reference of board rules.
     this->_rules = _rules;
@@ -329,7 +329,14 @@ void Board::InterpretOperations ()
                 MakeConcreteGargabe();
                 break;
             }
-
+            // RISE BOARD OPERATION
+            // format: [TYPE][XXXX][XXXX][XXXX][XXXX]
+            // Move the board a pixel upwards.
+            case RISE_BOARD_OPERATION:
+            {
+                RiseBoardOperation();
+                break;
+            }
         }
     }
     _changes.clear();
@@ -811,7 +818,12 @@ void Board::FallGarbage ()
 
 void Board::Slide()
 {
-    _rules->Slide(_boardLogic, _dimensions.getWidth(), _dimensions.getHeight(), _changes, _boardContainer);
+    _rules->Slide(_dimensions.getWidth(), _dimensions.getHeight(), _changes);
+}
+
+void Board::RiseBoardOperation ()
+{
+    _boardContainer->_y--;
 }
 
 GRRLIB_texImg * Board::DecodeType (unsigned int type, unsigned int style)
