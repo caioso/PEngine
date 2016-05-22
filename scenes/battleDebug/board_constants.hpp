@@ -31,6 +31,7 @@
 #define PANEL_FALL_FRAME_8 9
 #define PANEL_FALL_FRAME_9 10
 #define PANEL_FALL_FRAME_10 11
+#define PANEL_DARK_SPRITE 12
 
 // Cursor Constants
 #define CURSOR_WIDTH 68
@@ -39,5 +40,9 @@
 
 // Animation Constants
 #define FALL_DELAY 8
+
+// Rumble
+#define PANEL_FALL_RUMBLE_DURATION 5
+#define GARBAGE_FALL_RUMBLE_DURATION 15
 
 #endif // __BOARD_CONSTANTS__

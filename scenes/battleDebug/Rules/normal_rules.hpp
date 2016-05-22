@@ -55,8 +55,10 @@ class NormalRules : public RulesInterface
             _boardLogic[cursorPosition->getY()][cursorPosition->getX() + 1]->_state == 1)
             return;
         if (cursorPosition->getY() != (unsigned)(boardH - 1) &&
-            _boardLogic[cursorPosition->getY() + 1][cursorPosition->getX()]->_type == -1 &&
-            _boardLogic[cursorPosition->getY() + 1][cursorPosition->getX() + 1]->_type == -1)
+            ((_boardLogic[cursorPosition->getY()][cursorPosition->getX()]->_type != -1 &&
+             _boardLogic[cursorPosition->getY() + 1][cursorPosition->getX()]->_type == -1) ||
+            (_boardLogic[cursorPosition->getY()][cursorPosition->getX() + 1]->_type != -1 &&
+             _boardLogic[cursorPosition->getY() + 1][cursorPosition->getX() + 1]->_type == -1)))
             return;
 
         Change __swap = 0;
@@ -123,6 +125,7 @@ class NormalRules : public RulesInterface
                     }
                     else
                     {
+                        // Request Break Animation
                         boardLogic[i][j]->_wait--;
                         Change __change = 0;
                         __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
@@ -488,8 +491,21 @@ class NormalRules : public RulesInterface
                         }
                         else
                         {
-                            _boardLogic[i][j]->_state = 0;
-                            __fallCheckBoard[i][j]._state = 0;
+                            bool __canFall = CanGarbageFall (i, j);
+                            if (!__canFall)
+                            {
+                                if (i == __fallCheckBoard[i][j]._sourceY && j == __fallCheckBoard[i][j]._sourceX)
+                                {
+                                    // Rumble With garbage fall
+                                    Change __change = 0;
+                                    __change = AddChangeType(__change, RUMBLE_OPERATION);
+                                    __change = AddRumbleLength(__change, GARBAGE_FALL_RUMBLE_DURATION);
+                                    changes.push_back(__change);
+                                }
+                                
+                                _boardLogic[i][j]->_state = 0;
+                                __fallCheckBoard[i][j]._state = 0;
+                            }
                         }
                     }
                 }
@@ -503,8 +519,21 @@ class NormalRules : public RulesInterface
                     }
                     else
                     {
-                        _boardLogic[i][j]->_state = 0;
-                        __fallCheckBoard[i][j]._state = 0;
+                        bool __canFall = CanGarbageFall (i, j);
+                        if (!__canFall)
+                        {
+                            if (i == __fallCheckBoard[i][j]._sourceY && j == __fallCheckBoard[i][j]._sourceX)
+                            {
+                                // Rumble With garbage fall
+                                Change __change = 0;
+                                __change = AddChangeType(__change, RUMBLE_OPERATION);
+                                __change = AddRumbleLength(__change, GARBAGE_FALL_RUMBLE_DURATION);
+                                changes.push_back(__change);
+                            }
+                            
+                            _boardLogic[i][j]->_state = 0;
+                            __fallCheckBoard[i][j]._state = 0;
+                        }
                     }
                 }
             }
@@ -529,6 +558,13 @@ class NormalRules : public RulesInterface
             __change = AddTargetPanelX(__change, j);
             __change = AddTargetPanelY(__change, i);
             changes.push_back(__change);
+            
+            // Rumble for a short time when the panel finished falling
+            __change = 0;
+            __change = AddChangeType(__change, RUMBLE_OPERATION);
+            __change = AddRumbleLength(__change, PANEL_FALL_RUMBLE_DURATION);
+            changes.push_back(__change);
+
         }
         else if (__fallCheckBoard[i][j]._state == 5)
         {

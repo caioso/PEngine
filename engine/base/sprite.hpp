@@ -15,6 +15,7 @@ using namespace std;
 class Sprite
 {
     friend class AnimationEngine;
+    friend class GraphicEngine;
     
     public: float _x;
     public: float _y;
@@ -28,15 +29,23 @@ class Sprite
     private: bool _isAnimating;
     private: GRRLIB_texImg* _tex;
     private: vector<Sprite*> _children;
+    
+    // Animation
+    public: vector<GRRLIB_texImg*> _frames;
+    private: unsigned int _current_frame;
+    private: bool _is_playing;
+    private: bool _repeat;
+    public: int _animation_delay;
+    private: int _current_delay;
 
     // Generic Constructor Method.
     // This Constructor makes sure the Sprite position is set to (0,0).
-    public: Sprite () : _x(0), _y(0), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(1), _parent(NULL), _tex(NULL) {}
+    public: Sprite () : _x(0), _y(0), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(1), _parent(NULL), _tex(NULL), _current_frame(0), _is_playing(false), _repeat(true), _animation_delay(0), _current_delay(0) {}
 
     // Coordinate defining constructor. Width and height set null.
     // @param x: asset x coordinate.
     // @param y: asset y coordinate.
-    public: Sprite (float x, float y) : _x(x), _y(y), _width(0), _height(0), _rotation(1), _scaleX(1), _scaleY(0), _parent(NULL), _tex(NULL) {}
+    public: Sprite (float x, float y) : _x(x), _y(y), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(0), _parent(NULL), _tex(NULL), _current_frame(0), _is_playing(false), _repeat(true), _animation_delay(0), _current_delay(0) {}
 
     // Asset defining constructor. The Sprite coordinates are set to (0,0). Width and height set null.
     // @param asset: unsigned char array of the asset.
@@ -88,6 +97,39 @@ class Sprite
     // Returns the number of children in a sprite list.
     // @return: children list size.
     public: size_t GetChildrenNumber () { return _children.size(); }
+    
+    // Register frame in the animation list.
+    // @param _frame: Frame texture reference.
+    // @return inform if the operation was successful.
+    public: bool RegisterFrame (GRRLIB_texImg * _frame);
+    
+    // Starts animation or resume if previously paused.
+    public: void Play () { _is_playing = true; }
+    
+    // Pause animation.
+    public: void Pause () { _is_playing = false; }
+    
+    // Stop animation and restart current frame.
+    public: void Stop () { _is_playing = false; _current_frame = 0; }
+    
+    // Renders a target frame and stops animation.
+    // @param target_frame: Frame number to be rendered (0-based).
+    public: void GotoAndStop (unsigned int target_frame);
+    
+    // Renders a target frame and play animation.
+    // @param target_frame: Frame number to be rendered (0-based).
+    public: void GotoAndPlay (unsigned int target_frame);
+    
+    // Renders a target frame.
+    // @param target_frame: Frame number to be rendered (0-based).
+    private: void GotoFrame (unsigned int target_frame);
+    
+    // Go to next frame.
+    private: void NextFrame ();
+    
+    // Set repeat switch.
+    // @param repeat: repeat value.
+    public: void SetRepeat (bool repeat) { _repeat = repeat; }
 
     // Standard Destructir
     public: virtual ~Sprite();

@@ -34,5 +34,8 @@ void InputManager::UpdateInput ()
         _registered_controllers[i]->SetKeysUp(WPAD_ButtonsUp(_registered_controllers[i]->GetChannel()));
         // Held Keys
         _registered_controllers[i]->SetKeysHeld(WPAD_ButtonsHeld(_registered_controllers[i]->GetChannel()));
+        
+        // Update Rumble
+        _registered_controllers[i]->UpdateRumble();
     }
 }

@@ -1,9 +1,10 @@
 #include "board.hpp"
 
-Board::Board (RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, int initial_height, SpriteManager *spriteManager) :
+Board::Board (RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, int initial_height, SpriteManager *spriteManager, Controller * wiiremote) :
                                         _dimensions(dim),
                                         _position(pos),
-                                        _cursorPosition(cur_pos)
+                                        _cursorPosition(cur_pos),
+                                        _wiiremote(wiiremote)
 {
     // Fair randomization
     srand(time(NULL));
@@ -88,7 +89,7 @@ void Board::InstantiateAndIntializeGameMatrices(int initial_height)
         __previous_type = __random_type;
         
         // Instantiate Next-Row Panel Graphics
-        _nextRowGraphics[i] = new Panel(DecodeType(__random_type), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+        _nextRowGraphics[i] = new Panel(DecodeType(__random_type, PANEL_DARK_SPRITE), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
         
         // Adjust panel position.
         _nextRowGraphics[i]->_x = (PANEL_IMAGE_SIZE + PANEL_IMAGE_SPACE) * i;
@@ -142,11 +143,23 @@ void Board::InstantiateAndIntializeGameMatrices(int initial_height)
 
 void Board::InitializeCursor ()
 {
-    // Intialize Cursor control variables.
-    _cursorFrame = 0;
-    
     // Instantiate Cursor Sprite.
     _cursor = new Cursor(_spriteManager->_cursor0001, CURSOR_WIDTH, CURSOR_HEIGHT);
+    
+    // Load Cursor Animation
+    _cursor->RegisterFrame(_spriteManager->_cursor0001);
+    _cursor->RegisterFrame(_spriteManager->_cursor0002);
+    _cursor->RegisterFrame(_spriteManager->_cursor0003);
+    _cursor->RegisterFrame(_spriteManager->_cursor0004);
+    _cursor->RegisterFrame(_spriteManager->_cursor0005);
+    _cursor->RegisterFrame(_spriteManager->_cursor0006);
+    _cursor->RegisterFrame(_spriteManager->_cursor0007);
+    _cursor->RegisterFrame(_spriteManager->_cursor0008);
+    _cursor->RegisterFrame(_spriteManager->_cursor0009);
+    _cursor->RegisterFrame(_spriteManager->_cursor0010);
+    _cursor->RegisterFrame(_spriteManager->_cursor0011);
+    _cursor->_animation_delay = 2;
+    _cursor->Play();
     
     // Update Cursor Initial Position
     _cursor->_x = _boardContainer->_x;
@@ -180,75 +193,6 @@ void Board::UpdateCursorPosition (Point2D pos)
     _cursorPosition = pos;
     _cursor->_x = _boardContainer->_x + (_cursorPosition.getX() * (PANEL_IMAGE_SIZE + PANEL_IMAGE_SPACE)) - 3;
     _cursor->_y = _boardContainer->_y + (_cursorPosition.getY() * (PANEL_IMAGE_SIZE + PANEL_IMAGE_SPACE)) - 4;
-}
-
-void Board::UpdateCursorSprites()
-{
-    
-    if (__delay != 2)
-    {
-        __delay++;
-        return;
-    }
-    
-    __delay = 0;
-    
-    // Update Cursor Animation.
-    if (_cursorFrame == 0)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor0001, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _cursorFrame++;
-    }
-    else if (_cursorFrame == 1)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor0002, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _cursorFrame++;
-    }
-    else if (_cursorFrame == 2)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor0003, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _cursorFrame++;
-    }
-    else if (_cursorFrame == 3)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor0004, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _cursorFrame++;
-    }
-    else if (_cursorFrame == 4)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor0005, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _cursorFrame++;
-    }
-    else if (_cursorFrame == 5)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor0006, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _cursorFrame++;
-    }
-    else if (_cursorFrame == 6)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor0007, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _cursorFrame++;
-    }
-    else if (_cursorFrame == 7)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor0008, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _cursorFrame++;
-    }
-    else if (_cursorFrame == 8)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor0009, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _cursorFrame++;
-    }
-    else if (_cursorFrame == 9)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor0010, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _cursorFrame++;
-    }
-    else if (_cursorFrame == 10)
-    {
-        _cursor->SetAsset(_spriteManager->_cursor0011, CURSOR_WIDTH, CURSOR_HEIGHT);
-        _cursorFrame = 0;
-    }
 }
 
 // ----------------------------------------------------
@@ -335,6 +279,14 @@ void Board::InterpretOperations ()
             case RISE_BOARD_OPERATION:
             {
                 RiseBoardOperation();
+                break;
+            }
+            // RUMBLE OPERATION
+            // format: [TYPE][XXXX][XXXX][XXXX][XXXX]
+            // Move the board a pixel upwards.
+            case RUMBLE_OPERATION:
+            {
+                RumbleOperation(_changes[i]);
                 break;
             }
         }
@@ -603,7 +555,7 @@ void Board::TransportOperation ()
         __previous_type = __random_type;
 
         // Create next row graphics and update logics.
-        _nextRowGraphics[k]->SetAsset(DecodeType(__random_type), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+        _nextRowGraphics[k]->SetAsset(DecodeType(__random_type, PANEL_DARK_SPRITE), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
         _nextRowLogic[k]->_type = __random_type;
     }
     
@@ -641,6 +593,12 @@ void Board::GarbageOperation(Change change)
     
     // Build new garbage object.
     MakeGargabe(__garbageWidth, __garbageHeight, __garbagePosition);
+}
+
+void Board::RumbleOperation (Change change)
+{
+    unsigned int __rumbleLength = ExtractRumbleLength(change);
+    _wiiremote->RumbleFor(__rumbleLength);
 }
 
 void Board::TransformGarbageOperation(Change change)
@@ -844,6 +802,19 @@ GRRLIB_texImg * Board::DecodeType (unsigned int type, unsigned int style)
                 case PANEL_CONCRETE_GARBAGE_TYPE: return _spriteManager->_concrete; break;
             }
         break;
+        case PANEL_DARK_SPRITE:
+            switch (type)
+            {
+                case PANEL_RED_TYPE:              return _spriteManager->_dRedblocked; break;
+                case PANEL_CYAN_TYPE:             return _spriteManager->_dBlueblocked; break;
+                case PANEL_YELLOW_TYPE:           return _spriteManager->_dYellowblocked; break;
+                case PANEL_GREEN_TYPE:            return _spriteManager->_dGreenblocked; break;
+                case PANEL_PURPLE_TYPE:           return _spriteManager->_dPurpleblocked; break;
+                case PANEL_GARBAGE_TYPE:          return _spriteManager->_dGrayblocked; break;
+                case PANEL_CONCRETE_GARBAGE_TYPE: return _spriteManager->_dGrayblocked; break;
+            }
+            break;
+
         case PANEL_BRIGHT_SPRITE:
             switch (type)
             {
@@ -986,7 +957,6 @@ void Board::Fall()
 
 void Board::UpdateGraphics ()
 {
-    UpdateCursorSprites();
     CompleteSwap();
 }
 

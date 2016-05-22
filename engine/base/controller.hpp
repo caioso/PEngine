@@ -12,6 +12,8 @@ class Controller
     private: int _keys_down;
     private: int _keys_up;
     private: int _keys_held;
+    private: int _currentRumble;
+    private: int _totalRumble;
 
     // Generic Constructor.
     // @param player_number: Player unique ID (0 to 4)
@@ -51,6 +53,12 @@ class Controller
     // Return true if all the listed keys are present in the key map
     // for the requeted event.
     public: bool CheckKeysAND (int key_event, int keys, ...);
+    
+    // Set rumble duration.
+    public: bool RumbleFor (int frameNumber);
+    
+    // Update rumble duration.
+    public: bool UpdateRumble ();
 };
 
 #endif // __CONTROLLER__

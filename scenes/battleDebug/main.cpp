@@ -45,6 +45,26 @@ int main(int argc, char **argv)
     // Initialize Game Clock
     Clock * __system_clock = new Clock(_spriteManager);
     
+    
+    Sprite * _break = new Sprite(_spriteManager->_blueBreak0001, 32, 160);
+    _break->RegisterFrame(_spriteManager->_blueBreak0001);
+    _break->RegisterFrame(_spriteManager->_blueBreak0002);
+    _break->RegisterFrame(_spriteManager->_blueBreak0003);
+    _break->RegisterFrame(_spriteManager->_blueBreak0004);
+    _break->RegisterFrame(_spriteManager->_blueBreak0005);
+    _break->RegisterFrame(_spriteManager->_blueBreak0006);
+    _break->RegisterFrame(_spriteManager->_blueBreak0007);
+    _break->RegisterFrame(_spriteManager->_blueBreak0008);
+    _break->RegisterFrame(_spriteManager->_blueBreak0009);
+    _break->RegisterFrame(_spriteManager->_blueBreak0010);
+    _break->RegisterFrame(_spriteManager->_blueBreak0011);
+    _break->SetRepeat(false);
+    _break->Play();
+    _break->_animation_delay = 1;
+    _break->_x = 40;
+    _break->_y = 100;
+    GraphicEngine::_stage->AddChild(_break);
+    
     // Register Boards
     ScriptManager::Subscribe(__board_p1);
     ScriptManager::Subscribe(__board_p2);
@@ -52,20 +72,6 @@ int main(int argc, char **argv)
     // Register Clock
     ScriptManager::Subscribe(__system_clock);
     
-    // Test Animated Sprite
-    AnimatedSprite * _aSprite = new AnimatedSprite(5, PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
-    _aSprite->_x = 34;
-    _aSprite->_y = 50;
-    _aSprite->RegisterFrame(_spriteManager->_dred);
-    _aSprite->RegisterFrame(_spriteManager->_dblue);
-    _aSprite->RegisterFrame(_spriteManager->_dgreen);
-    _aSprite->RegisterFrame(_spriteManager->_dyellow);
-    _aSprite->RegisterFrame(_spriteManager->_dpurple);
-    _aSprite->_animation_delay = 10;
-    _aSprite->Play();
-    GraphicEngine::_stage->AddChild(dynamic_cast<Sprite*>(_aSprite));
-
-
     // Do not change this line.
     Engine::Loop();
 

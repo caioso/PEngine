@@ -95,8 +95,6 @@ script_template.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../system/../common/constants.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../system/../common/macros.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../types/visibility.hpp \
- /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/animated_sprite.hpp \
- /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/sprite.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/audio_engine.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/debug.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/../base/sound.hpp \
@@ -104,7 +102,6 @@ script_template.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/debug.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/graphic_engine.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/../base/sprite.hpp \
- /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/../base/animated_sprite.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/input_manager.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/../base/controller.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/script_manager.hpp \
@@ -312,10 +309,6 @@ script_template.o: \
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../types/visibility.hpp:
 
-/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/animated_sprite.hpp:
-
-/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/sprite.hpp:
-
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/audio_engine.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/debug.hpp:
@@ -329,8 +322,6 @@ script_template.o: \
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/graphic_engine.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/../base/sprite.hpp:
-
-/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/../base/animated_sprite.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/input_manager.hpp:
 

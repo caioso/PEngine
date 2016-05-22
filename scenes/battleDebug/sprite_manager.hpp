@@ -15,6 +15,13 @@
 #include "../../assets/graphics/dgarbage.h"
 #include "../../assets/graphics/concrete.h"
 
+#include "../../assets/graphics/dGrayblocked.h"
+#include "../../assets/graphics/dGreenblocked.h"
+#include "../../assets/graphics/dRedblocked.h"
+#include "../../assets/graphics/dBlueblocked.h"
+#include "../../assets/graphics/dPurpleblocked.h"
+#include "../../assets/graphics/dYellowblocked.h"
+
 #include "../../assets/graphics/dBlueFalling0001.h"
 #include "../../assets/graphics/dBlueFalling0002.h"
 #include "../../assets/graphics/dBlueFalling0003.h"
@@ -94,6 +101,19 @@
 #include "../../assets/graphics/n9.h"
 #include "../../assets/graphics/points.h"
 
+// Break Animation
+#include "../../assets/graphics/blueBreak0001.h"
+#include "../../assets/graphics/blueBreak0002.h"
+#include "../../assets/graphics/blueBreak0003.h"
+#include "../../assets/graphics/blueBreak0004.h"
+#include "../../assets/graphics/blueBreak0005.h"
+#include "../../assets/graphics/blueBreak0006.h"
+#include "../../assets/graphics/blueBreak0007.h"
+#include "../../assets/graphics/blueBreak0008.h"
+#include "../../assets/graphics/blueBreak0009.h"
+#include "../../assets/graphics/blueBreak0010.h"
+#include "../../assets/graphics/blueBreak0011.h"
+
 // Sprite manager class handles texture instances. It keeps a static reference to
 // each assets reference and deploy them as needed.
 class SpriteManager
@@ -110,6 +130,27 @@ class SpriteManager
     public: GRRLIB_texImg* _dpurple1;
     public: GRRLIB_texImg* _dgarbage;
     public: GRRLIB_texImg* _concrete;
+    
+    // Rising row
+    public: GRRLIB_texImg* _dGrayblocked;
+    public: GRRLIB_texImg* _dGreenblocked;
+    public: GRRLIB_texImg* _dRedblocked;
+    public: GRRLIB_texImg* _dBlueblocked;
+    public: GRRLIB_texImg* _dPurpleblocked;
+    public: GRRLIB_texImg* _dYellowblocked;
+    
+    // Break Blue Panel
+    public: GRRLIB_texImg* _blueBreak0001;
+    public: GRRLIB_texImg* _blueBreak0002;
+    public: GRRLIB_texImg* _blueBreak0003;
+    public: GRRLIB_texImg* _blueBreak0004;
+    public: GRRLIB_texImg* _blueBreak0005;
+    public: GRRLIB_texImg* _blueBreak0006;
+    public: GRRLIB_texImg* _blueBreak0007;
+    public: GRRLIB_texImg* _blueBreak0008;
+    public: GRRLIB_texImg* _blueBreak0009;
+    public: GRRLIB_texImg* _blueBreak0010;
+    public: GRRLIB_texImg* _blueBreak0011;
     
     // Cyan Falling Sprites
     public: GRRLIB_texImg* _dBlueFalling0001;
@@ -212,6 +253,15 @@ class SpriteManager
         _dgarbage = GRRLIB_LoadTexture(dgarbage);
         _concrete = GRRLIB_LoadTexture(concrete);
         
+        
+        // Rising Row
+        _dGrayblocked = GRRLIB_LoadTexture(dGrayblocked);
+        _dGreenblocked = GRRLIB_LoadTexture(dGreenblocked);
+        _dRedblocked = GRRLIB_LoadTexture(dRedblocked);
+        _dBlueblocked = GRRLIB_LoadTexture(dBlueblocked);
+        _dPurpleblocked = GRRLIB_LoadTexture(dPurpleblocked);
+        _dYellowblocked = GRRLIB_LoadTexture(dYellowblocked);
+        
         // Cursor sprites
         _cursor0001 = GRRLIB_LoadTexture(cursor0001);
         _cursor0002 = GRRLIB_LoadTexture(cursor0002);
@@ -297,6 +347,19 @@ class SpriteManager
         _n8 = GRRLIB_LoadTexture(n8);
         _n9 = GRRLIB_LoadTexture(n9);
         _points = GRRLIB_LoadTexture(points);
+        
+        // Break Blue Panel
+        _blueBreak0001 = GRRLIB_LoadTexture(blueBreak0001);
+        _blueBreak0002 = GRRLIB_LoadTexture(blueBreak0002);
+        _blueBreak0003 = GRRLIB_LoadTexture(blueBreak0003);
+        _blueBreak0004 = GRRLIB_LoadTexture(blueBreak0004);
+        _blueBreak0005 = GRRLIB_LoadTexture(blueBreak0005);
+        _blueBreak0006 = GRRLIB_LoadTexture(blueBreak0006);
+        _blueBreak0007 = GRRLIB_LoadTexture(blueBreak0007);
+        _blueBreak0008 = GRRLIB_LoadTexture(blueBreak0008);
+        _blueBreak0009 = GRRLIB_LoadTexture(blueBreak0009);
+        _blueBreak0010 = GRRLIB_LoadTexture(blueBreak0010);
+        _blueBreak0011 = GRRLIB_LoadTexture(blueBreak0011);
     }
     
     public: GRRLIB_texImg * DecodeNumber (int number)

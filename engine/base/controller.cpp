@@ -3,6 +3,8 @@
 
 Controller::Controller(int player_number) : _player(player_number), _keys_down(0)
 {
+    _currentRumble = 0;
+    _totalRumble = 0;
     switch (player_number)
     {
         case PPL_PLAYER_1: WPAD_SetDataFormat(WPAD_CHAN_0, WPAD_FMT_BTNS_ACC_IR);
@@ -67,4 +69,28 @@ bool Controller::CheckKeysAND (int key_event, int keys, ...)
             return false;
     }
     return true;
+}
+
+bool Controller::RumbleFor (int frameNumber)
+{
+    if (_totalRumble < frameNumber || _totalRumble == 0 )
+    {
+        _currentRumble = 0;
+        _totalRumble = frameNumber;
+    }
+}
+
+bool Controller::UpdateRumble ()
+{
+    if (_totalRumble == _currentRumble)
+    {
+        _totalRumble = 0;
+        _currentRumble = 0;
+        WPAD_Rumble(_channel, RUMBLE_DISABLED);
+    }
+    else
+    {
+        _currentRumble++;
+        WPAD_Rumble(_channel, RUMBLE_ENABLED);
+    }
 }

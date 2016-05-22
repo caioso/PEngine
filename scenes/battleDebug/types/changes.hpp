@@ -59,6 +59,12 @@ typedef uint32_t Change;
 // Add Destination Panel Y to Change
 #define AddDestinationPanelY(OP, A) ((OP) | (((A&15)<<4)<<8))
 
+// Add Rumble Lenth
+#define AddRumbleLength(OP, A) ((OP) | (A&255))
+
+// Extarct Rumble Length
+#define ExtractRumbleLength(OP) ((OP&255))
+
 // Operation constantds
 #define SWAP_OPERATION 0x1
 
@@ -77,5 +83,7 @@ typedef uint32_t Change;
 #define CONCRETE_GARBAGE_OPERATION 0x9
 
 #define RISE_BOARD_OPERATION 0xa
+
+#define RUMBLE_OPERATION 0xb
 
 #endif // __CHANGES__

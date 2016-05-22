@@ -1,7 +1,7 @@
 #include "board_task.hpp"
 
-#define WII 0
-#define MAC 1
+#define WII 1
+#define MAC 0
 
 BoardTask::BoardTask (std::string board_name,
                       Dim2D board_dim,
@@ -10,15 +10,15 @@ BoardTask::BoardTask (std::string board_name,
                       char player_number,
                       SpriteManager * spriteManager)
 {
-    // For Now, We'll include normal rules
-    NormalRules * _rules = new NormalRules(board_dim);
-    _board_name = board_name;
-    _board = new Board(dynamic_cast<RulesInterface*>(_rules), board_dim, board_pos, cursor_pos, 6, spriteManager);
-    
     // Configure Wiimotes
     _remote = new Controller(player_number);
     // Register Controller
     InputManager::RegisterController(_remote);
+
+    // For Now, We'll include normal rules
+    NormalRules * _rules = new NormalRules(board_dim);
+    _board_name = board_name;
+    _board = new Board(dynamic_cast<RulesInterface*>(_rules), board_dim, board_pos, cursor_pos, 6, spriteManager, _remote);
     
     // Register Sound Effects
     _swap = new Sound(swapfx, swapfx_size, 1, 48000);
@@ -104,6 +104,9 @@ void BoardTask::Update ()
     
     if (_remote->CheckKeysOR(PPL_KEY_HELD, 1, PPL_BUTTON_1))
         _board->SpeedUp();
+    
+    if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, WPAD_BUTTON_HOME))
+        exit(0);
     
     if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_PLUS))
         _board->DEBUGGarbage();

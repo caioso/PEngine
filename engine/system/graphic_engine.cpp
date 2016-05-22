@@ -41,8 +41,19 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
                 }
                 
                 // Compute sprite animations if this is the case.
-                if (dynamic_cast<AnimatedSprite*>(__tmp) != NULL)
-                    UpdateSpriteAnimation(dynamic_cast<AnimatedSprite*>(__tmp));
+                if (__tmp->_frames.size() > 0)
+                    UpdateSpriteAnimation(__tmp);
+                
+                // If not repeating, destroy the sprite
+                if (!__tmp->_repeat && __tmp->_current_frame >= __tmp->_frames.size() - 1)
+                {
+                    Debug::Log("Test");
+                    sprite->RemoveChild(__tmp);
+                    __stack_size--;
+                    i--;
+                    __tmp = NULL;
+                    continue;
+                }
                 
                 GRRLIB_DrawImg(__tmp->_x + __x, __tmp->_y + __y, __tmp->GetTexture(), __tmp->_rotation, __tmp->_scaleX, __tmp->_scaleY, PPL_COLOR_WHITE);
             }
@@ -52,17 +63,17 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
     }
 }
 
-void GraphicEngine::UpdateSpriteAnimation(AnimatedSprite* tmp)
+void GraphicEngine::UpdateSpriteAnimation(Sprite* tmp)
 {
     if (!tmp->_is_playing)
         return;
     else
     {
-        if (tmp->_current_frame == tmp->_total_frames - 1 && tmp->_repeat)
+        if (tmp->_current_frame == tmp->_frames.size() - 1 && tmp->_repeat)
         {
             tmp->GotoFrame(0);
         }
-        else if (tmp->_current_frame != tmp->_total_frames - 1)
+        else if (tmp->_current_frame != tmp->_frames.size() - 1)
         {
             tmp->NextFrame();
         }

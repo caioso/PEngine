@@ -32,7 +32,6 @@ class Board
     private: Sprite * _nextRowContainer;
     private: Panel * _leftSwap;
     private: Panel * _rightSwap;
-    private: unsigned int _cursorFrame;
     private: SpriteManager * _spriteManager;
     
     // Graphics Variables
@@ -41,8 +40,12 @@ class Board
     private: int _leftState;
     private: int _rightState;
     private: int __delay;
+    
     // Control Elements
     private: Point2D _cursorPosition;
+    
+    // Controller reference
+    private: Controller * _wiiremote;
 
     // Default Constructor, Builds a random set of panels, based on the
     // dimension provided as argument. The board origin point is determined
@@ -51,7 +54,8 @@ class Board
     // @param pos: the origin point used as reference for the board
     // coordinate system.
     // @param cur_pos: Initial cursor position.
-    public: Board(RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, int initial_height, SpriteManager *spriteManager);
+    // @param wiiremote: Player's wii remote reference.
+    public: Board(RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, int initial_height, SpriteManager *spriteManager, Controller * wiiremote);
 
     // Updates cursor position and graphics position based on a point.
     // This method also update sthe cursor animation frames.
@@ -146,6 +150,10 @@ class Board
     // @param change: Change operation binary code.
     private: void TransformGarbageOperation(Change change);
     
+    // Implements Rumble Operation.
+    // @param change: Change operation binary code.
+    private: void RumbleOperation (Change change);
+    
     // Implements Rise Board Operation.
     private: void RiseBoardOperation();
     
@@ -167,9 +175,6 @@ class Board
     
     // Update graphics attributes at each frame.
     public: void UpdateGraphics ();
-    
-    // Selects adequate cursor animation frame and implements delay on animation.
-    private: void UpdateCursorSprites();
     
     // Default Constructor
     public: ~Board ();
