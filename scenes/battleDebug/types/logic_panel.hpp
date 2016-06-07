@@ -27,6 +27,9 @@ class LogicPanel
     // Fall delay counter
     public: int _wait;
     
+    // Target wait value reached when break should be trigged.
+    public: int _break_delay;
+    
     // Garbage only data
     public: int _positionX;
     public: int _positionY;

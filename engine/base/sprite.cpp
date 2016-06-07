@@ -33,7 +33,10 @@ void Sprite::SetAsset (GRRLIB_texImg* asset, float width, float height)
 {
     _width = width;
     _height = height;
-    _tex = asset;
+    
+    // If the same texture is assigned, do nothing.
+    if (_tex != asset)
+        _tex = asset;
 }
 
 void Sprite::AddChild (Sprite* child)
@@ -61,7 +64,7 @@ void Sprite::AddChildAt (Sprite* child, int index)
         Debug::LogWarning("Child already belongs to this Sprite.");
         return;
     }
-    else if (_children.size() < index)
+    else if (_children.size() < (unsigned)index)
     {
         Debug::LogWarning("Child index out of bounds.");
         return;
@@ -94,7 +97,28 @@ bool Sprite::RegisterFrame (GRRLIB_texImg * _frame)
     if (_frames.size() == 0)
         SetAsset (_frame, _width, _height);
     _frames.push_back(_frame);
+    
+    Trajectory _tr;
+    _tr._point.setX(0);
+    _tr._point.setY(0);
+    _tr._type = IgnorePoint;
+    _trajectory.push_back(_tr);
     return true;
+}
+
+bool Sprite::RegisterFrameWithTrajectory (GRRLIB_texImg * _frame, int _x, int _y, PointType _type)
+{
+    if (_frames.size() == 0)
+        SetAsset (_frame, _width, _height);
+    _frames.push_back(_frame);
+    
+    Trajectory _tr;
+    _tr._point.setX(_x);
+    _tr._point.setY(_y);
+    _tr._type = _type;
+    _trajectory.push_back(_tr);
+    return true;
+
 }
 
 void Sprite::GotoAndStop (unsigned int target_frame)

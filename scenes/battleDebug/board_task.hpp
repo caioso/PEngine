@@ -7,6 +7,7 @@
 #include "board.hpp"
 #include "rules/normal_rules.hpp"
 #include "sprite_manager.hpp"
+#include "animation_manager.hpp"
 
 // Debug Audio
 #include "../../assets/audio/move.h"
@@ -35,7 +36,8 @@ class BoardTask : public Runnable
                        Point2D board_pos,
                        Point2D cursor_pos,
                        char player_number,
-                       SpriteManager * spriteManager);
+                       SpriteManager * spriteManager,
+                       AnimationManager * animationManager);
 
     // Required Methods
     // Initializes control variable

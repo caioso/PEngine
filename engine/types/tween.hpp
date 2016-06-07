@@ -4,6 +4,45 @@
 #include "../base/sprite.hpp"
 #include "sprite_properties.hpp"
 
+// Tween types supported by the engine
+enum EasingTypesName
+{
+    EaseInCubic,
+    EaseOutCubic,
+    EaseInOutCubic,
+    EaseInBack,
+    EaseOutBack,
+    EaseInOutBack,
+    EaseInBounce,
+    EaseOutBounce,
+    EaseInOutBounce,
+    EaseInCirc,
+    EaseOutCirc,
+    EaseInOutCirc,
+    EaseInElastic,
+    EaseOutElastic,
+    EaseInOutElastic,
+    EaseInExpo,
+    EaseOutExpo,
+    EaseInOutExpo,
+    EaseNoneLinear,
+    EaseInLinear,
+    EaseOutLinear,
+    EaseInOutLinear,
+    EaseInQuad,
+    EaseOutQuad,
+    EaseInOutQuad,
+    EaseInQuart,
+    EaseOutQuart,
+    EaseInOutQuart,
+    EaseInQuint,
+    EaseOutQuint,
+    EaseInOutQuint,
+    EaseInSine,
+    EaseOutSine,
+    EaseInOutSine
+};
+
 class Tween
 {
     // Sprite object
@@ -11,6 +50,9 @@ class Tween
     
     // Sprite Properties
     public: SpriteProperties _sprite_properties;
+    
+    // Easing Types
+    public: EasingTypesName _easing;
     
     // Tween duration in miliseconds
     public: float _duration;
@@ -25,7 +67,7 @@ class Tween
     public: void (*_completion)(void);
     
     // Default Constructor
-    public: Tween () : _duration(0.0), _total_frames(0), _current_frame(0), _completion(NULL){};
+    public: Tween () : _easing(EaseNoneLinear), _duration(0.0), _total_frames(0), _current_frame(0), _completion(NULL){};
 };
 
 #endif // __TWEEN__

@@ -1,14 +1,15 @@
 #include "board_task.hpp"
 
-#define WII 1
-#define MAC 0
+#define WII 0
+#define MAC 1
 
 BoardTask::BoardTask (std::string board_name,
                       Dim2D board_dim,
                       Point2D board_pos,
                       Point2D cursor_pos,
                       char player_number,
-                      SpriteManager * spriteManager)
+                      SpriteManager * spriteManager,
+                      AnimationManager * animationManager)
 {
     // Configure Wiimotes
     _remote = new Controller(player_number);
@@ -18,7 +19,7 @@ BoardTask::BoardTask (std::string board_name,
     // For Now, We'll include normal rules
     NormalRules * _rules = new NormalRules(board_dim);
     _board_name = board_name;
-    _board = new Board(dynamic_cast<RulesInterface*>(_rules), board_dim, board_pos, cursor_pos, 6, spriteManager, _remote);
+    _board = new Board(dynamic_cast<RulesInterface*>(_rules), board_dim, board_pos, cursor_pos, 6, spriteManager, animationManager, _remote);
     
     // Register Sound Effects
     _swap = new Sound(swapfx, swapfx_size, 1, 48000);

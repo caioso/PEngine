@@ -40,6 +40,7 @@ class Clock : public Runnable
         _startTime = ticks_to_millisecs(gettime());
         _seconds = 0;
         _minutes = 0;
+        _deltaTime = 0;
         
         _clockContainer = new Sprite();
         
@@ -56,7 +57,6 @@ class Clock : public Runnable
         _clockContainer->AddChild(_second1);
         _clockContainer->AddChild(_second2);
         _clockContainer->AddChild(_points);
-        
         _clockContainer->_x = 237;
         _clockContainer->_y = 205;
         
@@ -67,7 +67,6 @@ class Clock : public Runnable
     {
         _endTime = ticks_to_millisecs(gettime());
         _deltaTime += _endTime - _startTime;
-        
         if(_deltaTime >= 32000.0)
         {
             _startTime = ticks_to_millisecs(gettime());

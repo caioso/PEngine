@@ -29,6 +29,10 @@ class GraphicEngine
     // Update animation frames.
     // Is called internally in RenderSprites.
     private: static void UpdateSpriteAnimation(Sprite* tmp);
+    
+    // Update sprite position in Animation.
+    // Is called internally in RenderSprites.
+    private: static void UpdateSpritePosition(Sprite* tmp);
 };
 
 #endif // __GRAPHIC_ENGINE__

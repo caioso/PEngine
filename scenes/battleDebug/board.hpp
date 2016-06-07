@@ -11,6 +11,7 @@
 #include "cursor.hpp"
 #include "rules/rules_interface.hpp"
 #include "sprite_manager.hpp"
+#include "animation_manager.hpp"
 #include "board_constants.hpp"
 
 // Board class centers everything regarding rules and board presentation.
@@ -33,6 +34,7 @@ class Board
     private: Panel * _leftSwap;
     private: Panel * _rightSwap;
     private: SpriteManager * _spriteManager;
+    private: AnimationManager * _animationManager;
     
     // Graphics Variables
     private: Point2D * _swapTarget;
@@ -55,7 +57,7 @@ class Board
     // coordinate system.
     // @param cur_pos: Initial cursor position.
     // @param wiiremote: Player's wii remote reference.
-    public: Board(RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, int initial_height, SpriteManager *spriteManager, Controller * wiiremote);
+    public: Board(RulesInterface * _rules, Dim2D dim, Point2D pos, Point2D cur_pos, int initial_height, SpriteManager *spriteManager, AnimationManager * animationManager, Controller * wiiremote);
 
     // Updates cursor position and graphics position based on a point.
     // This method also update sthe cursor animation frames.
@@ -98,7 +100,7 @@ class Board
     // @param width: Garbage width. This will stack up rows as the garbage size dont fit the row.
     // @param height: Garbage height.
     // @param position: initial garbage position.
-    public: void MakeGargabe (unsigned int width, unsigned int height, unsigned int position);
+    public: void MakeGargabe (int width, int height, int position);
     
     public: void FallGarbage ();
 
@@ -160,12 +162,19 @@ class Board
     // Create a concrete garbage object.
     private: void MakeConcreteGargabe ();
     
+    // Implements Transform Garbage Operation.
+    // @param change: Change operation binary code.
+    private: void PanelOperationAnimation (Change change);
+    
     // Helper function: Ignore garbage only information in a logic panel object.
     // @param panel: target logic panel.
     private: void ClearGarbageData (LogicPanel * panel);
     
     // Initialize Swap sprites.
     private: void InitializeSwapSprites ();
+    
+    // Register a combo and its location.
+    private: void ScoreCombo (Change change);
     
     // Performs swap animation.
     private: void AnimateSwap (unsigned int i, unsigned int j);

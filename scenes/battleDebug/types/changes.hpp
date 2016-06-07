@@ -20,6 +20,9 @@ typedef uint32_t Change;
 // Extract Panel image style
 #define ExtractPanelImageStyle(OP) (((OP>>8)&255)&15)
 
+// Extract Combo Size
+#define ExtractComboSize(OP) (((OP>>8)&255)&15)
+
 // Extract Destination Y
 #define ExtractDestinationPanelY(OP) ((((OP>>8)&255)>>4)&15)
 
@@ -56,6 +59,9 @@ typedef uint32_t Change;
 // Add Panel Image Style
 #define AddPanelImageStyle(OP, A) ((OP) | ((A&15)<<8))
 
+// Add Combo Size
+#define AddComboSize(OP, A) ((OP) | ((A&15)<<8))
+
 // Add Destination Panel Y to Change
 #define AddDestinationPanelY(OP, A) ((OP) | (((A&15)<<4)<<8))
 
@@ -85,5 +91,9 @@ typedef uint32_t Change;
 #define RISE_BOARD_OPERATION 0xa
 
 #define RUMBLE_OPERATION 0xb
+
+#define PANEL_BREAK_ANIMATION_OPERATION 0xc
+
+#define SCORE_COMBO_OPERATION 0xd
 
 #endif // __CHANGES__

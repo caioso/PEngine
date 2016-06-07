@@ -40,6 +40,9 @@
 
 // Animation Constants
 #define FALL_DELAY 8
+#define COMBO_POSITION_X_OFFSET -24
+#define COMBO_POSITION_Y_OFFSET -160
+#define COMBO_POSITION_Y_OFFSET_FINAL 60
 
 // Rumble
 #define PANEL_FALL_RUMBLE_DURATION 5

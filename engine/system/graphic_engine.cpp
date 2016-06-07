@@ -42,12 +42,14 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
                 
                 // Compute sprite animations if this is the case.
                 if (__tmp->_frames.size() > 0)
+                {
                     UpdateSpriteAnimation(__tmp);
+                    UpdateSpritePosition(__tmp);
+                }
                 
                 // If not repeating, destroy the sprite
                 if (!__tmp->_repeat && __tmp->_current_frame >= __tmp->_frames.size() - 1)
                 {
-                    Debug::Log("Test");
                     sprite->RemoveChild(__tmp);
                     __stack_size--;
                     i--;
@@ -60,6 +62,24 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
         }
         //else
         //    Debug::LogWarning("Sprite without texture loaded. Skipped.");
+    }
+}
+
+void GraphicEngine::UpdateSpritePosition(Sprite* tmp)
+{
+    // Get Trajectory Point
+    Trajectory __point = tmp->_trajectory[tmp->_current_frame];
+    
+    // Determine with to do depending on the trajectory point type.
+    switch (__point._type)
+    {
+        case AbsolutePoint: tmp->_x = __point._point.getX();
+                            tmp->_y = __point._point.getY();
+                            break;
+        case RelativePoint: tmp->_x += __point._point.getX();
+                            tmp->_y += __point._point.getY();
+                            break;
+        case IgnorePoint: break;
     }
 }
 
