@@ -23,6 +23,9 @@ typedef uint32_t Change;
 // Extract Combo Size
 #define ExtractComboSize(OP) (((OP>>8)&255)&15)
 
+// Extract Chain Value
+#define ExtractChainValue(OP) (((OP>>8)&255)&15)
+
 // Extract Destination Y
 #define ExtractDestinationPanelY(OP) ((((OP>>8)&255)>>4)&15)
 
@@ -62,6 +65,9 @@ typedef uint32_t Change;
 // Add Combo Size
 #define AddComboSize(OP, A) ((OP) | ((A&15)<<8))
 
+// Add Chain Value
+#define AddChainValue(OP, A) ((OP) | ((A&15)<<8))
+
 // Add Destination Panel Y to Change
 #define AddDestinationPanelY(OP, A) ((OP) | (((A&15)<<4)<<8))
 
@@ -95,5 +101,9 @@ typedef uint32_t Change;
 #define PANEL_BREAK_ANIMATION_OPERATION 0xc
 
 #define SCORE_COMBO_OPERATION 0xd
+
+#define CHAIN_OPERATION 0xe
+
+#define SCORE_CHAIN_OPERATION 0xf
 
 #endif // __CHANGES__

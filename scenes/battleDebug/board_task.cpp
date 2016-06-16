@@ -78,29 +78,29 @@ void BoardTask::Update ()
     if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_UP ))
     {
         _cursor_position.setX(_cursor_position.getX() - 1);
-        //AudioEngine::PlaySFX(_move);
+        AudioEngine::PlaySFX(_move);
     }
     else if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_DOWN))
     {
         _cursor_position.setX(_cursor_position.getX() + 1);
-        //AudioEngine::PlaySFX(_move);
+        AudioEngine::PlaySFX(_move);
     }
     
     if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_RIGHT))
     {
         _cursor_position.setY(_cursor_position.getY() - 1);
-        //AudioEngine::PlaySFX(_move);
+        AudioEngine::PlaySFX(_move);
     }
     else if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_LEFT))
     {
         _cursor_position.setY(_cursor_position.getY() + 1);
-        //AudioEngine::PlaySFX(_move);
+        AudioEngine::PlaySFX(_move);
     }
     
     if (_remote->CheckKeysOR(PPL_KEY_DOWN, 1, PPL_BUTTON_2))
     {
         _board->Swap();
-        //AudioEngine::PlaySFX(_swap);
+        AudioEngine::PlaySFX(_swap);
     }
     
     if (_remote->CheckKeysOR(PPL_KEY_HELD, 1, PPL_BUTTON_1))

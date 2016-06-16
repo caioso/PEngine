@@ -30,6 +30,9 @@ class LogicPanel
     // Target wait value reached when break should be trigged.
     public: int _break_delay;
     
+    // Chain side-effect flag
+    public: int _in_chain;
+    
     // Garbage only data
     public: int _positionX;
     public: int _positionY;

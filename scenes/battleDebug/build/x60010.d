@@ -1,0 +1,2 @@
+x60010.o: \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../assets/graphics/x60010.c

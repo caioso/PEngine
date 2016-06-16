@@ -119,6 +119,7 @@ void Board::InstantiateAndIntializeGameMatrices(int initial_height)
             _boardLogic[i][j]->_state = 0;
             _boardLogic[i][j]->_wait = 0;
             _boardLogic[i][j]->_break_delay = 0;
+            _boardLogic[i][j]->_in_chain = 0;
             
             // Intantiate new Panel Sprite.
             _boardGraphics[i][j] = new Panel (DecodeType(_boardLogic[i][j]->_type), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
@@ -304,13 +305,38 @@ void Board::InterpretOperations ()
             // Register a new Combo and show combo bubble
             case SCORE_COMBO_OPERATION:
             {
-                ScoreCombo (_changes[i]);
+                ScoreCombo(_changes[i]);
                 break;
             }
-                
+            // CHAIN OPERATION
+            // format: [TYPE][XXXX][VALUE][TARG_Y][TARG_X]
+            // Chain operation in a pannel
+            case CHAIN_OPERATION:
+            {
+                CancelChain(_changes[i]);
+                break;
+            }
+            // REGISTER COMBO OPERATION
+            // format: [TYPE][XXXX][SIZE][TARG_Y][TARG_X]
+            // Register a new Combo and show combo bubble
+            case SCORE_CHAIN_OPERATION:
+            {
+                ScoreChain(_changes[i]);
+                break;
+            }
+   
         }
     }
     _changes.clear();
+}
+
+void Board::CancelChain(Change change)
+{
+    unsigned int __targetX = ExtractTargetPanelX(change);
+    unsigned int __targetY = ExtractTargetPanelY(change);
+    unsigned int __value = ExtractChainValue(change);
+
+    _boardLogic[__targetY][__targetX]->_in_chain = __value;
 }
 
 void Board::SwapOperation(Change change)
@@ -369,6 +395,31 @@ void Board::ScoreCombo(Change change)
     SpriteProperties __comboProperties(_combo);
     __comboProperties.RegisterPropertyFinalValue(SpriteY, _combo->_y + COMBO_POSITION_Y_OFFSET_FINAL + _position.getY());
     AnimationEngine::RegisterTween(_combo, __comboProperties, 1400.0, EaseInCubic);
+}
+
+void Board::ScoreChain(Change change)
+{
+    // Extract Operation Operands
+    int __targetX = ExtractTargetPanelX(change);
+    int __targetY = ExtractTargetPanelY(change);
+    unsigned int __chain_size = ExtractChainValue(change);
+    
+    Sprite * _chain = _animationManager->GenerateChainAnimation(__chain_size);
+    _chain->SetRepeat(false);
+    _chain->Play();
+    _chain->_animation_delay = 1;
+    
+    // Adjust position of the combo bubble so that it fits correctly in the detection position
+    // The initial position of the board is added to the animation sprite since it will be added
+    // to the stage graphic three.
+    _chain->_x = _boardGraphics[__targetY][__targetX]->_x + COMBO_POSITION_X_OFFSET + _position.getX();
+    _chain->_y = _boardGraphics[__targetY][__targetX]->_y + COMBO_POSITION_Y_OFFSET + _position.getY() - 40;
+    
+    GraphicEngine::_stage->AddChild(_chain);
+    
+    SpriteProperties __chainProperties(_chain);
+    __chainProperties.RegisterPropertyFinalValue(SpriteY, _chain->_y + COMBO_POSITION_Y_OFFSET_FINAL + _position.getY() - 40);
+    AnimationEngine::RegisterTween(_chain, __chainProperties, 1400.0, EaseInCubic);
 }
 
 void Board::AnimateSwap (unsigned int i, unsigned int j)
@@ -462,7 +513,6 @@ void Board::CompleteSwap ()
     _boardLogic[__destinationY][__destinationX]->_state = 0;
     _boardLogic[__destinationY][__destinationX]->_wait = 0;
     _boardLogic[__destinationY][__destinationX]->_break_delay = 0;
-    
     // Ignore Garbage Part
     ClearGarbageData(_boardLogic[__targetY][__targetX]);
     ClearGarbageData(_boardLogic[__destinationY][__destinationX]);
@@ -487,6 +537,7 @@ void Board::DestroyOperation(Change change)
     _boardLogic[__targetY][__targetX]->_state = 0;
     _boardLogic[__targetY][__targetX]->_wait = 0;
     _boardLogic[__targetY][__targetX]->_break_delay = 0;
+    _boardLogic[__targetY][__targetX]->_in_chain = 0;
     
     // Ignore Garbage Part
     ClearGarbageData(_boardLogic[__targetY][__targetX]);
@@ -509,6 +560,7 @@ void Board::FallOperation (Change change)
     _boardLogic[__targetY + 1][__targetX]->_state = 1;
     _boardLogic[__targetY + 1][__targetX]->_wait = _boardLogic[__targetY][__targetX]->_wait;
     _boardLogic[__targetY + 1][__targetX]->_break_delay = _boardLogic[__targetY][__targetX]->_break_delay;
+    _boardLogic[__targetY + 1][__targetX]->_in_chain = _boardLogic[__targetY][__targetX]->_in_chain;
     _boardLogic[__targetY + 1][__targetX]->_positionX = _boardLogic[__targetY][__targetX]->_positionX;
     _boardLogic[__targetY + 1][__targetX]->_positionY = _boardLogic[__targetY][__targetX]->_positionY;
     _boardLogic[__targetY + 1][__targetX]->_sourceX = _boardLogic[__targetY][__targetX]->_sourceX;
@@ -523,6 +575,7 @@ void Board::FallOperation (Change change)
     _boardLogic[__targetY][__targetX]->_state = 0;
     _boardLogic[__targetY][__targetX]->_wait = -1;
     _boardLogic[__targetY][__targetX]->_break_delay = 0;
+    _boardLogic[__targetY][__targetX]->_in_chain = 0;
     _boardLogic[__targetY][__targetX]->_positionX = -1;
     _boardLogic[__targetY][__targetX]->_positionY = -1;
     _boardLogic[__targetY][__targetX]->_sourceX = -1;
@@ -556,6 +609,7 @@ void Board::TransportOperation ()
             _boardLogic[j][k]->_state = _boardLogic[j + 1][k]->_state;
             _boardLogic[j][k]->_wait = _boardLogic[j + 1][k]->_wait;
             _boardLogic[j][k]->_break_delay = _boardLogic[j + 1][k]->_break_delay;
+            _boardLogic[j][k]->_in_chain = _boardLogic[j + 1][k]->_in_chain;
             
             // Update graphics accordingly
             if (_boardLogic[j][k]->_type != PANEL_VOID_TYPE && _boardLogic[j][k]->_state != 3)
@@ -598,6 +652,7 @@ void Board::TransportOperation ()
         _boardLogic[_dimensions.getHeight() - 1][k]->_type = _nextRowLogic[k]->_type;
         _boardLogic[_dimensions.getHeight() - 1][k]->_wait = 0;
         _boardLogic[_dimensions.getHeight() - 1][k]->_break_delay = 0;
+        _boardLogic[_dimensions.getHeight() - 1][k]->_in_chain = 0;
         _boardLogic[_dimensions.getHeight() - 1][k]->_state = 0;
         _boardGraphics[_dimensions.getHeight() - 1][k]->SetAsset(DecodeType(_nextRowLogic[k]->_type), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
         _boardGraphics[_dimensions.getHeight() - 1][k]->_visibility = visible;
@@ -694,6 +749,7 @@ void Board::TransformGarbageOperation(Change change)
     _boardLogic[__garbageSourceY][__garbageSourceX]->_type = __random_type;
     _boardLogic[__garbageSourceY][__garbageSourceX]->_wait = 0;
     _boardLogic[__garbageSourceY][__garbageSourceX]->_break_delay = 0;
+    _boardLogic[__garbageSourceY][__garbageSourceX]->_in_chain = 1;
     _boardLogic[__garbageSourceY][__garbageSourceX]->_state = 0;
     _boardGraphics[__garbageSourceY][__garbageSourceX]->SetAsset(DecodeType(__random_type), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
     _boardGraphics[__garbageSourceY][__garbageSourceX]->_visibility = visible;
@@ -713,7 +769,7 @@ void Board::DEBUGGarbage ()
     __change = AddGarbageHeight(__change, 3);
     __change = AddGarbagePosition(__change, 0);
     
-    _changes.push_back(__change);
+    //_changes.push_back(__change);
     
     __change = 0;
     __change = AddChangeType(__change, CONCRETE_GARBAGE_OPERATION);
@@ -726,12 +782,12 @@ void Board::DEBUGGarbage ()
     __change = AddGarbageHeight(__change, 1);
     __change = AddGarbagePosition(__change, 0);
     
-    _changes.push_back(__change);
+    //_changes.push_back(__change);
     
     __change = 0;
     __change = AddChangeType(__change, CONCRETE_GARBAGE_OPERATION);
     
-    _changes.push_back(__change);
+    //_changes.push_back(__change);
     
     __change = 0;
     __change = AddChangeType(__change, GARBAGE_OPERATION);
@@ -739,7 +795,7 @@ void Board::DEBUGGarbage ()
     __change = AddGarbageHeight(__change, 1);
     __change = AddGarbagePosition(__change, 2);
     
-    _changes.push_back(__change);
+    //_changes.push_back(__change);
 }
 
 void Board::MakeGargabe (int width, int height, int position)
@@ -763,6 +819,7 @@ void Board::MakeGargabe (int width, int height, int position)
             __garbageSlice[i]->_positionY = -1;
             __garbageSlice[i]->_wait = 0;
             __garbageSlice[i]->_break_delay = 0;
+            __garbageSlice[i]->_in_chain = 0;
             __garbageSlice[i]->_state = 0;
         }
         
@@ -777,6 +834,7 @@ void Board::MakeGargabe (int width, int height, int position)
             __garbageSlice[i]->_positionY = j;
             __garbageSlice[i]->_wait = 0;
             __garbageSlice[i]->_break_delay = 0;
+            __garbageSlice[i]->_in_chain = 0;
             __garbageSlice[i]->_state = 0;
         }
         _garbageList.push_back(__garbageSlice);
@@ -799,6 +857,7 @@ void Board::MakeConcreteGargabe ()
             __garbageSlice[i]->_positionY = -1;
             __garbageSlice[i]->_wait = 0;
             __garbageSlice[i]->_break_delay = 0;
+            __garbageSlice[i]->_in_chain = 0;
             __garbageSlice[i]->_state = 0;
         }
         
@@ -813,6 +872,7 @@ void Board::MakeConcreteGargabe ()
             __garbageSlice[i]->_positionY = 0;
             __garbageSlice[i]->_wait = 0;
             __garbageSlice[i]->_break_delay = 0;
+            __garbageSlice[i]->_in_chain = 0;
             __garbageSlice[i]->_state = 0;
         }
         _garbageList.push_back(__garbageSlice);
@@ -845,6 +905,7 @@ void Board::FallGarbage ()
             _boardLogic[0][i]->_positionY = _garbageList[0][i]->_positionY;
             _boardLogic[0][i]->_wait = _garbageList[0][i]->_wait;
             _boardLogic[0][i]->_break_delay = _garbageList[0][i]->_break_delay;
+            _boardLogic[0][i]->_in_chain = _garbageList[0][i]->_in_chain;
             _boardLogic[0][i]->_state = _garbageList[0][i]->_state;
             
             _boardGraphics[0][i]->SetAsset(DecodeType(_garbageList[0][i]->_type), PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);

@@ -76,7 +76,9 @@ void AudioEngine::StreamAudio ()
             if (_sfx_list[i]->_current_iteration == _sfx_list[i]->_repetitions)
             {
                 _sfx_list[i]->_current_iteration = 0;
-                _sfx_list.erase(_sfx_list.begin() + (i--));
+                _sfx_list.erase(_sfx_list.begin() + (i));
+                i--;
+                continue;
             }
         }
         // Play a sound if it is available to be played.

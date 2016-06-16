@@ -12,6 +12,7 @@ class WorkPanel
     public: int _width;
     public: int _height;
     public: int _wait;
+    public: int _in_chain;
 };
 
 #endif // __WORK_PANEL__

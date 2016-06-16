@@ -176,6 +176,12 @@ class Board
     // Register a combo and its location.
     private: void ScoreCombo (Change change);
     
+    // Register a chain and its location.
+    private: void ScoreChain (Change change);
+    
+    // Disable chain chances in panels.
+    private: void CancelChain(Change change);
+    
     // Performs swap animation.
     private: void AnimateSwap (unsigned int i, unsigned int j);
     

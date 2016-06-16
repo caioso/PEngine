@@ -24,6 +24,8 @@ class NormalRules : public RulesInterface
     int _currentDelay;	
     int _pixelsShown;
     bool _showNextLine;
+    int _current_chain;
+    int _chin_limit;
     
     public: NormalRules (Dim2D boardDim)
     {
@@ -35,10 +37,12 @@ class NormalRules : public RulesInterface
             __fallCheckBoard[i] = new WorkPanel[boardDim.getWidth()];
         }
         
+        _current_chain = 0;
         _boardVerticalPosition = 0;
         _levelDelay = 32;
         _currentDelay = 0;
         _pixelsShown = 0;
+        _chin_limit = 0;
         _showNextLine = false;
     }
 
@@ -89,6 +93,10 @@ class NormalRules : public RulesInterface
         {
             for (int j = 0; j < boardW; j++)
             {
+                int __average_row = 0;
+                int __average_col = 0;
+                int __total = 0;
+                int __chain_chance = 0;
                 DetectVertical(boardLogic, boardLogic[i][j]->_type, i, j, down, boardW, boardH);
                 DetectHorizontal(boardLogic, boardLogic[i][j]->_type, i, j, right, boardW, boardH);
                 
@@ -96,8 +104,20 @@ class NormalRules : public RulesInterface
                 {
                     for (unsigned int k = 0; k < _foundVertical.size(); k++)
                     {
+                        // Check for chain possibility
+                        if (boardLogic[_foundVertical[k].getX()][_foundVertical[k].getY()]->_in_chain == 2 &&
+                            __checkBoard[_foundVertical[k].getX()][_foundVertical[k].getY()] != 1)
+                        {
+                            UpdateChainCondition(_foundVertical[k].getX(), _foundVertical[k].getY(), 0, changes);
+                            __chain_chance = 1;
+                        }
+                        
                         __checkBoard[_foundVertical[k].getX()][_foundVertical[k].getY()] = 1;
                         CheckGarbageContact(boardLogic, _foundVertical[k].getX(), _foundVertical[k].getY(), boardW, boardH, _garbageList);
+                        
+                        __average_row += _foundVertical[k].getX();
+                        __average_col += _foundVertical[k].getY();
+                        __total++;
                     }
                 }
                 
@@ -105,9 +125,37 @@ class NormalRules : public RulesInterface
                 {
                     for (unsigned int k = 0; k < _foundHorizontal.size(); k++)
                     {
+                        // Check for chain possibility
+                        if (boardLogic[_foundHorizontal[k].getX()][_foundHorizontal[k].getY()]->_in_chain == 2 &&
+                            __checkBoard[_foundHorizontal[k].getX()][_foundHorizontal[k].getY()] != 1)
+                        {
+                            UpdateChainCondition(_foundHorizontal[k].getX(), _foundHorizontal[k].getY(), 0, changes);
+                            __chain_chance = 1;
+                        }
+                        
                         __checkBoard[_foundHorizontal[k].getX()][_foundHorizontal[k].getY()] = 1;
                         CheckGarbageContact(boardLogic, _foundHorizontal[k].getX(), _foundHorizontal[k].getY(), boardW, boardH, _garbageList);
+                        
+                        __average_row += _foundHorizontal[k].getX();
+                        __average_col += _foundHorizontal[k].getY();
+                        __total++;
                     }
+                }
+                
+                // Score Chain
+                if (__chain_chance == 1)
+                {
+                    _current_chain++;
+                    
+                    Change __change = 0;
+                    __change = AddChangeType(__change, SCORE_CHAIN_OPERATION);
+                    __change = AddTargetPanelX(__change, (int)(ceil(__average_col/(__total))));
+                    __change = AddTargetPanelY(__change, (int)(ceil(__average_row/(__total))));
+                    __change = AddChainValue(__change, (_current_chain + 1));
+                    changes.push_back(__change);
+ 
+                    // Chain time value. Depends on the combo size.
+                    _chin_limit = 62 + (_foundVertical.size() + _foundHorizontal.size())*(12);
                 }
                 
                 _foundVertical.clear();
@@ -129,6 +177,9 @@ class NormalRules : public RulesInterface
                         __change = AddTargetPanelX(__change, j);
                         __change = AddTargetPanelY(__change, i);
                         changes.push_back(__change);
+                        
+                        // Enable Chain Chance
+                        EnableChain(boardLogic, i, j);
                     }
                     else
                     {
@@ -217,6 +268,27 @@ class NormalRules : public RulesInterface
                 }
             }
         }
+    }
+    
+    // Sweeps panels above a given target, enabling chain chance.
+    // @param boardLogic: logic board matrix.
+    // @param i: row index.
+    // @param j: column index.
+    private: void EnableChain (LogicPanel *** boardLogic, int i, int j)
+    {
+        // If in the first row, no need to trigger chain.
+        if (i == 0)
+            return;
+        
+        // Sweep panels above otherwise.
+        for (int k = i; k >= 0; k--)
+        {
+            if (boardLogic[k][j]->_type == PANEL_VOID_TYPE)
+                break;
+            boardLogic[k][j]->_in_chain = 1;
+        }
+        
+        return;
     }
     
     // Detect combinations in vertical direction.
@@ -455,6 +527,7 @@ class NormalRules : public RulesInterface
                 __fallCheckBoard[i][j]._width = _boardLogic[i][j]->_width;
                 __fallCheckBoard[i][j]._height = _boardLogic[i][j]->_height;
                 __fallCheckBoard[i][j]._wait = _boardLogic[i][j]->_wait;
+                __fallCheckBoard[i][j]._in_chain = _boardLogic[i][j]->_in_chain;
             }
         
         // Detect Potential falls
@@ -545,6 +618,20 @@ class NormalRules : public RulesInterface
                             __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
                         {
                             UpdateFallSprite(i, j, changes, _boardLogic);
+                            
+                            // If _in_chain is equal to 1, it means it is falling or its falling has just finished.
+                            // Change it to 2 so it will have one extra frame to be detected.
+                            if (__fallCheckBoard[i][j]._in_chain == 1)
+                            {
+                                __fallCheckBoard[i][j]._in_chain = 2;
+                                UpdateChainCondition(i, j, 2, changes);
+                            }
+                            // Extra frame to detect chain chance.
+                            else if (__fallCheckBoard[i][j]._in_chain == 2)
+                            {
+                                __fallCheckBoard[i][j]._in_chain = 0;
+                                UpdateChainCondition(i, j, 0, changes);
+                            }
                         }
                         else
                         {
@@ -566,29 +653,65 @@ class NormalRules : public RulesInterface
                 else
                 {
                     // Stop fall hit the last line
-                    if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
-                        __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
+                    if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 || (__fallCheckBoard[i][j]._state >= 5 && __fallCheckBoard[i][j]._state <= 14)))
                     {
-                        UpdateFallSprite(i, j, changes, _boardLogic);
-                    }
-                    else
-                    {
-                        bool __canFall = CanGarbageFall (i, j);
-                        if (!__canFall)
+                        if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
+                            __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
                         {
-                            if (i == __fallCheckBoard[i][j]._sourceY && j == __fallCheckBoard[i][j]._sourceX)
-                            {
-                                // Rumble With garbage fall
-                                GrabageRumble (changes);
-                            }
+                            UpdateFallSprite(i, j, changes, _boardLogic);
                             
-                            _boardLogic[i][j]->_state = 0;
-                            __fallCheckBoard[i][j]._state = 0;
+                            // If _in_chain is equal to 1, it means it is falling or its falling has just finished.
+                            // Change it to 2 so it will have one extra frame to be detected.
+                            if (__fallCheckBoard[i][j]._in_chain == 1)
+                            {
+                                UpdateChainCondition(i, j, 2, changes);
+                                __fallCheckBoard[i][j]._in_chain = 2;
+                            }
+                            // Extra frame to detect chain chance.
+                            else if (__fallCheckBoard[i][j]._in_chain == 2)
+                            {
+                                UpdateChainCondition(i, j, 0, changes);
+                                __fallCheckBoard[i][j]._in_chain = 0;
+                            }
+                        }
+                        else
+                        {
+                            bool __canFall = CanGarbageFall (i, j);
+                            if (!__canFall)
+                            {
+                                if (i == __fallCheckBoard[i][j]._sourceY && j == __fallCheckBoard[i][j]._sourceX)
+                                {
+                                    // Rumble With garbage fall
+                                    GrabageRumble (changes);
+                                }
+                                
+                                _boardLogic[i][j]->_state = 0;
+                                __fallCheckBoard[i][j]._state = 0;
+                            }
                         }
                     }
                 }
             }
         }
+        
+        CheckChainEnd ();
+        
+    }
+    
+    private: void CheckChainEnd ()
+    {
+        // Check chain availability
+        if (_chin_limit != 0)
+        {
+            _chin_limit--;
+            if (_chin_limit == 0)
+            {
+                // Play Chain Fanfare here.
+                
+                _current_chain = 0;
+            }
+        }
+
     }
     
     private: void GrabageRumble (vector<Change> &changes)
@@ -602,6 +725,16 @@ class NormalRules : public RulesInterface
     private: bool IsInFallingAnimation (int i, int j)
     {
         return (__fallCheckBoard[i][j]._state >= 5 && __fallCheckBoard[i][j]._state <= 14);
+    }
+    
+    private: void UpdateChainCondition (int i, int j, int value, vector<Change> &changes)
+    {
+        Change __change = 0;
+        __change = AddChangeType(__change, CHAIN_OPERATION);
+        __change = AddChainValue(__change, value);
+        __change = AddTargetPanelX(__change, j);
+        __change = AddTargetPanelY(__change, i);
+        changes.push_back(__change);
     }
     
     private: void UpdateFallSprite (int i, int j, vector<Change> &changes, LogicPanel *** _boardLogic)
