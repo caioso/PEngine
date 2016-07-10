@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __CHANGES__
 #define __CHANGES__
 
@@ -6,7 +7,7 @@
 typedef uint32_t Change;
 
 // Extracts the change type
-#define ExtractOperation(OP) ((OP>>16)&255)
+#define ExtractOperation(OP) ((OP>>16)&65535)
 
 // Extarct Source X
 #define ExtractTargetPanelX(OP) ((OP&255)&15)
@@ -39,7 +40,7 @@ typedef uint32_t Change;
 #define ExtractGarbageHeight(OP) (((OP>>8)&255)&15)
 
 // Add Operation
-#define AddChangeType(OP, A) ((OP) | ((A&15)<<16))
+#define AddChangeType(OP, A) ((OP) | ((A&65535)<<16))
 
 // Add Target Panel X to Change
 #define AddTargetPanelX(OP, A) ((OP) | (A&15))
@@ -105,5 +106,9 @@ typedef uint32_t Change;
 #define CHAIN_OPERATION 0xe
 
 #define SCORE_CHAIN_OPERATION 0xf
+
+#define RIVAL_GARBAGE_OPERATION 0x10
+
+#define SHAKE_OPERATION 0x11
 
 #endif // __CHANGES__

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __SCRIPT_TEMPLATE__
 #define __SCRIPT_TEMPLATE__
 

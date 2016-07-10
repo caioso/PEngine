@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __NORMAL_RULES__
 #define __NORMAL_RULES__
 
@@ -253,6 +254,9 @@ class NormalRules : public RulesInterface
             __change = AddTargetPanelY(__change, (int)(ceil(__lower_row/__combo_size)));
             __change = AddComboSize(__change, __combo_size);
             changes.push_back(__change);
+            
+            // Create garbage blocks based on combo size
+            GenerateGarbageFromCombo(__combo_size, changes, (int)(ceil(__lower_column/__combo_size)));
         }
         
         // Correct Delay value
@@ -270,6 +274,59 @@ class NormalRules : public RulesInterface
         }
     }
     
+    // Sends Garbage_operation to board interpreter. This creates new objects.
+    // 
+    void GenerateGarbageFromCombo(int combo_size, vector<Change> &changes, int initialPoistion)
+    {
+        switch (combo_size)
+        {
+            case 4:
+                CreateGarbage(3, 1, (initialPoistion >= 3? 3 : initialPoistion), changes);
+                break;
+            case 5:
+                CreateGarbage(4, 1, (initialPoistion >= 2? 2 : initialPoistion), changes);
+                break;
+            case 6:
+                CreateGarbage(5, 1, (initialPoistion >= 1? 1 : initialPoistion), changes);
+                break;
+            case 7:
+                CreateGarbage(6, 1, 0, changes);
+                break;
+            case 8:
+                CreateGarbage(4, 1, 0, changes);
+                CreateGarbage(3, 1, 3, changes);
+                break;
+            case 9:
+                CreateGarbage(4, 1, 0, changes);
+                CreateGarbage(4, 1, 2, changes);
+                break;
+            case 10:
+                CreateGarbage(5, 1, 0, changes);
+                CreateGarbage(5, 1, 1, changes);
+                break;
+            default:
+                CreateGarbage(6, 1, 0, changes);
+                for (int i = 0; i < combo_size - 10; i++)
+                    CreateGarbage(6, 1, 0, changes);
+                break;
+        }
+    }
+    
+    // Creates instructions.
+    // @param width: garbage width;
+    // @param height: grabage height;
+    // @param changes: change list
+    private: void CreateGarbage (int width, int height, int position, vector<Change> &changes)
+    {
+        Change __change = 0;
+        __change = AddChangeType(__change, RIVAL_GARBAGE_OPERATION);
+        __change = AddGarbageWidth(__change, width);
+        __change = AddGarbageHeight(__change, height);
+        // Position the garbage making sure it will fit in the board width.
+        __change = AddGarbagePosition(__change, position);
+        changes.push_back(__change);
+    }
+
     // Sweeps panels above a given target, enabling chain chance.
     // @param boardLogic: logic board matrix.
     // @param i: row index.
@@ -636,16 +693,16 @@ class NormalRules : public RulesInterface
                         else
                         {
                             bool __canFall = CanGarbageFall (i, j);
+                            int __state = __fallCheckBoard[__fallCheckBoard[i][j]._sourceY][__fallCheckBoard[i][j]._sourceX]._state;
                             if (!__canFall)
                             {
-                                if (i == __fallCheckBoard[i][j]._sourceY && j == __fallCheckBoard[i][j]._sourceX)
+                                if (__state == 1)
                                 {
                                     // Rumble With garbage fall
-                                    GrabageRumble (changes);
+                                    GarbageRumble (changes);
+                                    ShakeBoard (changes);
                                 }
-                                
-                                _boardLogic[i][j]->_state = 0;
-                                __fallCheckBoard[i][j]._state = 0;
+                                StopFullGarbageFall(i, j, _boardLogic, _garbageList);
                             }
                         }
                     }
@@ -677,16 +734,16 @@ class NormalRules : public RulesInterface
                         else
                         {
                             bool __canFall = CanGarbageFall (i, j);
+                            int __state = __fallCheckBoard[__fallCheckBoard[i][j]._sourceY][__fallCheckBoard[i][j]._sourceX]._state;
                             if (!__canFall)
                             {
-                                if (i == __fallCheckBoard[i][j]._sourceY && j == __fallCheckBoard[i][j]._sourceX)
+                                if (__state == 1)
                                 {
                                     // Rumble With garbage fall
-                                    GrabageRumble (changes);
+                                    GarbageRumble (changes);
+                                    ShakeBoard (changes);
                                 }
-                                
-                                _boardLogic[i][j]->_state = 0;
-                                __fallCheckBoard[i][j]._state = 0;
+                                StopFullGarbageFall(i, j, _boardLogic, _garbageList);
                             }
                         }
                     }
@@ -714,11 +771,18 @@ class NormalRules : public RulesInterface
 
     }
     
-    private: void GrabageRumble (vector<Change> &changes)
+    private: void GarbageRumble (vector<Change> &changes)
     {
         Change __change = 0;
         __change = AddChangeType(__change, RUMBLE_OPERATION);
         __change = AddRumbleLength(__change, GARBAGE_FALL_RUMBLE_DURATION);
+        changes.push_back(__change);
+    }
+    
+    private: void ShakeBoard (vector<Change> &changes)
+    {
+        Change __change = 0;
+        __change = AddChangeType(__change, SHAKE_OPERATION);
         changes.push_back(__change);
     }
     
@@ -896,6 +960,38 @@ class NormalRules : public RulesInterface
         return true;
     }
     
+    // Set every garbage object state to 0 (not falling).
+    // @param i: row index;
+    // @param j: column index;
+    // @param _boardLogic: board logic object
+    // @param _garbageList: garbage queue list.
+    private: void StopFullGarbageFall (int i, int j, LogicPanel *** _boardLogic, vector<LogicPanel **> &_garbageList)
+    {
+        int __initialIndexX = __fallCheckBoard[i][j]._sourceX;
+        int __initialIndexY = i;
+        int __lastIndexX = __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width;
+        int __lastIndexY = i - __fallCheckBoard[i][j]._height;
+        int __garbageCounter = 0;
+        for (int l = __initialIndexY; l > __lastIndexY; l--)
+        {
+            if (l >= 0)
+            {
+                for (int k = __initialIndexX; k < __lastIndexX; k++)
+                {
+                    __fallCheckBoard[l][k]._state = 0;
+                    _boardLogic[l][k]->_state = 0;
+                }
+            }
+            else
+            {
+                for (int k = __initialIndexX; k < __lastIndexX; k++)
+                {
+                    _garbageList[__garbageCounter][k]->_state = 0;
+                }
+                __garbageCounter++;
+            }
+        }
+    }
     
     // Update grabage object in the board to make it fall as a single unit.
     // @param i: row index;

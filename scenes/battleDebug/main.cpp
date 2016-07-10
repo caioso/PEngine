@@ -6,7 +6,7 @@
 #include "clock.hpp"
 
 // DEBUG TEST
-#include "../../assets/audio/battleTheme.h"
+//#include "../../assets/audio/col.h"
 #include "../../assets/graphics/BG1.h"
 
 int main(int argc, char **argv)
@@ -16,7 +16,7 @@ int main(int argc, char **argv)
     
     // DEBUG
     Music * __msc;
-    __msc = new Music(battleTheme, battleTheme_size, 1000);
+    //__msc = new Music(col, col_size, 1000);
     //AudioEngine::PlayMusic(__msc, false, 128);
     
     // Animation and Sprite Managers
@@ -31,25 +31,30 @@ int main(int argc, char **argv)
     GraphicEngine::_stage->AddChild(_bg);
     
     // Declare and Subscribe your scripts here.
-    BoardTask * __board_p1 = new BoardTask("P1 Board",
-                                           Dim2D(6,11),
-                                           Point2D(32, 64),
-                                           Point2D(0,5),
-                                           PPL_PLAYER_1,
-                                           _spriteManager,
-                                           _animationManager);
-    BoardTask * __board_p2 = new BoardTask("P2 Board",
-                                           Dim2D(6,11),
-                                           Point2D(419, 108),
-                                           Point2D(3,5),
-                                           PPL_PLAYER_2,
-                                           _spriteManager,
-                                           _animationManager);
+    BoardTask * __board_p1, * __board_p2;
+    
+    __board_p1 = new BoardTask("P1 Board",
+                               Dim2D(6,11),
+                               Point2D(32, 61),
+                               Point2D(0,5),
+                               PPL_PLAYER_1,
+                               _spriteManager,
+                               _animationManager);
+    
+    __board_p2 = new BoardTask("P2 Board",
+                               Dim2D(6,11),
+                               Point2D(421, 105),
+                               Point2D(3,5),
+                               PPL_PLAYER_2,
+                               _spriteManager,
+                               _animationManager);
+    
+    // Set reference to rival board.
+    __board_p1->GetBoard()->SetRivalReference(__board_p2->GetBoard());
+    __board_p2->GetBoard()->SetRivalReference(__board_p1->GetBoard());
     
     // Initialize Game Clock
     Clock * __system_clock = new Clock(_spriteManager);
-    
-    
         
     // Register Boards
     ScriptManager::Subscribe(__board_p1);

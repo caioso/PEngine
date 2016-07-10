@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __PANEL__
 #define __PANEL__
 

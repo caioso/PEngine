@@ -108,7 +108,7 @@ void AudioEngine::PlayMusic (Music * music, bool transition, int volume)
     if (music == _current_music)
     {
         //Debug::LogWarning("This music file is already being played.");
-        return;
+        //return;
     }
     
     if (transition)

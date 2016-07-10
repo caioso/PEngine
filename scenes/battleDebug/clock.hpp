@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __CLOCK__
 #define __CLOCK__
 

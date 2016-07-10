@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __SPRITE_MANAGER__
 #define __SPRITE_MANAGER__
 

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __WORK_PANEL__
 #define __WORK_PANEL__
 

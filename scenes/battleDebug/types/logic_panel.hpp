@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __LOGIC_PANEL__
 #define __LOGIC_PANEL__
 

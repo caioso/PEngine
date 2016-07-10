@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __RULES_INTERFACE__
 #define __RULES_INTERFACE__
 

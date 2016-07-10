@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __CURSOR__
 #define __CURSOR__
 

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef __BOARD_CONSTANTS__
 #define __BOARD_CONSTANTS__
 
