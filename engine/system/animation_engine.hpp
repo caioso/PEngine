@@ -17,26 +17,26 @@
 class AnimationEngine
 {
     friend class Sprite;
-    
+
     private: static vector<Tween> _tween_list;
-    
+
     // Intializes Animation Engine
     public: static void Init (){};
-    
+
     // Reister a new Tween in Animation Engine
     // @param object: Target sprite to be animated;
     // @param properties: Which sprite properties will be animated;
     // @param duration: Animation length in miliseconds.
     // @param completion_completion: callback called when the tween completes execution.
-    public: static void RegisterTween (Sprite * object, SpriteProperties properties, float duration, EasingTypesName easin = EaseNoneLinear, void (*completion_completion)(void) = NULL);
-    
+    public: static void RegisterTween (Sprite * object, SpriteProperties properties, float duration, EasingTypesName easin = EaseNoneLinear, float delay = 0.0, void (*completion_completion)(void) = NULL);
+
     // Update each animation for the given frame
     public: static void UpdateTweens ();
-    
+
     private: static void UpdateTweenPropertiesLinear (int index);
-    
+
     private: static float RunTween (int index, SpritePropertyName property);
-    
+
     // Easing Fucntions
     // t: current time, b: begInnIng value, c: change In value, d: duration
     private: static float easeInCubic (float t, float b , float c, float d);

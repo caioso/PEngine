@@ -770,6 +770,144 @@
 #include "../../assets/graphics/chainxunknown_0046.h"
 #include "../../assets/graphics/chainxunknown_0047.h"
 
+#include "../../assets/graphics/comboInterfaceAnimationP1_0001.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0002.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0003.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0004.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0005.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0006.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0007.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0008.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0009.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0010.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0011.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0012.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0013.h"
+#include "../../assets/graphics/comboInterfaceAnimationP1_0014.h"
+
+#include "../../assets/graphics/comboInterfaceAnimationP2_0001.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0002.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0003.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0004.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0005.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0006.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0007.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0008.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0009.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0010.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0011.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0012.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0013.h"
+#include "../../assets/graphics/comboInterfaceAnimationP2_0014.h"
+
+#include "../../assets/graphics/x3_dark.h"
+#include "../../assets/graphics/x3_electric.h"
+#include "../../assets/graphics/x3_fairy.h"
+#include "../../assets/graphics/x3_fighting.h"
+#include "../../assets/graphics/x3_fire.h"
+#include "../../assets/graphics/x3_leaf.h"
+#include "../../assets/graphics/x3_metal.h"
+#include "../../assets/graphics/x3_normal.h"
+#include "../../assets/graphics/x3_psy.h"
+#include "../../assets/graphics/x3_water.h"
+
+#include "../../assets/graphics/x4_dark.h"
+#include "../../assets/graphics/x4_electric.h"
+#include "../../assets/graphics/x4_fairy.h"
+#include "../../assets/graphics/x4_fighting.h"
+#include "../../assets/graphics/x4_fire.h"
+#include "../../assets/graphics/x4_leaf.h"
+#include "../../assets/graphics/x4_metal.h"
+#include "../../assets/graphics/x4_normal.h"
+#include "../../assets/graphics/x4_psy.h"
+#include "../../assets/graphics/x4_water.h"
+
+#include "../../assets/graphics/x5_dark.h"
+#include "../../assets/graphics/x5_electric.h"
+#include "../../assets/graphics/x5_fairy.h"
+#include "../../assets/graphics/x5_fighting.h"
+#include "../../assets/graphics/x5_fire.h"
+#include "../../assets/graphics/x5_leaf.h"
+#include "../../assets/graphics/x5_metal.h"
+#include "../../assets/graphics/x5_normal.h"
+#include "../../assets/graphics/x5_psy.h"
+#include "../../assets/graphics/x5_water.h"
+
+#include "../../assets/graphics/x6_dark.h"
+#include "../../assets/graphics/x6_electric.h"
+#include "../../assets/graphics/x6_fairy.h"
+#include "../../assets/graphics/x6_fighting.h"
+#include "../../assets/graphics/x6_fire.h"
+#include "../../assets/graphics/x6_leaf.h"
+#include "../../assets/graphics/x6_metal.h"
+#include "../../assets/graphics/x6_normal.h"
+#include "../../assets/graphics/x6_psy.h"
+#include "../../assets/graphics/x6_water.h"
+
+#include "../../assets/graphics/comboBox_Player1_0001.h"
+#include "../../assets/graphics/comboBox_Player1_0002.h"
+#include "../../assets/graphics/comboBox_Player1_0003.h"
+#include "../../assets/graphics/comboBox_Player1_0004.h"
+#include "../../assets/graphics/comboBox_Player1_0005.h"
+#include "../../assets/graphics/comboBox_Player1_0006.h"
+#include "../../assets/graphics/comboBox_Player1_0007.h"
+#include "../../assets/graphics/comboBox_Player1_0008.h"
+#include "../../assets/graphics/comboBox_Player1_0009.h"
+#include "../../assets/graphics/comboBox_Player1_0010.h"
+#include "../../assets/graphics/comboBox_Player1_0011.h"
+#include "../../assets/graphics/comboBox_Player1_0012.h"
+#include "../../assets/graphics/comboBox_Player1_0013.h"
+#include "../../assets/graphics/comboBox_Player1_0014.h"
+#include "../../assets/graphics/comboBox_Player1_0015.h"
+#include "../../assets/graphics/comboBox_Player1_0016.h"
+#include "../../assets/graphics/comboBox_Player1_0017.h"
+#include "../../assets/graphics/comboBox_Player1_0018.h"
+#include "../../assets/graphics/comboBox_Player1_0019.h"
+#include "../../assets/graphics/comboBox_Player1_0020.h"
+#include "../../assets/graphics/comboBox_Player1_0021.h"
+#include "../../assets/graphics/comboBox_Player1_0022.h"
+#include "../../assets/graphics/comboBox_Player1_0023.h"
+#include "../../assets/graphics/comboBox_Player1_0024.h"
+#include "../../assets/graphics/comboBox_Player1_0025.h"
+#include "../../assets/graphics/comboBox_Player1_0026.h"
+#include "../../assets/graphics/comboBox_Player1_0027.h"
+#include "../../assets/graphics/comboBox_Player1_0028.h"
+#include "../../assets/graphics/comboBox_Player1_0029.h"
+#include "../../assets/graphics/comboBox_Player1_0030.h"
+
+#include "../../assets/graphics/comboBox_Player2_0001.h"
+#include "../../assets/graphics/comboBox_Player2_0002.h"
+#include "../../assets/graphics/comboBox_Player2_0003.h"
+#include "../../assets/graphics/comboBox_Player2_0004.h"
+#include "../../assets/graphics/comboBox_Player2_0005.h"
+#include "../../assets/graphics/comboBox_Player2_0006.h"
+#include "../../assets/graphics/comboBox_Player2_0007.h"
+#include "../../assets/graphics/comboBox_Player2_0008.h"
+#include "../../assets/graphics/comboBox_Player2_0009.h"
+#include "../../assets/graphics/comboBox_Player2_0010.h"
+#include "../../assets/graphics/comboBox_Player2_0011.h"
+#include "../../assets/graphics/comboBox_Player2_0012.h"
+#include "../../assets/graphics/comboBox_Player2_0013.h"
+#include "../../assets/graphics/comboBox_Player2_0014.h"
+#include "../../assets/graphics/comboBox_Player2_0015.h"
+#include "../../assets/graphics/comboBox_Player2_0016.h"
+#include "../../assets/graphics/comboBox_Player2_0017.h"
+#include "../../assets/graphics/comboBox_Player2_0018.h"
+#include "../../assets/graphics/comboBox_Player2_0019.h"
+#include "../../assets/graphics/comboBox_Player2_0020.h"
+#include "../../assets/graphics/comboBox_Player2_0021.h"
+#include "../../assets/graphics/comboBox_Player2_0022.h"
+#include "../../assets/graphics/comboBox_Player2_0023.h"
+#include "../../assets/graphics/comboBox_Player2_0024.h"
+#include "../../assets/graphics/comboBox_Player2_0025.h"
+#include "../../assets/graphics/comboBox_Player2_0026.h"
+#include "../../assets/graphics/comboBox_Player2_0027.h"
+#include "../../assets/graphics/comboBox_Player2_0028.h"
+#include "../../assets/graphics/comboBox_Player2_0029.h"
+#include "../../assets/graphics/comboBox_Player2_0030.h"
+
+#include "../../assets/graphics/P1.h"
+#include "../../assets/graphics/P2.h"
 
 // Sprite manager class handles texture instances. It keeps a static reference to
 // each assets reference and deploy them as needed.
@@ -787,7 +925,7 @@ class SpriteManager
     public: GRRLIB_texImg* _dpurple1;
     public: GRRLIB_texImg* _dgarbage;
     public: GRRLIB_texImg* _concrete;
-    
+
     // Rising row
     public: GRRLIB_texImg* _dGrayblocked;
     public: GRRLIB_texImg* _dGreenblocked;
@@ -795,7 +933,7 @@ class SpriteManager
     public: GRRLIB_texImg* _dBlueblocked;
     public: GRRLIB_texImg* _dPurpleblocked;
     public: GRRLIB_texImg* _dYellowblocked;
-    
+
     // Detect Panel
     public: GRRLIB_texImg* _dGraydetect;
     public: GRRLIB_texImg* _dGreendetect;
@@ -803,7 +941,7 @@ class SpriteManager
     public: GRRLIB_texImg* _dBluedetect;
     public: GRRLIB_texImg* _dPurpledetect;
     public: GRRLIB_texImg* _dYellowdetect;
-    
+
     // Break Blue Panel
     public: GRRLIB_texImg* _blueBreak0001;
     public: GRRLIB_texImg* _blueBreak0002;
@@ -816,7 +954,7 @@ class SpriteManager
     public: GRRLIB_texImg* _blueBreak0009;
     public: GRRLIB_texImg* _blueBreak0010;
     public: GRRLIB_texImg* _blueBreak0011;
-    
+
     // Break Green Panel
     public: GRRLIB_texImg* _greenBreak0001;
     public: GRRLIB_texImg* _greenBreak0002;
@@ -829,7 +967,7 @@ class SpriteManager
     public: GRRLIB_texImg* _greenBreak0009;
     public: GRRLIB_texImg* _greenBreak0010;
     public: GRRLIB_texImg* _greenBreak0011;
-    
+
     // Break Purple Panel
     public: GRRLIB_texImg* _purpleBreak0001;
     public: GRRLIB_texImg* _purpleBreak0002;
@@ -842,7 +980,7 @@ class SpriteManager
     public: GRRLIB_texImg* _purpleBreak0009;
     public: GRRLIB_texImg* _purpleBreak0010;
     public: GRRLIB_texImg* _purpleBreak0011;
-    
+
     // Break Red Panel
     public: GRRLIB_texImg* _redBreak0001;
     public: GRRLIB_texImg* _redBreak0002;
@@ -855,7 +993,7 @@ class SpriteManager
     public: GRRLIB_texImg* _redBreak0009;
     public: GRRLIB_texImg* _redBreak0010;
     public: GRRLIB_texImg* _redBreak0011;
-    
+
     // Break yellow Panel
     public: GRRLIB_texImg* _yellowBreak0001;
     public: GRRLIB_texImg* _yellowBreak0002;
@@ -868,7 +1006,7 @@ class SpriteManager
     public: GRRLIB_texImg* _yellowBreak0009;
     public: GRRLIB_texImg* _yellowBreak0010;
     public: GRRLIB_texImg* _yellowBreak0011;
-    
+
     // Cyan Falling Sprites
     public: GRRLIB_texImg* _dBlueFalling0001;
     public: GRRLIB_texImg* _dBlueFalling0002;
@@ -880,7 +1018,7 @@ class SpriteManager
     public: GRRLIB_texImg* _dBlueFalling0008;
     public: GRRLIB_texImg* _dBlueFalling0009;
     public: GRRLIB_texImg* _dBlueFalling0010;
-    
+
     // Red Falling Sprites
     public: GRRLIB_texImg* _dRedFalling0001;
     public: GRRLIB_texImg* _dRedFalling0002;
@@ -892,7 +1030,7 @@ class SpriteManager
     public: GRRLIB_texImg* _dRedFalling0008;
     public: GRRLIB_texImg* _dRedFalling0009;
     public: GRRLIB_texImg* _dRedFalling0010;
-    
+
     // Green Falling Sprites
     public: GRRLIB_texImg* _dGreenFalling0001;
     public: GRRLIB_texImg* _dGreenFalling0002;
@@ -904,7 +1042,7 @@ class SpriteManager
     public: GRRLIB_texImg* _dGreenFalling0008;
     public: GRRLIB_texImg* _dGreenFalling0009;
     public: GRRLIB_texImg* _dGreenFalling0010;
-    
+
     // Purple Falling Sprites
     public: GRRLIB_texImg* _dPurpleFalling0001;
     public: GRRLIB_texImg* _dPurpleFalling0002;
@@ -916,7 +1054,7 @@ class SpriteManager
     public: GRRLIB_texImg* _dPurpleFalling0008;
     public: GRRLIB_texImg* _dPurpleFalling0009;
     public: GRRLIB_texImg* _dPurpleFalling0010;
-    
+
     // Yellow Falling Sprites
     public: GRRLIB_texImg* _dYellowFalling0001;
     public: GRRLIB_texImg* _dYellowFalling0002;
@@ -928,7 +1066,7 @@ class SpriteManager
     public: GRRLIB_texImg* _dYellowFalling0008;
     public: GRRLIB_texImg* _dYellowFalling0009;
     public: GRRLIB_texImg* _dYellowFalling0010;
-    
+
     // Cursor Sprites
     public: GRRLIB_texImg* _cursor0001;
     public: GRRLIB_texImg* _cursor0002;
@@ -941,7 +1079,7 @@ class SpriteManager
     public: GRRLIB_texImg* _cursor0009;
     public: GRRLIB_texImg* _cursor0010;
     public: GRRLIB_texImg* _cursor0011;
-    
+
     // Clock Sprites
     public: GRRLIB_texImg* _n0;
     public: GRRLIB_texImg* _n1;
@@ -954,7 +1092,7 @@ class SpriteManager
     public: GRRLIB_texImg* _n8;
     public: GRRLIB_texImg* _n9;
     public: GRRLIB_texImg* _points;
-    
+
     // X4 Combo
     public: GRRLIB_texImg* _x4_0001;
     public: GRRLIB_texImg* _x4_0002;
@@ -980,7 +1118,7 @@ class SpriteManager
     public: GRRLIB_texImg* _x4_0045;
     public: GRRLIB_texImg* _x4_0046;
     public: GRRLIB_texImg* _x4_0047;
-    
+
     // x5 Combo
     public: GRRLIB_texImg* _x5_0001;
     public: GRRLIB_texImg* _x5_0002;
@@ -1032,7 +1170,7 @@ class SpriteManager
     public: GRRLIB_texImg* _x6_0045;
     public: GRRLIB_texImg* _x6_0046;
     public: GRRLIB_texImg* _x6_0047;
-    
+
     // x7 Combo
     public: GRRLIB_texImg* _x7_0001;
     public: GRRLIB_texImg* _x7_0002;
@@ -1058,7 +1196,7 @@ class SpriteManager
     public: GRRLIB_texImg* _x7_0045;
     public: GRRLIB_texImg* _x7_0046;
     public: GRRLIB_texImg* _x7_0047;
-    
+
     // x8 Combo
     public: GRRLIB_texImg* _x8_0001;
     public: GRRLIB_texImg* _x8_0002;
@@ -1084,7 +1222,7 @@ class SpriteManager
     public: GRRLIB_texImg* _x8_0045;
     public: GRRLIB_texImg* _x8_0046;
     public: GRRLIB_texImg* _x8_0047;
-    
+
     // x9 Combo
     public: GRRLIB_texImg* _x9_0001;
     public: GRRLIB_texImg* _x9_0002;
@@ -1110,7 +1248,7 @@ class SpriteManager
     public: GRRLIB_texImg* _x9_0045;
     public: GRRLIB_texImg* _x9_0046;
     public: GRRLIB_texImg* _x9_0047;
-    
+
     // x10 Combo
     public: GRRLIB_texImg* _x10_0001;
     public: GRRLIB_texImg* _x10_0002;
@@ -1136,7 +1274,7 @@ class SpriteManager
     public: GRRLIB_texImg* _x10_0045;
     public: GRRLIB_texImg* _x10_0046;
     public: GRRLIB_texImg* _x10_0047;
-    
+
     // x11 Combo
     public: GRRLIB_texImg* _x11_0001;
     public: GRRLIB_texImg* _x11_0002;
@@ -1162,7 +1300,7 @@ class SpriteManager
     public: GRRLIB_texImg* _x11_0045;
     public: GRRLIB_texImg* _x11_0046;
     public: GRRLIB_texImg* _x11_0047;
-    
+
     // x12 Combo
     public: GRRLIB_texImg* _x12_0001;
     public: GRRLIB_texImg* _x12_0002;
@@ -1188,7 +1326,7 @@ class SpriteManager
     public: GRRLIB_texImg* _x12_0045;
     public: GRRLIB_texImg* _x12_0046;
     public: GRRLIB_texImg* _x12_0047;
-    
+
     // x13 Combo
     public: GRRLIB_texImg* _x13_0001;
     public: GRRLIB_texImg* _x13_0002;
@@ -1214,7 +1352,7 @@ class SpriteManager
     public: GRRLIB_texImg* _x13_0045;
     public: GRRLIB_texImg* _x13_0046;
     public: GRRLIB_texImg* _x13_0047;
-    
+
     // xunknown Combo
     public: GRRLIB_texImg* _xunknown_0001;
     public: GRRLIB_texImg* _xunknown_0002;
@@ -1240,7 +1378,7 @@ class SpriteManager
     public: GRRLIB_texImg* _xunknown_0045;
     public: GRRLIB_texImg* _xunknown_0046;
     public: GRRLIB_texImg* _xunknown_0047;
-    
+
     // Chain x2
     public: GRRLIB_texImg* _chainx2_0001;
     public: GRRLIB_texImg* _chainx2_0002;
@@ -1266,7 +1404,7 @@ class SpriteManager
     public: GRRLIB_texImg* _chainx2_0045;
     public: GRRLIB_texImg* _chainx2_0046;
     public: GRRLIB_texImg* _chainx2_0047;
-    
+
     // Chain x3
     public: GRRLIB_texImg* _chainx3_0001;
     public: GRRLIB_texImg* _chainx3_0002;
@@ -1292,7 +1430,7 @@ class SpriteManager
     public: GRRLIB_texImg* _chainx3_0045;
     public: GRRLIB_texImg* _chainx3_0046;
     public: GRRLIB_texImg* _chainx3_0047;
-    
+
     // Chain x4
     public: GRRLIB_texImg* _chainx4_0001;
     public: GRRLIB_texImg* _chainx4_0002;
@@ -1318,7 +1456,7 @@ class SpriteManager
     public: GRRLIB_texImg* _chainx4_0045;
     public: GRRLIB_texImg* _chainx4_0046;
     public: GRRLIB_texImg* _chainx4_0047;
-    
+
     // Chain x5
     public: GRRLIB_texImg* _chainx5_0001;
     public: GRRLIB_texImg* _chainx5_0002;
@@ -1344,7 +1482,7 @@ class SpriteManager
     public: GRRLIB_texImg* _chainx5_0045;
     public: GRRLIB_texImg* _chainx5_0046;
     public: GRRLIB_texImg* _chainx5_0047;
-    
+
     // Chain x6
     public: GRRLIB_texImg* _chainx6_0001;
     public: GRRLIB_texImg* _chainx6_0002;
@@ -1370,7 +1508,7 @@ class SpriteManager
     public: GRRLIB_texImg* _chainx6_0045;
     public: GRRLIB_texImg* _chainx6_0046;
     public: GRRLIB_texImg* _chainx6_0047;
-    
+
     // Chain x7
     public: GRRLIB_texImg* _chainx7_0001;
     public: GRRLIB_texImg* _chainx7_0002;
@@ -1396,7 +1534,7 @@ class SpriteManager
     public: GRRLIB_texImg* _chainx7_0045;
     public: GRRLIB_texImg* _chainx7_0046;
     public: GRRLIB_texImg* _chainx7_0047;
-    
+
     // Chain x8
     public: GRRLIB_texImg* _chainx8_0001;
     public: GRRLIB_texImg* _chainx8_0002;
@@ -1422,7 +1560,7 @@ class SpriteManager
     public: GRRLIB_texImg* _chainx8_0045;
     public: GRRLIB_texImg* _chainx8_0046;
     public: GRRLIB_texImg* _chainx8_0047;
-    
+
     // Chain x9
     public: GRRLIB_texImg* _chainx9_0001;
     public: GRRLIB_texImg* _chainx9_0002;
@@ -1448,7 +1586,7 @@ class SpriteManager
     public: GRRLIB_texImg* _chainx9_0045;
     public: GRRLIB_texImg* _chainx9_0046;
     public: GRRLIB_texImg* _chainx9_0047;
-    
+
     // Chain x10
     public: GRRLIB_texImg* _chainx10_0001;
     public: GRRLIB_texImg* _chainx10_0002;
@@ -1474,7 +1612,7 @@ class SpriteManager
     public: GRRLIB_texImg* _chainx10_0045;
     public: GRRLIB_texImg* _chainx10_0046;
     public: GRRLIB_texImg* _chainx10_0047;
-    
+
     // Chain x11
     public: GRRLIB_texImg* _chainx11_0001;
     public: GRRLIB_texImg* _chainx11_0002;
@@ -1500,7 +1638,7 @@ class SpriteManager
     public: GRRLIB_texImg* _chainx11_0045;
     public: GRRLIB_texImg* _chainx11_0046;
     public: GRRLIB_texImg* _chainx11_0047;
-    
+
     // Chain x12
     public: GRRLIB_texImg* _chainx12_0001;
     public: GRRLIB_texImg* _chainx12_0002;
@@ -1526,7 +1664,7 @@ class SpriteManager
     public: GRRLIB_texImg* _chainx12_0045;
     public: GRRLIB_texImg* _chainx12_0046;
     public: GRRLIB_texImg* _chainx12_0047;
-    
+
     // Chain x13
     public: GRRLIB_texImg* _chainx13_0001;
     public: GRRLIB_texImg* _chainx13_0002;
@@ -1579,6 +1717,145 @@ class SpriteManager
     public: GRRLIB_texImg* _chainxunknown_0046;
     public: GRRLIB_texImg* _chainxunknown_0047;
 
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0001;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0002;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0003;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0004;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0005;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0006;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0007;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0008;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0009;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0010;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0011;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0012;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0013;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP1_0014;
+
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0001;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0002;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0003;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0004;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0005;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0006;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0007;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0008;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0009;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0010;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0011;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0012;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0013;
+    public: GRRLIB_texImg* _comboInterfaceAnimationP2_0014;
+
+    public: GRRLIB_texImg* _x3_dark;
+    public: GRRLIB_texImg* _x3_electric;
+    public: GRRLIB_texImg* _x3_fairy;
+    public: GRRLIB_texImg* _x3_fighting;
+    public: GRRLIB_texImg* _x3_fire;
+    public: GRRLIB_texImg* _x3_leaf;
+    public: GRRLIB_texImg* _x3_metal;
+    public: GRRLIB_texImg* _x3_normal;
+    public: GRRLIB_texImg* _x3_psy;
+    public: GRRLIB_texImg* _x3_water;
+
+    public: GRRLIB_texImg* _x4_dark;
+    public: GRRLIB_texImg* _x4_electric;
+    public: GRRLIB_texImg* _x4_fairy;
+    public: GRRLIB_texImg* _x4_fighting;
+    public: GRRLIB_texImg* _x4_fire;
+    public: GRRLIB_texImg* _x4_leaf;
+    public: GRRLIB_texImg* _x4_metal;
+    public: GRRLIB_texImg* _x4_normal;
+    public: GRRLIB_texImg* _x4_psy;
+    public: GRRLIB_texImg* _x4_water;
+
+    public: GRRLIB_texImg* _x5_dark;
+    public: GRRLIB_texImg* _x5_electric;
+    public: GRRLIB_texImg* _x5_fairy;
+    public: GRRLIB_texImg* _x5_fighting;
+    public: GRRLIB_texImg* _x5_fire;
+    public: GRRLIB_texImg* _x5_leaf;
+    public: GRRLIB_texImg* _x5_metal;
+    public: GRRLIB_texImg* _x5_normal;
+    public: GRRLIB_texImg* _x5_psy;
+    public: GRRLIB_texImg* _x5_water;
+
+    public: GRRLIB_texImg* _x6_dark;
+    public: GRRLIB_texImg* _x6_electric;
+    public: GRRLIB_texImg* _x6_fairy;
+    public: GRRLIB_texImg* _x6_fighting;
+    public: GRRLIB_texImg* _x6_fire;
+    public: GRRLIB_texImg* _x6_leaf;
+    public: GRRLIB_texImg* _x6_metal;
+    public: GRRLIB_texImg* _x6_normal;
+    public: GRRLIB_texImg* _x6_psy;
+    public: GRRLIB_texImg* _x6_water;
+
+    public: GRRLIB_texImg* _comboBox_Player1_0001;
+    public: GRRLIB_texImg* _comboBox_Player1_0002;
+    public: GRRLIB_texImg* _comboBox_Player1_0003;
+    public: GRRLIB_texImg* _comboBox_Player1_0004;
+    public: GRRLIB_texImg* _comboBox_Player1_0005;
+    public: GRRLIB_texImg* _comboBox_Player1_0006;
+    public: GRRLIB_texImg* _comboBox_Player1_0007;
+    public: GRRLIB_texImg* _comboBox_Player1_0008;
+    public: GRRLIB_texImg* _comboBox_Player1_0009;
+    public: GRRLIB_texImg* _comboBox_Player1_0010;
+    public: GRRLIB_texImg* _comboBox_Player1_0011;
+    public: GRRLIB_texImg* _comboBox_Player1_0012;
+    public: GRRLIB_texImg* _comboBox_Player1_0013;
+    public: GRRLIB_texImg* _comboBox_Player1_0014;
+    public: GRRLIB_texImg* _comboBox_Player1_0015;
+    public: GRRLIB_texImg* _comboBox_Player1_0016;
+    public: GRRLIB_texImg* _comboBox_Player1_0017;
+    public: GRRLIB_texImg* _comboBox_Player1_0018;
+    public: GRRLIB_texImg* _comboBox_Player1_0019;
+    public: GRRLIB_texImg* _comboBox_Player1_0020;
+    public: GRRLIB_texImg* _comboBox_Player1_0021;
+    public: GRRLIB_texImg* _comboBox_Player1_0022;
+    public: GRRLIB_texImg* _comboBox_Player1_0023;
+    public: GRRLIB_texImg* _comboBox_Player1_0024;
+    public: GRRLIB_texImg* _comboBox_Player1_0025;
+    public: GRRLIB_texImg* _comboBox_Player1_0026;
+    public: GRRLIB_texImg* _comboBox_Player1_0027;
+    public: GRRLIB_texImg* _comboBox_Player1_0028;
+    public: GRRLIB_texImg* _comboBox_Player1_0029;
+    public: GRRLIB_texImg* _comboBox_Player1_0030;
+
+    public: GRRLIB_texImg* _comboBox_Player2_0001;
+    public: GRRLIB_texImg* _comboBox_Player2_0002;
+    public: GRRLIB_texImg* _comboBox_Player2_0003;
+    public: GRRLIB_texImg* _comboBox_Player2_0004;
+    public: GRRLIB_texImg* _comboBox_Player2_0005;
+    public: GRRLIB_texImg* _comboBox_Player2_0006;
+    public: GRRLIB_texImg* _comboBox_Player2_0007;
+    public: GRRLIB_texImg* _comboBox_Player2_0008;
+    public: GRRLIB_texImg* _comboBox_Player2_0009;
+    public: GRRLIB_texImg* _comboBox_Player2_0010;
+    public: GRRLIB_texImg* _comboBox_Player2_0011;
+    public: GRRLIB_texImg* _comboBox_Player2_0012;
+    public: GRRLIB_texImg* _comboBox_Player2_0013;
+    public: GRRLIB_texImg* _comboBox_Player2_0014;
+    public: GRRLIB_texImg* _comboBox_Player2_0015;
+    public: GRRLIB_texImg* _comboBox_Player2_0016;
+    public: GRRLIB_texImg* _comboBox_Player2_0017;
+    public: GRRLIB_texImg* _comboBox_Player2_0018;
+    public: GRRLIB_texImg* _comboBox_Player2_0019;
+    public: GRRLIB_texImg* _comboBox_Player2_0020;
+    public: GRRLIB_texImg* _comboBox_Player2_0021;
+    public: GRRLIB_texImg* _comboBox_Player2_0022;
+    public: GRRLIB_texImg* _comboBox_Player2_0023;
+    public: GRRLIB_texImg* _comboBox_Player2_0024;
+    public: GRRLIB_texImg* _comboBox_Player2_0025;
+    public: GRRLIB_texImg* _comboBox_Player2_0026;
+    public: GRRLIB_texImg* _comboBox_Player2_0027;
+    public: GRRLIB_texImg* _comboBox_Player2_0028;
+    public: GRRLIB_texImg* _comboBox_Player2_0029;
+    public: GRRLIB_texImg* _comboBox_Player2_0030;
+
+    public: GRRLIB_texImg* _P1;
+    public: GRRLIB_texImg* _P2;
+
     public: SpriteManager ()
     {
         _dred = GRRLIB_LoadTexture(dred);
@@ -1593,7 +1870,7 @@ class SpriteManager
         _dpurple1 = GRRLIB_LoadTexture(dpurple1);
         _dgarbage = GRRLIB_LoadTexture(dgarbage);
         _concrete = GRRLIB_LoadTexture(concrete);
-        
+
         // Rising Row
         _dGrayblocked = GRRLIB_LoadTexture(dGrayblocked);
         _dGreenblocked = GRRLIB_LoadTexture(dGreenblocked);
@@ -1601,7 +1878,7 @@ class SpriteManager
         _dBlueblocked = GRRLIB_LoadTexture(dBlueblocked);
         _dPurpleblocked = GRRLIB_LoadTexture(dPurpleblocked);
         _dYellowblocked = GRRLIB_LoadTexture(dYellowblocked);
-        
+
         // Detect Panel
         _dGraydetect = GRRLIB_LoadTexture(dGraydetect);
         _dGreendetect = GRRLIB_LoadTexture(dGreendetect);
@@ -1609,7 +1886,7 @@ class SpriteManager
         _dBluedetect = GRRLIB_LoadTexture(dBluedetect);
         _dPurpledetect = GRRLIB_LoadTexture(dPurpledetect);
         _dYellowdetect = GRRLIB_LoadTexture(dYellowdetect);
-        
+
         // Cursor sprites
         _cursor0001 = GRRLIB_LoadTexture(cursor0001);
         _cursor0002 = GRRLIB_LoadTexture(cursor0002);
@@ -1622,7 +1899,7 @@ class SpriteManager
         _cursor0009 = GRRLIB_LoadTexture(cursor0009);
         _cursor0010 = GRRLIB_LoadTexture(cursor0010);
         _cursor0011 = GRRLIB_LoadTexture(cursor0011);
-        
+
         // Cyan Falling Sprites
         _dBlueFalling0001 = GRRLIB_LoadTexture(dBlueFalling0001);
         _dBlueFalling0002 = GRRLIB_LoadTexture(dBlueFalling0002);
@@ -1634,7 +1911,7 @@ class SpriteManager
         _dBlueFalling0008 = GRRLIB_LoadTexture(dBlueFalling0008);
         _dBlueFalling0009 = GRRLIB_LoadTexture(dBlueFalling0009);
         _dBlueFalling0010 = GRRLIB_LoadTexture(dBlueFalling0010);
-        
+
         // Red Falling Sprites
         _dRedFalling0001 = GRRLIB_LoadTexture(dRedFalling0001);
         _dRedFalling0002 = GRRLIB_LoadTexture(dRedFalling0002);
@@ -1646,7 +1923,7 @@ class SpriteManager
         _dRedFalling0008 = GRRLIB_LoadTexture(dRedFalling0008);
         _dRedFalling0009 = GRRLIB_LoadTexture(dRedFalling0009);
         _dRedFalling0010 = GRRLIB_LoadTexture(dRedFalling0010);
-        
+
         // Green Falling Sprites
         _dGreenFalling0001 = GRRLIB_LoadTexture(dGreenFalling0001);
         _dGreenFalling0002 = GRRLIB_LoadTexture(dGreenFalling0002);
@@ -1658,7 +1935,7 @@ class SpriteManager
         _dGreenFalling0008 = GRRLIB_LoadTexture(dGreenFalling0008);
         _dGreenFalling0009 = GRRLIB_LoadTexture(dGreenFalling0009);
         _dGreenFalling0010 = GRRLIB_LoadTexture(dGreenFalling0010);
-        
+
         // Purple Falling Sprites
         _dPurpleFalling0001 = GRRLIB_LoadTexture(dPurpleFalling0001);
         _dPurpleFalling0002 = GRRLIB_LoadTexture(dPurpleFalling0002);
@@ -1682,7 +1959,7 @@ class SpriteManager
         _dYellowFalling0008 = GRRLIB_LoadTexture(dYellowFalling0008);
         _dYellowFalling0009 = GRRLIB_LoadTexture(dYellowFalling0009);
         _dYellowFalling0010 = GRRLIB_LoadTexture(dYellowFalling0010);
-        
+
         // Clock Sprites
         _n0 = GRRLIB_LoadTexture(n0);
         _n1 = GRRLIB_LoadTexture(n1);
@@ -1695,7 +1972,7 @@ class SpriteManager
         _n8 = GRRLIB_LoadTexture(n8);
         _n9 = GRRLIB_LoadTexture(n9);
         _points = GRRLIB_LoadTexture(points);
-        
+
         // Break Blue Panel
         _blueBreak0001 = GRRLIB_LoadTexture(blueBreak0001);
         _blueBreak0002 = GRRLIB_LoadTexture(blueBreak0002);
@@ -1708,7 +1985,7 @@ class SpriteManager
         _blueBreak0009 = GRRLIB_LoadTexture(blueBreak0009);
         _blueBreak0010 = GRRLIB_LoadTexture(blueBreak0010);
         _blueBreak0011 = GRRLIB_LoadTexture(blueBreak0011);
-        
+
         // Break Green Panel
         _greenBreak0001 = GRRLIB_LoadTexture(greenBreak0001);
         _greenBreak0002 = GRRLIB_LoadTexture(greenBreak0002);
@@ -1721,7 +1998,7 @@ class SpriteManager
         _greenBreak0009 = GRRLIB_LoadTexture(greenBreak0009);
         _greenBreak0010 = GRRLIB_LoadTexture(greenBreak0010);
         _greenBreak0011 = GRRLIB_LoadTexture(greenBreak0011);
-        
+
         // Break Purple Panel
         _purpleBreak0001 = GRRLIB_LoadTexture(purpleBreak0001);
         _purpleBreak0002 = GRRLIB_LoadTexture(purpleBreak0002);
@@ -1734,7 +2011,7 @@ class SpriteManager
         _purpleBreak0009 = GRRLIB_LoadTexture(purpleBreak0009);
         _purpleBreak0010 = GRRLIB_LoadTexture(purpleBreak0010);
         _purpleBreak0011 = GRRLIB_LoadTexture(purpleBreak0011);
-        
+
         // Break Red Panel
         _redBreak0001 = GRRLIB_LoadTexture(redBreak0001);
         _redBreak0002 = GRRLIB_LoadTexture(redBreak0002);
@@ -1747,7 +2024,7 @@ class SpriteManager
         _redBreak0009 = GRRLIB_LoadTexture(redBreak0009);
         _redBreak0010 = GRRLIB_LoadTexture(redBreak0010);
         _redBreak0011 = GRRLIB_LoadTexture(redBreak0011);
-        
+
         // Break yellow Panel
         _yellowBreak0001 = GRRLIB_LoadTexture(yellowBreak0001);
         _yellowBreak0002 = GRRLIB_LoadTexture(yellowBreak0002);
@@ -1760,7 +2037,7 @@ class SpriteManager
         _yellowBreak0009 = GRRLIB_LoadTexture(yellowBreak0009);
         _yellowBreak0010 = GRRLIB_LoadTexture(yellowBreak0010);
         _yellowBreak0011 = GRRLIB_LoadTexture(yellowBreak0011);
-        
+
         // x4 Combo
         _x4_0001 = GRRLIB_LoadTexture(x4_0001);
         _x4_0002 = GRRLIB_LoadTexture(x4_0002);
@@ -1786,7 +2063,7 @@ class SpriteManager
         _x4_0045 = GRRLIB_LoadTexture(x4_0045);
         _x4_0046 = GRRLIB_LoadTexture(x4_0046);
         _x4_0047 = GRRLIB_LoadTexture(x4_0047);
-        
+
         // x5 Combo
         _x5_0001 = GRRLIB_LoadTexture(x5_0001);
         _x5_0002 = GRRLIB_LoadTexture(x5_0002);
@@ -1812,7 +2089,7 @@ class SpriteManager
         _x5_0045 = GRRLIB_LoadTexture(x5_0045);
         _x5_0046 = GRRLIB_LoadTexture(x5_0046);
         _x5_0047 = GRRLIB_LoadTexture(x5_0047);
-        
+
         // x6 Combo
         _x6_0001 = GRRLIB_LoadTexture(x60001);
         _x6_0002 = GRRLIB_LoadTexture(x60002);
@@ -1864,7 +2141,7 @@ class SpriteManager
         _x7_0045 = GRRLIB_LoadTexture(x7_0045);
         _x7_0046 = GRRLIB_LoadTexture(x7_0046);
         _x7_0047 = GRRLIB_LoadTexture(x7_0047);
-        
+
         // x8 Combo
         _x8_0001 = GRRLIB_LoadTexture(x8_0001);
         _x8_0002 = GRRLIB_LoadTexture(x8_0002);
@@ -1890,7 +2167,7 @@ class SpriteManager
         _x8_0045 = GRRLIB_LoadTexture(x8_0045);
         _x8_0046 = GRRLIB_LoadTexture(x8_0046);
         _x8_0047 = GRRLIB_LoadTexture(x8_0047);
-        
+
         // x9 Combo
         _x9_0001 = GRRLIB_LoadTexture(x9_0001);
         _x9_0002 = GRRLIB_LoadTexture(x9_0002);
@@ -1916,7 +2193,7 @@ class SpriteManager
         _x9_0045 = GRRLIB_LoadTexture(x9_0045);
         _x9_0046 = GRRLIB_LoadTexture(x9_0046);
         _x9_0047 = GRRLIB_LoadTexture(x9_0047);
-        
+
         // x10 Combo
         _x10_0001 = GRRLIB_LoadTexture(x10_0001);
         _x10_0002 = GRRLIB_LoadTexture(x10_0002);
@@ -1942,7 +2219,7 @@ class SpriteManager
         _x10_0045 = GRRLIB_LoadTexture(x10_0045);
         _x10_0046 = GRRLIB_LoadTexture(x10_0046);
         _x10_0047 = GRRLIB_LoadTexture(x10_0047);
-        
+
         // x11 Combo
         _x11_0001 = GRRLIB_LoadTexture(x110001);
         _x11_0002 = GRRLIB_LoadTexture(x110002);
@@ -1968,7 +2245,7 @@ class SpriteManager
         _x11_0045 = GRRLIB_LoadTexture(x110045);
         _x11_0046 = GRRLIB_LoadTexture(x110046);
         _x11_0047 = GRRLIB_LoadTexture(x110047);
-        
+
         // x12 Combo
         _x12_0001 = GRRLIB_LoadTexture(x120001);
         _x12_0002 = GRRLIB_LoadTexture(x120002);
@@ -1994,7 +2271,7 @@ class SpriteManager
         _x12_0045 = GRRLIB_LoadTexture(x120045);
         _x12_0046 = GRRLIB_LoadTexture(x120046);
         _x12_0047 = GRRLIB_LoadTexture(x120047);
-        
+
         // x13 Combo
         _x13_0001 = GRRLIB_LoadTexture(x130001);
         _x13_0002 = GRRLIB_LoadTexture(x130002);
@@ -2020,7 +2297,7 @@ class SpriteManager
         _x13_0045 = GRRLIB_LoadTexture(x130045);
         _x13_0046 = GRRLIB_LoadTexture(x130046);
         _x13_0047 = GRRLIB_LoadTexture(x130047);
-        
+
         // xunknown Combo
         _xunknown_0001 = GRRLIB_LoadTexture(xunknown_0001);
         _xunknown_0002 = GRRLIB_LoadTexture(xunknown_0002);
@@ -2046,7 +2323,7 @@ class SpriteManager
         _xunknown_0045 = GRRLIB_LoadTexture(xunknown_0045);
         _xunknown_0046 = GRRLIB_LoadTexture(xunknown_0046);
         _xunknown_0047 = GRRLIB_LoadTexture(xunknown_0047);
-        
+
         // Chain
         _chainx2_0001 = GRRLIB_LoadTexture(chainx2_0001);
         _chainx2_0002 = GRRLIB_LoadTexture(chainx2_0002);
@@ -2097,7 +2374,7 @@ class SpriteManager
         _chainx3_0045 = GRRLIB_LoadTexture(chainx3_0045);
         _chainx3_0046 = GRRLIB_LoadTexture(chainx3_0046);
         _chainx3_0047 = GRRLIB_LoadTexture(chainx3_0047);
-        
+
         _chainx4_0001 = GRRLIB_LoadTexture(chainx4_0001);
         _chainx4_0002 = GRRLIB_LoadTexture(chainx4_0002);
         _chainx4_0003 = GRRLIB_LoadTexture(chainx4_0003);
@@ -2122,7 +2399,7 @@ class SpriteManager
         _chainx4_0045 = GRRLIB_LoadTexture(chainx4_0045);
         _chainx4_0046 = GRRLIB_LoadTexture(chainx4_0046);
         _chainx4_0047 = GRRLIB_LoadTexture(chainx4_0047);
-        
+
         _chainx5_0001 = GRRLIB_LoadTexture(chainx5_0001);
         _chainx5_0002 = GRRLIB_LoadTexture(chainx5_0002);
         _chainx5_0003 = GRRLIB_LoadTexture(chainx5_0003);
@@ -2147,7 +2424,7 @@ class SpriteManager
         _chainx5_0045 = GRRLIB_LoadTexture(chainx5_0045);
         _chainx5_0046 = GRRLIB_LoadTexture(chainx5_0046);
         _chainx5_0047 = GRRLIB_LoadTexture(chainx5_0047);
-        
+
         _chainx6_0001 = GRRLIB_LoadTexture(chainx6_0001);
         _chainx6_0002 = GRRLIB_LoadTexture(chainx6_0002);
         _chainx6_0003 = GRRLIB_LoadTexture(chainx6_0003);
@@ -2172,7 +2449,7 @@ class SpriteManager
         _chainx6_0045 = GRRLIB_LoadTexture(chainx6_0045);
         _chainx6_0046 = GRRLIB_LoadTexture(chainx6_0046);
         _chainx6_0047 = GRRLIB_LoadTexture(chainx6_0047);
-        
+
         _chainx7_0001 = GRRLIB_LoadTexture(chainx7_0001);
         _chainx7_0002 = GRRLIB_LoadTexture(chainx7_0002);
         _chainx7_0003 = GRRLIB_LoadTexture(chainx7_0003);
@@ -2222,7 +2499,7 @@ class SpriteManager
         _chainx8_0045 = GRRLIB_LoadTexture(chainx8_0045);
         _chainx8_0046 = GRRLIB_LoadTexture(chainx8_0046);
         _chainx8_0047 = GRRLIB_LoadTexture(chainx8_0047);
-        
+
         _chainx9_0001 = GRRLIB_LoadTexture(chainx9_0001);
         _chainx9_0002 = GRRLIB_LoadTexture(chainx9_0002);
         _chainx9_0003 = GRRLIB_LoadTexture(chainx9_0003);
@@ -2247,7 +2524,7 @@ class SpriteManager
         _chainx9_0045 = GRRLIB_LoadTexture(chainx9_0045);
         _chainx9_0046 = GRRLIB_LoadTexture(chainx9_0046);
         _chainx9_0047 = GRRLIB_LoadTexture(chainx9_0047);
-        
+
         _chainx10_0001 = GRRLIB_LoadTexture(chainx10_0001);
         _chainx10_0002 = GRRLIB_LoadTexture(chainx10_0002);
         _chainx10_0003 = GRRLIB_LoadTexture(chainx10_0003);
@@ -2272,7 +2549,7 @@ class SpriteManager
         _chainx10_0045 = GRRLIB_LoadTexture(chainx10_0045);
         _chainx10_0046 = GRRLIB_LoadTexture(chainx10_0046);
         _chainx10_0047 = GRRLIB_LoadTexture(chainx10_0047);
-        
+
         _chainx11_0001 = GRRLIB_LoadTexture(chainx11_0001);
         _chainx11_0002 = GRRLIB_LoadTexture(chainx11_0002);
         _chainx11_0003 = GRRLIB_LoadTexture(chainx11_0003);
@@ -2297,7 +2574,7 @@ class SpriteManager
         _chainx11_0045 = GRRLIB_LoadTexture(chainx11_0045);
         _chainx11_0046 = GRRLIB_LoadTexture(chainx11_0046);
         _chainx11_0047 = GRRLIB_LoadTexture(chainx11_0047);
-        
+
         _chainx12_0001 = GRRLIB_LoadTexture(chainx12_0001);
         _chainx12_0002 = GRRLIB_LoadTexture(chainx12_0002);
         _chainx12_0003 = GRRLIB_LoadTexture(chainx12_0003);
@@ -2322,7 +2599,7 @@ class SpriteManager
         _chainx12_0045 = GRRLIB_LoadTexture(chainx12_0045);
         _chainx12_0046 = GRRLIB_LoadTexture(chainx12_0046);
         _chainx12_0047 = GRRLIB_LoadTexture(chainx12_0047);
-        
+
         _chainx13_0001 = GRRLIB_LoadTexture(chainx13_0001);
         _chainx13_0002 = GRRLIB_LoadTexture(chainx13_0002);
         _chainx13_0003 = GRRLIB_LoadTexture(chainx13_0003);
@@ -2347,7 +2624,7 @@ class SpriteManager
         _chainx13_0045 = GRRLIB_LoadTexture(chainx13_0045);
         _chainx13_0046 = GRRLIB_LoadTexture(chainx13_0046);
         _chainx13_0047 = GRRLIB_LoadTexture(chainx13_0047);
-        
+
         _chainxunknown_0001 = GRRLIB_LoadTexture(chainxunknown_0001);
         _chainxunknown_0002 = GRRLIB_LoadTexture(chainxunknown_0002);
         _chainxunknown_0003 = GRRLIB_LoadTexture(chainxunknown_0003);
@@ -2373,8 +2650,146 @@ class SpriteManager
         _chainxunknown_0046 = GRRLIB_LoadTexture(chainxunknown_0046);
         _chainxunknown_0047 = GRRLIB_LoadTexture(chainxunknown_0047);
 
+        _comboInterfaceAnimationP1_0001 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0001);
+        _comboInterfaceAnimationP1_0002 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0002);
+        _comboInterfaceAnimationP1_0003 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0003);
+        _comboInterfaceAnimationP1_0004 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0004);
+        _comboInterfaceAnimationP1_0005 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0005);
+        _comboInterfaceAnimationP1_0006 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0006);
+        _comboInterfaceAnimationP1_0007 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0007);
+        _comboInterfaceAnimationP1_0008 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0008);
+        _comboInterfaceAnimationP1_0009 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0009);
+        _comboInterfaceAnimationP1_0010 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0010);
+        _comboInterfaceAnimationP1_0011 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0011);
+        _comboInterfaceAnimationP1_0012 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0012);
+        _comboInterfaceAnimationP1_0013 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0013);
+        _comboInterfaceAnimationP1_0014 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0014);
+
+        _comboInterfaceAnimationP2_0001 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0001);
+        _comboInterfaceAnimationP2_0002 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0002);
+        _comboInterfaceAnimationP2_0003 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0003);
+        _comboInterfaceAnimationP2_0004 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0004);
+        _comboInterfaceAnimationP2_0005 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0005);
+        _comboInterfaceAnimationP2_0006 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0006);
+        _comboInterfaceAnimationP2_0007 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0007);
+        _comboInterfaceAnimationP2_0008 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0008);
+        _comboInterfaceAnimationP2_0009 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0009);
+        _comboInterfaceAnimationP2_0010 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0010);
+        _comboInterfaceAnimationP2_0011 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0011);
+        _comboInterfaceAnimationP2_0012 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0012);
+        _comboInterfaceAnimationP2_0013 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0013);
+        _comboInterfaceAnimationP2_0014 = GRRLIB_LoadTexture(comboInterfaceAnimationP2_0014);
+
+        _x3_dark = GRRLIB_LoadTexture(x3_dark);
+        _x3_electric = GRRLIB_LoadTexture(x3_electric);
+        _x3_fairy = GRRLIB_LoadTexture(x3_fairy);
+        _x3_fighting = GRRLIB_LoadTexture(x3_fighting);
+        _x3_fire = GRRLIB_LoadTexture(x3_fire);
+        _x3_leaf = GRRLIB_LoadTexture(x3_leaf);
+        _x3_metal = GRRLIB_LoadTexture(x3_metal);
+        _x3_normal = GRRLIB_LoadTexture(x3_normal);
+        _x3_psy = GRRLIB_LoadTexture(x3_psy);
+        _x3_water = GRRLIB_LoadTexture(x3_water);
+
+        _x4_dark = GRRLIB_LoadTexture(x4_dark);
+        _x4_electric = GRRLIB_LoadTexture(x4_electric);
+        _x4_fairy = GRRLIB_LoadTexture(x4_fairy);
+        _x4_fighting = GRRLIB_LoadTexture(x4_fighting);
+        _x4_fire = GRRLIB_LoadTexture(x4_fire);
+        _x4_leaf = GRRLIB_LoadTexture(x4_leaf);
+        _x4_metal = GRRLIB_LoadTexture(x4_metal);
+        _x4_normal = GRRLIB_LoadTexture(x4_normal);
+        _x4_psy = GRRLIB_LoadTexture(x4_psy);
+        _x4_water = GRRLIB_LoadTexture(x4_water);
+
+        _x5_dark = GRRLIB_LoadTexture(x5_dark);
+        _x5_electric = GRRLIB_LoadTexture(x5_electric);
+        _x5_fairy = GRRLIB_LoadTexture(x5_fairy);
+        _x5_fighting = GRRLIB_LoadTexture(x5_fighting);
+        _x5_fire = GRRLIB_LoadTexture(x5_fire);
+        _x5_leaf = GRRLIB_LoadTexture(x5_leaf);
+        _x5_metal = GRRLIB_LoadTexture(x5_metal);
+        _x5_normal = GRRLIB_LoadTexture(x5_normal);
+        _x5_psy = GRRLIB_LoadTexture(x5_psy);
+        _x5_water = GRRLIB_LoadTexture(x5_water);
+
+        _x6_dark = GRRLIB_LoadTexture(x6_dark);
+        _x6_electric = GRRLIB_LoadTexture(x6_electric);
+        _x6_fairy = GRRLIB_LoadTexture(x6_fairy);
+        _x6_fighting = GRRLIB_LoadTexture(x6_fighting);
+        _x6_fire = GRRLIB_LoadTexture(x6_fire);
+        _x6_leaf = GRRLIB_LoadTexture(x6_leaf);
+        _x6_metal = GRRLIB_LoadTexture(x6_metal);
+        _x6_normal = GRRLIB_LoadTexture(x6_normal);
+        _x6_psy = GRRLIB_LoadTexture(x6_psy);
+        _x6_water = GRRLIB_LoadTexture(x6_water);
+
+        _comboBox_Player1_0001 = GRRLIB_LoadTexture(comboBox_Player1_0001);
+        _comboBox_Player1_0002 = GRRLIB_LoadTexture(comboBox_Player1_0002);
+        _comboBox_Player1_0003 = GRRLIB_LoadTexture(comboBox_Player1_0003);
+        _comboBox_Player1_0004 = GRRLIB_LoadTexture(comboBox_Player1_0004);
+        _comboBox_Player1_0005 = GRRLIB_LoadTexture(comboBox_Player1_0005);
+        _comboBox_Player1_0006 = GRRLIB_LoadTexture(comboBox_Player1_0006);
+        _comboBox_Player1_0007 = GRRLIB_LoadTexture(comboBox_Player1_0007);
+        _comboBox_Player1_0008 = GRRLIB_LoadTexture(comboBox_Player1_0008);
+        _comboBox_Player1_0009 = GRRLIB_LoadTexture(comboBox_Player1_0009);
+        _comboBox_Player1_0010 = GRRLIB_LoadTexture(comboBox_Player1_0010);
+        _comboBox_Player1_0011 = GRRLIB_LoadTexture(comboBox_Player1_0011);
+        _comboBox_Player1_0012 = GRRLIB_LoadTexture(comboBox_Player1_0012);
+        _comboBox_Player1_0013 = GRRLIB_LoadTexture(comboBox_Player1_0013);
+        _comboBox_Player1_0014 = GRRLIB_LoadTexture(comboBox_Player1_0014);
+        _comboBox_Player1_0015 = GRRLIB_LoadTexture(comboBox_Player1_0015);
+        _comboBox_Player1_0016 = GRRLIB_LoadTexture(comboBox_Player1_0016);
+        _comboBox_Player1_0017 = GRRLIB_LoadTexture(comboBox_Player1_0017);
+        _comboBox_Player1_0018 = GRRLIB_LoadTexture(comboBox_Player1_0018);
+        _comboBox_Player1_0019 = GRRLIB_LoadTexture(comboBox_Player1_0019);
+        _comboBox_Player1_0020 = GRRLIB_LoadTexture(comboBox_Player1_0020);
+        _comboBox_Player1_0021 = GRRLIB_LoadTexture(comboBox_Player1_0021);
+        _comboBox_Player1_0022 = GRRLIB_LoadTexture(comboBox_Player1_0022);
+        _comboBox_Player1_0023 = GRRLIB_LoadTexture(comboBox_Player1_0023);
+        _comboBox_Player1_0024 = GRRLIB_LoadTexture(comboBox_Player1_0024);
+        _comboBox_Player1_0025 = GRRLIB_LoadTexture(comboBox_Player1_0025);
+        _comboBox_Player1_0026 = GRRLIB_LoadTexture(comboBox_Player1_0026);
+        _comboBox_Player1_0027 = GRRLIB_LoadTexture(comboBox_Player1_0027);
+        _comboBox_Player1_0028 = GRRLIB_LoadTexture(comboBox_Player1_0028);
+        _comboBox_Player1_0029 = GRRLIB_LoadTexture(comboBox_Player1_0029);
+        _comboBox_Player1_0030 = GRRLIB_LoadTexture(comboBox_Player1_0030);
+
+        _comboBox_Player2_0001 = GRRLIB_LoadTexture(comboBox_Player2_0001);
+        _comboBox_Player2_0002 = GRRLIB_LoadTexture(comboBox_Player2_0002);
+        _comboBox_Player2_0003 = GRRLIB_LoadTexture(comboBox_Player2_0003);
+        _comboBox_Player2_0004 = GRRLIB_LoadTexture(comboBox_Player2_0004);
+        _comboBox_Player2_0005 = GRRLIB_LoadTexture(comboBox_Player2_0005);
+        _comboBox_Player2_0006 = GRRLIB_LoadTexture(comboBox_Player2_0006);
+        _comboBox_Player2_0007 = GRRLIB_LoadTexture(comboBox_Player2_0007);
+        _comboBox_Player2_0008 = GRRLIB_LoadTexture(comboBox_Player2_0008);
+        _comboBox_Player2_0009 = GRRLIB_LoadTexture(comboBox_Player2_0009);
+        _comboBox_Player2_0010 = GRRLIB_LoadTexture(comboBox_Player2_0010);
+        _comboBox_Player2_0011 = GRRLIB_LoadTexture(comboBox_Player2_0011);
+        _comboBox_Player2_0012 = GRRLIB_LoadTexture(comboBox_Player2_0012);
+        _comboBox_Player2_0013 = GRRLIB_LoadTexture(comboBox_Player2_0013);
+        _comboBox_Player2_0014 = GRRLIB_LoadTexture(comboBox_Player2_0014);
+        _comboBox_Player2_0015 = GRRLIB_LoadTexture(comboBox_Player2_0015);
+        _comboBox_Player2_0016 = GRRLIB_LoadTexture(comboBox_Player2_0016);
+        _comboBox_Player2_0017 = GRRLIB_LoadTexture(comboBox_Player2_0017);
+        _comboBox_Player2_0018 = GRRLIB_LoadTexture(comboBox_Player2_0018);
+        _comboBox_Player2_0019 = GRRLIB_LoadTexture(comboBox_Player2_0019);
+        _comboBox_Player2_0020 = GRRLIB_LoadTexture(comboBox_Player2_0020);
+        _comboBox_Player2_0021 = GRRLIB_LoadTexture(comboBox_Player2_0021);
+        _comboBox_Player2_0022 = GRRLIB_LoadTexture(comboBox_Player2_0022);
+        _comboBox_Player2_0023 = GRRLIB_LoadTexture(comboBox_Player2_0023);
+        _comboBox_Player2_0024 = GRRLIB_LoadTexture(comboBox_Player2_0024);
+        _comboBox_Player2_0025 = GRRLIB_LoadTexture(comboBox_Player2_0025);
+        _comboBox_Player2_0026 = GRRLIB_LoadTexture(comboBox_Player2_0026);
+        _comboBox_Player2_0027 = GRRLIB_LoadTexture(comboBox_Player2_0027);
+        _comboBox_Player2_0028 = GRRLIB_LoadTexture(comboBox_Player2_0028);
+        _comboBox_Player2_0029 = GRRLIB_LoadTexture(comboBox_Player2_0029);
+        _comboBox_Player2_0030 = GRRLIB_LoadTexture(comboBox_Player2_0030);
+
+        _P1 = GRRLIB_LoadTexture(P1);
+        _P2 = GRRLIB_LoadTexture(P2);
     }
-    
+
     public: GRRLIB_texImg * DecodeNumber (int number)
     {
         switch (number)

@@ -7,6 +7,84 @@
 
 class Utils
 {
+    // Decodes a type and returns the buffer related to the garbage type and size.
+    // @param type: garbage type to be decode.
+    // @param width: garbage width.
+    // @param height: garbage height
+    // @param spriteManager: reference to system-wise sprite manager.
+    // @return Texture reference.
+    public: static GRRLIB_texImg * DecodeGarbageType (unsigned int type, unsigned int width, unsigned int height, SpriteManager * spriteManager)
+    {
+        if (height == 1)
+        {
+            switch (width)
+            {
+                case 3:
+                switch (type)
+                {
+                    case DARK_TYPE: return spriteManager->_x3_dark; break;
+                    case FIRE_TYPE: return spriteManager->_x3_fire; break;
+                    case WATER_TYPE: return spriteManager->_x3_water; break;
+                    case GRASS_TYPE: return spriteManager->_x3_leaf; break;
+                    case ELECTRIC_TYPE: return spriteManager->_x3_electric; break;
+                    case PSYCHIC_TYPE: return spriteManager->_x3_psy; break;
+                    case METAL_TYPE: return spriteManager->_x3_metal; break;
+                    case FIGHTING_TYPE: return spriteManager->_x3_fighting; break;
+                    case FAIRY_TYPE: return spriteManager->_x3_fairy; break;
+                    case NORMAL_TYPE: return spriteManager->_x3_normal; break;
+                }
+                break;
+                case 4:
+                switch (type)
+                {
+                    case DARK_TYPE: return spriteManager->_x4_dark; break;
+                    case FIRE_TYPE: return spriteManager->_x4_fire; break;
+                    case WATER_TYPE: return spriteManager->_x4_water; break;
+                    case GRASS_TYPE: return spriteManager->_x4_leaf; break;
+                    case ELECTRIC_TYPE: return spriteManager->_x4_electric; break;
+                    case PSYCHIC_TYPE: return spriteManager->_x4_psy; break;
+                    case METAL_TYPE: return spriteManager->_x4_metal; break;
+                    case FIGHTING_TYPE: return spriteManager->_x4_fighting; break;
+                    case FAIRY_TYPE: return spriteManager->_x4_fairy; break;
+                    case NORMAL_TYPE: return spriteManager->_x4_normal; break;
+                }
+                break;
+                case 5:
+                switch (type)
+                {
+                    case DARK_TYPE: return spriteManager->_x5_dark; break;
+                    case FIRE_TYPE: return spriteManager->_x5_fire; break;
+                    case WATER_TYPE: return spriteManager->_x5_water; break;
+                    case GRASS_TYPE: return spriteManager->_x5_leaf; break;
+                    case ELECTRIC_TYPE: return spriteManager->_x5_electric; break;
+                    case PSYCHIC_TYPE: return spriteManager->_x5_psy; break;
+                    case METAL_TYPE: return spriteManager->_x5_metal; break;
+                    case FIGHTING_TYPE: return spriteManager->_x5_fighting; break;
+                    case FAIRY_TYPE: return spriteManager->_x5_fairy; break;
+                    case NORMAL_TYPE: return spriteManager->_x5_normal; break;
+                }
+                break;
+                case 6:
+                switch (type)
+                {
+                    case DARK_TYPE: return spriteManager->_x6_dark; break;
+                    case FIRE_TYPE: return spriteManager->_x6_fire; break;
+                    case WATER_TYPE: return spriteManager->_x6_water; break;
+                    case GRASS_TYPE: return spriteManager->_x6_leaf; break;
+                    case ELECTRIC_TYPE: return spriteManager->_x6_electric; break;
+                    case PSYCHIC_TYPE: return spriteManager->_x6_psy; break;
+                    case METAL_TYPE: return spriteManager->_x6_metal; break;
+                    case FIGHTING_TYPE: return spriteManager->_x6_fighting; break;
+                    case FAIRY_TYPE: return spriteManager->_x6_fairy; break;
+                    case NORMAL_TYPE: return spriteManager->_x6_normal; break;
+                }
+                break;
+            }
+        }
+        return NULL;
+    }
+
+
     // Decodes a type and returns the buffer related to the type.
     // @param type: panel type to be decode.
     // @param spriteManager: reference to system-wise sprite manager.
@@ -26,8 +104,6 @@ class Utils
                 case PANEL_YELLOW_TYPE:           return spriteManager->_dyellow; break;
                 case PANEL_GREEN_TYPE:            return spriteManager->_dgreen; break;
                 case PANEL_PURPLE_TYPE:           return spriteManager->_dpurple; break;
-                case PANEL_GARBAGE_TYPE:          return spriteManager->_dgarbage; break;
-                case PANEL_CONCRETE_GARBAGE_TYPE: return spriteManager->_concrete; break;
             }
                 break;
             case PANEL_DARK_SPRITE:
@@ -38,11 +114,9 @@ class Utils
                 case PANEL_YELLOW_TYPE:           return spriteManager->_dYellowblocked; break;
                 case PANEL_GREEN_TYPE:            return spriteManager->_dGreenblocked; break;
                 case PANEL_PURPLE_TYPE:           return spriteManager->_dPurpleblocked; break;
-                case PANEL_GARBAGE_TYPE:          return spriteManager->_dGrayblocked; break;
-                case PANEL_CONCRETE_GARBAGE_TYPE: return spriteManager->_dGrayblocked; break;
             }
                 break;
-                
+
             case PANEL_BRIGHT_SPRITE:
                 switch (type)
             {

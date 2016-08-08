@@ -49,4 +49,20 @@
 #define PANEL_FALL_RUMBLE_DURATION 5
 #define GARBAGE_FALL_RUMBLE_DURATION 15
 
+// Garbage Constnat
+#define GARBAGE_FALL_DELAY 205
+
+// Pokemon Types
+#define VOID_TYPE 0x0
+#define FIRE_TYPE 0x1
+#define WATER_TYPE 0x2
+#define GRASS_TYPE 0x3
+#define ELECTRIC_TYPE 0x4
+#define PSYCHIC_TYPE 0x5
+#define DARK_TYPE 0x6
+#define METAL_TYPE 0x7
+#define FIGHTING_TYPE 0x8
+#define FAIRY_TYPE 0x9
+#define NORMAL_TYPE 0xa
+
 #endif // __BOARD_CONSTANTS__

@@ -1,8 +1,8 @@
 #include "sprite.hpp"
 
 Sprite::Sprite (GRRLIB_texImg* asset) :
-                _x(0), _y(0), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(1), _tex(asset),
-                _current_frame(0), _is_playing(false), _repeat(true), _animation_delay(0), _current_delay(0)
+                _x(0), _y(0), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(1), _alpha(255), _tex(asset),
+                _current_frame(0), _is_playing(false), _repeat(true), _auto_destroy(true), _animation_delay(0), _current_delay(0)
 {
     _isAnimating = false;
     _visibility = visible;
@@ -10,8 +10,8 @@ Sprite::Sprite (GRRLIB_texImg* asset) :
 }
 
 Sprite::Sprite (GRRLIB_texImg* asset, float width, float height) :
-                _x(0), _y(0), _width(width), _height(height), _rotation(0), _scaleX(1), _scaleY(1), _tex(asset),
-                _current_frame(0), _is_playing(false), _repeat(true), _animation_delay(0), _current_delay(0)
+                _x(0), _y(0), _width(width), _height(height), _rotation(0), _scaleX(1), _scaleY(1), _alpha(255), _tex(asset),
+                _current_frame(0), _is_playing(false), _repeat(true), _auto_destroy(true), _animation_delay(0), _current_delay(0)
 {
     _isAnimating = false;
     _visibility = visible;
@@ -19,8 +19,8 @@ Sprite::Sprite (GRRLIB_texImg* asset, float width, float height) :
 }
 
 Sprite::Sprite (GRRLIB_texImg* asset, float x, float y, float width, float height) :
-                _x(x), _y(y), _width(width), _height(height), _rotation(0), _tex(asset),
-                _current_frame(0), _is_playing(false), _repeat(true), _animation_delay(0), _current_delay(0)
+                _x(x), _y(y), _width(width), _height(height), _rotation(0), _alpha(255), _tex(asset),
+                _current_frame(0), _is_playing(false), _repeat(true), _auto_destroy(true), _animation_delay(0), _current_delay(0)
 {
     _scaleX = 1;
     _scaleY = 1;

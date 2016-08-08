@@ -2,7 +2,7 @@
 
 vector<Tween> AnimationEngine::_tween_list;
 
-void AnimationEngine::RegisterTween (Sprite * object, SpriteProperties properties, float duration, EasingTypesName easing, void (*completion_completion)(void))
+void AnimationEngine::RegisterTween (Sprite * object, SpriteProperties properties, float duration, EasingTypesName easing, float delay, void (*completion_completion)(void))
 {
     if (object->_isAnimating == false)
     {
@@ -11,10 +11,12 @@ void AnimationEngine::RegisterTween (Sprite * object, SpriteProperties propertie
         __tween._sprite_properties = properties;
         __tween._easing = easing;
         __tween._duration = duration;
+        __tween._delay = delay;
         __tween._total_frames = (duration/1000)*PPL_TARGET_FRAMERATE;
+        __tween._total_delay = (delay/1000)*PPL_TARGET_FRAMERATE;
         __tween._completion = completion_completion;
         _tween_list.push_back(__tween);
-        
+
         object->_isAnimating = true;
     }
 }
@@ -23,8 +25,35 @@ void AnimationEngine::UpdateTweens ()
 {
     for (unsigned int i = 0; i < _tween_list.size(); i++)
     {
+        // Update Tween delay
+        if (_tween_list[i]._total_delay != 0)
+        {
+            _tween_list[i]._total_delay--;
+            continue;
+        }
+
+        // Finalize Tween
         if (_tween_list[i]._current_frame == _tween_list[i]._total_frames)
         {
+            if (_tween_list[i]._sprite_properties.IsPropertyRegistered(SpriteX))
+                _tween_list[i]._sprite_properties.UpdatePropertyValue
+                (SpriteX,_tween_list[i]._sprite_properties.GetFinalPropertyValue(SpriteX));
+            if (_tween_list[i]._sprite_properties.IsPropertyRegistered(SpriteY))
+                _tween_list[i]._sprite_properties.UpdatePropertyValue
+                (SpriteY,_tween_list[i]._sprite_properties.GetFinalPropertyValue(SpriteY));
+            if (_tween_list[i]._sprite_properties.IsPropertyRegistered(SpriteScaleX))
+                _tween_list[i]._sprite_properties.UpdatePropertyValue
+                (SpriteScaleX,_tween_list[i]._sprite_properties.GetFinalPropertyValue(SpriteScaleX));
+            if (_tween_list[i]._sprite_properties.IsPropertyRegistered(SpriteScaleY))
+                _tween_list[i]._sprite_properties.UpdatePropertyValue
+                (SpriteScaleY,_tween_list[i]._sprite_properties.GetFinalPropertyValue(SpriteScaleY));
+            if (_tween_list[i]._sprite_properties.IsPropertyRegistered(SpriteRotation))
+                _tween_list[i]._sprite_properties.UpdatePropertyValue
+                (SpriteRotation,_tween_list[i]._sprite_properties.GetFinalPropertyValue(SpriteRotation));
+            if (_tween_list[i]._sprite_properties.IsPropertyRegistered(SpriteAlpha))
+                _tween_list[i]._sprite_properties.UpdatePropertyValue
+                (SpriteAlpha,_tween_list[i]._sprite_properties.GetFinalPropertyValue(SpriteAlpha));
+
             _tween_list[i]._sprite_reference->_isAnimating = false;
             if (_tween_list[i]._completion != NULL)
                 _tween_list[i]._completion();
@@ -33,6 +62,7 @@ void AnimationEngine::UpdateTweens ()
         }
         else
         {
+            // Compute next tween frame
             UpdateTweenPropertiesLinear(i);
         }
     }
@@ -46,17 +76,17 @@ void AnimationEngine::UpdateTweenPropertiesLinear (int index)
     {
         // Compute Value
         __current_value = RunTween(index, SpriteX);
-        
+
         // Update Value
-        _tween_list[index]._sprite_properties.UpdatePropertyValue(SpriteX, __current_value);
+        _tween_list[index]._sprite_properties.UpdatePropertyValue(SpriteX,  _tween_list[index]._sprite_properties.GetInitialPropertyValue(SpriteX) + _tween_list[index]._sprite_properties.GetFinalPropertyValue(SpriteX) - __current_value);
     }
     if (_tween_list[index]._sprite_properties.IsPropertyRegistered(SpriteY))
     {
         // Compute Value
         __current_value = RunTween(index, SpriteY);
-        
+
         // Update Value
-        _tween_list[index]._sprite_properties.UpdatePropertyValue(SpriteY, __current_value);
+        _tween_list[index]._sprite_properties.UpdatePropertyValue(SpriteY, _tween_list[index]._sprite_properties.GetInitialPropertyValue(SpriteY) + _tween_list[index]._sprite_properties.GetFinalPropertyValue(SpriteY) - __current_value);
     }
     if (_tween_list[index]._sprite_properties.IsPropertyRegistered(SpriteScaleX))
     {
@@ -64,25 +94,33 @@ void AnimationEngine::UpdateTweenPropertiesLinear (int index)
         __current_value = RunTween(index, SpriteScaleX);
 
         // Update Value
-        _tween_list[index]._sprite_properties.UpdatePropertyValue(SpriteScaleX, __current_value);
+        _tween_list[index]._sprite_properties.UpdatePropertyValue(SpriteScaleX, _tween_list[index]._sprite_properties.GetInitialPropertyValue(SpriteScaleX) + _tween_list[index]._sprite_properties.GetFinalPropertyValue(SpriteScaleX) - __current_value);
 
     }
     if (_tween_list[index]._sprite_properties.IsPropertyRegistered(SpriteScaleY))
     {
         // Compute Value
         __current_value = RunTween(index, SpriteScaleY);
-        
+
         // Update Value
-        _tween_list[index]._sprite_properties.UpdatePropertyValue(SpriteScaleY, __current_value);
+        _tween_list[index]._sprite_properties.UpdatePropertyValue(SpriteScaleY, _tween_list[index]._sprite_properties.GetInitialPropertyValue(SpriteScaleY) + _tween_list[index]._sprite_properties.GetFinalPropertyValue(SpriteScaleY) - __current_value);
 
     }
     if (_tween_list[index]._sprite_properties.IsPropertyRegistered(SpriteRotation))
     {
         // Compute Value
         __current_value = RunTween(index, SpriteRotation);
-        
+
         // Update Value
-        _tween_list[index]._sprite_properties.UpdatePropertyValue(SpriteRotation, __current_value);
+        _tween_list[index]._sprite_properties.UpdatePropertyValue(SpriteRotation, _tween_list[index]._sprite_properties.GetInitialPropertyValue(SpriteRotation) + _tween_list[index]._sprite_properties.GetFinalPropertyValue(SpriteRotation) - __current_value);
+    }
+    if (_tween_list[index]._sprite_properties.IsPropertyRegistered(SpriteAlpha))
+    {
+        // Compute Value
+        __current_value = RunTween(index, SpriteAlpha);
+
+        // Update Value
+        _tween_list[index]._sprite_properties.UpdatePropertyValue(SpriteAlpha, _tween_list[index]._sprite_properties.GetInitialPropertyValue(SpriteAlpha) + _tween_list[index]._sprite_properties.GetFinalPropertyValue(SpriteAlpha) -__current_value);
     }
     _tween_list[index]._current_frame++;
 }
@@ -91,7 +129,7 @@ float AnimationEngine::RunTween (int index, SpritePropertyName property)
 {
     float __value = 0;
     EasingTypesName __easing = _tween_list[index]._easing;
-    
+
     switch(__easing)
     {
         case EaseInCubic: __value = easeInCubic(_tween_list[index]._total_frames - _tween_list[index]._current_frame,
@@ -406,7 +444,7 @@ float AnimationEngine::easeInOutElastic(float t,float b , float c, float d)
     float p=d*(.3f*1.5f);
     float a=c;
     float s=p/4;
-    
+
     if (t < 1) {
         float postFix =a*pow(2,10*(t-=1)); // postIncrement is evil
         return -.5f*(postFix* sin( (t*d-s)*(2*PI)/p )) + b;
@@ -469,12 +507,12 @@ float AnimationEngine::easeInOutQuad(float t,float b , float c, float d)
     return -c/2 * (((t-2)*(--t)) - 1) + b;
     /*
      originally return -c/2 * (((t-2)*(--t)) - 1) + b;
-     
+
      I've had to swap (--t)*(t-2) due to diffence in behaviour in
      pre-increment operators between java and c++, after hours
      of joy
      */
-    
+
 }
 
 float AnimationEngine::easeInQuart(float t,float b , float c, float d)

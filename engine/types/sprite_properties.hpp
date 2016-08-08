@@ -8,7 +8,8 @@ enum SpritePropertyName
     SpriteY,
     SpriteScaleX,
     SpriteScaleY,
-    SpriteRotation
+    SpriteRotation,
+    SpriteAlpha
 };
 
 class SpriteProperties
@@ -32,6 +33,7 @@ class SpriteProperties
     private: float _initial_scaleX;
     private: float _initial_scaleY;
     private: float _initial_rotation;
+    private: char _initial_alpha;
     
     // Final value of tween properties;
     private: float _final_x;
@@ -39,13 +41,14 @@ class SpriteProperties
     private: float _final_scaleX;
     private: float _final_scaleY;
     private: float _final_rotation;
+    private: char _final_alpha;
     
     // Default Constructor
-    public: SpriteProperties() : _property_map(0), _sprite(NULL), _final_x(0), _final_y(0), _final_scaleX(0), _final_scaleY(0), _final_rotation(0){}
+    public: SpriteProperties() : _property_map(0), _sprite(NULL), _final_x(0), _final_y(0), _final_scaleX(0), _final_scaleY(0), _final_rotation(0), _final_alpha(0){}
 
     // Standard Contructor
     // @param sprite: Object used to initialize the initial values of the Properties
-    public: SpriteProperties(Sprite * sprite) : _property_map(0), _final_x(0), _final_y(0), _final_scaleX(0), _final_scaleY(0), _final_rotation(0)
+    public: SpriteProperties(Sprite * sprite) : _property_map(0), _final_x(0), _final_y(0), _final_scaleX(0), _final_scaleY(0), _final_rotation(0), _final_alpha(0)
     {
         _sprite = sprite;
         _initial_x = sprite->_x;
@@ -53,6 +56,7 @@ class SpriteProperties
         _initial_scaleX = sprite->_scaleX;
         _initial_scaleY = sprite->_scaleY;
         _initial_rotation = sprite->_rotation;
+        _initial_alpha = sprite->_alpha;
     };
     
     // Register Property final value in their respective internal vartibales and update the property map
@@ -78,6 +82,9 @@ class SpriteProperties
             case SpriteRotation: _final_rotation = finalValue;
                 _property_map |= 16;
                 break;
+            case SpriteAlpha: _final_alpha = finalValue;
+                _property_map |= 32;
+                break;
         }
     }
     
@@ -98,8 +105,11 @@ class SpriteProperties
                 break;
             case SpriteRotation: _sprite->_rotation = value;
                 break;
+            case SpriteAlpha: _sprite->_alpha = (char)value;
+                break;
         }
     }
+    
     
     // Returns value of final property
     // @param name: Property name;
@@ -117,6 +127,9 @@ class SpriteProperties
                 break;
             case SpriteRotation: return _final_rotation;
                 break;
+            case SpriteAlpha: return (float)_final_alpha;
+                break;
+
         }
         return 0.0;
     }
@@ -137,6 +150,8 @@ class SpriteProperties
                 break;
             case SpriteRotation: return _initial_rotation;
                 break;
+            case SpriteAlpha: return _initial_alpha;
+                break;
         }
         return 0.0;
     }
@@ -156,6 +171,8 @@ class SpriteProperties
             case SpriteScaleY: return (_property_map&8) != 0? true : false;
                 break;
             case SpriteRotation: return (_property_map&16) != 0? true : false;
+                break;
+            case SpriteAlpha: return (_property_map&32) != 0? true : false;
                 break;
         }
         return false;

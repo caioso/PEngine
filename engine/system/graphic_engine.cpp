@@ -16,10 +16,10 @@ void GraphicEngine::Render()
 void GraphicEngine::RenderSprites (Sprite * sprite)
 {
     int __stack_size = sprite->GetChildren().size();
-    
+
     // Break Condition
     if (__stack_size == 0) return;
-    
+
     for (int i = 0; i < __stack_size; i++)
     {
         Sprite * __tmp = sprite->GetChildren()[i];
@@ -31,7 +31,7 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
                 // Correct Position in terms of all parents
                 float __x = 0, __y = 0;
                 Sprite * __ref = __tmp->_parent;
-                
+
                 // Compute Relative positions
                 while (__ref != NULL)
                 {
@@ -39,16 +39,16 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
                     __y += __ref->_y;
                     __ref = __ref->_parent;
                 }
-                
+
                 // Compute sprite animations if this is the case.
                 if (__tmp->_frames.size() > 0)
                 {
                     UpdateSpriteAnimation(__tmp);
                     UpdateSpritePosition(__tmp);
                 }
-                
+
                 // If not repeating, destroy the sprite
-                if (!__tmp->_repeat && __tmp->_current_frame >= __tmp->_frames.size() - 1)
+                if (!__tmp->_repeat && __tmp->_current_frame >= __tmp->_frames.size() - 1 && __tmp->_auto_destroy)
                 {
                     sprite->RemoveChild(__tmp);
                     __stack_size--;
@@ -56,8 +56,8 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
                     __tmp = NULL;
                     continue;
                 }
-                
-                GRRLIB_DrawImg(__tmp->_x + __x, __tmp->_y + __y, __tmp->GetTexture(), __tmp->_rotation, __tmp->_scaleX, __tmp->_scaleY, PPL_COLOR_WHITE);
+
+                GRRLIB_DrawImg(__tmp->_x + __x, __tmp->_y + __y, __tmp->GetTexture(), __tmp->_rotation, __tmp->_scaleX, __tmp->_scaleY, PPL_RGBA(255, 255, 255, __tmp->_alpha));
             }
         }
         //else
@@ -69,7 +69,7 @@ void GraphicEngine::UpdateSpritePosition(Sprite* tmp)
 {
     // Get Trajectory Point
     Trajectory __point = tmp->_trajectory[tmp->_current_frame];
-    
+
     // Determine with to do depending on the trajectory point type.
     switch (__point._type)
     {
@@ -98,6 +98,8 @@ void GraphicEngine::UpdateSpriteAnimation(Sprite* tmp)
             tmp->NextFrame();
         }
         else
-            return;
+        {
+            tmp->_is_playing = false;
+        }
     }
 }

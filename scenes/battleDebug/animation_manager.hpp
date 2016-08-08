@@ -7,12 +7,61 @@
 class AnimationManager
 {
     private: SpriteManager * _spriteManager;
-    
+
     public: AnimationManager (SpriteManager * spriteManager)
     {
         _spriteManager = spriteManager;
     }
-    
+
+    public: Sprite * GenerateGarbageUIFlare (int player)
+    {
+        Sprite * _animation;
+        switch (player)
+        {
+            case PPL_PLAYER_1:
+            {
+                _animation = new Sprite(_spriteManager->_comboInterfaceAnimationP1_0001, 452, 84);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0001);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0002);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0003);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0004);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0005);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0006);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0007);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0008);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0009);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0010);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0011);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0012);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0013);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0014);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP1_0001);
+               break;
+            }
+            case PPL_PLAYER_2:
+            {
+                _animation = new Sprite(_spriteManager->_comboInterfaceAnimationP2_0001, 452, 84);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0001);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0002);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0003);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0004);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0005);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0006);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0007);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0008);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0009);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0010);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0011);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0012);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0013);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0014);
+                _animation->RegisterFrame(_spriteManager->_comboInterfaceAnimationP2_0001);
+                break;
+            }
+        }
+        return _animation;
+    }
+
     public: Sprite * GenerateChainAnimation (int size)
     {
         Sprite * _chain;
@@ -708,10 +757,10 @@ class AnimationManager
                 break;
             }
         }
-        
+
         return _chain;
     }
-    
+
     public: Sprite * GenerateComboAnimation (int size)
     {
         Sprite * _combo;
@@ -1301,10 +1350,10 @@ class AnimationManager
                 break;
             }
         }
-        
+
         return _combo;
     }
-    
+
     public: Sprite * GeneratePanelOperationAnimation (int type)
     {
         // Show Break animation
