@@ -909,6 +909,9 @@
 #include "../../assets/graphics/P1.h"
 #include "../../assets/graphics/P2.h"
 
+// Particles
+#include "../../assets/graphics/garbage_transform_leaf.h"
+
 // Sprite manager class handles texture instances. It keeps a static reference to
 // each assets reference and deploy them as needed.
 class SpriteManager
@@ -1856,6 +1859,8 @@ class SpriteManager
     public: GRRLIB_texImg* _P1;
     public: GRRLIB_texImg* _P2;
 
+    public: GRRLIB_texImg* _garbage_transform_leaf;
+
     public: SpriteManager ()
     {
         _dred = GRRLIB_LoadTexture(dred);
@@ -2788,6 +2793,8 @@ class SpriteManager
 
         _P1 = GRRLIB_LoadTexture(P1);
         _P2 = GRRLIB_LoadTexture(P2);
+
+        _garbage_transform_leaf = GRRLIB_LoadTexture(garbage_transform_leaf);
     }
 
     public: GRRLIB_texImg * DecodeNumber (int number)

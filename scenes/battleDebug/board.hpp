@@ -47,6 +47,7 @@ class Board
     private: Sprite * _badgeContainer;
     private: vector<GarbageBadge *> _garbageBadges;
     private: bool _garbageCanFall;
+    private: int _frameBreakingGarbage;
 
     // Rival Board Reference
     private: Board * _rival;
@@ -441,14 +442,8 @@ class Board
 
         _garbageCanFall = false;
 
-        for (int i = 0; i < _dimensions.getWidth(); i++)
-        {
-            // Check if the top most if free let garbage fall.
-            if (_boardLogic[0][i]->_type != -1 && _garbageList[0][i]->_type == PANEL_GARBAGE_TYPE)
-            {
-                return;
-            }
-        }
+        if (!CanGarbageFall())
+          return;
 
         for (int i = 0; i < _dimensions.getWidth(); i++)
         {
@@ -478,10 +473,24 @@ class Board
                 }
             }
         }
+
         for (int i = 0; i < _dimensions.getWidth(); i++)
             delete _garbageList[0][i];
         delete[] _garbageList[0];
         _garbageList.erase (_garbageList.begin());
+    }
+
+    private: bool CanGarbageFall ()
+    {
+      for (int i = 0; i < _dimensions.getWidth(); i++)
+      {
+          // Check if the top most if free let garbage fall.
+          if (_boardLogic[0][i]->_type != -1 && _garbageList[0][i]->_type == PANEL_GARBAGE_TYPE)
+          {
+              return false;
+          }
+      }
+      return true;
     }
 
     // Debug function to drop garbage in the board.
@@ -551,14 +560,17 @@ class Board
             {
               if (_garbageBadges[0]->_lifeTime == 50 && _garbageBadges[0]->_appearing == true)
               {
-                  _garbageBadges[0]->_lifeTime = 0;
-                  _garbageBadges[0]->_finalPosition = 0;
-                  _garbageBadges[0]->_appearing = false;
-                  AdjustBadgeTargetPositions();
+                  if (CanGarbageFall())
+                  {
+                    _garbageBadges[0]->_lifeTime = 0;
+                    _garbageBadges[0]->_finalPosition = 0;
+                    _garbageBadges[0]->_appearing = false;
+                    AdjustBadgeTargetPositions();
+                    _garbageCanFall = true;
+                  }
               }
               else if (_garbageBadges[0]->_lifeTime == 50 && _garbageBadges[0]->_appearing == false)
               {
-                  _garbageCanFall = true;
                   _badgeContainer->RemoveChild(_garbageBadges[0]);
                   _garbageBadges.erase(_garbageBadges.begin());
                   i--;
@@ -911,14 +923,21 @@ class Board
                     _boardGraphics[j][k]->_visibility = visible;
                     if (_boardLogic[j][k]->_type == PANEL_GARBAGE_TYPE || _boardLogic[j][k]->_type == PANEL_CONCRETE_GARBAGE_TYPE)
                         {
-                            // Show image only for the source garbage
-                            if (_boardLogic[j][k]->_sourceX == k)
+                            // Show image only for the source garbage in the appropriate state
+                            if (_boardLogic[j][k]->_state == 15)
                             {
-                                _boardGraphics[j][k]->SetAsset(Utils::DecodeGarbageType(_pokemonType, 6, 1, _spriteManager),PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+                              _boardGraphics[j][k]->SetAsset(Utils::GarbageIntermediate(_pokemonType,_spriteManager),PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
                             }
                             else
                             {
-                                 _boardGraphics[j][k]->_visibility = hidden;
+                              if (_boardLogic[j][k]->_sourceX == k)
+                              {
+                                  _boardGraphics[j][k]->SetAsset(Utils::DecodeGarbageType(_pokemonType, 6, 1, _spriteManager),PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+                              }
+                              else
+                              {
+                                   _boardGraphics[j][k]->_visibility = hidden;
+                              }
                             }
                         }
                         else
@@ -1028,19 +1047,13 @@ class Board
         unsigned int __garbageSourceX = ExtractTargetPanelX(change);
         unsigned int __garbageSourceY = ExtractTargetPanelY(change);
 
-        // Build new garbage object.
-        char __previous_type = -1;
-        // Make sure the current panel is different from the previous.
-        char __random_type = Utils::GetNextTypeWithoutRepetition(__previous_type);
-        __previous_type = __random_type;
-
-        // Create new panels in the place of the
-        _boardLogic[__garbageSourceY][__garbageSourceX]->_type = __random_type;
-        _boardLogic[__garbageSourceY][__garbageSourceX]->_wait = 0;
+        // Update garbage object to reflect break state.
+        _boardLogic[__garbageSourceY][__garbageSourceX]->_wait = 30*(_frameBreakingGarbage++);
         _boardLogic[__garbageSourceY][__garbageSourceX]->_break_delay = 0;
-        _boardLogic[__garbageSourceY][__garbageSourceX]->_in_chain = 1;
-        _boardLogic[__garbageSourceY][__garbageSourceX]->_state = 0;
-        _boardGraphics[__garbageSourceY][__garbageSourceX]->SetAsset(Utils::DecodeType(__random_type, _spriteManager),
+        _boardLogic[__garbageSourceY][__garbageSourceX]->_in_chain = 0;
+        _boardLogic[__garbageSourceY][__garbageSourceX]->_state = 15;
+
+        _boardGraphics[__garbageSourceY][__garbageSourceX]->SetAsset(Utils::GarbageIntermediate(_pokemonType, _spriteManager),
                                                                      PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
         _boardGraphics[__garbageSourceY][__garbageSourceX]->_visibility = visible;
 
@@ -1320,6 +1333,7 @@ class Board
         _boardLogic[__destinationY][__destinationX]->_state = 0;
         _boardLogic[__destinationY][__destinationX]->_wait = 0;
         _boardLogic[__destinationY][__destinationX]->_break_delay = 0;
+
         // Ignore Garbage Part
         ClearGarbageData(_boardLogic[__targetY][__targetX]);
         ClearGarbageData(_boardLogic[__destinationY][__destinationX]);
@@ -1333,9 +1347,52 @@ class Board
     // Update graphics attributes at each frame.
     public: void UpdateGraphics ()
     {
+        // Clear total breaking garbage counter;
+        _frameBreakingGarbage = 0;
+
+        // Update Graphics;
         CompleteSwap();
         UpdateShake();
         AnimateGarbageBadges();
+        UpdateGarbageDestruction();
+    }
+
+    // Update the animation of each garbage being destroyed
+    private: void UpdateGarbageDestruction()
+    {
+        // Find panels in state 15 and decrease their wait state until it reaches 0
+        for (int j = 0; j < _dimensions.getWidth(); j++)
+            for (int i = 0; i < _dimensions.getHeight() - 1; i++)
+            {
+                if (_boardLogic[i][j]->_state == 15)
+                {
+                    // Check if the garbage panel is supposed to change its appearance.
+                    if (_boardLogic[i][j]->_wait == 0)
+                    {
+                        // Make sure the current panel is different from the previous.
+                        char __previous_type = -1;
+                        if (j > 0)
+                        {
+                          __previous_type = _boardLogic[i][j - 1]->_type;
+                        }
+                        char __random_type = Utils::GetNextTypeWithoutRepetition(__previous_type);
+
+                        // Create new panels in the place of the
+                        _boardLogic[i][j]->_type = __random_type;
+
+                        // Update sprite
+                        _boardGraphics[i][j]->SetAsset(Utils::DecodeType(_boardLogic[i][j]->_type, _spriteManager),
+                                                       PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+
+                        // Update panel status
+                        _boardLogic[i][j]->_state = 16;
+                    }
+                    else
+                    {
+                        _boardLogic[i][j]->_wait--;
+                    }
+                }
+            }
     }
 
     public: void ShakeBoard (int numberOfSamples)
@@ -1363,7 +1420,7 @@ class Board
     {
         if ((unsigned int)_currentShakeFrame < _shakeSamples.size())
         {
-            _boardOuterContainer->_y = 8*_shakeSamples[_currentShakeFrame];
+            _boardOuterContainer->_y = 12*_shakeSamples[_currentShakeFrame];
             _currentShakeFrame++;
         }
         else

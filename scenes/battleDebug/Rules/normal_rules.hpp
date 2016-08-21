@@ -15,19 +15,19 @@
 class NormalRules : public RulesInterface
 {
     enum Direction {up, down, left, right};
-    
+
     std::vector<Point2D> _foundVertical;
     std::vector<Point2D> _foundHorizontal;
     int ** __checkBoard;
     WorkPanel ** __fallCheckBoard;
     int _boardVerticalPosition;
     int _levelDelay;
-    int _currentDelay;	
+    int _currentDelay;
     int _pixelsShown;
     bool _showNextLine;
     int _current_chain;
     int _chin_limit;
-    
+
     public: NormalRules (Dim2D boardDim)
     {
         __checkBoard = new int * [boardDim.getHeight()];
@@ -37,7 +37,7 @@ class NormalRules : public RulesInterface
             __checkBoard[i] = new int[boardDim.getWidth()];
             __fallCheckBoard[i] = new WorkPanel[boardDim.getWidth()];
         }
-        
+
         _current_chain = 0;
         _boardVerticalPosition = 0;
         _levelDelay = 32;
@@ -80,7 +80,7 @@ class NormalRules : public RulesInterface
         changes.push_back(__swap);
         return;
     };
-    
+
     public: void Detect (LogicPanel *** boardLogic, int boardW, int boardH, vector<Change> &changes, vector<LogicPanel **> &_garbageList)
     {
         // Panel checkboard
@@ -89,7 +89,7 @@ class NormalRules : public RulesInterface
             for (int j = 0; j < boardW; j++)
                 __checkBoard[i][j] = 0;
         }
-        
+
         for (int i = 0; i < boardH; i++)
         {
             for (int j = 0; j < boardW; j++)
@@ -100,7 +100,7 @@ class NormalRules : public RulesInterface
                 int __chain_chance = 0;
                 DetectVertical(boardLogic, boardLogic[i][j]->_type, i, j, down, boardW, boardH);
                 DetectHorizontal(boardLogic, boardLogic[i][j]->_type, i, j, right, boardW, boardH);
-                
+
                 if (_foundVertical.size() >= 3)
                 {
                     for (unsigned int k = 0; k < _foundVertical.size(); k++)
@@ -112,16 +112,16 @@ class NormalRules : public RulesInterface
                             UpdateChainCondition(_foundVertical[k].getX(), _foundVertical[k].getY(), 0, changes);
                             __chain_chance = 1;
                         }
-                        
+
                         __checkBoard[_foundVertical[k].getX()][_foundVertical[k].getY()] = 1;
                         CheckGarbageContact(boardLogic, _foundVertical[k].getX(), _foundVertical[k].getY(), boardW, boardH, _garbageList);
-                        
+
                         __average_row += _foundVertical[k].getX();
                         __average_col += _foundVertical[k].getY();
                         __total++;
                     }
                 }
-                
+
                 if (_foundHorizontal.size() >= 3)
                 {
                     for (unsigned int k = 0; k < _foundHorizontal.size(); k++)
@@ -133,37 +133,37 @@ class NormalRules : public RulesInterface
                             UpdateChainCondition(_foundHorizontal[k].getX(), _foundHorizontal[k].getY(), 0, changes);
                             __chain_chance = 1;
                         }
-                        
+
                         __checkBoard[_foundHorizontal[k].getX()][_foundHorizontal[k].getY()] = 1;
                         CheckGarbageContact(boardLogic, _foundHorizontal[k].getX(), _foundHorizontal[k].getY(), boardW, boardH, _garbageList);
-                        
+
                         __average_row += _foundHorizontal[k].getX();
                         __average_col += _foundHorizontal[k].getY();
                         __total++;
                     }
                 }
-                
+
                 // Score Chain
                 if (__chain_chance == 1)
                 {
                     _current_chain++;
-                    
+
                     Change __change = 0;
                     __change = AddChangeType(__change, SCORE_CHAIN_OPERATION);
                     __change = AddTargetPanelX(__change, (int)(ceil(__average_col/(__total))));
                     __change = AddTargetPanelY(__change, (int)(ceil(__average_row/(__total))));
                     __change = AddChainValue(__change, (_current_chain + 1));
                     changes.push_back(__change);
- 
+
                     // Chain time value. Depends on the combo size.
                     _chin_limit = 62 + (_foundVertical.size() + _foundHorizontal.size())*(12);
                 }
-                
+
                 _foundVertical.clear();
                 _foundHorizontal.clear();
             }
         }
-        
+
         // Check panels to destroy them
         for (int i = 0; i < boardH; i++)
         {
@@ -178,7 +178,7 @@ class NormalRules : public RulesInterface
                         __change = AddTargetPanelX(__change, j);
                         __change = AddTargetPanelY(__change, i);
                         changes.push_back(__change);
-                        
+
                         // Enable Chain Chance
                         EnableChain(boardLogic, i, j);
                     }
@@ -210,7 +210,7 @@ class NormalRules : public RulesInterface
                 }
             }
         }
-        
+
         // Initialize Break animation sequence
         int __delay = 0;
         int __combo_size = 0;
@@ -244,7 +244,7 @@ class NormalRules : public RulesInterface
                 }
             }
         }
-        
+
         // Check if a combo has been triggered
         if (__combo_size >= 4)
         {
@@ -254,11 +254,11 @@ class NormalRules : public RulesInterface
             __change = AddTargetPanelY(__change, (int)(ceil(__lower_row/__combo_size)));
             __change = AddComboSize(__change, __combo_size);
             changes.push_back(__change);
-            
+
             // Create garbage blocks based on combo size
             GenerateGarbageFromCombo(__combo_size, changes, (int)(ceil(__lower_column/__combo_size)));
         }
-        
+
         // Correct Delay value
         __delay -= 12;
         for (int i = boardH - 1; i >= 0; i--)
@@ -273,9 +273,9 @@ class NormalRules : public RulesInterface
             }
         }
     }
-    
+
     // Sends Garbage_operation to board interpreter. This creates new objects.
-    // 
+    //
     void GenerateGarbageFromCombo(int combo_size, vector<Change> &changes, int initialPoistion)
     {
         switch (combo_size)
@@ -311,7 +311,7 @@ class NormalRules : public RulesInterface
                 break;
         }
     }
-    
+
     // Creates instructions.
     // @param width: garbage width;
     // @param height: grabage height;
@@ -336,7 +336,7 @@ class NormalRules : public RulesInterface
         // If in the first row, no need to trigger chain.
         if (i == 0)
             return;
-        
+
         // Sweep panels above otherwise.
         for (int k = i; k >= 0; k--)
         {
@@ -344,16 +344,16 @@ class NormalRules : public RulesInterface
                 break;
             boardLogic[k][j]->_in_chain = 1;
         }
-        
+
         return;
     }
-    
+
     // Detect combinations in vertical direction.
     // @param i: row index.
     // @param j: column index.
     private: void DetectVertical (LogicPanel *** boardLogic, int type, int i, int j, Direction dir, int boardW, int boardH)
     {
-        if (boardLogic[i][j]->_state == 3 || boardLogic[i][j]->_state == 2)
+        if (boardLogic[i][j]->_state == 3 || boardLogic[i][j]->_state == 2 || boardLogic[i][j]->_state == 15)
             return;
         if (i != boardH - 1 && boardLogic[i + 1][j]->_type == -1)
             return;
@@ -375,13 +375,13 @@ class NormalRules : public RulesInterface
 
         }
     }
-    
+
     // Detect combinations in vertical direction.
     // @param i: row index.
     // @param j: column index.
     private: void DetectHorizontal (LogicPanel *** boardLogic, int type, int i, int j, Direction dir, int boardW, int boardH)
     {
-        if (boardLogic[i][j]->_state == 3 || boardLogic[i][j]->_state == 2)
+        if (boardLogic[i][j]->_state == 3 || boardLogic[i][j]->_state == 2 || boardLogic[i][j]->_state == 15)
             return;
         if (i != boardH - 1 && boardLogic[i + 1][j]->_type == -1)
             return;
@@ -400,10 +400,10 @@ class NormalRules : public RulesInterface
             if (dir != right && j != 0)
                 DetectHorizontal(boardLogic, type, i, j - 1, left, boardW, boardH);
             return;
-            
+
         }
     }
-    
+
     // Check if a breaking panel is touching any sort of garbage
     // @param _boardLogic: Board logic matrix reference.
     // @param i: row index;
@@ -421,7 +421,7 @@ class NormalRules : public RulesInterface
         {
             MarkGarbage(_boardLogic, i - 1, j, _garbageList);
         }
-        
+
         if (i < boardH - 1 && _boardLogic[i + 1][j]->_type == PANEL_GARBAGE_TYPE)
         {
             MarkGarbage(_boardLogic, i + 1, j, _garbageList);
@@ -431,7 +431,7 @@ class NormalRules : public RulesInterface
         {
             MarkGarbage(_boardLogic, i + 1, j, _garbageList);
         }
-        
+
         if (j > 0 && _boardLogic[i][j - 1]->_type == PANEL_GARBAGE_TYPE)
         {
             MarkGarbage(_boardLogic, i, j - 1, _garbageList);
@@ -441,7 +441,7 @@ class NormalRules : public RulesInterface
         {
             MarkGarbage(_boardLogic, i, j - 1, _garbageList);
         }
-        
+
         if (j < boardW - 1 && _boardLogic[i][j + 1]->_type == PANEL_GARBAGE_TYPE)
         {
             MarkGarbage(_boardLogic, i, j + 1, _garbageList);
@@ -452,7 +452,7 @@ class NormalRules : public RulesInterface
             MarkGarbage(_boardLogic, i, j + 1, _garbageList);
         }
     }
-    
+
     // Analyses the board to figure out if a target garbage is in contact with other garbage objects.
     // @param _boardLogic: Board logic matrix reference.
     // @param i: row index;
@@ -477,7 +477,7 @@ class NormalRules : public RulesInterface
                     MarkGarbage(_boardLogic, k - 1, l, _garbageList);
                     FindSurroudingGarbage(_boardLogic, k - 1, l, boardW, boardH, _garbageList);
                 }
-                
+
                 if (k < boardH - 1 && _boardLogic[k + 1][l]->_type == PANEL_GARBAGE_TYPE &&
                     __checkBoard[_boardLogic[k + 1][l]->_sourceY][_boardLogic[k + 1][l]->_sourceX] != 2 &&
                     __checkBoard[_boardLogic[k + 1][l]->_sourceY][_boardLogic[k + 1][l]->_sourceX] != 3)
@@ -485,7 +485,7 @@ class NormalRules : public RulesInterface
                     MarkGarbage(_boardLogic, k + 1, l, _garbageList);
                     FindSurroudingGarbage(_boardLogic, k + 1, l, boardW, boardH, _garbageList);
                 }
-                
+
                 if (l > 0 && _boardLogic[k][l - 1]->_type == PANEL_GARBAGE_TYPE &&
                     __checkBoard[_boardLogic[k][l - 1]->_sourceY][_boardLogic[k][l - 1]->_sourceX] != 2 &&
                     __checkBoard[_boardLogic[k][l - 1]->_sourceY][_boardLogic[k][l - 1]->_sourceX] != 3)
@@ -493,7 +493,7 @@ class NormalRules : public RulesInterface
                     MarkGarbage(_boardLogic, k, l - 1, _garbageList);
                     FindSurroudingGarbage(_boardLogic, k, l - 1, boardW, boardH, _garbageList);
                 }
-                
+
                 if (l < boardW - 1 && _boardLogic[k][l + 1]->_type == PANEL_GARBAGE_TYPE &&
                     __checkBoard[_boardLogic[k][l + 1]->_sourceY][_boardLogic[k][l + 1]->_sourceX] != 2 &&
                     __checkBoard[_boardLogic[k][l + 1]->_sourceY][_boardLogic[k][l + 1]->_sourceX] != 3)
@@ -518,7 +518,7 @@ class NormalRules : public RulesInterface
         int __initialX =  _boardLogic[i][j]->_sourceX;
         int __width = _boardLogic[i][j]->_width;
         int __garbageCounter = 0;
-        
+
         for ( int k = __initialY; k > __initialY - __heightY; k--)
         {
 
@@ -538,14 +538,14 @@ class NormalRules : public RulesInterface
                     _boardLogic[k][l]->_sourceY--;
                     _boardLogic[k][l]->_height--;
                     _boardLogic[k][l]->_positionY--;
-                    
+
                     // Three represents elements from a already broken multi-layer garbage
                     // that have already been analyzed.
                     __checkBoard[k][l] = 3;
                 }
                 else if (k < 0)
                 {
-                    
+
                     for (int m = __initialX; m < __initialX + __width; m++)
                     {
                         _garbageList[__garbageCounter][m]->_sourceY = __initialY- 1 >= 0? __initialY - 1: 0;
@@ -558,7 +558,7 @@ class NormalRules : public RulesInterface
             }
         }
     }
-    
+
     // Implements fall logic. Sweeps the board for panels in falling condition and update those
     // already falling.
     // @param _boardLogic: Pointer to logic board.
@@ -586,7 +586,7 @@ class NormalRules : public RulesInterface
                 __fallCheckBoard[i][j]._wait = _boardLogic[i][j]->_wait;
                 __fallCheckBoard[i][j]._in_chain = _boardLogic[i][j]->_in_chain;
             }
-        
+
         // Detect Potential falls
         for (int i = boardH - 1; i >= 0; i--)
         {
@@ -597,7 +597,11 @@ class NormalRules : public RulesInterface
                     // If Swapping, ignore the panel
                     if (__fallCheckBoard[i][j]._state == 2)
                         continue;
-                    
+
+                    // If the panel is a garbage in transformation, ignore it.
+                    if (__fallCheckBoard[i][j]._state == 15)
+                      continue;
+
                     // Start fall
                     if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 0 || IsInFallingAnimation(i,j)) && __fallCheckBoard[i][j]._state != 2 && (__fallCheckBoard[i + 1][j]._type == -1 || __fallCheckBoard[i + 1][j]._state == 4))
                     {
@@ -606,7 +610,7 @@ class NormalRules : public RulesInterface
                         {
                             _boardLogic[i][j]->_state = 4;
                             _boardLogic[i][j]->_wait = FALL_DELAY;
-                            
+
                             __fallCheckBoard[i][j]._state = 4;
                             __fallCheckBoard[i][j]._wait = FALL_DELAY;
 
@@ -641,7 +645,7 @@ class NormalRules : public RulesInterface
                             __fall = AddTargetPanelX(__fall, j);
                             __fall = AddTargetPanelY(__fall, i);
                             changes.push_back(__fall);
-                            
+
                             // Update local work boards
                             __fallCheckBoard[i + 1][j]._type= __fallCheckBoard[i][j]._type;
                             __fallCheckBoard[i + 1][j]._state = __fallCheckBoard[i][j]._state;
@@ -651,7 +655,7 @@ class NormalRules : public RulesInterface
                             __fallCheckBoard[i + 1][j]._sourceY = __fallCheckBoard[i][j]._sourceY;
                             __fallCheckBoard[i + 1][j]._width = __fallCheckBoard[i][j]._width;
                             __fallCheckBoard[i + 1][j]._height = __fallCheckBoard[i][j]._height;
-                            
+
                             __fallCheckBoard[i][j]._type = -1;
                             __fallCheckBoard[i][j]._state = -1;
                             __fallCheckBoard[i][j]._positionX = -1;
@@ -675,7 +679,7 @@ class NormalRules : public RulesInterface
                             __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
                         {
                             UpdateFallSprite(i, j, changes, _boardLogic);
-                            
+
                             // If _in_chain is equal to 1, it means it is falling or its falling has just finished.
                             // Change it to 2 so it will have one extra frame to be detected.
                             if (__fallCheckBoard[i][j]._in_chain == 1)
@@ -716,7 +720,7 @@ class NormalRules : public RulesInterface
                             __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
                         {
                             UpdateFallSprite(i, j, changes, _boardLogic);
-                            
+
                             // If _in_chain is equal to 1, it means it is falling or its falling has just finished.
                             // Change it to 2 so it will have one extra frame to be detected.
                             if (__fallCheckBoard[i][j]._in_chain == 1)
@@ -750,11 +754,11 @@ class NormalRules : public RulesInterface
                 }
             }
         }
-        
+
         CheckChainEnd ();
-        
+
     }
-    
+
     private: void CheckChainEnd ()
     {
         // Check chain availability
@@ -764,13 +768,13 @@ class NormalRules : public RulesInterface
             if (_chin_limit == 0)
             {
                 // Play Chain Fanfare here.
-                
+
                 _current_chain = 0;
             }
         }
 
     }
-    
+
     private: void GarbageRumble (vector<Change> &changes)
     {
         Change __change = 0;
@@ -778,19 +782,19 @@ class NormalRules : public RulesInterface
         __change = AddRumbleLength(__change, GARBAGE_FALL_RUMBLE_DURATION);
         changes.push_back(__change);
     }
-    
+
     private: void ShakeBoard (vector<Change> &changes)
     {
         Change __change = 0;
         __change = AddChangeType(__change, SHAKE_OPERATION);
         changes.push_back(__change);
     }
-    
+
     private: bool IsInFallingAnimation (int i, int j)
     {
         return (__fallCheckBoard[i][j]._state >= 5 && __fallCheckBoard[i][j]._state <= 14);
     }
-    
+
     private: void UpdateChainCondition (int i, int j, int value, vector<Change> &changes)
     {
         Change __change = 0;
@@ -800,21 +804,21 @@ class NormalRules : public RulesInterface
         __change = AddTargetPanelY(__change, i);
         changes.push_back(__change);
     }
-    
+
     private: void UpdateFallSprite (int i, int j, vector<Change> &changes, LogicPanel *** _boardLogic)
     {
         if (__fallCheckBoard[i][j]._state == 1)
         {
             _boardLogic[i][j]->_state = 5;
             __fallCheckBoard[i][j]._state = 5;
-            
+
             Change __change = 0;
             __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
             __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_1);
             __change = AddTargetPanelX(__change, j);
             __change = AddTargetPanelY(__change, i);
             changes.push_back(__change);
-            
+
             // Rumble for a short time when the panel finished falling
             __change = 0;
             __change = AddChangeType(__change, RUMBLE_OPERATION);
@@ -826,7 +830,7 @@ class NormalRules : public RulesInterface
         {
             _boardLogic[i][j]->_state = 6;
             __fallCheckBoard[i][j]._state = 6;
-            
+
             Change __change = 0;
             __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
             __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_2);
@@ -838,7 +842,7 @@ class NormalRules : public RulesInterface
         {
             _boardLogic[i][j]->_state = 7;
             __fallCheckBoard[i][j]._state = 7;
-            
+
             Change __change = 0;
             __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
             __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_3);
@@ -850,7 +854,7 @@ class NormalRules : public RulesInterface
         {
             _boardLogic[i][j]->_state = 8;
             __fallCheckBoard[i][j]._state = 8;
-            
+
             Change __change = 0;
             __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
             __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_4);
@@ -862,7 +866,7 @@ class NormalRules : public RulesInterface
         {
             _boardLogic[i][j]->_state = 9;
             __fallCheckBoard[i][j]._state = 9;
-            
+
             Change __change = 0;
             __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
             __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_5);
@@ -874,7 +878,7 @@ class NormalRules : public RulesInterface
         {
             _boardLogic[i][j]->_state = 10;
             __fallCheckBoard[i][j]._state = 10;
-            
+
             Change __change = 0;
             __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
             __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_6);
@@ -886,7 +890,7 @@ class NormalRules : public RulesInterface
         {
             _boardLogic[i][j]->_state = 11;
             __fallCheckBoard[i][j]._state = 11;
-            
+
             Change __change = 0;
             __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
             __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_7);
@@ -898,7 +902,7 @@ class NormalRules : public RulesInterface
         {
             _boardLogic[i][j]->_state = 12;
             __fallCheckBoard[i][j]._state = 12;
-            
+
             Change __change = 0;
             __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
             __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_8);
@@ -910,7 +914,7 @@ class NormalRules : public RulesInterface
         {
             _boardLogic[i][j]->_state = 13;
             __fallCheckBoard[i][j]._state = 13;
-            
+
             Change __change = 0;
             __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
             __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_9);
@@ -922,7 +926,7 @@ class NormalRules : public RulesInterface
         {
             _boardLogic[i][j]->_state = 14;
             __fallCheckBoard[i][j]._state = 14;
-            
+
             Change __change = 0;
             __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
             __change = AddPanelImageStyle(__change, PANEL_FALL_FRAME_10);
@@ -934,7 +938,7 @@ class NormalRules : public RulesInterface
         {
             _boardLogic[i][j]->_state = 0;
             __fallCheckBoard[i][j]._state = 0;
-            
+
             Change __change = 0;
             __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
             __change = AddPanelImageStyle(__change, PANEL_NORMAL_SPRITE);
@@ -959,7 +963,7 @@ class NormalRules : public RulesInterface
         }
         return true;
     }
-    
+
     // Set every garbage object state to 0 (not falling).
     // @param i: row index;
     // @param j: column index;
@@ -992,7 +996,7 @@ class NormalRules : public RulesInterface
             }
         }
     }
-    
+
     // Update grabage object in the board to make it fall as a single unit.
     // @param i: row index;
     // @param j: column index;
@@ -1015,7 +1019,7 @@ class NormalRules : public RulesInterface
                     __fall = AddTargetPanelX(__fall, k);
                     __fall = AddTargetPanelY(__fall, l);
                     changes.push_back(__fall);
-                    
+
                     __fallCheckBoard[l + 1][k]._type= __fallCheckBoard[l][k]._type;
                     __fallCheckBoard[l + 1][k]._state = __fallCheckBoard[l][k]._state;
                     __fallCheckBoard[l + 1][k]._positionX = __fallCheckBoard[l][k]._positionX;
@@ -1024,7 +1028,7 @@ class NormalRules : public RulesInterface
                     __fallCheckBoard[l + 1][k]._sourceY = __fallCheckBoard[l][k]._sourceY + 1;
                     __fallCheckBoard[l + 1][k]._width = __fallCheckBoard[l][k]._width;
                     __fallCheckBoard[l + 1][k]._height = __fallCheckBoard[l][k]._height;
-                    
+
                     __fallCheckBoard[l][k]._type = -1;
                     __fallCheckBoard[l][k]._state = -1;
                     __fallCheckBoard[l][k]._positionX = -1;
@@ -1045,17 +1049,17 @@ class NormalRules : public RulesInterface
             }
         }
     }
-    
+
     public: void SpeedUp()
     {
         _showNextLine = true;
     }
-    
+
     public: void Slide (int boardW, int boardH, std::vector<Change> &changes)
     {
         if (_showNextLine)
         {
-            
+
             if (_pixelsShown >= PANEL_IMAGE_SIZE - 1)
             {
                 _pixelsShown = 0;
@@ -1090,7 +1094,7 @@ class NormalRules : public RulesInterface
             else
             {
                 _currentDelay = 0;
-                
+
                 if (_pixelsShown == PANEL_IMAGE_SIZE - 1)
                 {
                     _pixelsShown = 0;
@@ -1108,7 +1112,7 @@ class NormalRules : public RulesInterface
             }
         }
     }
-    
+
     public: ~NormalRules () {};
 };
 

@@ -65,4 +65,9 @@
 #define FAIRY_TYPE 0x9
 #define NORMAL_TYPE 0xa
 
+// Bezier
+#define BEZIER_TRAIL_LENGTH 20
+#define BEZIER_TOTAL_POINTS 140
+#define BEZIER_PARTICLE_SCALE 0.5
+
 #endif // __BOARD_CONSTANTS__

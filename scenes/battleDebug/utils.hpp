@@ -7,6 +7,15 @@
 
 class Utils
 {
+  // Decodes a type and returns the buffer related to the garbage intermediate break image.
+  // @param type: garbage type to be decode.
+  // @param spriteManager: reference to system-wise sprite manager.
+  // @return Texture reference.
+    public: static GRRLIB_texImg * GarbageIntermediate (unsigned int type, SpriteManager * spriteManager)
+    {
+        return spriteManager->_garbage_transform_leaf;
+    }
+
     // Decodes a type and returns the buffer related to the garbage type and size.
     // @param type: garbage type to be decode.
     // @param width: garbage width.

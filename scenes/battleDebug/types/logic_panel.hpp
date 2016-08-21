@@ -6,7 +6,7 @@ class LogicPanel
 {
     // Logic Panel Type
     public: int _type;
-    
+
     // Panel State
     // 0: Steady
     // 1: Falling
@@ -23,17 +23,18 @@ class LogicPanel
     // 12: fall frame 8
     // 13: fall frame 9
     // 14: fall frame 10
+    // 15: Garbage panel waiting to transform.
     public: int _state;
-    
+
     // Fall delay counter
     public: int _wait;
-    
+
     // Target wait value reached when break should be trigged.
     public: int _break_delay;
-    
+
     // Chain side-effect flag
     public: int _in_chain;
-    
+
     // Garbage only data
     public: int _positionX;
     public: int _positionY;
