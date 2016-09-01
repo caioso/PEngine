@@ -912,6 +912,61 @@
 // Particles
 #include "../../assets/graphics/garbage_transform_leaf.h"
 
+#include "../../assets/graphics/blue_animation0001.h"
+#include "../../assets/graphics/blue_animation0002.h"
+#include "../../assets/graphics/blue_animation0003.h"
+#include "../../assets/graphics/blue_animation0004.h"
+#include "../../assets/graphics/blue_animation0005.h"
+#include "../../assets/graphics/blue_animation0006.h"
+#include "../../assets/graphics/blue_animation0007.h"
+#include "../../assets/graphics/blue_animation0008.h"
+
+#include "../../assets/graphics/gray_animation0001.h"
+#include "../../assets/graphics/gray_animation0002.h"
+#include "../../assets/graphics/gray_animation0003.h"
+#include "../../assets/graphics/gray_animation0004.h"
+#include "../../assets/graphics/gray_animation0005.h"
+#include "../../assets/graphics/gray_animation0006.h"
+#include "../../assets/graphics/gray_animation0007.h"
+#include "../../assets/graphics/gray_animation0008.h"
+
+#include "../../assets/graphics/green_animation0001.h"
+#include "../../assets/graphics/green_animation0002.h"
+#include "../../assets/graphics/green_animation0003.h"
+#include "../../assets/graphics/green_animation0004.h"
+#include "../../assets/graphics/green_animation0005.h"
+#include "../../assets/graphics/green_animation0006.h"
+#include "../../assets/graphics/green_animation0007.h"
+#include "../../assets/graphics/green_animation0008.h"
+
+#include "../../assets/graphics/purple_animation0001.h"
+#include "../../assets/graphics/purple_animation0002.h"
+#include "../../assets/graphics/purple_animation0003.h"
+#include "../../assets/graphics/purple_animation0004.h"
+#include "../../assets/graphics/purple_animation0005.h"
+#include "../../assets/graphics/purple_animation0006.h"
+#include "../../assets/graphics/purple_animation0007.h"
+#include "../../assets/graphics/purple_animation0008.h"
+
+#include "../../assets/graphics/red_animation0001.h"
+#include "../../assets/graphics/red_animation0002.h"
+#include "../../assets/graphics/red_animation0003.h"
+#include "../../assets/graphics/red_animation0004.h"
+#include "../../assets/graphics/red_animation0005.h"
+#include "../../assets/graphics/red_animation0006.h"
+#include "../../assets/graphics/red_animation0007.h"
+#include "../../assets/graphics/red_animation0008.h"
+
+#include "../../assets/graphics/yellow_animation0001.h"
+#include "../../assets/graphics/yellow_animation0002.h"
+#include "../../assets/graphics/yellow_animation0003.h"
+#include "../../assets/graphics/yellow_animation0004.h"
+#include "../../assets/graphics/yellow_animation0005.h"
+#include "../../assets/graphics/yellow_animation0006.h"
+#include "../../assets/graphics/yellow_animation0007.h"
+#include "../../assets/graphics/yellow_animation0008.h"
+
+
 // Sprite manager class handles texture instances. It keeps a static reference to
 // each assets reference and deploy them as needed.
 class SpriteManager
@@ -1856,6 +1911,60 @@ class SpriteManager
     public: GRRLIB_texImg* _comboBox_Player2_0029;
     public: GRRLIB_texImg* _comboBox_Player2_0030;
 
+    public: GRRLIB_texImg* _blue_animation0001;
+    public: GRRLIB_texImg* _blue_animation0002;
+    public: GRRLIB_texImg* _blue_animation0003;
+    public: GRRLIB_texImg* _blue_animation0004;
+    public: GRRLIB_texImg* _blue_animation0005;
+    public: GRRLIB_texImg* _blue_animation0006;
+    public: GRRLIB_texImg* _blue_animation0007;
+    public: GRRLIB_texImg* _blue_animation0008;
+
+   public: GRRLIB_texImg* _gray_animation0001;
+    public: GRRLIB_texImg* _gray_animation0002;
+    public: GRRLIB_texImg* _gray_animation0003;
+    public: GRRLIB_texImg* _gray_animation0004;
+    public: GRRLIB_texImg* _gray_animation0005;
+    public: GRRLIB_texImg* _gray_animation0006;
+    public: GRRLIB_texImg* _gray_animation0007;
+    public: GRRLIB_texImg* _gray_animation0008;
+
+    public: GRRLIB_texImg* _green_animation0001;
+    public: GRRLIB_texImg* _green_animation0002;
+    public: GRRLIB_texImg* _green_animation0003;
+    public: GRRLIB_texImg* _green_animation0004;
+    public: GRRLIB_texImg* _green_animation0005;
+    public: GRRLIB_texImg* _green_animation0006;
+    public: GRRLIB_texImg* _green_animation0007;
+    public: GRRLIB_texImg* _green_animation0008;
+
+    public: GRRLIB_texImg* _purple_animation0001;
+    public: GRRLIB_texImg* _purple_animation0002;
+    public: GRRLIB_texImg* _purple_animation0003;
+    public: GRRLIB_texImg* _purple_animation0004;
+    public: GRRLIB_texImg* _purple_animation0005;
+    public: GRRLIB_texImg* _purple_animation0006;
+    public: GRRLIB_texImg* _purple_animation0007;
+    public: GRRLIB_texImg* _purple_animation0008;
+
+    public: GRRLIB_texImg* _red_animation0001;
+    public: GRRLIB_texImg* _red_animation0002;
+    public: GRRLIB_texImg* _red_animation0003;
+    public: GRRLIB_texImg* _red_animation0004;
+    public: GRRLIB_texImg* _red_animation0005;
+    public: GRRLIB_texImg* _red_animation0006;
+    public: GRRLIB_texImg* _red_animation0007;
+    public: GRRLIB_texImg* _red_animation0008;
+
+    public: GRRLIB_texImg* _yellow_animation0001;
+    public: GRRLIB_texImg* _yellow_animation0002;
+    public: GRRLIB_texImg* _yellow_animation0003;
+    public: GRRLIB_texImg* _yellow_animation0004;
+    public: GRRLIB_texImg* _yellow_animation0005;
+    public: GRRLIB_texImg* _yellow_animation0006;
+    public: GRRLIB_texImg* _yellow_animation0007;
+    public: GRRLIB_texImg* _yellow_animation0008;
+
     public: GRRLIB_texImg* _P1;
     public: GRRLIB_texImg* _P2;
 
@@ -2795,6 +2904,60 @@ class SpriteManager
         _P2 = GRRLIB_LoadTexture(P2);
 
         _garbage_transform_leaf = GRRLIB_LoadTexture(garbage_transform_leaf);
+
+        _blue_animation0001 = GRRLIB_LoadTexture(blue_animation0001);
+        _blue_animation0002 = GRRLIB_LoadTexture(blue_animation0002);
+        _blue_animation0003 = GRRLIB_LoadTexture(blue_animation0003);
+        _blue_animation0004 = GRRLIB_LoadTexture(blue_animation0004);
+        _blue_animation0005 = GRRLIB_LoadTexture(blue_animation0005);
+        _blue_animation0006 = GRRLIB_LoadTexture(blue_animation0006);
+        _blue_animation0007 = GRRLIB_LoadTexture(blue_animation0007);
+        _blue_animation0008 = GRRLIB_LoadTexture(blue_animation0008);
+
+_gray_animation0001 = GRRLIB_LoadTexture(gray_animation0001);
+        _gray_animation0002 = GRRLIB_LoadTexture(gray_animation0002);
+        _gray_animation0003 = GRRLIB_LoadTexture(gray_animation0003);
+        _gray_animation0004 = GRRLIB_LoadTexture(gray_animation0004);
+        _gray_animation0005 = GRRLIB_LoadTexture(gray_animation0005);
+        _gray_animation0006 = GRRLIB_LoadTexture(gray_animation0006);
+        _gray_animation0007 = GRRLIB_LoadTexture(gray_animation0007);
+        _gray_animation0008 = GRRLIB_LoadTexture(gray_animation0008);
+
+_green_animation0001 = GRRLIB_LoadTexture(green_animation0001);
+        _green_animation0002 = GRRLIB_LoadTexture(green_animation0002);
+        _green_animation0003 = GRRLIB_LoadTexture(green_animation0003);
+        _green_animation0004 = GRRLIB_LoadTexture(green_animation0004);
+        _green_animation0005 = GRRLIB_LoadTexture(green_animation0005);
+        _green_animation0006 = GRRLIB_LoadTexture(green_animation0006);
+        _green_animation0007 = GRRLIB_LoadTexture(green_animation0007);
+        _green_animation0008 = GRRLIB_LoadTexture(green_animation0008);
+
+_purple_animation0001 = GRRLIB_LoadTexture(purple_animation0001);
+        _purple_animation0002 = GRRLIB_LoadTexture(purple_animation0002);
+        _purple_animation0003 = GRRLIB_LoadTexture(purple_animation0003);
+        _purple_animation0004 = GRRLIB_LoadTexture(purple_animation0004);
+        _purple_animation0005 = GRRLIB_LoadTexture(purple_animation0005);
+        _purple_animation0006 = GRRLIB_LoadTexture(purple_animation0006);
+        _purple_animation0007 = GRRLIB_LoadTexture(purple_animation0007);
+        _purple_animation0008 = GRRLIB_LoadTexture(purple_animation0008);
+
+_red_animation0001 = GRRLIB_LoadTexture(red_animation0001);
+        _red_animation0002 = GRRLIB_LoadTexture(red_animation0002);
+        _red_animation0003 = GRRLIB_LoadTexture(red_animation0003);
+        _red_animation0004 = GRRLIB_LoadTexture(red_animation0004);
+        _red_animation0005 = GRRLIB_LoadTexture(red_animation0005);
+        _red_animation0006 = GRRLIB_LoadTexture(red_animation0006);
+        _red_animation0007 = GRRLIB_LoadTexture(red_animation0007);
+        _red_animation0008 = GRRLIB_LoadTexture(red_animation0008);
+
+_yellow_animation0001 = GRRLIB_LoadTexture(yellow_animation0001);
+        _yellow_animation0002 = GRRLIB_LoadTexture(yellow_animation0002);
+        _yellow_animation0003 = GRRLIB_LoadTexture(yellow_animation0003);
+        _yellow_animation0004 = GRRLIB_LoadTexture(yellow_animation0004);
+        _yellow_animation0005 = GRRLIB_LoadTexture(yellow_animation0005);
+        _yellow_animation0006 = GRRLIB_LoadTexture(yellow_animation0006);
+        _yellow_animation0007 = GRRLIB_LoadTexture(yellow_animation0007);
+        _yellow_animation0008 = GRRLIB_LoadTexture(yellow_animation0008);
     }
 
     public: GRRLIB_texImg * DecodeNumber (int number)

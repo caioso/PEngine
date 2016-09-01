@@ -48,6 +48,12 @@ typedef uint32_t Change;
 // Add Target Panel Y to Change
 #define AddTargetPanelY(OP, A) ((OP) | ((A&15)<<4))
 
+// Add Target Panel Y to Change
+#define AddTargetShakeColumn(OP, A) ((OP) | ((A&255)))
+
+// Extarct Shake Column
+#define ExtractTargetShakeColumn(OP) (((OP&255)))
+
 // Add Garbage width to change
 #define AddGarbageWidth(OP, A) ((OP) | (A&15))
 
@@ -66,6 +72,9 @@ typedef uint32_t Change;
 // Add Combo Size
 #define AddComboSize(OP, A) ((OP) | ((A&15)<<8))
 
+// Add Pause Period
+#define AddPausePeriod(OP, A) ((OP) | ((A&15)<<8))
+
 // Add Chain Value
 #define AddChainValue(OP, A) ((OP) | ((A&15)<<8))
 
@@ -77,6 +86,9 @@ typedef uint32_t Change;
 
 // Extarct Rumble Length
 #define ExtractRumbleLength(OP) ((OP&255))
+
+// Extract Pause Period
+#define ExtractPausePeriod(OP) (((OP>>8)&255)&15)
 
 // Operation constantds
 #define SWAP_OPERATION 0x1
@@ -110,5 +122,9 @@ typedef uint32_t Change;
 #define RIVAL_GARBAGE_OPERATION 0x10
 
 #define SHAKE_OPERATION 0x11
+
+#define PAUSE_BOARD_OPERATION 0x12
+
+#define SHAKE_COLUMN_OPERATION 0x13
 
 #endif // __CHANGES__

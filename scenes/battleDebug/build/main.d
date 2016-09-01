@@ -986,6 +986,54 @@ main.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/P1.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/P2.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/garbage_transform_leaf.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0001.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0002.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0003.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0004.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0005.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0006.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0007.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0008.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0001.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0002.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0003.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0004.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0005.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0006.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0007.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0008.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0001.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0002.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0003.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0004.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0005.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0006.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0007.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0008.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0001.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0002.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0003.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0004.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0005.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0006.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0007.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0008.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0001.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0002.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0003.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0004.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0005.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0006.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0007.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0008.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0001.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0002.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0003.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0004.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0005.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0006.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0007.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0008.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./animation_manager.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./board_constants.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./utils.hpp \
@@ -2969,6 +3017,102 @@ main.o: \
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/P2.h:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/garbage_transform_leaf.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0001.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0002.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0003.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0004.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0005.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0006.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0007.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/blue_animation0008.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0001.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0002.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0003.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0004.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0005.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0006.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0007.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/gray_animation0008.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0001.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0002.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0003.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0004.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0005.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0006.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0007.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/green_animation0008.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0001.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0002.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0003.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0004.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0005.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0006.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0007.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/purple_animation0008.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0001.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0002.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0003.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0004.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0005.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0006.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0007.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/red_animation0008.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0001.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0002.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0003.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0004.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0005.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0006.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0007.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/yellow_animation0008.h:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./animation_manager.hpp:
 

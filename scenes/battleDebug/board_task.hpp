@@ -3,8 +3,8 @@
 #define __BOARD_TASK__
 
 // Dev Constants
-#define WII 0
-#define MAC 1
+#define WII 1
+#define MAC 0
 
 #include "../../engine/engine.hpp"
 
@@ -91,6 +91,8 @@ class BoardTask : public Runnable
         _board->InterpretOperations();
         _board->FallGarbage();
         _board->Slide();
+        _board->InterpretOperations();
+        _board->CheckAlert();
         _board->InterpretOperations();
     }
 

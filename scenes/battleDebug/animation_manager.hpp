@@ -1354,6 +1354,7 @@ class AnimationManager
         return _combo;
     }
 
+    // Update _slideDelay in board if the number of the frames change.
     public: Sprite * GeneratePanelOperationAnimation (int type)
     {
         // Show Break animation

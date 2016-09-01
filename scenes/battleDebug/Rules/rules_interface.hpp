@@ -12,7 +12,10 @@ class RulesInterface
     public: virtual void Detect (LogicPanel *** _boardLogic, int boardW, int boardH, vector<Change> &changes, vector<LogicPanel **> &_garbageList) = 0;
     public: virtual void Fall (LogicPanel *** _boardLogic, int boardW, int boardH, vector<Change> &changes, vector<LogicPanel **> &_garbageList) = 0;
     public: virtual void Slide (int boardW, int boardH, std::vector<Change> &changes) = 0;
+    public: virtual void PauseBoardSlide () = 0;
+    public: virtual void ResumeBoardSlide () = 0;
     public: virtual void SpeedUp() = 0;
+    public: virtual void BoardAlert(LogicPanel *** _boardLogic, int boardW, int boardH, vector<Change> &changes) = 0;
 };
 
 #endif // __RULES_INTERFACE__

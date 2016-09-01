@@ -27,6 +27,7 @@ class NormalRules : public RulesInterface
     bool _showNextLine;
     int _current_chain;
     int _chin_limit;
+    bool _isSlidePaused;
 
     public: NormalRules (Dim2D boardDim)
     {
@@ -45,6 +46,7 @@ class NormalRules : public RulesInterface
         _pixelsShown = 0;
         _chin_limit = 0;
         _showNextLine = false;
+        _isSlidePaused = false;
     }
 
     // Implements Swap logic.
@@ -116,6 +118,9 @@ class NormalRules : public RulesInterface
                         __checkBoard[_foundVertical[k].getX()][_foundVertical[k].getY()] = 1;
                         CheckGarbageContact(boardLogic, _foundVertical[k].getX(), _foundVertical[k].getY(), boardW, boardH, _garbageList);
 
+                        // Stop Rising
+                        _isSlidePaused = true;
+
                         __average_row += _foundVertical[k].getX();
                         __average_col += _foundVertical[k].getY();
                         __total++;
@@ -136,6 +141,8 @@ class NormalRules : public RulesInterface
 
                         __checkBoard[_foundHorizontal[k].getX()][_foundHorizontal[k].getY()] = 1;
                         CheckGarbageContact(boardLogic, _foundHorizontal[k].getX(), _foundHorizontal[k].getY(), boardW, boardH, _garbageList);
+
+
 
                         __average_row += _foundHorizontal[k].getX();
                         __average_col += _foundHorizontal[k].getY();
@@ -196,6 +203,12 @@ class NormalRules : public RulesInterface
                             __change = AddTargetPanelX(__change, j);
                             __change = AddTargetPanelY(__change, i);
                             changes.push_back(__change);
+
+                            // Request rising pause
+                            __change = 0;
+                            __change = AddChangeType(__change, PAUSE_BOARD_OPERATION);
+                            __change = AddPausePeriod(__change, 11);
+                            changes.push_back(__change);
                         }
                         else if (boardLogic[i][j]->_wait == 20)
                         {
@@ -203,6 +216,11 @@ class NormalRules : public RulesInterface
                             __change = AddChangeType(__change, PANEL_BREAK_ANIMATION_OPERATION);
                             __change = AddTargetPanelX(__change, j);
                             __change = AddTargetPanelY(__change, i);
+                            changes.push_back(__change);
+
+                            __change = 0;
+                            __change = AddChangeType(__change, PAUSE_BOARD_OPERATION);
+                            __change = AddPausePeriod(__change, 22);
                             changes.push_back(__change);
                         }
                         boardLogic[i][j]->_wait--;
@@ -1052,11 +1070,20 @@ class NormalRules : public RulesInterface
 
     public: void SpeedUp()
     {
+        if (_isSlidePaused)
+        {
+          return;
+        }
         _showNextLine = true;
     }
 
     public: void Slide (int boardW, int boardH, std::vector<Change> &changes)
     {
+        if (_isSlidePaused)
+        {
+          return;
+        }
+
         if (_showNextLine)
         {
 
@@ -1109,6 +1136,36 @@ class NormalRules : public RulesInterface
                     changes.push_back(__change);
                     _pixelsShown++;
                 }
+            }
+        }
+    }
+
+    public: virtual void PauseBoardSlide ()
+    {
+        _isSlidePaused = true;
+    }
+
+    public: virtual void ResumeBoardSlide ()
+    {
+        _isSlidePaused = false;
+    }
+
+    // Checks if the board is in alert state. For this rule, it basically chacks if the first (top-most) row has any valid panel.
+    // @param _boardLogic: Board logic DS.
+    // @param boardW: Board Width.
+    // @param boardH: Board Height.
+    // @param changes: Changes array.
+    public: virtual void BoardAlert (LogicPanel *** _boardLogic, int boardW, int boardH, vector<Change> &changes)
+    {
+        // Detect Potential falls
+        for (int j = 0; j < boardW; j++)
+        {
+            if (_boardLogic[0][j]->_type != PANEL_VOID_TYPE && _boardLogic[0][j]->_state != 1)
+            {
+                Change __change = 0;
+                __change = AddChangeType(__change, SHAKE_COLUMN_OPERATION);
+                __change = AddTargetShakeColumn(__change, (1<<j));
+                changes.push_back(__change);
             }
         }
     }

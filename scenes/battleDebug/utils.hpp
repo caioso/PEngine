@@ -136,7 +136,7 @@ class Utils
                 case PANEL_PURPLE_TYPE:  return spriteManager->_dPurpledetect; break;
             }
                 break;
-            case PANEL_FALL_FRAME_1:
+            case PANEL_SHAKE_FRAME_1:
                 switch (type)
             {
                 case PANEL_RED_TYPE:     return spriteManager->_dRedFalling0001; break;
@@ -146,7 +146,7 @@ class Utils
                 case PANEL_PURPLE_TYPE:  return spriteManager->_dPurpleFalling0001; break;
             }
                 break;
-            case PANEL_FALL_FRAME_2:
+            case PANEL_SHAKE_FRAME_2:
                 switch (type)
             {
                 case PANEL_RED_TYPE:     return spriteManager->_dRedFalling0002; break;
@@ -156,7 +156,7 @@ class Utils
                 case PANEL_PURPLE_TYPE:  return spriteManager->_dPurpleFalling0002; break;
             }
                 break;
-            case PANEL_FALL_FRAME_3:
+            case PANEL_SHAKE_FRAME_3:
                 switch (type)
             {
                 case PANEL_RED_TYPE:     return spriteManager->_dRedFalling0003; break;
@@ -166,7 +166,7 @@ class Utils
                 case PANEL_PURPLE_TYPE:  return spriteManager->_dPurpleFalling0003; break;
             }
                 break;
-            case PANEL_FALL_FRAME_4:
+            case PANEL_SHAKE_FRAME_4:
                 switch (type)
             {
                 case PANEL_RED_TYPE:     return spriteManager->_dRedFalling0004; break;
@@ -176,7 +176,7 @@ class Utils
                 case PANEL_PURPLE_TYPE:  return spriteManager->_dPurpleFalling0004; break;
             }
                 break;
-            case PANEL_FALL_FRAME_5:
+            case PANEL_SHAKE_FRAME_5:
                 switch (type)
             {
                 case PANEL_RED_TYPE:     return spriteManager->_dRedFalling0005; break;
@@ -186,7 +186,7 @@ class Utils
                 case PANEL_PURPLE_TYPE:  return spriteManager->_dPurpleFalling0005; break;
             }
                 break;
-            case PANEL_FALL_FRAME_6:
+            case PANEL_SHAKE_FRAME_6:
                 switch (type)
             {
                 case PANEL_RED_TYPE:     return spriteManager->_dRedFalling0006; break;
@@ -196,7 +196,7 @@ class Utils
                 case PANEL_PURPLE_TYPE:  return spriteManager->_dPurpleFalling0006; break;
             }
                 break;
-            case PANEL_FALL_FRAME_7:
+            case PANEL_SHAKE_FRAME_7:
                 switch (type)
             {
                 case PANEL_RED_TYPE:     return spriteManager->_dRedFalling0007; break;
@@ -206,7 +206,7 @@ class Utils
                 case PANEL_PURPLE_TYPE:  return spriteManager->_dPurpleFalling0007; break;
             }
                 break;
-            case PANEL_FALL_FRAME_8:
+            case PANEL_SHAKE_FRAME_8:
                 switch (type)
             {
                 case PANEL_RED_TYPE:     return spriteManager->_dRedFalling0008; break;
@@ -216,7 +216,7 @@ class Utils
                 case PANEL_PURPLE_TYPE:  return spriteManager->_dPurpleFalling0008; break;
             }
                 break;
-            case PANEL_FALL_FRAME_9:
+            case PANEL_SHAKE_FRAME_9:
                 switch (type)
             {
                 case PANEL_RED_TYPE:     return spriteManager->_dRedFalling0009; break;
@@ -226,7 +226,7 @@ class Utils
                 case PANEL_PURPLE_TYPE:  return spriteManager->_dPurpleFalling0009; break;
             }
                 break;
-            case PANEL_FALL_FRAME_10:
+            case PANEL_SHAKE_FRAME_10:
                 switch (type)
             {
                 case PANEL_RED_TYPE:     return spriteManager->_dRedFalling0010; break;
@@ -236,6 +236,89 @@ class Utils
                 case PANEL_PURPLE_TYPE:  return spriteManager->_dPurpleFalling0010; break;
             }
                 break;
+                case PANEL_FALL_FRAME_1:
+                switch (type)
+            {
+                case PANEL_RED_TYPE:     return spriteManager->_red_animation0001; break;
+                case PANEL_CYAN_TYPE:    return spriteManager->_blue_animation0001; break;
+                case PANEL_YELLOW_TYPE:  return spriteManager->_yellow_animation0001; break;
+                case PANEL_GREEN_TYPE:   return spriteManager->_green_animation0001; break;
+                case PANEL_PURPLE_TYPE:  return spriteManager->_purple_animation0001; break;
+            }
+                break;
+            case PANEL_FALL_FRAME_2:
+                switch (type)
+            {
+                case PANEL_RED_TYPE:     return spriteManager->_red_animation0002; break;
+                case PANEL_CYAN_TYPE:    return spriteManager->_blue_animation0002; break;
+                case PANEL_YELLOW_TYPE:  return spriteManager->_yellow_animation0002; break;
+                case PANEL_GREEN_TYPE:   return spriteManager->_green_animation0002; break;
+                case PANEL_PURPLE_TYPE:  return spriteManager->_purple_animation0002; break;
+            }
+                break;
+            case PANEL_FALL_FRAME_3:
+                switch (type)
+            {
+                case PANEL_RED_TYPE:     return spriteManager->_red_animation0003; break;
+                case PANEL_CYAN_TYPE:    return spriteManager->_blue_animation0003; break;
+                case PANEL_YELLOW_TYPE:  return spriteManager->_yellow_animation0003; break;
+                case PANEL_GREEN_TYPE:   return spriteManager->_green_animation0003; break;
+                case PANEL_PURPLE_TYPE:  return spriteManager->_purple_animation0003; break;
+            }
+                break;
+            case PANEL_FALL_FRAME_4:
+                switch (type)
+            {
+                case PANEL_RED_TYPE:     return spriteManager->_red_animation0004; break;
+                case PANEL_CYAN_TYPE:    return spriteManager->_blue_animation0004; break;
+                case PANEL_YELLOW_TYPE:  return spriteManager->_yellow_animation0004; break;
+                case PANEL_GREEN_TYPE:   return spriteManager->_green_animation0004; break;
+                case PANEL_PURPLE_TYPE:  return spriteManager->_purple_animation0004; break;
+            }
+                break;
+            case PANEL_FALL_FRAME_5:
+                switch (type)
+            {
+                case PANEL_RED_TYPE:     return spriteManager->_red_animation0005; break;
+                case PANEL_CYAN_TYPE:    return spriteManager->_blue_animation0005; break;
+                case PANEL_YELLOW_TYPE:  return spriteManager->_yellow_animation0005; break;
+                case PANEL_GREEN_TYPE:   return spriteManager->_green_animation0005; break;
+                case PANEL_PURPLE_TYPE:  return spriteManager->_purple_animation0005; break;
+            }
+                break;
+            case PANEL_FALL_FRAME_6:
+                switch (type)
+            {
+                case PANEL_RED_TYPE:     return spriteManager->_red_animation0006; break;
+                case PANEL_CYAN_TYPE:    return spriteManager->_blue_animation0006; break;
+                case PANEL_YELLOW_TYPE:  return spriteManager->_yellow_animation0006; break;
+                case PANEL_GREEN_TYPE:   return spriteManager->_green_animation0006; break;
+                case PANEL_PURPLE_TYPE:  return spriteManager->_purple_animation0006; break;
+            }
+                break;
+            case PANEL_FALL_FRAME_7:
+                switch (type)
+            {
+                case PANEL_RED_TYPE:     return spriteManager->_red_animation0007; break;
+                case PANEL_CYAN_TYPE:    return spriteManager->_blue_animation0007; break;
+                case PANEL_YELLOW_TYPE:  return spriteManager->_yellow_animation0007; break;
+                case PANEL_GREEN_TYPE:   return spriteManager->_green_animation0007; break;
+                case PANEL_PURPLE_TYPE:  return spriteManager->_purple_animation0007; break;
+            }
+                break;
+            case PANEL_FALL_FRAME_9:
+            case PANEL_FALL_FRAME_10:
+            case PANEL_FALL_FRAME_8:
+                switch (type)
+            {
+                case PANEL_RED_TYPE:     return spriteManager->_red_animation0008; break;
+                case PANEL_CYAN_TYPE:    return spriteManager->_blue_animation0008; break;
+                case PANEL_YELLOW_TYPE:  return spriteManager->_yellow_animation0008; break;
+                case PANEL_GREEN_TYPE:   return spriteManager->_green_animation0008; break;
+                case PANEL_PURPLE_TYPE:  return spriteManager->_purple_animation0008; break;
+                break;
+            }
+            break;
         }
         return NULL;
     }

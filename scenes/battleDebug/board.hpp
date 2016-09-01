@@ -76,6 +76,15 @@ class Board
     // Pokemon character data
     private: int _pokemonType;
 
+    // Slide Control
+    private: int _slideDelay;
+
+    // Alert Animation
+    private: char _shakeColumnMap;
+    private: char _previousShakeColumnMap;
+    private: int _shakeFrame;
+    private: int _shakeDelay;
+
     // Default Constructor, Builds a random set of panels, based on the
     // dimension provided as argument. The board origin point is determined
     // by pos argument.
@@ -102,6 +111,8 @@ class Board
         // save reference of board rules.
         this->_rules = _rules;
         _garbageDelay = 0;
+        _slideDelay = 0;
+        _shakeDelay = 0;
 
         // Create base container for board.
         _boardContainer = new Sprite();
@@ -123,6 +134,11 @@ class Board
         // Badge Container
         _badgeContainer = new Sprite ();
         GraphicEngine::_stage->AddChild(_badgeContainer);
+
+        // Shake Column Map
+        _shakeColumnMap = 0;
+        _previousShakeColumnMap = 0;
+        _shakeFrame = PANEL_SHAKE_FRAME_1;
 
         // UI Animation
         _UIGrabageWarningFlare = _animationManager->GenerateGarbageUIFlare(_wiiremote->GetPlayerNumber());
@@ -339,6 +355,20 @@ class Board
                     ShakeBoard(20);
                     break;
                 }
+                    // SHAKE OPERATION
+                    // format: [TYPE][XXXX][XXXX][XXXX][XXXX]
+                    // Shake board upon reques
+                case PAUSE_BOARD_OPERATION:
+                {
+                    PauseBoard(_changes[i]);
+                    break;
+                }
+
+                case SHAKE_COLUMN_OPERATION:
+                {
+                    ShakeColumn(_changes[i]);
+                    break;
+                }
             }
         }
         _changes.clear();
@@ -359,7 +389,16 @@ class Board
     // Update board update movement (Slide up/down depending on the rule).
     public: void Slide()
     {
-        _rules->Slide(_dimensions.getWidth(), _dimensions.getHeight(), _changes);
+        if (_slideDelay > 0)
+        {
+            _slideDelay--;
+            _rules->PauseBoardSlide();
+        }
+        else
+        {
+            _rules->ResumeBoardSlide();
+            _rules->Slide(_dimensions.getWidth(), _dimensions.getHeight(), _changes);
+        }
     }
 
     // Increases slide speed on key pressed
@@ -496,6 +535,8 @@ class Board
     // Debug function to drop garbage in the board.
     public: void DEBUGInput()
     {
+      Debug::Log("Test");
+      MakeConcreteGargabe();
     }
 
     private: void EmitGarbageFallingSequence ()
@@ -1048,7 +1089,7 @@ class Board
         unsigned int __garbageSourceY = ExtractTargetPanelY(change);
 
         // Update garbage object to reflect break state.
-        _boardLogic[__garbageSourceY][__garbageSourceX]->_wait = 30*(_frameBreakingGarbage++);
+        _boardLogic[__garbageSourceY][__garbageSourceX]->_wait = 15*(_frameBreakingGarbage++);
         _boardLogic[__garbageSourceY][__garbageSourceX]->_break_delay = 0;
         _boardLogic[__garbageSourceY][__garbageSourceX]->_in_chain = 0;
         _boardLogic[__garbageSourceY][__garbageSourceX]->_state = 15;
@@ -1110,6 +1151,7 @@ class Board
             __garbageSlice[i]->_state = 0;
         }
         _garbageList.push_back(__garbageSlice);
+        EmitGarbageFallingSequence ();
     }
 
 
@@ -1355,6 +1397,7 @@ class Board
         UpdateShake();
         AnimateGarbageBadges();
         UpdateGarbageDestruction();
+        UpdateAlertShake();
     }
 
     // Update the animation of each garbage being destroyed
@@ -1428,6 +1471,80 @@ class Board
             _currentShakeFrame = 0;
             _shakeSamples.clear();
         }
+    }
+
+    private: void PauseBoard(Change change)
+    {
+      unsigned int __duration = ExtractPausePeriod(change);
+
+      _slideDelay = __duration;
+    }
+
+    // Check if the board is in alert status
+    public: void CheckAlert ()
+    {
+        _rules->BoardAlert(_boardLogic, _dimensions.getWidth(), _dimensions.getHeight(), _changes);
+    }
+
+    public: void ShakeColumn (Change change)
+    {
+        int __targetColumn = ExtractTargetShakeColumn(change);
+        // Each column is stored as a 1 in the vaiable like
+        // 0 1 0 0 1 0 -> only the second and the firth columns shall shake.
+        _shakeColumnMap |= __targetColumn;
+    }
+
+    public: void UpdateAlertShake ()
+    {
+        for (int i = 0; i < _dimensions.getWidth(); i++)
+        {
+            if ((_shakeColumnMap>>i)&1) // Update alert shake animation
+            {
+                if (_shakeDelay == ALERT_SHAKE_DELAY)
+                {
+                  for (int j = 0; j < _dimensions.getHeight(); j++)
+                  {
+                      if (_boardLogic[j][i]->_type != PANEL_VOID_TYPE &&
+                      _boardLogic[j][i]->_type != PANEL_GARBAGE_TYPE &&
+                      _boardLogic[j][i]->_type != PANEL_CONCRETE_GARBAGE_TYPE)
+                      {
+                        _boardGraphics[j][i]->SetAsset(Utils::DecodeType(_boardLogic[j][i]->_type, _spriteManager, _shakeFrame),
+                                                       PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+                      }
+                  }
+                }
+            }
+            else if ((_previousShakeColumnMap>>i)&1) // Restore sprites to original
+            {
+              for (int j = 0; j < _dimensions.getHeight(); j++)
+              {
+                  if (_boardLogic[j][i]->_type != PANEL_VOID_TYPE &&
+                  _boardLogic[j][i]->_type != PANEL_GARBAGE_TYPE &&
+                  _boardLogic[j][i]->_type != PANEL_CONCRETE_GARBAGE_TYPE)
+                  {
+                    _boardGraphics[j][i]->SetAsset(Utils::DecodeType(_boardLogic[j][i]->_type, _spriteManager, PANEL_NORMAL_SPRITE),
+                                                   PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+                  }
+              }
+            }
+        }
+        // Update Delay
+        if (_shakeDelay == ALERT_SHAKE_DELAY)
+        {
+          _shakeFrame++;
+          _shakeDelay = 0;
+        }
+        else
+        {
+          _shakeDelay++;
+        }
+        if (_shakeFrame >= PANEL_SHAKE_FRAME_10)
+        {
+          _shakeFrame = PANEL_SHAKE_FRAME_1;
+        }
+        // Store data for next frame.
+        _previousShakeColumnMap = _shakeColumnMap;
+        _shakeColumnMap = 0;
     }
 
     // Default Constructor
