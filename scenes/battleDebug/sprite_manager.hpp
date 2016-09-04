@@ -966,6 +966,16 @@
 #include "../../assets/graphics/yellow_animation0007.h"
 #include "../../assets/graphics/yellow_animation0008.h"
 
+#include "../../assets/graphics/xc1_dark.h"
+#include "../../assets/graphics/xc1_electric.h"
+#include "../../assets/graphics/xc1_fairy.h"
+#include "../../assets/graphics/xc1_fighting.h"
+#include "../../assets/graphics/xc1_fire.h"
+#include "../../assets/graphics/xc1_leaf.h"
+#include "../../assets/graphics/xc1_metal.h"
+#include "../../assets/graphics/xc1_normal.h"
+#include "../../assets/graphics/xc1_psy.h"
+#include "../../assets/graphics/xc1_water.h"
 
 // Sprite manager class handles texture instances. It keeps a static reference to
 // each assets reference and deploy them as needed.
@@ -1970,6 +1980,17 @@ class SpriteManager
 
     public: GRRLIB_texImg* _garbage_transform_leaf;
 
+    public: GRRLIB_texImg* _xc1_dark;
+    public: GRRLIB_texImg* _xc1_electric;
+    public: GRRLIB_texImg* _xc1_fairy;
+    public: GRRLIB_texImg* _xc1_fighting;
+    public: GRRLIB_texImg* _xc1_fire;
+    public: GRRLIB_texImg* _xc1_leaf;
+    public: GRRLIB_texImg* _xc1_metal;
+    public: GRRLIB_texImg* _xc1_normal;
+    public: GRRLIB_texImg* _xc1_psy;
+    public: GRRLIB_texImg* _xc1_water;
+
     public: SpriteManager ()
     {
         _dred = GRRLIB_LoadTexture(dred);
@@ -2914,7 +2935,7 @@ class SpriteManager
         _blue_animation0007 = GRRLIB_LoadTexture(blue_animation0007);
         _blue_animation0008 = GRRLIB_LoadTexture(blue_animation0008);
 
-_gray_animation0001 = GRRLIB_LoadTexture(gray_animation0001);
+        _gray_animation0001 = GRRLIB_LoadTexture(gray_animation0001);
         _gray_animation0002 = GRRLIB_LoadTexture(gray_animation0002);
         _gray_animation0003 = GRRLIB_LoadTexture(gray_animation0003);
         _gray_animation0004 = GRRLIB_LoadTexture(gray_animation0004);
@@ -2923,7 +2944,7 @@ _gray_animation0001 = GRRLIB_LoadTexture(gray_animation0001);
         _gray_animation0007 = GRRLIB_LoadTexture(gray_animation0007);
         _gray_animation0008 = GRRLIB_LoadTexture(gray_animation0008);
 
-_green_animation0001 = GRRLIB_LoadTexture(green_animation0001);
+        _green_animation0001 = GRRLIB_LoadTexture(green_animation0001);
         _green_animation0002 = GRRLIB_LoadTexture(green_animation0002);
         _green_animation0003 = GRRLIB_LoadTexture(green_animation0003);
         _green_animation0004 = GRRLIB_LoadTexture(green_animation0004);
@@ -2932,7 +2953,7 @@ _green_animation0001 = GRRLIB_LoadTexture(green_animation0001);
         _green_animation0007 = GRRLIB_LoadTexture(green_animation0007);
         _green_animation0008 = GRRLIB_LoadTexture(green_animation0008);
 
-_purple_animation0001 = GRRLIB_LoadTexture(purple_animation0001);
+        _purple_animation0001 = GRRLIB_LoadTexture(purple_animation0001);
         _purple_animation0002 = GRRLIB_LoadTexture(purple_animation0002);
         _purple_animation0003 = GRRLIB_LoadTexture(purple_animation0003);
         _purple_animation0004 = GRRLIB_LoadTexture(purple_animation0004);
@@ -2941,7 +2962,7 @@ _purple_animation0001 = GRRLIB_LoadTexture(purple_animation0001);
         _purple_animation0007 = GRRLIB_LoadTexture(purple_animation0007);
         _purple_animation0008 = GRRLIB_LoadTexture(purple_animation0008);
 
-_red_animation0001 = GRRLIB_LoadTexture(red_animation0001);
+        _red_animation0001 = GRRLIB_LoadTexture(red_animation0001);
         _red_animation0002 = GRRLIB_LoadTexture(red_animation0002);
         _red_animation0003 = GRRLIB_LoadTexture(red_animation0003);
         _red_animation0004 = GRRLIB_LoadTexture(red_animation0004);
@@ -2950,7 +2971,7 @@ _red_animation0001 = GRRLIB_LoadTexture(red_animation0001);
         _red_animation0007 = GRRLIB_LoadTexture(red_animation0007);
         _red_animation0008 = GRRLIB_LoadTexture(red_animation0008);
 
-_yellow_animation0001 = GRRLIB_LoadTexture(yellow_animation0001);
+        _yellow_animation0001 = GRRLIB_LoadTexture(yellow_animation0001);
         _yellow_animation0002 = GRRLIB_LoadTexture(yellow_animation0002);
         _yellow_animation0003 = GRRLIB_LoadTexture(yellow_animation0003);
         _yellow_animation0004 = GRRLIB_LoadTexture(yellow_animation0004);
@@ -2958,6 +2979,17 @@ _yellow_animation0001 = GRRLIB_LoadTexture(yellow_animation0001);
         _yellow_animation0006 = GRRLIB_LoadTexture(yellow_animation0006);
         _yellow_animation0007 = GRRLIB_LoadTexture(yellow_animation0007);
         _yellow_animation0008 = GRRLIB_LoadTexture(yellow_animation0008);
+
+        _xc1_dark = GRRLIB_LoadTexture(xc1_dark);
+        _xc1_electric = GRRLIB_LoadTexture(xc1_electric);
+        _xc1_fairy = GRRLIB_LoadTexture(xc1_fairy);
+        _xc1_fighting = GRRLIB_LoadTexture(xc1_fighting);
+        _xc1_fire = GRRLIB_LoadTexture(xc1_fire);
+        _xc1_leaf = GRRLIB_LoadTexture(xc1_leaf);
+        _xc1_metal = GRRLIB_LoadTexture(xc1_metal);
+        _xc1_normal = GRRLIB_LoadTexture(xc1_normal);
+        _xc1_psy = GRRLIB_LoadTexture(xc1_psy);
+        _xc1_water = GRRLIB_LoadTexture(xc1_water);
     }
 
     public: GRRLIB_texImg * DecodeNumber (int number)

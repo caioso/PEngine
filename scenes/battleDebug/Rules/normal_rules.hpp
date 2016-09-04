@@ -142,8 +142,6 @@ class NormalRules : public RulesInterface
                         __checkBoard[_foundHorizontal[k].getX()][_foundHorizontal[k].getY()] = 1;
                         CheckGarbageContact(boardLogic, _foundHorizontal[k].getX(), _foundHorizontal[k].getY(), boardW, boardH, _garbageList);
 
-
-
                         __average_row += _foundHorizontal[k].getX();
                         __average_col += _foundHorizontal[k].getY();
                         __total++;
@@ -292,8 +290,16 @@ class NormalRules : public RulesInterface
         }
     }
 
+    // Sends Garbage_operation to board interpreter. Creates a new blocky garbage
+    void GenerateGarbageFromChain(int chain_size, vector<Change> &changes)
+    {
+        CreateGarbage(6, 2, 0, changes);
+    }
+
     // Sends Garbage_operation to board interpreter. This creates new objects.
-    //
+    // @param combo_size: Combo size;
+    // @param changes changes vector;
+    // @param initialPoistion: initial garbage position;
     void GenerateGarbageFromCombo(int combo_size, vector<Change> &changes, int initialPoistion)
     {
         switch (combo_size)
@@ -640,7 +646,7 @@ class NormalRules : public RulesInterface
                                 FallGarbage(i, j, changes, _garbageList);
                         }
                     }
-                    else if (__fallCheckBoard[i][j]._state == 4)
+                    else if (__fallCheckBoard[i][j]._state == 4) // if panel is wating to fall
                     {
                         if (_boardLogic[i][j]->_wait == 0)
                         {
@@ -773,11 +779,11 @@ class NormalRules : public RulesInterface
             }
         }
 
-        CheckChainEnd ();
+        CheckChainEndAndEmitGarbage (changes);
 
     }
 
-    private: void CheckChainEnd ()
+    private: void CheckChainEndAndEmitGarbage (vector<Change> &changes)
     {
         // Check chain availability
         if (_chin_limit != 0)
@@ -785,8 +791,10 @@ class NormalRules : public RulesInterface
             _chin_limit--;
             if (_chin_limit == 0)
             {
-                // Play Chain Fanfare here.
+                // If the chain is over, generate Garbage
+                GenerateGarbageFromChain(_current_chain, changes);
 
+                // Play Chain Fanfare here
                 _current_chain = 0;
             }
         }

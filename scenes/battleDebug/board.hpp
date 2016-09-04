@@ -47,6 +47,7 @@ class Board
     private: Sprite * _badgeContainer;
     private: vector<GarbageBadge *> _garbageBadges;
     private: bool _garbageCanFall;
+    private: int _garbageLoadHeight;
     private: int _frameBreakingGarbage;
 
     // Rival Board Reference
@@ -111,6 +112,7 @@ class Board
         // save reference of board rules.
         this->_rules = _rules;
         _garbageDelay = 0;
+        _garbageLoadHeight = 0;
         _slideDelay = 0;
         _shakeDelay = 0;
 
@@ -479,8 +481,6 @@ class Board
             return;
         }
 
-        _garbageCanFall = false;
-
         if (!CanGarbageFall())
           return;
 
@@ -500,9 +500,9 @@ class Board
                 _boardLogic[0][i]->_in_chain = _garbageList[0][i]->_in_chain;
                 _boardLogic[0][i]->_state = 1;
 
-                if (_garbageList[0][i]->_positionX == _garbageList[0][i]->_sourceX)
+                if (_garbageList[0][i]->_positionX == _garbageList[0][i]->_sourceX && _garbageLoadHeight == _boardLogic[0][i]->_height)
                 {
-                    _boardGraphics[0][i]->SetAsset(Utils::DecodeGarbageType(_pokemonType, 6, 1, _spriteManager),
+                    _boardGraphics[0][i]->SetAsset(Utils::DecodeGarbageType(_pokemonType, _boardLogic[0][i]->_width, _boardLogic[0][i]->_height, _spriteManager),
                                                    PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
                     _boardGraphics[0][i]->_visibility = visible;
                 }
@@ -517,6 +517,16 @@ class Board
             delete _garbageList[0][i];
         delete[] _garbageList[0];
         _garbageList.erase (_garbageList.begin());
+
+        // only when it is zero is that the next garbage will be allowed to fall;
+        _garbageLoadHeight--;
+
+        // check if the current garbage have fully fallen
+        if (_garbageLoadHeight <= 0)
+        {
+          _garbageLoadHeight = 0;
+          _garbageCanFall = false;
+        }
     }
 
     private: bool CanGarbageFall ()
@@ -535,8 +545,10 @@ class Board
     // Debug function to drop garbage in the board.
     public: void DEBUGInput()
     {
-      Debug::Log("Test");
-      MakeConcreteGargabe();
+      MakeGargabe(3, 1, 2);
+      MakeGargabe(3, 1, 3);
+      MakeGargabe(6, 2, 0);
+      MakeGargabe(4, 1, 0);
     }
 
     private: void EmitGarbageFallingSequence ()
@@ -601,12 +613,22 @@ class Board
             {
               if (_garbageBadges[0]->_lifeTime == 50 && _garbageBadges[0]->_appearing == true)
               {
-                  if (CanGarbageFall())
+                  if (CanGarbageFall() && _garbageLoadHeight == 0)
                   {
                     _garbageBadges[0]->_lifeTime = 0;
                     _garbageBadges[0]->_finalPosition = 0;
                     _garbageBadges[0]->_appearing = false;
                     AdjustBadgeTargetPositions();
+
+                    // Update _garbageLoadHeight to hold the height of the garbage to fall.
+                    for (int k = 0; k < _dimensions.getWidth(); k++)
+                    {
+                      if (_garbageList[0][k]->_type == PANEL_GARBAGE_TYPE)
+                      {
+                        _garbageLoadHeight = _garbageList[0][k]->_height;
+                        break;
+                      }
+                    }
                     _garbageCanFall = true;
                   }
               }
@@ -866,7 +888,7 @@ class Board
             if (__targetX == (unsigned)_boardLogic[__targetY][__targetX]->_sourceX)
             {
                 _boardGraphics[__targetY + 1][__targetX]->SetAsset(
-                                            Utils::DecodeGarbageType(_pokemonType, 6, 1, _spriteManager),
+                                            Utils::DecodeGarbageType(_pokemonType, _boardLogic[__targetY][__targetX]->_width,  _boardLogic[__targetY][__targetX]->_height, _spriteManager),
                                                                PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
             }
             else
@@ -973,7 +995,7 @@ class Board
                             {
                               if (_boardLogic[j][k]->_sourceX == k)
                               {
-                                  _boardGraphics[j][k]->SetAsset(Utils::DecodeGarbageType(_pokemonType, 6, 1, _spriteManager),PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+                                  _boardGraphics[j][k]->SetAsset(Utils::DecodeGarbageType(_pokemonType, _boardLogic[j][k]->_width, _boardLogic[j][k]->_height, _spriteManager),PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
                               }
                               else
                               {
@@ -1428,7 +1450,7 @@ class Board
                                                        PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
 
                         // Update panel status
-                        _boardLogic[i][j]->_state = 16;
+                        _boardLogic[i][j]->_state = 0;
                     }
                     else
                     {
