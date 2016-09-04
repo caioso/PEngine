@@ -56,8 +56,7 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
                     __tmp = NULL;
                     continue;
                 }
-
-                GRRLIB_DrawImg(__tmp->_x + __x, __tmp->_y + __y, __tmp->GetTexture(), __tmp->_rotation, __tmp->_scaleX, __tmp->_scaleY, PPL_RGBA(255, 255, 255, __tmp->_alpha));
+                GRRLIB_DrawImg(__tmp->_x + __x + __tmp->_offsetX, __tmp->_y + __y + __tmp->_offsetY, __tmp->GetTexture(), __tmp->_rotation, __tmp->_scaleX, __tmp->_scaleY, PPL_RGBA(255, 255, 255, __tmp->_alpha));
             }
         }
         //else

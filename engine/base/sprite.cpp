@@ -1,7 +1,7 @@
 #include "sprite.hpp"
 
 Sprite::Sprite (GRRLIB_texImg* asset) :
-                _x(0), _y(0), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(1), _alpha(255), _tex(asset),
+                _x(0), _y(0), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(1), _alpha(255), _tex(asset), _offsetX(0), _offsetY(0),
                 _current_frame(0), _is_playing(false), _repeat(true), _auto_destroy(true), _animation_delay(0), _current_delay(0)
 {
     _isAnimating = false;
@@ -10,7 +10,7 @@ Sprite::Sprite (GRRLIB_texImg* asset) :
 }
 
 Sprite::Sprite (GRRLIB_texImg* asset, float width, float height) :
-                _x(0), _y(0), _width(width), _height(height), _rotation(0), _scaleX(1), _scaleY(1), _alpha(255), _tex(asset),
+                _x(0), _y(0), _width(width), _height(height), _rotation(0), _scaleX(1), _scaleY(1), _alpha(255), _tex(asset), _offsetX(0), _offsetY(0),
                 _current_frame(0), _is_playing(false), _repeat(true), _auto_destroy(true), _animation_delay(0), _current_delay(0)
 {
     _isAnimating = false;
@@ -19,7 +19,7 @@ Sprite::Sprite (GRRLIB_texImg* asset, float width, float height) :
 }
 
 Sprite::Sprite (GRRLIB_texImg* asset, float x, float y, float width, float height) :
-                _x(x), _y(y), _width(width), _height(height), _rotation(0), _alpha(255), _tex(asset),
+                _x(x), _y(y), _width(width), _height(height), _rotation(0), _alpha(255), _tex(asset), _offsetX(0), _offsetY(0),
                 _current_frame(0), _is_playing(false), _repeat(true), _auto_destroy(true), _animation_delay(0), _current_delay(0)
 {
     _scaleX = 1;
@@ -29,11 +29,13 @@ Sprite::Sprite (GRRLIB_texImg* asset, float x, float y, float width, float heigh
     _parent = NULL;
 }
 
-void Sprite::SetAsset (GRRLIB_texImg* asset, float width, float height)
+void Sprite::SetAsset (GRRLIB_texImg* asset, float width, float height, int offsetX, int offsetY)
 {
     _width = width;
     _height = height;
-    
+    _offsetX = offsetX;
+    _offsetY = offsetY;
+
     // If the same texture is assigned, do nothing.
     if (_tex != asset)
         _tex = asset;
@@ -97,7 +99,7 @@ bool Sprite::RegisterFrame (GRRLIB_texImg * _frame)
     if (_frames.size() == 0)
         SetAsset (_frame, _width, _height);
     _frames.push_back(_frame);
-    
+
     Trajectory _tr;
     _tr._point.setX(0);
     _tr._point.setY(0);
@@ -111,7 +113,7 @@ bool Sprite::RegisterFrameWithTrajectory (GRRLIB_texImg * _frame, int _x, int _y
     if (_frames.size() == 0)
         SetAsset (_frame, _width, _height);
     _frames.push_back(_frame);
-    
+
     Trajectory _tr;
     _tr._point.setX(_x);
     _tr._point.setY(_y);
@@ -144,7 +146,7 @@ void Sprite::GotoFrame (unsigned int target_frame)
     {
         _current_frame = target_frame;
     }
-    
+
     // Set asset
     SetAsset (_frames[_current_frame], _width, _height);
 }

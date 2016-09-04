@@ -31,6 +31,8 @@ class Sprite
     private: bool _isAnimating;
     private: GRRLIB_texImg* _tex;
     private: vector<Sprite*> _children;
+    public: int _offsetX;
+    public: int _offsetY;
 
     // Animation
     public: vector<GRRLIB_texImg*> _frames;
@@ -44,12 +46,12 @@ class Sprite
 
     // Generic Constructor Method.
     // This Constructor makes sure the Sprite position is set to (0,0).
-    public: Sprite () : _x(0), _y(0), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(1), _alpha(255), _parent(NULL), _tex(NULL), _current_frame(0), _is_playing(false), _repeat(true), _auto_destroy(true), _animation_delay(0), _current_delay(0) {}
+    public: Sprite () : _x(0), _y(0), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(1), _alpha(255), _parent(NULL), _tex(NULL), _offsetX(0), _offsetY(0), _current_frame(0), _is_playing(false), _repeat(true), _auto_destroy(true), _animation_delay(0), _current_delay(0) {}
 
     // Coordinate defining constructor. Width and height set null.
     // @param x: asset x coordinate.
     // @param y: asset y coordinate.
-    public: Sprite (float x, float y) : _x(x), _y(y), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(0), _alpha(255), _parent(NULL), _tex(NULL), _current_frame(0), _is_playing(false), _repeat(true), _auto_destroy(true), _animation_delay(0), _current_delay(0) {}
+    public: Sprite (float x, float y) : _x(x), _y(y), _width(0), _height(0), _rotation(0), _scaleX(1), _scaleY(0), _alpha(255), _parent(NULL), _tex(NULL), _offsetX(0), _offsetY(0),  _current_frame(0), _is_playing(false), _repeat(true), _auto_destroy(true), _animation_delay(0), _current_delay(0) {}
 
     // Asset defining constructor. The Sprite coordinates are set to (0,0). Width and height set null.
     // @param asset: unsigned char array of the asset.
@@ -77,7 +79,11 @@ class Sprite
 
     // Manually loads an asset object into the Sprite.
     // @param asset: asset array.
-    public: void SetAsset (GRRLIB_texImg* asset, float width, float height);
+    // @param width: asset width.
+    // @param height: asset height.
+    // @param offsetX: sprite coordinate offset X (default 0).
+    // @param offsetY: sprite coordinate offset Y (default 0).
+    public: void SetAsset (GRRLIB_texImg* asset, float width, float height, int offsetX = 0, int offsetY = 0);
 
     // Add child Sprite to the current Sprite children list.
     // @param child: Child sprite to be stored in this Sprite children list.

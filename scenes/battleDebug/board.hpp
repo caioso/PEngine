@@ -500,10 +500,10 @@ class Board
                 _boardLogic[0][i]->_in_chain = _garbageList[0][i]->_in_chain;
                 _boardLogic[0][i]->_state = 1;
 
-                if (_garbageList[0][i]->_positionX == _garbageList[0][i]->_sourceX && _garbageLoadHeight == _boardLogic[0][i]->_height)
+                if (_garbageList[0][i]->_positionX == _garbageList[0][i]->_sourceX)
                 {
                     _boardGraphics[0][i]->SetAsset(Utils::DecodeGarbageType(_pokemonType, _boardLogic[0][i]->_width, _boardLogic[0][i]->_height, _spriteManager),
-                                                   PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+                                                   PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE, 0, -((_boardLogic[0][i]->_height - 1)*PANEL_IMAGE_SIZE));
                     _boardGraphics[0][i]->_visibility = visible;
                 }
                 else
@@ -885,11 +885,12 @@ class Board
         if (__targetType == PANEL_GARBAGE_TYPE || __targetType == PANEL_CONCRETE_GARBAGE_TYPE)
         {
             // Show garbage graphics only for the gargabge source.
-            if (__targetX == (unsigned)_boardLogic[__targetY][__targetX]->_sourceX)
+            if (__targetX == (unsigned)_boardLogic[__targetY][__targetX]->_sourceX &&
+                __targetY == (unsigned)_boardLogic[__targetY][__targetX]->_sourceY)
             {
                 _boardGraphics[__targetY + 1][__targetX]->SetAsset(
                                             Utils::DecodeGarbageType(_pokemonType, _boardLogic[__targetY][__targetX]->_width,  _boardLogic[__targetY][__targetX]->_height, _spriteManager),
-                                                               PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+                                                               PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE, 0, -((_boardLogic[__targetY][__targetX]->_height - 1)*PANEL_IMAGE_SIZE));
             }
             else
             {
@@ -993,9 +994,9 @@ class Board
                             }
                             else
                             {
-                              if (_boardLogic[j][k]->_sourceX == k)
+                              if (_boardLogic[j][k]->_sourceX == k && _boardLogic[j][k]->_sourceY == j)
                               {
-                                  _boardGraphics[j][k]->SetAsset(Utils::DecodeGarbageType(_pokemonType, _boardLogic[j][k]->_width, _boardLogic[j][k]->_height, _spriteManager),PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+                                  _boardGraphics[j][k]->SetAsset(Utils::DecodeGarbageType(_pokemonType, _boardLogic[j][k]->_width, _boardLogic[j][k]->_height, _spriteManager),PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE, 0, -((_boardLogic[j][k]->_height - 1)*PANEL_IMAGE_SIZE));
                               }
                               else
                               {
