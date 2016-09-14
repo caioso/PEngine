@@ -500,10 +500,10 @@ class Board
                 _boardLogic[0][i]->_in_chain = _garbageList[0][i]->_in_chain;
                 _boardLogic[0][i]->_state = 1;
 
-                if (_garbageList[0][i]->_positionX == _garbageList[0][i]->_sourceX)
+                if (_garbageList[0][i]->_positionY == 0 &&
+                    _garbageList[0][i]->_positionX == 0)
                 {
-                    _boardGraphics[0][i]->SetAsset(Utils::DecodeGarbageType(_pokemonType, _boardLogic[0][i]->_width, _boardLogic[0][i]->_height, _spriteManager),
-                                                   PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE, 0, -((_boardLogic[0][i]->_height - 1)*PANEL_IMAGE_SIZE));
+                    DisplayGarbageSprite(0, i);
                     _boardGraphics[0][i]->_visibility = visible;
                 }
                 else
@@ -545,10 +545,11 @@ class Board
     // Debug function to drop garbage in the board.
     public: void DEBUGInput()
     {
-      MakeGargabe(3, 1, 2);
-      MakeGargabe(3, 1, 3);
-      MakeGargabe(6, 2, 0);
-      MakeGargabe(4, 1, 0);
+      //MakeGargabe(3, 1, 2);
+      //MakeGargabe(3, 1, 3);
+      //MakeGargabe(6, 2, 0);
+      //MakeGargabe(4, 1, 0);
+      MakeGargabe(6, 7, 0);
     }
 
     private: void EmitGarbageFallingSequence ()
@@ -888,9 +889,8 @@ class Board
             if (__targetX == (unsigned)_boardLogic[__targetY][__targetX]->_sourceX &&
                 __targetY == (unsigned)_boardLogic[__targetY][__targetX]->_sourceY)
             {
-                _boardGraphics[__targetY + 1][__targetX]->SetAsset(
-                                            Utils::DecodeGarbageType(_pokemonType, _boardLogic[__targetY][__targetX]->_width,  _boardLogic[__targetY][__targetX]->_height, _spriteManager),
-                                                               PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE, 0, -((_boardLogic[__targetY][__targetX]->_height - 1)*PANEL_IMAGE_SIZE));
+
+                DisplayGarbageSprite(__targetY, __targetX, 1);
             }
             else
             {
@@ -930,6 +930,19 @@ class Board
         _boardLogic[__targetY][__targetX]->_sourceY = -1;
         _boardLogic[__targetY][__targetX]->_width = -1;
         _boardLogic[__targetY][__targetX]->_height = -1;
+
+    }
+
+    // Display garabge sprite in a given position (with possibly different row offset).
+    // @param i: row index
+    // @param j: column index
+    // @param offset: row offset
+    private: void DisplayGarbageSprite (int i, int j, int offset = 0)
+    {
+      int __extraSpace = (_boardLogic[i][j]->_height - 1) != 0? _boardLogic[i][j]->_height - 1 : 0;
+      _boardGraphics[i + offset][j]->SetAsset(
+                                  Utils::DecodeGarbageType(_pokemonType, _boardLogic[i][j]->_width,  _boardLogic[i][j]->_height, _spriteManager),
+                                                     PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE, 0, -((_boardLogic[i][j]->_height - 1)*PANEL_IMAGE_SIZE) + __extraSpace);
 
     }
 
@@ -996,7 +1009,7 @@ class Board
                             {
                               if (_boardLogic[j][k]->_sourceX == k && _boardLogic[j][k]->_sourceY == j)
                               {
-                                  _boardGraphics[j][k]->SetAsset(Utils::DecodeGarbageType(_pokemonType, _boardLogic[j][k]->_width, _boardLogic[j][k]->_height, _spriteManager),PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE, 0, -((_boardLogic[j][k]->_height - 1)*PANEL_IMAGE_SIZE));
+                                  DisplayGarbageSprite(j, k);
                               }
                               else
                               {

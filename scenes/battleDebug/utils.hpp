@@ -110,6 +110,176 @@ class Utils
             }
             break;
           }
+          case 3:
+          {
+            switch (type)
+            {
+              case DARK_TYPE: return spriteManager->_xc2_dark; break;
+                case FIRE_TYPE: return spriteManager->_xc2_fire; break;
+                case WATER_TYPE: return spriteManager->_xc2_water; break;
+                case GRASS_TYPE: return spriteManager->_xc2_leaf; break;
+                case ELECTRIC_TYPE: return spriteManager->_xc2_electric; break;
+                case PSYCHIC_TYPE: return spriteManager->_xc2_psy; break;
+                case METAL_TYPE: return spriteManager->_xc2_metal; break;
+                case FIGHTING_TYPE: return spriteManager->_xc2_fighting; break;
+                case FAIRY_TYPE: return spriteManager->_xc2_fairy; break;
+                case NORMAL_TYPE: return spriteManager->_xc2_normal; break;
+              }
+              break;
+          }
+          case 4:
+          {
+            switch (type)
+            {
+                case DARK_TYPE: return spriteManager->_xc3_dark; break;
+                case FIRE_TYPE: return spriteManager->_xc3_fire; break;
+                case WATER_TYPE: return spriteManager->_xc3_water; break;
+                case GRASS_TYPE: return spriteManager->_xc3_leaf; break;
+                case ELECTRIC_TYPE: return spriteManager->_xc3_electric; break;
+                case PSYCHIC_TYPE: return spriteManager->_xc3_psy; break;
+                case METAL_TYPE: return spriteManager->_xc3_metal; break;
+                case FIGHTING_TYPE: return spriteManager->_xc3_fighting; break;
+                case FAIRY_TYPE: return spriteManager->_xc3_fairy; break;
+                case NORMAL_TYPE: return spriteManager->_xc3_normal; break;
+            }
+            break;
+          }
+          case 5:
+          {
+            switch (type)
+            {
+              case DARK_TYPE: return spriteManager->_xc4_dark; break;
+                case FIRE_TYPE: return spriteManager->_xc4_fire; break;
+                case WATER_TYPE: return spriteManager->_xc4_water; break;
+                case GRASS_TYPE: return spriteManager->_xc4_leaf; break;
+                case ELECTRIC_TYPE: return spriteManager->_xc4_electric; break;
+                case PSYCHIC_TYPE: return spriteManager->_xc4_psy; break;
+                case METAL_TYPE: return spriteManager->_xc4_metal; break;
+                case FIGHTING_TYPE: return spriteManager->_xc4_fighting; break;
+                case FAIRY_TYPE: return spriteManager->_xc4_fairy; break;
+                case NORMAL_TYPE: return spriteManager->_xc4_normal; break;
+            }
+            break;
+          }
+          case 6:
+          {
+            switch (type)
+            {
+              case DARK_TYPE: return spriteManager->_xc5_dark; break;
+                case FIRE_TYPE: return spriteManager->_xc5_fire; break;
+                case WATER_TYPE: return spriteManager->_xc5_water; break;
+                case GRASS_TYPE: return spriteManager->_xc5_leaf; break;
+                case ELECTRIC_TYPE: return spriteManager->_xc5_electric; break;
+                case PSYCHIC_TYPE: return spriteManager->_xc5_psy; break;
+                case METAL_TYPE: return spriteManager->_xc5_metal; break;
+                case FIGHTING_TYPE: return spriteManager->_xc5_fighting; break;
+                case FAIRY_TYPE: return spriteManager->_xc5_fairy; break;
+                case NORMAL_TYPE: return spriteManager->_xc5_normal; break;
+            }
+            break;
+          }
+          case 7:
+          {
+            switch (type)
+            {
+            case DARK_TYPE: return spriteManager->_xc6_dark; break;
+                case FIRE_TYPE: return spriteManager->_xc6_fire; break;
+                case WATER_TYPE: return spriteManager->_xc6_water; break;
+                case GRASS_TYPE: return spriteManager->_xc6_leaf; break;
+                case ELECTRIC_TYPE: return spriteManager->_xc6_electric; break;
+                case PSYCHIC_TYPE: return spriteManager->_xc6_psy; break;
+                case METAL_TYPE: return spriteManager->_xc6_metal; break;
+                case FIGHTING_TYPE: return spriteManager->_xc6_fighting; break;
+                case FAIRY_TYPE: return spriteManager->_xc6_fairy; break;
+                case NORMAL_TYPE: return spriteManager->_xc6_normal; break;
+              }
+              break;
+          }
+          case 8:
+          {
+            switch (type)
+            {
+              case DARK_TYPE: return spriteManager->_xc7_dark; break;
+                case FIRE_TYPE: return spriteManager->_xc7_fire; break;
+                case WATER_TYPE: return spriteManager->_xc7_water; break;
+                case GRASS_TYPE: return spriteManager->_xc7_leaf; break;
+                case ELECTRIC_TYPE: return spriteManager->_xc7_electric; break;
+                case PSYCHIC_TYPE: return spriteManager->_xc7_psy; break;
+                case METAL_TYPE: return spriteManager->_xc7_metal; break;
+                case FIGHTING_TYPE: return spriteManager->_xc7_fighting; break;
+                case FAIRY_TYPE: return spriteManager->_xc7_fairy; break;
+                case NORMAL_TYPE: return spriteManager->_xc7_normal; break;
+            }
+            break;
+          }
+          case 9:
+          {
+            switch (type)
+            {
+              case DARK_TYPE: return spriteManager->_xc8_dark; break;
+                  case FIRE_TYPE: return spriteManager->_xc8_fire; break;
+                  case WATER_TYPE: return spriteManager->_xc8_water; break;
+                  case GRASS_TYPE: return spriteManager->_xc8_leaf; break;
+                  case ELECTRIC_TYPE: return spriteManager->_xc8_electric; break;
+                  case PSYCHIC_TYPE: return spriteManager->_xc8_psy; break;
+                  case METAL_TYPE: return spriteManager->_xc8_metal; break;
+                  case FIGHTING_TYPE: return spriteManager->_xc8_fighting; break;
+                  case FAIRY_TYPE: return spriteManager->_xc8_fairy; break;
+                  case NORMAL_TYPE: return spriteManager->_xc8_normal; break;
+            }
+            break;
+          }
+          case 10:
+          {
+            switch (type)
+            {
+              case DARK_TYPE: return spriteManager->_xc9_dark; break;
+                case FIRE_TYPE: return spriteManager->_xc9_fire; break;
+                case WATER_TYPE: return spriteManager->_xc9_water; break;
+                case GRASS_TYPE: return spriteManager->_xc9_leaf; break;
+                case ELECTRIC_TYPE: return spriteManager->_xc9_electric; break;
+                case PSYCHIC_TYPE: return spriteManager->_xc9_psy; break;
+                case METAL_TYPE: return spriteManager->_xc9_metal; break;
+                case FIGHTING_TYPE: return spriteManager->_xc9_fighting; break;
+                case FAIRY_TYPE: return spriteManager->_xc9_fairy; break;
+                case NORMAL_TYPE: return spriteManager->_xc9_normal; break;
+            }
+            break;
+          }
+          case 11:
+          {
+            switch (type)
+            {
+              case DARK_TYPE: return spriteManager->_xc10_dark; break;
+                case FIRE_TYPE: return spriteManager->_xc10_fire; break;
+                case WATER_TYPE: return spriteManager->_xc10_water; break;
+                case GRASS_TYPE: return spriteManager->_xc10_leaf; break;
+                case ELECTRIC_TYPE: return spriteManager->_xc10_electric; break;
+                case PSYCHIC_TYPE: return spriteManager->_xc10_psy; break;
+                case METAL_TYPE: return spriteManager->_xc10_metal; break;
+                case FIGHTING_TYPE: return spriteManager->_xc10_fighting; break;
+                case FAIRY_TYPE: return spriteManager->_xc10_fairy; break;
+                case NORMAL_TYPE: return spriteManager->_xc10_normal; break;
+            }
+            break;
+          }
+          case 12:
+          {
+            switch (type)
+            {
+              case DARK_TYPE: return spriteManager->_xc11_dark; break;
+                case FIRE_TYPE: return spriteManager->_xc11_fire; break;
+                case WATER_TYPE: return spriteManager->_xc11_water; break;
+                case GRASS_TYPE: return spriteManager->_xc11_leaf; break;
+                case ELECTRIC_TYPE: return spriteManager->_xc11_electric; break;
+                case PSYCHIC_TYPE: return spriteManager->_xc11_psy; break;
+                case METAL_TYPE: return spriteManager->_xc11_metal; break;
+                case FIGHTING_TYPE: return spriteManager->_xc11_fighting; break;
+                case FAIRY_TYPE: return spriteManager->_xc11_fairy; break;
+                case NORMAL_TYPE: return spriteManager->_xc11_normal; break;
+            }
+            break;
+          }
       }
         return NULL;
     }

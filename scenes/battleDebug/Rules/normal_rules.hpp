@@ -495,6 +495,7 @@ class NormalRules : public RulesInterface
             for (int l = __sourceX; l < __width; l++)
             {
                 if (k > 0 && _boardLogic[k - 1][l]->_type == PANEL_GARBAGE_TYPE &&
+                    _boardLogic[k - 1][l]->_sourceY >= 0 && _boardLogic[k - 1][l]->_sourceX >= 0 &&
                     __checkBoard[_boardLogic[k - 1][l]->_sourceY][_boardLogic[k - 1][l]->_sourceX] != 2 &&
                     __checkBoard[_boardLogic[k - 1][l]->_sourceY][_boardLogic[k - 1][l]->_sourceX] != 3)
                 {
@@ -503,6 +504,7 @@ class NormalRules : public RulesInterface
                 }
 
                 if (k < boardH - 1 && _boardLogic[k + 1][l]->_type == PANEL_GARBAGE_TYPE &&
+                    _boardLogic[k + 1][l]->_sourceY >= 0 && _boardLogic[k + 1][l]->_sourceX >= 0 &&
                     __checkBoard[_boardLogic[k + 1][l]->_sourceY][_boardLogic[k + 1][l]->_sourceX] != 2 &&
                     __checkBoard[_boardLogic[k + 1][l]->_sourceY][_boardLogic[k + 1][l]->_sourceX] != 3)
                 {
@@ -511,6 +513,7 @@ class NormalRules : public RulesInterface
                 }
 
                 if (l > 0 && _boardLogic[k][l - 1]->_type == PANEL_GARBAGE_TYPE &&
+                    _boardLogic[k][l - 1]->_sourceY >= 0 && _boardLogic[k][l - 1]->_sourceX >= 0 &&
                     __checkBoard[_boardLogic[k][l - 1]->_sourceY][_boardLogic[k][l - 1]->_sourceX] != 2 &&
                     __checkBoard[_boardLogic[k][l - 1]->_sourceY][_boardLogic[k][l - 1]->_sourceX] != 3)
                 {
@@ -519,6 +522,7 @@ class NormalRules : public RulesInterface
                 }
 
                 if (l < boardW - 1 && _boardLogic[k][l + 1]->_type == PANEL_GARBAGE_TYPE &&
+                    _boardLogic[k][l + 1]->_sourceY >= 0 && _boardLogic[k][l + 1]->_sourceX >= 0 &&
                     __checkBoard[_boardLogic[k][l + 1]->_sourceY][_boardLogic[k][l + 1]->_sourceX] != 2 &&
                     __checkBoard[_boardLogic[k][l + 1]->_sourceY][_boardLogic[k][l + 1]->_sourceX] != 3)
                 {
@@ -548,7 +552,7 @@ class NormalRules : public RulesInterface
 
             for ( int l = __initialX; l < __initialX + __width; l++)
             {
-                if (__checkBoard[k][l] == 2)
+                if (k >= 0 &&__checkBoard[k][l] == 2)
                 {
                     return;
                 }

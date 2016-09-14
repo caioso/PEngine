@@ -977,6 +977,116 @@
 #include "../../assets/graphics/xc1_psy.h"
 #include "../../assets/graphics/xc1_water.h"
 
+#include "../../assets/graphics/xc2_dark.h"
+#include "../../assets/graphics/xc2_electric.h"
+#include "../../assets/graphics/xc2_fairy.h"
+#include "../../assets/graphics/xc2_fighting.h"
+#include "../../assets/graphics/xc2_fire.h"
+#include "../../assets/graphics/xc2_leaf.h"
+#include "../../assets/graphics/xc2_metal.h"
+#include "../../assets/graphics/xc2_normal.h"
+#include "../../assets/graphics/xc2_psy.h"
+#include "../../assets/graphics/xc2_water.h"
+
+#include "../../assets/graphics/xc3_dark.h"
+#include "../../assets/graphics/xc3_electric.h"
+#include "../../assets/graphics/xc3_fairy.h"
+#include "../../assets/graphics/xc3_fighting.h"
+#include "../../assets/graphics/xc3_fire.h"
+#include "../../assets/graphics/xc3_leaf.h"
+#include "../../assets/graphics/xc3_metal.h"
+#include "../../assets/graphics/xc3_normal.h"
+#include "../../assets/graphics/xc3_psy.h"
+#include "../../assets/graphics/xc3_water.h"
+
+#include "../../assets/graphics/xc4_dark.h"
+#include "../../assets/graphics/xc4_electric.h"
+#include "../../assets/graphics/xc4_fairy.h"
+#include "../../assets/graphics/xc4_fighting.h"
+#include "../../assets/graphics/xc4_fire.h"
+#include "../../assets/graphics/xc4_leaf.h"
+#include "../../assets/graphics/xc4_metal.h"
+#include "../../assets/graphics/xc4_normal.h"
+#include "../../assets/graphics/xc4_psy.h"
+#include "../../assets/graphics/xc4_water.h"
+
+#include "../../assets/graphics/xc5_dark.h"
+#include "../../assets/graphics/xc5_electric.h"
+#include "../../assets/graphics/xc5_fairy.h"
+#include "../../assets/graphics/xc5_fighting.h"
+#include "../../assets/graphics/xc5_fire.h"
+#include "../../assets/graphics/xc5_leaf.h"
+#include "../../assets/graphics/xc5_metal.h"
+#include "../../assets/graphics/xc5_normal.h"
+#include "../../assets/graphics/xc5_psy.h"
+#include "../../assets/graphics/xc5_water.h"
+
+#include "../../assets/graphics/xc6_dark.h"
+#include "../../assets/graphics/xc6_electric.h"
+#include "../../assets/graphics/xc6_fairy.h"
+#include "../../assets/graphics/xc6_fighting.h"
+#include "../../assets/graphics/xc6_fire.h"
+#include "../../assets/graphics/xc6_leaf.h"
+#include "../../assets/graphics/xc6_metal.h"
+#include "../../assets/graphics/xc6_normal.h"
+#include "../../assets/graphics/xc6_psy.h"
+#include "../../assets/graphics/xc6_water.h"
+
+#include "../../assets/graphics/xc7_dark.h"
+#include "../../assets/graphics/xc7_electric.h"
+#include "../../assets/graphics/xc7_fairy.h"
+#include "../../assets/graphics/xc7_fighting.h"
+#include "../../assets/graphics/xc7_fire.h"
+#include "../../assets/graphics/xc7_leaf.h"
+#include "../../assets/graphics/xc7_metal.h"
+#include "../../assets/graphics/xc7_normal.h"
+#include "../../assets/graphics/xc7_psy.h"
+#include "../../assets/graphics/xc7_water.h"
+
+#include "../../assets/graphics/xc8_dark.h"
+#include "../../assets/graphics/xc8_electric.h"
+#include "../../assets/graphics/xc8_fairy.h"
+#include "../../assets/graphics/xc8_fighting.h"
+#include "../../assets/graphics/xc8_fire.h"
+#include "../../assets/graphics/xc8_leaf.h"
+#include "../../assets/graphics/xc8_metal.h"
+#include "../../assets/graphics/xc8_normal.h"
+#include "../../assets/graphics/xc8_psy.h"
+#include "../../assets/graphics/xc8_water.h"
+
+#include "../../assets/graphics/xc9_dark.h"
+#include "../../assets/graphics/xc9_electric.h"
+#include "../../assets/graphics/xc9_fairy.h"
+#include "../../assets/graphics/xc9_fighting.h"
+#include "../../assets/graphics/xc9_fire.h"
+#include "../../assets/graphics/xc9_leaf.h"
+#include "../../assets/graphics/xc9_metal.h"
+#include "../../assets/graphics/xc9_normal.h"
+#include "../../assets/graphics/xc9_psy.h"
+#include "../../assets/graphics/xc9_water.h"
+
+#include "../../assets/graphics/xc10_dark.h"
+#include "../../assets/graphics/xc10_electric.h"
+#include "../../assets/graphics/xc10_fairy.h"
+#include "../../assets/graphics/xc10_fighting.h"
+#include "../../assets/graphics/xc10_fire.h"
+#include "../../assets/graphics/xc10_leaf.h"
+#include "../../assets/graphics/xc10_metal.h"
+#include "../../assets/graphics/xc10_normal.h"
+#include "../../assets/graphics/xc10_psy.h"
+#include "../../assets/graphics/xc10_water.h"
+
+#include "../../assets/graphics/xc11_dark.h"
+#include "../../assets/graphics/xc11_electric.h"
+#include "../../assets/graphics/xc11_fairy.h"
+#include "../../assets/graphics/xc11_fighting.h"
+#include "../../assets/graphics/xc11_fire.h"
+#include "../../assets/graphics/xc11_leaf.h"
+#include "../../assets/graphics/xc11_metal.h"
+#include "../../assets/graphics/xc11_normal.h"
+#include "../../assets/graphics/xc11_psy.h"
+#include "../../assets/graphics/xc11_water.h"
+
 // Sprite manager class handles texture instances. It keeps a static reference to
 // each assets reference and deploy them as needed.
 class SpriteManager
@@ -1991,6 +2101,116 @@ class SpriteManager
     public: GRRLIB_texImg* _xc1_psy;
     public: GRRLIB_texImg* _xc1_water;
 
+    public: GRRLIB_texImg* _xc2_dark;
+    public: GRRLIB_texImg* _xc2_electric;
+    public: GRRLIB_texImg* _xc2_fairy;
+    public: GRRLIB_texImg* _xc2_fighting;
+    public: GRRLIB_texImg* _xc2_fire;
+    public: GRRLIB_texImg* _xc2_leaf;
+    public: GRRLIB_texImg* _xc2_metal;
+    public: GRRLIB_texImg* _xc2_normal;
+    public: GRRLIB_texImg* _xc2_psy;
+    public: GRRLIB_texImg* _xc2_water;
+
+    public: GRRLIB_texImg* _xc3_dark;
+    public: GRRLIB_texImg* _xc3_electric;
+    public: GRRLIB_texImg* _xc3_fairy;
+    public: GRRLIB_texImg* _xc3_fighting;
+    public: GRRLIB_texImg* _xc3_fire;
+    public: GRRLIB_texImg* _xc3_leaf;
+    public: GRRLIB_texImg* _xc3_metal;
+    public: GRRLIB_texImg* _xc3_normal;
+    public: GRRLIB_texImg* _xc3_psy;
+    public: GRRLIB_texImg* _xc3_water;
+
+    public: GRRLIB_texImg* _xc4_dark;
+    public: GRRLIB_texImg* _xc4_electric;
+    public: GRRLIB_texImg* _xc4_fairy;
+    public: GRRLIB_texImg* _xc4_fighting;
+    public: GRRLIB_texImg* _xc4_fire;
+    public: GRRLIB_texImg* _xc4_leaf;
+    public: GRRLIB_texImg* _xc4_metal;
+    public: GRRLIB_texImg* _xc4_normal;
+    public: GRRLIB_texImg* _xc4_psy;
+    public: GRRLIB_texImg* _xc4_water;
+
+    public: GRRLIB_texImg* _xc5_dark;
+    public: GRRLIB_texImg* _xc5_electric;
+    public: GRRLIB_texImg* _xc5_fairy;
+    public: GRRLIB_texImg* _xc5_fighting;
+    public: GRRLIB_texImg* _xc5_fire;
+    public: GRRLIB_texImg* _xc5_leaf;
+    public: GRRLIB_texImg* _xc5_metal;
+    public: GRRLIB_texImg* _xc5_normal;
+    public: GRRLIB_texImg* _xc5_psy;
+    public: GRRLIB_texImg* _xc5_water;
+
+    public: GRRLIB_texImg* _xc6_dark;
+    public: GRRLIB_texImg* _xc6_electric;
+    public: GRRLIB_texImg* _xc6_fairy;
+    public: GRRLIB_texImg* _xc6_fighting;
+    public: GRRLIB_texImg* _xc6_fire;
+    public: GRRLIB_texImg* _xc6_leaf;
+    public: GRRLIB_texImg* _xc6_metal;
+    public: GRRLIB_texImg* _xc6_normal;
+    public: GRRLIB_texImg* _xc6_psy;
+    public: GRRLIB_texImg* _xc6_water;
+
+    public: GRRLIB_texImg* _xc7_dark;
+    public: GRRLIB_texImg* _xc7_electric;
+    public: GRRLIB_texImg* _xc7_fairy;
+    public: GRRLIB_texImg* _xc7_fighting;
+    public: GRRLIB_texImg* _xc7_fire;
+    public: GRRLIB_texImg* _xc7_leaf;
+    public: GRRLIB_texImg* _xc7_metal;
+    public: GRRLIB_texImg* _xc7_normal;
+    public: GRRLIB_texImg* _xc7_psy;
+    public: GRRLIB_texImg* _xc7_water;
+
+    public: GRRLIB_texImg* _xc8_dark;
+    public: GRRLIB_texImg* _xc8_electric;
+    public: GRRLIB_texImg* _xc8_fairy;
+    public: GRRLIB_texImg* _xc8_fighting;
+    public: GRRLIB_texImg* _xc8_fire;
+    public: GRRLIB_texImg* _xc8_leaf;
+    public: GRRLIB_texImg* _xc8_metal;
+    public: GRRLIB_texImg* _xc8_normal;
+    public: GRRLIB_texImg* _xc8_psy;
+    public: GRRLIB_texImg* _xc8_water;
+
+    public: GRRLIB_texImg* _xc9_dark;
+    public: GRRLIB_texImg* _xc9_electric;
+    public: GRRLIB_texImg* _xc9_fairy;
+    public: GRRLIB_texImg* _xc9_fighting;
+    public: GRRLIB_texImg* _xc9_fire;
+    public: GRRLIB_texImg* _xc9_leaf;
+    public: GRRLIB_texImg* _xc9_metal;
+    public: GRRLIB_texImg* _xc9_normal;
+    public: GRRLIB_texImg* _xc9_psy;
+    public: GRRLIB_texImg* _xc9_water;
+
+    public: GRRLIB_texImg* _xc10_dark;
+    public: GRRLIB_texImg* _xc10_electric;
+    public: GRRLIB_texImg* _xc10_fairy;
+    public: GRRLIB_texImg* _xc10_fighting;
+    public: GRRLIB_texImg* _xc10_fire;
+    public: GRRLIB_texImg* _xc10_leaf;
+    public: GRRLIB_texImg* _xc10_metal;
+    public: GRRLIB_texImg* _xc10_normal;
+    public: GRRLIB_texImg* _xc10_psy;
+    public: GRRLIB_texImg* _xc10_water;
+
+    public: GRRLIB_texImg* _xc11_dark;
+    public: GRRLIB_texImg* _xc11_electric;
+    public: GRRLIB_texImg* _xc11_fairy;
+    public: GRRLIB_texImg* _xc11_fighting;
+    public: GRRLIB_texImg* _xc11_fire;
+    public: GRRLIB_texImg* _xc11_leaf;
+    public: GRRLIB_texImg* _xc11_metal;
+    public: GRRLIB_texImg* _xc11_normal;
+    public: GRRLIB_texImg* _xc11_psy;
+    public: GRRLIB_texImg* _xc11_water;
+
     public: SpriteManager ()
     {
         _dred = GRRLIB_LoadTexture(dred);
@@ -2990,6 +3210,117 @@ class SpriteManager
         _xc1_normal = GRRLIB_LoadTexture(xc1_normal);
         _xc1_psy = GRRLIB_LoadTexture(xc1_psy);
         _xc1_water = GRRLIB_LoadTexture(xc1_water);
+
+        _xc2_dark = GRRLIB_LoadTexture(xc2_dark);
+        _xc2_electric = GRRLIB_LoadTexture(xc2_electric);
+        _xc2_fairy = GRRLIB_LoadTexture(xc2_fairy);
+        _xc2_fighting = GRRLIB_LoadTexture(xc2_fighting);
+        _xc2_fire = GRRLIB_LoadTexture(xc2_fire);
+        _xc2_leaf = GRRLIB_LoadTexture(xc2_leaf);
+        _xc2_metal = GRRLIB_LoadTexture(xc2_metal);
+        _xc2_normal = GRRLIB_LoadTexture(xc2_normal);
+        _xc2_psy = GRRLIB_LoadTexture(xc2_psy);
+        _xc2_water = GRRLIB_LoadTexture(xc2_water);
+
+        _xc3_dark = GRRLIB_LoadTexture(xc3_dark);
+        _xc3_electric = GRRLIB_LoadTexture(xc3_electric);
+        _xc3_fairy = GRRLIB_LoadTexture(xc3_fairy);
+        _xc3_fighting = GRRLIB_LoadTexture(xc3_fighting);
+        _xc3_fire = GRRLIB_LoadTexture(xc3_fire);
+        _xc3_leaf = GRRLIB_LoadTexture(xc3_leaf);
+        _xc3_metal = GRRLIB_LoadTexture(xc3_metal);
+        _xc3_normal = GRRLIB_LoadTexture(xc3_normal);
+        _xc3_psy = GRRLIB_LoadTexture(xc3_psy);
+        _xc3_water = GRRLIB_LoadTexture(xc3_water);
+
+        _xc4_dark = GRRLIB_LoadTexture(xc4_dark);
+        _xc4_electric = GRRLIB_LoadTexture(xc4_electric);
+        _xc4_fairy = GRRLIB_LoadTexture(xc4_fairy);
+        _xc4_fighting = GRRLIB_LoadTexture(xc4_fighting);
+        _xc4_fire = GRRLIB_LoadTexture(xc4_fire);
+        _xc4_leaf = GRRLIB_LoadTexture(xc4_leaf);
+        _xc4_metal = GRRLIB_LoadTexture(xc4_metal);
+        _xc4_normal = GRRLIB_LoadTexture(xc4_normal);
+        _xc4_psy = GRRLIB_LoadTexture(xc4_psy);
+        _xc4_water = GRRLIB_LoadTexture(xc4_water);
+
+        _xc5_dark = GRRLIB_LoadTexture(xc5_dark);
+        _xc5_electric = GRRLIB_LoadTexture(xc5_electric);
+        _xc5_fairy = GRRLIB_LoadTexture(xc5_fairy);
+        _xc5_fighting = GRRLIB_LoadTexture(xc5_fighting);
+        _xc5_fire = GRRLIB_LoadTexture(xc5_fire);
+        _xc5_leaf = GRRLIB_LoadTexture(xc5_leaf);
+        _xc5_metal = GRRLIB_LoadTexture(xc5_metal);
+        _xc5_normal = GRRLIB_LoadTexture(xc5_normal);
+        _xc5_psy = GRRLIB_LoadTexture(xc5_psy);
+        _xc5_water = GRRLIB_LoadTexture(xc5_water);
+
+        _xc6_dark = GRRLIB_LoadTexture(xc6_dark);
+        _xc6_electric = GRRLIB_LoadTexture(xc6_electric);
+        _xc6_fairy = GRRLIB_LoadTexture(xc6_fairy);
+        _xc6_fighting = GRRLIB_LoadTexture(xc6_fighting);
+        _xc6_fire = GRRLIB_LoadTexture(xc6_fire);
+        _xc6_leaf = GRRLIB_LoadTexture(xc6_leaf);
+        _xc6_metal = GRRLIB_LoadTexture(xc6_metal);
+        _xc6_normal = GRRLIB_LoadTexture(xc6_normal);
+        _xc6_psy = GRRLIB_LoadTexture(xc6_psy);
+        _xc6_water = GRRLIB_LoadTexture(xc6_water);
+
+        _xc7_dark = GRRLIB_LoadTexture(xc7_dark);
+        _xc7_electric = GRRLIB_LoadTexture(xc7_electric);
+        _xc7_fairy = GRRLIB_LoadTexture(xc7_fairy);
+        _xc7_fighting = GRRLIB_LoadTexture(xc7_fighting);
+        _xc7_fire = GRRLIB_LoadTexture(xc7_fire);
+        _xc7_leaf = GRRLIB_LoadTexture(xc7_leaf);
+        _xc7_metal = GRRLIB_LoadTexture(xc7_metal);
+        _xc7_normal = GRRLIB_LoadTexture(xc7_normal);
+        _xc7_psy = GRRLIB_LoadTexture(xc7_psy);
+        _xc7_water = GRRLIB_LoadTexture(xc7_water);
+
+        _xc8_dark = GRRLIB_LoadTexture(xc8_dark);
+        _xc8_electric = GRRLIB_LoadTexture(xc8_electric);
+        _xc8_fairy = GRRLIB_LoadTexture(xc8_fairy);
+        _xc8_fighting = GRRLIB_LoadTexture(xc8_fighting);
+        _xc8_fire = GRRLIB_LoadTexture(xc8_fire);
+        _xc8_leaf = GRRLIB_LoadTexture(xc8_leaf);
+        _xc8_metal = GRRLIB_LoadTexture(xc8_metal);
+        _xc8_normal = GRRLIB_LoadTexture(xc8_normal);
+        _xc8_psy = GRRLIB_LoadTexture(xc8_psy);
+        _xc8_water = GRRLIB_LoadTexture(xc8_water);
+
+        _xc9_dark = GRRLIB_LoadTexture(xc9_dark);
+        _xc9_electric = GRRLIB_LoadTexture(xc9_electric);
+        _xc9_fairy = GRRLIB_LoadTexture(xc9_fairy);
+        _xc9_fighting = GRRLIB_LoadTexture(xc9_fighting);
+        _xc9_fire = GRRLIB_LoadTexture(xc9_fire);
+        _xc9_leaf = GRRLIB_LoadTexture(xc9_leaf);
+        _xc9_metal = GRRLIB_LoadTexture(xc9_metal);
+        _xc9_normal = GRRLIB_LoadTexture(xc9_normal);
+        _xc9_psy = GRRLIB_LoadTexture(xc9_psy);
+        _xc9_water = GRRLIB_LoadTexture(xc9_water);
+
+        _xc10_dark = GRRLIB_LoadTexture(xc10_dark);
+        _xc10_electric = GRRLIB_LoadTexture(xc10_electric);
+        _xc10_fairy = GRRLIB_LoadTexture(xc10_fairy);
+        _xc10_fighting = GRRLIB_LoadTexture(xc10_fighting);
+        _xc10_fire = GRRLIB_LoadTexture(xc10_fire);
+        _xc10_leaf = GRRLIB_LoadTexture(xc10_leaf);
+        _xc10_metal = GRRLIB_LoadTexture(xc10_metal);
+        _xc10_normal = GRRLIB_LoadTexture(xc10_normal);
+        _xc10_psy = GRRLIB_LoadTexture(xc10_psy);
+        _xc10_water = GRRLIB_LoadTexture(xc10_water);
+
+        _xc11_dark = GRRLIB_LoadTexture(xc11_dark);
+        _xc11_electric = GRRLIB_LoadTexture(xc11_electric);
+        _xc11_fairy = GRRLIB_LoadTexture(xc11_fairy);
+        _xc11_fighting = GRRLIB_LoadTexture(xc11_fighting);
+        _xc11_fire = GRRLIB_LoadTexture(xc11_fire);
+        _xc11_leaf = GRRLIB_LoadTexture(xc11_leaf);
+        _xc11_metal = GRRLIB_LoadTexture(xc11_metal);
+        _xc11_normal = GRRLIB_LoadTexture(xc11_normal);
+        _xc11_psy = GRRLIB_LoadTexture(xc11_psy);
+        _xc11_water = GRRLIB_LoadTexture(xc11_water);
+
     }
 
     public: GRRLIB_texImg * DecodeNumber (int number)

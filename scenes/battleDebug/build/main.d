@@ -1044,6 +1044,106 @@ main.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc1_normal.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc1_psy.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc1_water.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_dark.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_electric.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_fairy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_fighting.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_fire.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_leaf.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_metal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_normal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_psy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_water.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_dark.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_electric.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_fairy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_fighting.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_fire.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_leaf.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_metal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_normal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_psy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_water.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_dark.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_electric.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_fairy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_fighting.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_fire.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_leaf.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_metal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_normal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_psy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_water.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_dark.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_electric.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_fairy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_fighting.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_fire.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_leaf.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_metal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_normal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_psy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_water.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_dark.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_electric.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_fairy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_fighting.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_fire.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_leaf.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_metal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_normal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_psy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_water.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_dark.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_electric.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_fairy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_fighting.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_fire.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_leaf.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_metal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_normal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_psy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_water.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_dark.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_electric.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_fairy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_fighting.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_fire.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_leaf.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_metal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_normal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_psy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_water.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_dark.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_electric.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_fairy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_fighting.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_fire.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_leaf.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_metal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_normal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_psy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_water.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_dark.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_electric.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_fairy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_fighting.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_fire.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_leaf.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_metal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_normal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_psy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_water.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_dark.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_electric.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_fairy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_fighting.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_fire.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_leaf.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_metal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_normal.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_psy.h \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_water.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./animation_manager.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./board_constants.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./utils.hpp \
@@ -3143,6 +3243,206 @@ main.o: \
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc1_psy.h:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc1_water.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_dark.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_electric.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_fairy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_fighting.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_fire.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_leaf.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_metal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_normal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_psy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc2_water.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_dark.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_electric.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_fairy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_fighting.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_fire.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_leaf.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_metal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_normal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_psy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc3_water.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_dark.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_electric.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_fairy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_fighting.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_fire.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_leaf.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_metal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_normal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_psy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc4_water.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_dark.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_electric.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_fairy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_fighting.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_fire.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_leaf.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_metal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_normal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_psy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc5_water.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_dark.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_electric.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_fairy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_fighting.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_fire.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_leaf.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_metal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_normal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_psy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc6_water.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_dark.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_electric.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_fairy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_fighting.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_fire.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_leaf.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_metal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_normal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_psy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc7_water.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_dark.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_electric.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_fairy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_fighting.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_fire.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_leaf.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_metal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_normal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_psy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc8_water.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_dark.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_electric.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_fairy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_fighting.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_fire.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_leaf.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_metal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_normal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_psy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc9_water.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_dark.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_electric.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_fairy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_fighting.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_fire.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_leaf.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_metal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_normal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_psy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc10_water.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_dark.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_electric.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_fairy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_fighting.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_fire.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_leaf.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_metal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_normal.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_psy.h:
+
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../assets/graphics/xc11_water.h:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./animation_manager.hpp:
 

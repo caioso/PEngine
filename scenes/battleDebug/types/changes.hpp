@@ -127,4 +127,6 @@ typedef uint32_t Change;
 
 #define SHAKE_COLUMN_OPERATION 0x13
 
+#define GARBAGE_FALL_OPERATION_STOP 0x14
+
 #endif // __CHANGES__
