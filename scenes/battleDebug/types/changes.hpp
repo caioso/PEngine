@@ -42,6 +42,12 @@ typedef uint32_t Change;
 // Add Operation
 #define AddChangeType(OP, A) ((OP) | ((A&65535)<<16))
 
+// Add Garbage Transformation Type
+#define AddGarbageTransformationType(OP, A) ((OP) | ((A&15)<<8))
+
+// Extract Garbage Transformation Type
+#define ExtractGarbageTransformationType(OP) (((OP>>8)&255)&15)
+
 // Add Target Panel X to Change
 #define AddTargetPanelX(OP, A) ((OP) | (A&15))
 
@@ -65,6 +71,12 @@ typedef uint32_t Change;
 
 // Add Destination Panel X to Change
 #define AddDestinationPanelX(OP, A) ((OP) | ((A&15)<<8))
+
+// Add Destination Panel X to Change
+#define AddFallDelay(OP, A) ((OP) | ((A&15)<<8))
+
+// Extract Destination X
+#define ExtractFallDelay(OP) (((OP>>8)&255)&15)
 
 // Add Panel Image Style
 #define AddPanelImageStyle(OP, A) ((OP) | ((A&15)<<8))

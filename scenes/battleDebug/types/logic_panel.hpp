@@ -24,6 +24,7 @@ class LogicPanel
     // 13: fall frame 9
     // 14: fall frame 10
     // 15: Garbage panel waiting to transform.
+    // 16: Garbage panel being transformed into smaller garbage.
     public: int _state;
 
     // Fall delay counter

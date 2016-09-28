@@ -62,6 +62,7 @@ class Board
     private: int _leftState;
     private: int _rightState;
     private: int __delay;
+    private: vector<Point2D> _transformingPanels;
 
     // Control Elements
     private: Point2D _cursorPosition;
@@ -420,7 +421,7 @@ class Board
     // @param width: Garbage width. This will stack up rows as the garbage size dont fit the row.
     // @param height: Garbage height.
     // @param position: initial garbage position.
-    public: void MakeGargabe (int width, int height, int position)
+    public: void MakeGarbage (int width, int height, int position)
     {
         // The garbage will overflow in terms of columns.
         if (width + position > _dimensions.getWidth())
@@ -500,8 +501,8 @@ class Board
                 _boardLogic[0][i]->_in_chain = _garbageList[0][i]->_in_chain;
                 _boardLogic[0][i]->_state = 1;
 
-                if (_garbageList[0][i]->_positionY == 0 &&
-                    _garbageList[0][i]->_positionX == 0)
+                if (_garbageList[0][i]->_positionY == _garbageList[0][i]->_sourceY &&
+                    _garbageList[0][i]->_positionX == _garbageList[0][i]->_sourceX)
                 {
                     DisplayGarbageSprite(0, i);
                     _boardGraphics[0][i]->_visibility = visible;
@@ -545,11 +546,11 @@ class Board
     // Debug function to drop garbage in the board.
     public: void DEBUGInput()
     {
-      //MakeGargabe(3, 1, 2);
-      //MakeGargabe(3, 1, 3);
-      //MakeGargabe(6, 2, 0);
-      //MakeGargabe(4, 1, 0);
-      MakeGargabe(6, 7, 0);
+      MakeGarbage(3, 1, 2);
+      MakeGarbage(3, 1, 3);
+      MakeGarbage(6, 2, 0);
+      MakeGarbage(4, 1, 0);
+      //MakeGarbage(6, 7, 0);
     }
 
     private: void EmitGarbageFallingSequence ()
@@ -1101,7 +1102,7 @@ class Board
         unsigned int __garbagePosition = ExtractGarbagePosition(change);
 
         // Build new garbage object.
-        MakeGargabe(__garbageWidth, __garbageHeight, __garbagePosition);
+        MakeGarbage(__garbageWidth, __garbageHeight, __garbagePosition);
     }
 
     // Implements Garbage Operation
@@ -1113,7 +1114,7 @@ class Board
         unsigned int __garbageHeight = ExtractGarbageHeight(change);
         unsigned int __garbagePosition = ExtractGarbagePosition(change);
         // Build new garbage object.
-        _rival->MakeGargabe(__garbageWidth, __garbageHeight, __garbagePosition);
+        _rival->MakeGarbage(__garbageWidth, __garbageHeight, __garbagePosition);
     }
 
     // Implements Transform Garbage Operation.
@@ -1123,18 +1124,39 @@ class Board
         // Extract Operation Operands
         unsigned int __garbageSourceX = ExtractTargetPanelX(change);
         unsigned int __garbageSourceY = ExtractTargetPanelY(change);
+        unsigned int __transformationType = ExtractGarbageTransformationType(change);
 
-        // Update garbage object to reflect break state.
-        _boardLogic[__garbageSourceY][__garbageSourceX]->_wait = 15*(_frameBreakingGarbage++);
-        _boardLogic[__garbageSourceY][__garbageSourceX]->_break_delay = 0;
-        _boardLogic[__garbageSourceY][__garbageSourceX]->_in_chain = 0;
-        _boardLogic[__garbageSourceY][__garbageSourceX]->_state = 15;
+        Point2D __panel;
+        __panel.setX(__garbageSourceX);
+        __panel.setY(__garbageSourceY);
+        _transformingPanels.push_back(__panel);
 
-        _boardGraphics[__garbageSourceY][__garbageSourceX]->SetAsset(Utils::GarbageIntermediate(_pokemonType, _spriteManager),
-                                                                     PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
-        _boardGraphics[__garbageSourceY][__garbageSourceX]->_visibility = visible;
+        if (__transformationType == GARBAGE_TARNSFORMATION_TO_PANEL)
+        {
+          // Update garbage object to reflect break state.
+          _boardLogic[__garbageSourceY][__garbageSourceX]->_wait = 15*(_frameBreakingGarbage++);
+          _boardLogic[__garbageSourceY][__garbageSourceX]->_break_delay = 0;
+          _boardLogic[__garbageSourceY][__garbageSourceX]->_in_chain = 0;
+          _boardLogic[__garbageSourceY][__garbageSourceX]->_state = 15;
 
-        ClearGarbageData(_boardLogic[__garbageSourceY][__garbageSourceX]);
+          _boardGraphics[__garbageSourceY][__garbageSourceX]->SetAsset(Utils::GarbageIntermediate(_pokemonType, _spriteManager),
+                                                                       PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+          _boardGraphics[__garbageSourceY][__garbageSourceX]->_visibility = visible;
+
+          ClearGarbageData(_boardLogic[__garbageSourceY][__garbageSourceX]);
+        }
+        else
+        {
+          // Update garbage object to reflect break state.
+          _boardLogic[__garbageSourceY][__garbageSourceX]->_wait = 15*(_frameBreakingGarbage++);
+          _boardLogic[__garbageSourceY][__garbageSourceX]->_break_delay = 0;
+          _boardLogic[__garbageSourceY][__garbageSourceX]->_in_chain = 0;
+          _boardLogic[__garbageSourceY][__garbageSourceX]->_state = 16;
+
+          _boardGraphics[__garbageSourceY][__garbageSourceX]->SetAsset(Utils::GarbageIntermediate(_pokemonType, _spriteManager),
+                                                                       PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
+          _boardGraphics[__garbageSourceY][__garbageSourceX]->_visibility = visible;
+        }
     }
 
     // Implements Rumble Operation.
@@ -1425,9 +1447,6 @@ class Board
     // Update graphics attributes at each frame.
     public: void UpdateGraphics ()
     {
-        // Clear total breaking garbage counter;
-        _frameBreakingGarbage = 0;
-
         // Update Graphics;
         CompleteSwap();
         UpdateShake();
@@ -1439,6 +1458,21 @@ class Board
     // Update the animation of each garbage being destroyed
     private: void UpdateGarbageDestruction()
     {
+        if (_frameBreakingGarbage != 0)
+        {
+            // Update Fall Delay for the garbages under transformation
+            for (unsigned int i = 0; i < _transformingPanels.size(); i++)
+            {
+                int __x = _transformingPanels[i].getX();
+                int __y = _transformingPanels[i].getY();
+
+                _boardLogic[__y][__x]->_break_delay = 15 * (_frameBreakingGarbage--);
+            }
+            _transformingPanels.clear();
+            // Clear total breaking garbage counter;
+            _frameBreakingGarbage = 0;
+        }
+
         // Find panels in state 15 and decrease their wait state until it reaches 0
         for (int j = 0; j < _dimensions.getWidth(); j++)
             for (int i = 0; i < _dimensions.getHeight() - 1; i++)
@@ -1448,30 +1482,127 @@ class Board
                     // Check if the garbage panel is supposed to change its appearance.
                     if (_boardLogic[i][j]->_wait == 0)
                     {
-                        // Make sure the current panel is different from the previous.
-                        char __previous_type = -1;
-                        if (j > 0)
+                        // Transform garbage into panel
+                        if (_boardLogic[i][j]->_type == PANEL_GARBAGE_TYPE || _boardLogic[i][j]->_type == PANEL_CONCRETE_GARBAGE_TYPE)
                         {
-                          __previous_type = _boardLogic[i][j - 1]->_type;
+                          // Make sure the current panel is different from the previous.
+                          char __previous_type = -1;
+                          if (j > 0)
+                          {
+                            __previous_type = _boardLogic[i][j - 1]->_type;
+                          }
+                          char __random_type = Utils::GetNextTypeWithoutRepetition(__previous_type);
+
+                          // Create new panels in the place of the
+                          _boardLogic[i][j]->_type = __random_type;
+                          _boardLogic[i][j]->_in_chain = 1;
+
+                          // Update sprite
+                          _boardGraphics[i][j]->SetAsset(Utils::DecodeType(_boardLogic[i][j]->_type, _spriteManager),
+                                                         PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
                         }
-                        char __random_type = Utils::GetNextTypeWithoutRepetition(__previous_type);
 
-                        // Create new panels in the place of the
-                        _boardLogic[i][j]->_type = __random_type;
-
-                        // Update sprite
-                        _boardGraphics[i][j]->SetAsset(Utils::DecodeType(_boardLogic[i][j]->_type, _spriteManager),
-                                                       PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
-
-                        // Update panel status
-                        _boardLogic[i][j]->_state = 0;
+                        // Update Delay -> The panel will only be freed if the delay reaches 0 (it is actually waiting for all panels to finish transforming).
+                        if (_boardLogic[i][j]->_break_delay != 0)
+                        {
+                            _boardLogic[i][j]->_break_delay--;
+                            continue;
+                        }
+                        else
+                        {
+                            // Update panel status
+                            _boardLogic[i][j]->_state = 0;
+                        }
                     }
                     else
                     {
                         _boardLogic[i][j]->_wait--;
+                        // Keep the board wating while the garbage breaks.
+                        _slideDelay = 1;
+                    }
+                }
+                else if (_boardLogic[i][j]->_state == 16)
+                {
+                    // Check if the garbage panel is supposed to change its appearance.
+                    if (_boardLogic[i][j]->_wait == 0)
+                    {
+                        if (_boardLogic[i][j]->_positionX == 0 && _boardLogic[i][j]->_positionY == 0)
+                        {
+                          _boardGraphics[i][j]->_visibility = visible;
+                          _boardContainer->RemoveChild(_boardGraphics[i][j]);
+                          _boardContainer->AddChildAt(_boardGraphics[i][j], 0);
+                          DisplayGarbageSprite(i, j);
+                        }
+                        else
+                        {
+                          _boardGraphics[i][j]->_visibility = hidden;
+                        }
+
+                        // Update Delay -> The panel will only be freed if the delay reaches 0 (it is actually waiting for all panels to finish transforming).
+                        if (_boardLogic[i][j]->_break_delay != 0)
+                        {
+                            _boardLogic[i][j]->_break_delay--;
+                            continue;
+                        }
+                        else
+                        {
+                            // Update panel status
+                            if (_boardLogic[i][j]->_positionX == 0 && _boardLogic[i][j]->_positionY == 0)
+                            {
+                              CheckAndFreeGarbageIfNeeded (i, j);
+                              _boardGraphics[i][j]->_visibility = visible;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        _boardLogic[i][j]->_wait--;
+                        // Keep the board wating while the garbage breaks.
+                        _slideDelay = 1;
                     }
                 }
             }
+    }
+
+    private: void CheckAndFreeGarbageIfNeeded (int targetY, int targetX)
+    {
+        int __garbageWidth = _boardLogic[targetY][targetX]->_width;
+        int __garbageHeight = _boardLogic[targetY][targetX]->_height;
+
+        // Check if the garbage have finished transforming.
+        for (int i = targetY; i > targetY - __garbageHeight; i--)
+        {
+          // check board bounds;
+          if (i < 0)
+            break;
+          for (int j = targetX; j < __garbageWidth; j++)
+          {
+              // Check if some panel is still animating
+              if (_boardLogic[i][j]->_wait != 0)
+              {
+                  return;
+              }
+          }
+        }
+
+        for (int i = targetY; i > targetY - __garbageHeight; i--)
+        {
+          // check board bounds;
+          if (i < 0)
+            break;
+          for (int j = targetX; j < __garbageWidth; j++)
+          {
+              // The only case when this if will trigger is when freeing the last garbage of a multi row garbage.
+              // This will happen since this method is ran by the source block. At the time all panels have wait 0,
+              // the last panel in the garbage will not have been analyzed (to hide is sprite), but it will have
+              // already 0 wait (computed in the previous frame).
+              if (_boardGraphics[i][j]->_visibility != hidden)
+              {
+                _boardGraphics[i][j]->_visibility = hidden;
+              }
+              _boardLogic[i][j]->_state = 0;
+          }
+        }
     }
 
     public: void ShakeBoard (int numberOfSamples)
@@ -1512,8 +1643,8 @@ class Board
     private: void PauseBoard(Change change)
     {
       unsigned int __duration = ExtractPausePeriod(change);
-
-      _slideDelay = __duration;
+      if (__duration != 0)
+        _slideDelay = __duration;
     }
 
     // Check if the board is in alert status
