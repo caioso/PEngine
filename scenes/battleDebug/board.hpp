@@ -1495,7 +1495,6 @@ class Board
 
                           // Create new panels in the place of the
                           _boardLogic[i][j]->_type = __random_type;
-                          _boardLogic[i][j]->_in_chain = 1;
 
                           // Update sprite
                           _boardGraphics[i][j]->SetAsset(Utils::DecodeType(_boardLogic[i][j]->_type, _spriteManager),
@@ -1512,6 +1511,7 @@ class Board
                         {
                             // Update panel status
                             _boardLogic[i][j]->_state = 0;
+                            _boardLogic[i][j]->_in_chain = 1;
                         }
                     }
                     else

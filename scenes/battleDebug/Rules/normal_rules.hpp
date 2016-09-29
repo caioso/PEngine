@@ -664,7 +664,9 @@ class NormalRules : public RulesInterface
                         {
                             bool __canFall = CanGarbageFall (i, j);
                             if (__canFall)
-                                FallGarbage(i, j, changes, _garbageList, _boardLogic, FALL_DELAY);
+                            {
+                                UpdateGarbageState(i, j, _garbageList, _boardLogic, 4, FALL_DELAY);
+                            }
                         }
                     }
                     else if (__fallCheckBoard[i][j]._state == 4) // if panel is wating to fall
@@ -717,7 +719,7 @@ class NormalRules : public RulesInterface
                         }
                     }
                     // Stop fall
-                    else if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 || (__fallCheckBoard[i][j]._state >= 5 && __fallCheckBoard[i][j]._state <= 14))&& __fallCheckBoard[i + 1][j]._type != -1)
+                    else if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 || (__fallCheckBoard[i][j]._state >= 5 && __fallCheckBoard[i][j]._state <= 14)) && __fallCheckBoard[i + 1][j]._type != -1)
                     {
                         if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
                             __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
@@ -1002,7 +1004,9 @@ class NormalRules : public RulesInterface
     {
         for (int k = __fallCheckBoard[i][j]._sourceX; k < __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width; k++)
         {
-            if (__fallCheckBoard[i + 1][k]._type != -1)
+            if (__fallCheckBoard[i + 1][k]._type != -1 && __fallCheckBoard[i + 1][k]._state == 4)
+              continue;
+            if (__fallCheckBoard[i + 1][k]._type != -1 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 16)
             {
                 return false;
             }
@@ -1043,11 +1047,11 @@ class NormalRules : public RulesInterface
         }
     }
 
-    // Update grabage object in the board to make it fall as a single unit.
+    // Update grabage object styte and delay
     // @param i: row index;
     // @param j: column index;
     // @param _garbageList: grabage list vecrtor;
-    private: void FallGarbage (int i, int j, vector<Change> &changes, vector<LogicPanel **> &_garbageList, LogicPanel *** _boardLogic, int delay = 0)
+    private: void UpdateGarbageState (int i, int j, vector<LogicPanel **> &_garbageList, LogicPanel *** _boardLogic, int state, int delay = 0)
     {
         int __initialIndexX = __fallCheckBoard[i][j]._sourceX;
         int __initialIndexY = i;
@@ -1060,7 +1064,33 @@ class NormalRules : public RulesInterface
             {
                 for (int k = __initialIndexX; k < __lastIndexX; k++)
                 {
+                  _boardLogic[i][j]->_state = state;
+                  _boardLogic[i][j]->_wait = delay;
 
+                  __fallCheckBoard[i][j]._state = state;
+                  __fallCheckBoard[i][j]._wait = delay;
+                }
+            }
+        }
+    }
+
+    // Update grabage object in the board to make it fall as a single unit.
+    // @param i: row index;
+    // @param j: column index;
+    // @param _garbageList: grabage list vecrtor;
+    private: void FallGarbage (int i, int j, vector<Change> &changes, vector<LogicPanel **> &_garbageList, LogicPanel *** _boardLogic)
+    {
+        int __initialIndexX = __fallCheckBoard[i][j]._sourceX;
+        int __initialIndexY = i;
+        int __lastIndexX = __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width;
+        int __lastIndexY = i - __fallCheckBoard[i][j]._height;
+        int __garbageCounter = 0;
+        for (int l = __initialIndexY; l > __lastIndexY; l--)
+        {
+            if (l >= 0)
+            {
+                for (int k = __initialIndexX; k < __lastIndexX; k++)
+                {
                     Change __fall = 0;
                     __fall = AddChangeType(__fall, FALL_OPERATION);
                     __fall = AddTargetPanelX(__fall, k);
