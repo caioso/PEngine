@@ -648,7 +648,7 @@ class NormalRules : public RulesInterface
                       continue;
 
                     // Start fall
-                    if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 0 || IsInFallingAnimation(i,j)) && __fallCheckBoard[i][j]._state != 2 && (__fallCheckBoard[i + 1][j]._type == -1 || __fallCheckBoard[i + 1][j]._state == 4))
+                    if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 0 || IsInFallingAnimation(i,j)) && __fallCheckBoard[i][j]._state != 2 && (__fallCheckBoard[i + 1][j]._type == -1 || __fallCheckBoard[i + 1][j]._state == 4) && __fallCheckBoard[i + 1][j]._state != 2)
                     {
                         if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
                             __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
@@ -682,7 +682,7 @@ class NormalRules : public RulesInterface
                         }
                     }
                     // Update fall
-                    else if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 ||  IsInFallingAnimation(i,j)) && __fallCheckBoard[i][j]._state != 2 && __fallCheckBoard[i + 1][j]._type == -1)
+                    else if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 ||  IsInFallingAnimation(i,j)) && __fallCheckBoard[i][j]._state != 2 && __fallCheckBoard[i + 1][j]._type == -1  && __fallCheckBoard[i + 1][j]._state != 2)
                     {
                         if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
                             __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
@@ -719,7 +719,7 @@ class NormalRules : public RulesInterface
                         }
                     }
                     // Stop fall
-                    else if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 || (__fallCheckBoard[i][j]._state >= 5 && __fallCheckBoard[i][j]._state <= 14)) && __fallCheckBoard[i + 1][j]._type != -1)
+                    else if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 || (__fallCheckBoard[i][j]._state >= 5 && __fallCheckBoard[i][j]._state <= 14)) && (__fallCheckBoard[i + 1][j]._type != -1 || (__fallCheckBoard[i + 1][j]._type == -1 && __fallCheckBoard[i + 1][j]._state == 2)))
                     {
                         if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
                             __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
@@ -1006,7 +1006,7 @@ class NormalRules : public RulesInterface
         {
             if (__fallCheckBoard[i + 1][k]._type != -1 && __fallCheckBoard[i + 1][k]._state == 4)
               continue;
-            if (__fallCheckBoard[i + 1][k]._type != -1 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 16)
+            if (__fallCheckBoard[i + 1][k]._type != -1 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 2 || __fallCheckBoard[i + 1][k]._state == 16)
             {
                 return false;
             }
