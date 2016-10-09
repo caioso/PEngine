@@ -14,6 +14,7 @@ class WorkPanel
     public: int _height;
     public: int _wait;
     public: int _in_chain;
+    public: int _checked;
 };
 
 #endif // __WORK_PANEL__

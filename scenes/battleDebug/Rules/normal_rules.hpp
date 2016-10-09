@@ -630,6 +630,7 @@ class NormalRules : public RulesInterface
                 __fallCheckBoard[i][j]._height = _boardLogic[i][j]->_height;
                 __fallCheckBoard[i][j]._wait = _boardLogic[i][j]->_wait;
                 __fallCheckBoard[i][j]._in_chain = _boardLogic[i][j]->_in_chain;
+                __fallCheckBoard[i][j]._checked = 0;
             }
 
         // Detect Potential falls
@@ -639,6 +640,10 @@ class NormalRules : public RulesInterface
             {
                 if (i != boardH - 1)
                 {
+                    // Garbages will be checked if already proccessed;
+                    if (__fallCheckBoard[i][j]._checked == 1)
+                        continue;
+
                     // If Swapping, ignore the panel
                     if (__fallCheckBoard[i][j]._state == 2)
                         continue;
@@ -658,27 +663,77 @@ class NormalRules : public RulesInterface
 
                             __fallCheckBoard[i][j]._state = 4;
                             __fallCheckBoard[i][j]._wait = FALL_DELAY;
-
                         }
                         else
                         {
                             bool __canFall = CanGarbageFall (i, j);
                             if (__canFall)
                             {
-                                UpdateGarbageState(i, j, _garbageList, _boardLogic, 4, FALL_DELAY);
+                                UpdateGarbageAndViccinityStates(i, j, _boardLogic, 4, FALL_DELAY);
                             }
                         }
                     }
                     else if (__fallCheckBoard[i][j]._state == 4) // if panel is wating to fall
                     {
+                        if (__fallCheckBoard[i + 1][j]._state == 2)
+                        {
+                          if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
+                              __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
+                          {
+                            for (int l = i; l >= 0; l--)
+                            {
+                                if (_boardLogic[l][j]->_type == -1)
+                                  break;
+
+                                _boardLogic[l][j]->_state = 0;
+                                _boardLogic[l][j]->_wait = 0;
+
+                                __fallCheckBoard[l][j]._state = 0;
+                                __fallCheckBoard[l][j]._wait = 0;
+
+                                if (__fallCheckBoard[l][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
+                                    __fallCheckBoard[l][j]._type != PANEL_GARBAGE_TYPE)
+                                {
+                                  Change __change = 0;
+                                  __change = AddChangeType(__change, PANEL_GRAPHICS_STYLE_OPERATION);
+                                  __change = AddPanelImageStyle(__change, PANEL_NORMAL_SPRITE);
+                                  __change = AddTargetPanelX(__change, j);
+                                  __change = AddTargetPanelY(__change, l);
+                                  changes.push_back(__change);
+                                }
+                            }
+                          }
+                          else
+                          {
+                            UpdateGarbageAndViccinityStates(i, j, _boardLogic, 0, 0);
+                          }
+                          continue;
+                        }
+
                         if (_boardLogic[i][j]->_wait == 0)
                         {
+                          if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
+                              __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
+                          {
                             __fallCheckBoard[i][j]._state = 1;
                             _boardLogic[i][j]->_state = 1;
+                          }
+                          else
+                          {
+                            UpdateGarbageAndViccinityStates (i, j, _boardLogic, 1, 0);
+                          }
                         }
                         else
                         {
+                          if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
+                              __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
+                          {
                             _boardLogic[i][j]->_wait--;
+                          }
+                          else
+                          {
+                            UpdateGarbageAndViccinityStates (i, j, _boardLogic, 4, _boardLogic[i][j]->_wait - 1);
+                          }
                         }
                     }
                     // Update fall
@@ -719,7 +774,7 @@ class NormalRules : public RulesInterface
                         }
                     }
                     // Stop fall
-                    else if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 || (__fallCheckBoard[i][j]._state >= 5 && __fallCheckBoard[i][j]._state <= 14)) && (__fallCheckBoard[i + 1][j]._type != -1 || (__fallCheckBoard[i + 1][j]._type == -1 && __fallCheckBoard[i + 1][j]._state == 2)))
+                    else if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 || (__fallCheckBoard[i][j]._state >= 5 && __fallCheckBoard[i][j]._state <= 14)) && (__fallCheckBoard[i + 1][j]._type != -1 || __fallCheckBoard[i + 1][j]._state == 4 || (__fallCheckBoard[i + 1][j]._type == -1 && __fallCheckBoard[i + 1][j]._state == 2)))
                     {
                         if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
                             __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
@@ -1004,9 +1059,25 @@ class NormalRules : public RulesInterface
     {
         for (int k = __fallCheckBoard[i][j]._sourceX; k < __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width; k++)
         {
-            if (__fallCheckBoard[i + 1][k]._type != -1 && __fallCheckBoard[i + 1][k]._state == 4)
+            if (__fallCheckBoard[i + 1][k]._type != -1)//if (__fallCheckBoard[i + 1][k]._type != -1 && (__fallCheckBoard[i + 1][k]._state >= 5 || __fallCheckBoard[i + 1][k]._state <= 14 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 2 || __fallCheckBoard[i + 1][k]._state == 4 || __fallCheckBoard[i + 1][k]._state == 3 || __fallCheckBoard[i + 1][k]._state == 0 || __fallCheckBoard[i + 1][k]._state == 16))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Determines if a garbage at location i, j can fall.
+    // @param i: row index;
+    // @param j: column index;
+    // @return true if the garbage can fall, false if not.
+    private: bool CanGarbageBeAttracted (int i, int j)
+    {
+        for (int k = __fallCheckBoard[i][j]._sourceX; k < __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width; k++)
+        {
+            if (__fallCheckBoard[i + 1][k]._state == 1 && (__fallCheckBoard[i + 1][k]._type == PANEL_GARBAGE_TYPE || __fallCheckBoard[i + 1][k]._type == PANEL_CONCRETE_GARBAGE_TYPE))
               continue;
-            if (__fallCheckBoard[i + 1][k]._type != -1 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 2 || __fallCheckBoard[i + 1][k]._state == 16)
+            if (__fallCheckBoard[i + 1][k]._type != -1)//if (__fallCheckBoard[i + 1][k]._type != -1 && (__fallCheckBoard[i + 1][k]._state >= 5 || __fallCheckBoard[i + 1][k]._state <= 14 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 2 || __fallCheckBoard[i + 1][k]._state == 4 || __fallCheckBoard[i + 1][k]._state == 3 || __fallCheckBoard[i + 1][k]._state == 0 || __fallCheckBoard[i + 1][k]._state == 16))
             {
                 return false;
             }
@@ -1047,30 +1118,52 @@ class NormalRules : public RulesInterface
         }
     }
 
-    // Update grabage object styte and delay
+    // Update grabage object styte and delay and fetch for nearby garbages to do the same
     // @param i: row index;
     // @param j: column index;
-    // @param _garbageList: grabage list vecrtor;
-    private: void UpdateGarbageState (int i, int j, vector<LogicPanel **> &_garbageList, LogicPanel *** _boardLogic, int state, int delay = 0)
+    // @param _boardLogic: logic board matrix;
+    // @param state: intended panel state;
+    // @param delay: intended panel delay
+    private: void UpdateGarbageAndViccinityStates (int i, int j, LogicPanel ***  _boardLogic, int state, int delay = 0, int depth = 0)
     {
-        int __initialIndexX = __fallCheckBoard[i][j]._sourceX;
-        int __initialIndexY = i;
-        int __lastIndexX = __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width;
-        int __lastIndexY = i - __fallCheckBoard[i][j]._height;
-        int __garbageCounter = 0;
-        for (int l = __initialIndexY; l > __lastIndexY; l--)
-        {
-            if (l >= 0)
-            {
-                for (int k = __initialIndexX; k < __lastIndexX; k++)
-                {
-                  _boardLogic[i][j]->_state = state;
-                  _boardLogic[i][j]->_wait = delay;
+      bool __canFall = CanGarbageBeAttracted (i, j);
+      if (!__canFall || __fallCheckBoard[i][j]._checked == 1)
+        return;
 
-                  __fallCheckBoard[i][j]._state = state;
-                  __fallCheckBoard[i][j]._wait = delay;
-                }
+      int __initialIndexX = __fallCheckBoard[i][j]._sourceX;
+      int __initialIndexY = i;
+      int __lastIndexX = __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width;
+      int __lastIndexY = i - __fallCheckBoard[i][j]._height;
+      int __garbageCounter = 0;
+
+      if (state == 1)
+      {
+        stringstream ss;
+        ss<<"Depth: "<<depth<<" First: "<<__initialIndexY<<" Last: "<<__lastIndexY<<endl;
+        Debug::Log(ss.str());
+      }
+
+      for (int l = __initialIndexY; l > __lastIndexY; l--)
+      {
+        if (l >= 0)
+        {
+            for (int k = __initialIndexX; k < __lastIndexX; k++)
+            {
+              _boardLogic[l][k]->_state = state;
+              _boardLogic[l][k]->_wait = delay;
+
+              __fallCheckBoard[l][k]._state = state;
+              __fallCheckBoard[l][k]._wait = delay;
+              __fallCheckBoard[l][k]._checked = 1;
             }
+          }
+        }
+
+        for (int k = __initialIndexX; k < __lastIndexX; k++)
+        {
+          if (__fallCheckBoard[__lastIndexY][k]._type == PANEL_CONCRETE_GARBAGE_TYPE ||
+              __fallCheckBoard[__lastIndexY][k]._type == PANEL_GARBAGE_TYPE)
+              UpdateGarbageAndViccinityStates(__lastIndexY, k, _boardLogic, state, delay, depth + 1);
         }
     }
 
