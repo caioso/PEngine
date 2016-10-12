@@ -666,10 +666,18 @@ class NormalRules : public RulesInterface
                         }
                         else
                         {
-                            bool __canFall = CanGarbageFall (i, j);
-                            if (__canFall)
+                            if (__fallCheckBoard[__fallCheckBoard[i][j]._sourceY][__fallCheckBoard[i][j]._sourceX]._state == 0)
                             {
-                                UpdateGarbageAndViccinityStates(i, j, _boardLogic, 4, FALL_DELAY);
+                                bool __canFall = CanGarbageFall (i, j);
+                                if (__canFall)
+                                {
+                                    //Debug::Log("Will Start Waiting");
+                                    UpdateGarbageAndViccinityStates(i, j, _boardLogic, 4, FALL_DELAY);
+                                }
+                                else
+                                {
+                                  //Debug::Log("Can't fall");
+                                }
                             }
                         }
                     }
@@ -720,6 +728,7 @@ class NormalRules : public RulesInterface
                           }
                           else
                           {
+                            //Debug::Log("Will Start Falling");
                             UpdateGarbageAndViccinityStates (i, j, _boardLogic, 1, 0);
                           }
                         }
@@ -737,7 +746,9 @@ class NormalRules : public RulesInterface
                         }
                     }
                     // Update fall
-                    else if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 ||  IsInFallingAnimation(i,j)) && __fallCheckBoard[i][j]._state != 2 && __fallCheckBoard[i + 1][j]._type == -1  && __fallCheckBoard[i + 1][j]._state != 2)
+                    else if (__fallCheckBoard[i][j]._type != -1 && (__fallCheckBoard[i][j]._state == 1 ||  IsInFallingAnimation(i,j)) && __fallCheckBoard[i][j]._state != 2 &&
+                    (__fallCheckBoard[i + 1][j]._type == -1 || (__fallCheckBoard[i + 1][j]._type != -1 && __fallCheckBoard[i + 1][j]._state == 4))
+                    && __fallCheckBoard[i + 1][j]._state != 2)
                     {
                         if (__fallCheckBoard[i][j]._type != PANEL_CONCRETE_GARBAGE_TYPE &&
                             __fallCheckBoard[i][j]._type != PANEL_GARBAGE_TYPE)
@@ -768,9 +779,12 @@ class NormalRules : public RulesInterface
                         }
                         else
                         {
-                            bool __canFall = CanGarbageFall (i, j);
+                            bool __canFall = CanUpdateGarbageFall (i, j);
                             if (__canFall)
+                            {
+                                //Debug::Log("Will Update Fall");
                                 FallGarbage(i, j, changes, _garbageList, _boardLogic);
+                            }
                         }
                     }
                     // Stop fall
@@ -808,6 +822,7 @@ class NormalRules : public RulesInterface
                                     ShakeBoard (changes);
                                 }
                                 StopFullGarbageFall(i, j, _boardLogic, _garbageList);
+                                //Debug::Log("Will Stop Falling");
                             }
                         }
                     }
@@ -849,6 +864,8 @@ class NormalRules : public RulesInterface
                                     ShakeBoard (changes);
                                 }
                                 StopFullGarbageFall(i, j, _boardLogic, _garbageList);
+                                //Debug::Log("Will Stop Falling");
+
                             }
                         }
                     }
@@ -1059,7 +1076,9 @@ class NormalRules : public RulesInterface
     {
         for (int k = __fallCheckBoard[i][j]._sourceX; k < __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width; k++)
         {
-            if (__fallCheckBoard[i + 1][k]._type != -1)//if (__fallCheckBoard[i + 1][k]._type != -1 && (__fallCheckBoard[i + 1][k]._state >= 5 || __fallCheckBoard[i + 1][k]._state <= 14 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 2 || __fallCheckBoard[i + 1][k]._state == 4 || __fallCheckBoard[i + 1][k]._state == 3 || __fallCheckBoard[i + 1][k]._state == 0 || __fallCheckBoard[i + 1][k]._state == 16))
+            if (__fallCheckBoard[i + 1][k]._state == 4)
+              continue;
+            if (__fallCheckBoard[i + 1][k]._type != -1 || (__fallCheckBoard[i + 1][k]._type == -1 && __fallCheckBoard[i + 1][k]._state == 2))//if (__fallCheckBoard[i + 1][k]._type != -1 && (__fallCheckBoard[i + 1][k]._state >= 5 || __fallCheckBoard[i + 1][k]._state <= 14 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 2 || __fallCheckBoard[i + 1][k]._state == 4 || __fallCheckBoard[i + 1][k]._state == 3 || __fallCheckBoard[i + 1][k]._state == 0 || __fallCheckBoard[i + 1][k]._state == 16))
             {
                 return false;
             }
@@ -1071,13 +1090,30 @@ class NormalRules : public RulesInterface
     // @param i: row index;
     // @param j: column index;
     // @return true if the garbage can fall, false if not.
+    private: bool CanUpdateGarbageFall (int i, int j)
+    {
+        for (int k = __fallCheckBoard[i][j]._sourceX; k < __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width; k++)
+        {
+            if (__fallCheckBoard[i + 1][k]._type != -1 || (__fallCheckBoard[i + 1][k]._type == -1 && __fallCheckBoard[i + 1][k]._state == 2))//if (__fallCheckBoard[i + 1][k]._type != -1 && (__fallCheckBoard[i + 1][k]._state >= 5 || __fallCheckBoard[i + 1][k]._state <= 14 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 2 || __fallCheckBoard[i + 1][k]._state == 4 || __fallCheckBoard[i + 1][k]._state == 3 || __fallCheckBoard[i + 1][k]._state == 0 || __fallCheckBoard[i + 1][k]._state == 16))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    // Determines if a garbage at location i, j can fall.
+    // @param i: row index;
+    // @param j: column index;
+    // @return true if the garbage can fall, false if not.
     private: bool CanGarbageBeAttracted (int i, int j)
     {
         for (int k = __fallCheckBoard[i][j]._sourceX; k < __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width; k++)
         {
             if (__fallCheckBoard[i + 1][k]._state == 1 && (__fallCheckBoard[i + 1][k]._type == PANEL_GARBAGE_TYPE || __fallCheckBoard[i + 1][k]._type == PANEL_CONCRETE_GARBAGE_TYPE))
               continue;
-            if (__fallCheckBoard[i + 1][k]._type != -1)//if (__fallCheckBoard[i + 1][k]._type != -1 && (__fallCheckBoard[i + 1][k]._state >= 5 || __fallCheckBoard[i + 1][k]._state <= 14 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 2 || __fallCheckBoard[i + 1][k]._state == 4 || __fallCheckBoard[i + 1][k]._state == 3 || __fallCheckBoard[i + 1][k]._state == 0 || __fallCheckBoard[i + 1][k]._state == 16))
+            if (__fallCheckBoard[i + 1][k]._type != -1 || (__fallCheckBoard[i + 1][k]._type == -1 && __fallCheckBoard[i + 1][k]._state == 2))//if (__fallCheckBoard[i + 1][k]._type != -1 && (__fallCheckBoard[i + 1][k]._state >= 5 || __fallCheckBoard[i + 1][k]._state <= 14 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 15 || __fallCheckBoard[i + 1][k]._state == 2 || __fallCheckBoard[i + 1][k]._state == 4 || __fallCheckBoard[i + 1][k]._state == 3 || __fallCheckBoard[i + 1][k]._state == 0 || __fallCheckBoard[i + 1][k]._state == 16))
             {
                 return false;
             }
@@ -1126,22 +1162,18 @@ class NormalRules : public RulesInterface
     // @param delay: intended panel delay
     private: void UpdateGarbageAndViccinityStates (int i, int j, LogicPanel ***  _boardLogic, int state, int delay = 0, int depth = 0)
     {
-      bool __canFall = CanGarbageBeAttracted (i, j);
-      if (!__canFall || __fallCheckBoard[i][j]._checked == 1)
-        return;
+      if (depth != 0)
+      {
+        bool __canFall = CanGarbageBeAttracted (i, j);
+        if (!__canFall || __fallCheckBoard[i][j]._checked == 1)
+          return;
+      }
 
       int __initialIndexX = __fallCheckBoard[i][j]._sourceX;
       int __initialIndexY = i;
       int __lastIndexX = __fallCheckBoard[i][j]._sourceX + __fallCheckBoard[i][j]._width;
       int __lastIndexY = i - __fallCheckBoard[i][j]._height;
       int __garbageCounter = 0;
-
-      if (state == 1)
-      {
-        stringstream ss;
-        ss<<"Depth: "<<depth<<" First: "<<__initialIndexY<<" Last: "<<__lastIndexY<<endl;
-        Debug::Log(ss.str());
-      }
 
       for (int l = __initialIndexY; l > __lastIndexY; l--)
       {

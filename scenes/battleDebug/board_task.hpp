@@ -3,8 +3,8 @@
 #define __BOARD_TASK__
 
 // Dev Constants
-#define WII 0
-#define MAC 1
+#define WII 1
+#define MAC 0
 
 #include "../../engine/engine.hpp"
 
