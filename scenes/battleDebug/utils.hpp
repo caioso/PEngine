@@ -7,13 +7,71 @@
 
 class Utils
 {
-  // Decodes a type and returns the buffer related to the garbage intermediate break image.
-  // @param type: garbage type to be decode.
-  // @param spriteManager: reference to system-wise sprite manager.
-  // @return Texture reference.
+    // Decodes a type and returns the buffer related to the garbage intermediate break image.
+    // @param type: garbage type to be decode.
+    // @param spriteManager: reference to system-wise sprite manager.
+    // @return Texture reference.
     public: static GRRLIB_texImg * GarbageIntermediate (unsigned int type, SpriteManager * spriteManager)
     {
-        return spriteManager->_garbage_transform_leaf;
+        switch (type)
+        {
+            case DARK_TYPE: return spriteManager->_g_black; break;
+            case FIRE_TYPE: return spriteManager->_g_red; break;
+            case WATER_TYPE: return spriteManager->_g_blue; break;
+            case GRASS_TYPE: return spriteManager->_g_green; break;
+            case ELECTRIC_TYPE: return spriteManager->_g_yellow; break;
+            case PSYCHIC_TYPE: return spriteManager->_g_purple; break;
+            case METAL_TYPE: return spriteManager->_g_gray; break;
+            case FIGHTING_TYPE: return spriteManager->_g_orange; break;
+            case FAIRY_TYPE: return spriteManager->_g_pink; break;
+            default: return spriteManager->_g_normal; break;
+        }
+    }
+
+    // Returns the combo number image related to the combo size.
+    // @param comboSize: Combo Size;
+    // @param _spriteManager: reference to syztem-size sprite manager.
+    // @return Fully built sprite with the number reference.
+    public: static Sprite * GetComboNumber (unsigned int comboSize, SpriteManager * _spriteManager)
+    {
+        switch (comboSize)
+        {
+          case 4: return new Sprite(_spriteManager->_combo_4, 24, 16); break;
+          case 5: return new Sprite(_spriteManager->_combo_5, 24, 16); break;
+          case 6: return new Sprite(_spriteManager->_combo_6, 24, 16); break;
+          case 7: return new Sprite(_spriteManager->_combo_7, 24, 16); break;
+          case 8: return new Sprite(_spriteManager->_combo_8, 24, 16); break;
+          case 9: return new Sprite(_spriteManager->_combo_9, 24, 16); break;
+          case 10: return new Sprite(_spriteManager->_combo_10, 24, 16); break;
+          case 11: return new Sprite(_spriteManager->_combo_11, 24, 16); break;
+          case 12: return new Sprite(_spriteManager->_combo_12, 24, 16); break;
+          case 13: return new Sprite(_spriteManager->_combo_13, 24, 16); break;
+          default: return new Sprite(_spriteManager->_unnamed, 24, 16);
+        }
+    }
+
+    // Returns the chain number image related to the combo size.
+    // @param chainSize: Combo Size;
+    // @param _spriteManager: reference to syztem-size sprite manager.
+    // @return Fully built sprite with the number reference.
+    public: static Sprite * GetChainNumber (unsigned int chainSize, SpriteManager * _spriteManager)
+    {
+        switch (chainSize)
+        {
+          case 2: return new Sprite(_spriteManager->_chain_2, 24, 16); break;
+          case 3: return new Sprite(_spriteManager->_chain_3, 24, 16); break;
+          case 4: return new Sprite(_spriteManager->_chain_4, 24, 16); break;
+          case 5: return new Sprite(_spriteManager->_chain_5, 24, 16); break;
+          case 6: return new Sprite(_spriteManager->_chain_6, 24, 16); break;
+          case 7: return new Sprite(_spriteManager->_chain_7, 24, 16); break;
+          case 8: return new Sprite(_spriteManager->_chain_8, 24, 16); break;
+          case 9: return new Sprite(_spriteManager->_chain_9, 24, 16); break;
+          case 10: return new Sprite(_spriteManager->_chain_10, 24, 16); break;
+          case 11: return new Sprite(_spriteManager->_chain_11, 24, 16); break;
+          case 12: return new Sprite(_spriteManager->_chain_12, 24, 16); break;
+          case 13: return new Sprite(_spriteManager->_chain_13, 24, 16); break;
+          default: return new Sprite(_spriteManager->_chain_unknown, 24, 16);
+        }
     }
 
     // Decodes a type and returns the buffer related to the garbage type and size.
@@ -250,7 +308,7 @@ class Utils
           {
             switch (type)
             {
-              case DARK_TYPE: return spriteManager->_xc10_dark; break;
+                case DARK_TYPE: return spriteManager->_xc10_dark; break;
                 case FIRE_TYPE: return spriteManager->_xc10_fire; break;
                 case WATER_TYPE: return spriteManager->_xc10_water; break;
                 case GRASS_TYPE: return spriteManager->_xc10_leaf; break;

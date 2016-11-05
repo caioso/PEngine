@@ -279,7 +279,7 @@ class Board
                     break;
                 }
                     // TRANSFORM GARBAGE OPERATION
-                    // format: [TYPE][XXXX][XXXX][SRC_Y][SRC_X]
+                    // format: [TYPE][IS_GARBAGE_SOURCE][TRANSFORMATION_TYPE][SRC_Y][SRC_X]
                     // Breaks garbage objects into smaller parts.
                 case TRANSFORM_GARBAGE_OPERATION:
                 {
@@ -546,10 +546,10 @@ class Board
     // Debug function to drop garbage in the board.
     public: void DEBUGInput()
     {
-      MakeGarbage(3, 1, 2);
-      MakeGarbage(3, 1, 3);
-      MakeGarbage(6, 2, 0);
-      MakeGarbage(4, 1, 0);
+      //MakeGarbage(4, 1, 2);
+      //MakeGarbage(3, 1, 3);
+      MakeGarbage(6, 3, 0);
+      //MakeGarbage(4, 1, 0);
       //MakeGarbage(6, 7, 0);
     }
 
@@ -1125,6 +1125,7 @@ class Board
         unsigned int __garbageSourceX = ExtractTargetPanelX(change);
         unsigned int __garbageSourceY = ExtractTargetPanelY(change);
         unsigned int __transformationType = ExtractGarbageTransformationType(change);
+        unsigned int __isGarbageSource = ExtractPanelIsGarbageSource(change);
 
         Point2D __panel;
         __panel.setX(__garbageSourceX);
@@ -1133,8 +1134,8 @@ class Board
 
         if (__transformationType == GARBAGE_TARNSFORMATION_TO_PANEL)
         {
-          // Update garbage object to reflect break state.
-          _boardLogic[__garbageSourceY][__garbageSourceX]->_wait = 15*(_frameBreakingGarbage++);
+          // Update garbage object to reflect break state. +20 is an initial delay used to display the transformation animation.
+          _boardLogic[__garbageSourceY][__garbageSourceX]->_wait = 15*(_frameBreakingGarbage++ + 1.2) + 40;
           _boardLogic[__garbageSourceY][__garbageSourceX]->_break_delay = 0;
           _boardLogic[__garbageSourceY][__garbageSourceX]->_in_chain = 0;
           _boardLogic[__garbageSourceY][__garbageSourceX]->_state = 15;
@@ -1142,13 +1143,18 @@ class Board
           _boardGraphics[__garbageSourceY][__garbageSourceX]->SetAsset(Utils::GarbageIntermediate(_pokemonType, _spriteManager),
                                                                        PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
           _boardGraphics[__garbageSourceY][__garbageSourceX]->_visibility = visible;
-
+          // Show transformation initial animation only for the garbage origin
+          if (__isGarbageSource == 1)
+          {
+            // Show Garbage transformation animation
+            ShowGarbageTransformationAnimation(_boardLogic[__garbageSourceY][__garbageSourceX]->_width, _boardLogic[__garbageSourceY][__garbageSourceX]->_height, __garbageSourceY, __garbageSourceX);
+          }
           ClearGarbageData(_boardLogic[__garbageSourceY][__garbageSourceX]);
         }
         else
         {
-          // Update garbage object to reflect break state.
-          _boardLogic[__garbageSourceY][__garbageSourceX]->_wait = 15*(_frameBreakingGarbage++);
+          // Update garbage object to reflect break state. +20 is an initial delay used to display the transformation animation.
+          _boardLogic[__garbageSourceY][__garbageSourceX]->_wait = 15*(_frameBreakingGarbage++ + 1.2) + 40;
           _boardLogic[__garbageSourceY][__garbageSourceX]->_break_delay = 0;
           _boardLogic[__garbageSourceY][__garbageSourceX]->_in_chain = 0;
           _boardLogic[__garbageSourceY][__garbageSourceX]->_state = 16;
@@ -1156,6 +1162,207 @@ class Board
           _boardGraphics[__garbageSourceY][__garbageSourceX]->SetAsset(Utils::GarbageIntermediate(_pokemonType, _spriteManager),
                                                                        PANEL_IMAGE_SIZE, PANEL_IMAGE_SIZE);
           _boardGraphics[__garbageSourceY][__garbageSourceX]->_visibility = visible;
+        }
+    }
+
+    // SHow garbage animation when it is broken. If hwight and width are zero, a single panel animation will be shown.
+    // @param width: Garbage width;
+    // @param height: Garbage height;
+    // @param i: vertical position;
+    // @param j: horizontal position;
+    private: void ShowGarbageTransformationAnimation(int width, int height, int i, int j)
+    {
+        Sprite * _alphaAnimation;
+        if (width == 0 && height == 0)
+        {
+          _alphaAnimation = new Sprite(_spriteManager->_blockMask0008, 116, 116);
+          _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+          _alphaAnimation->_y = _boardGraphics[i][j]->_y - 43;
+          _alphaAnimation->_alpha = 0;
+          SpriteProperties _alphaProperty(_alphaAnimation);
+          _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+          AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 155.0, EaseInLinear, 0, true, EaseOutLinear, true);
+          _boardContainer->AddChild(_alphaAnimation);
+        }
+        else if (height == 1)
+        {
+          switch (width)
+          {
+            case 3:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_x3_mask0008, 176, 116);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - 43;
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+            case 4:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_x4_mask0008, 208, 116);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - 43;
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+            case 5:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_x5_mask0008, 236, 116);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - 43;
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+            case 6:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_x6_mask0008, 272, 116);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - 43;
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+          }
+        }
+        else
+        {
+          switch (height)
+          {
+            case 2:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_xc1_mask0008, 272, 148);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - (43 + (height - 1)*PANEL_IMAGE_SIZE);
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+            case 3:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_xc2_mask0008, 272, 176);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - (43 + (height - 1)*PANEL_IMAGE_SIZE);
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+            case 4:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_xc3_mask0008, 272, 212);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - (43 + (height - 1)*PANEL_IMAGE_SIZE);
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+            case 5:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_xc4_mask0008, 272, 244);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - (43 + (height - 1)*PANEL_IMAGE_SIZE);
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+            case 6:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_xc5_mask0008, 272, 268);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - (43 + (height - 1)*PANEL_IMAGE_SIZE);
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+            case 7:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_xc6_mask0008, 272, 304);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - (43 + (height - 1)*PANEL_IMAGE_SIZE);
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+            case 8:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_xc7_mask0008, 272, 336);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - (43 + (height - 1)*PANEL_IMAGE_SIZE);
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+            case 9:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_xc8_mask0008, 272, 364);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - (43 + (height - 1)*PANEL_IMAGE_SIZE);
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+            case 10:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_xc9_mask0008, 272, 396);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - (43 + (height - 1)*PANEL_IMAGE_SIZE);
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+            case 11:
+            {
+              _alphaAnimation = new Sprite(_spriteManager->_xc10_mask0008, 272, 424);
+              _alphaAnimation->_x = _boardGraphics[i][j]->_x - 43;
+              _alphaAnimation->_y = _boardGraphics[i][j]->_y - (43 + (height - 1)*PANEL_IMAGE_SIZE);
+              _alphaAnimation->_alpha = 0;
+              SpriteProperties _alphaProperty(_alphaAnimation);
+              _alphaProperty.RegisterPropertyFinalValue(SpriteAlpha, 255);
+              AnimationEngine::RegisterTween(_alphaAnimation, _alphaProperty, 305.0, EaseInLinear, 0, true, EaseOutLinear, true);
+              _boardContainer->AddChild(_alphaAnimation);
+              break;
+            }
+          }
         }
     }
 
@@ -1283,10 +1490,18 @@ class Board
         int __targetY = ExtractTargetPanelY(change);
         unsigned int __combo_size = ExtractComboSize(change);
 
-        Sprite * _combo = _animationManager->GenerateComboAnimation(__combo_size);
+        // Bubble Body
+        Sprite * _combo = _animationManager->GenerateBubbleAnimation(__combo_size);
         _combo->SetRepeat(false);
         _combo->Play();
         _combo->_animation_delay = 1;
+
+        // Bubble Content
+        Sprite * _number = Utils::GetComboNumber(__combo_size, _spriteManager);
+        _animationManager->RegisterBubbleNumberAnimation(_number);
+        _number->Play();
+        _number->_animation_delay = 1;
+        _combo->AddChild(_number);
 
         // Adjust position of the combo bubble so that it fits correctly in the detection position
         // The initial position of the board is added to the animation sprite since it will be added
@@ -1309,10 +1524,18 @@ class Board
         int __targetY = ExtractTargetPanelY(change);
         unsigned int __chain_size = ExtractChainValue(change);
 
-        Sprite * _chain = _animationManager->GenerateChainAnimation(__chain_size);
+        // Bubble Body
+        Sprite * _chain = _animationManager->GenerateBubbleAnimation(__chain_size);
         _chain->SetRepeat(false);
         _chain->Play();
         _chain->_animation_delay = 1;
+
+        // Bubble Content
+        Sprite * _number = Utils::GetChainNumber(__chain_size, _spriteManager);
+        _animationManager->RegisterBubbleNumberAnimation(_number, true);
+        _number->Play();
+        _number->_animation_delay = 1;
+        _chain->AddChild(_number);
 
         // Adjust position of the combo bubble so that it fits correctly in the detection position
         // The initial position of the board is added to the animation sprite since it will be added
@@ -1517,6 +1740,10 @@ class Board
                     else
                     {
                         _boardLogic[i][j]->_wait--;
+                        if (_boardLogic[i][j]->_wait == 13)
+                        {
+                          ShowGarbageTransformationAnimation(0, 0, i, j);
+                        }
                         // Keep the board wating while the garbage breaks.
                         _slideDelay = 1;
                     }
@@ -1558,6 +1785,10 @@ class Board
                     {
                         _boardLogic[i][j]->_wait--;
                         // Keep the board wating while the garbage breaks.
+                        if (_boardLogic[i][j]->_wait == 13)
+                        {
+                          ShowGarbageTransformationAnimation(0, 0, i, j);
+                        }
                         _slideDelay = 1;
                     }
                 }

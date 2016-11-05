@@ -84,7 +84,7 @@ animation_engine.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/sprite.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../system/debug.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/visibility.hpp \
- /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/trajectory.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/transformation.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/point2d.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../types/sprite_properties.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../types/tween.hpp \
@@ -261,7 +261,7 @@ animation_engine.o: \
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/visibility.hpp:
 
-/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/trajectory.hpp:
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/transformation.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/point2d.hpp:
 

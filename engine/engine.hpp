@@ -40,7 +40,7 @@
 // Type Includes
 #include "types/point2d.hpp"
 #include "types/dim2D.hpp"
-#include "types/trajectory.hpp"
+#include "types/transformation.hpp"
 #include "types/sprite_properties.hpp"
 
 class Engine

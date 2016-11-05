@@ -54,6 +54,9 @@ class Tween
     // Easing Types
     public: EasingTypesName _easing;
 
+    // Easing Types
+    public: EasingTypesName _revert_easing;
+
     // Tween duration in miliseconds
     public: float _duration;
 
@@ -72,8 +75,18 @@ class Tween
     // Completion callback
     public: void (*_completion)(void);
 
+    // Auto revert
+    public: bool _auto_revert;
+
+    // Automatically destroys the sprite after it has finished animating.
+    public: bool _auto_destroy;
+
     // Default Constructor
-    public: Tween () : _easing(EaseNoneLinear), _duration(0.0), _total_frames(0), _current_frame(0), _completion(NULL){};
+    public: Tween (bool auto_revert = false, bool auto_destroy = false) : _easing(EaseNoneLinear), _duration(0.0), _total_frames(0), _current_frame(0), _completion(NULL)
+    {
+        _auto_revert = auto_revert;
+        _auto_destroy = auto_destroy;
+    };
 };
 
 #endif // __TWEEN__

@@ -83,7 +83,7 @@ graphic_engine.o: \
  /opt/devkitpro/libogc/include/sdl/SDL_error.h \
  /opt/devkitpro/libogc/include/sdl/SDL_mutex.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/visibility.hpp \
- /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/trajectory.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/transformation.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/point2d.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/debug.hpp
 
@@ -253,7 +253,7 @@ graphic_engine.o: \
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/visibility.hpp:
 
-/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/trajectory.hpp:
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/transformation.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/../../engine/system/../base/../types/point2d.hpp:
 

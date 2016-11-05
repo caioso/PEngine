@@ -23,7 +23,6 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
     for (int i = 0; i < __stack_size; i++)
     {
         Sprite * __tmp = sprite->GetChildren()[i];
-        RenderSprites(__tmp);
         if (__tmp->GetTexture() != NULL)
         {
             if (__tmp->_visibility == visible)
@@ -44,7 +43,7 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
                 if (__tmp->_frames.size() > 0)
                 {
                     UpdateSpriteAnimation(__tmp);
-                    UpdateSpritePosition(__tmp);
+                    UpdateSpriteTransformation(__tmp);
                 }
 
                 // If not repeating, destroy the sprite
@@ -54,31 +53,64 @@ void GraphicEngine::RenderSprites (Sprite * sprite)
                     __stack_size--;
                     i--;
                     __tmp = NULL;
+                    delete __tmp;
                     continue;
                 }
                 GRRLIB_DrawImg(__tmp->_x + __x + __tmp->_offsetX, __tmp->_y + __y + __tmp->_offsetY, __tmp->GetTexture(), __tmp->_rotation, __tmp->_scaleX, __tmp->_scaleY, PPL_RGBA(255, 255, 255, __tmp->_alpha));
             }
         }
+        RenderSprites(__tmp);
         //else
         //    Debug::LogWarning("Sprite without texture loaded. Skipped.");
     }
 }
 
-void GraphicEngine::UpdateSpritePosition(Sprite* tmp)
+void GraphicEngine::UpdateSpriteTransformation(Sprite* tmp)
 {
-    // Get Trajectory Point
-    Trajectory __point = tmp->_trajectory[tmp->_current_frame];
+      // Get Trajectory Point
+    Transformation __transform = tmp->_transformations[tmp->_current_frame];
 
     // Determine with to do depending on the trajectory point type.
-    switch (__point._type)
+    switch (__transform._pointType)
     {
-        case AbsolutePoint: tmp->_x = __point._point.getX();
-                            tmp->_y = __point._point.getY();
+        case AbsolutePoint: tmp->_x = __transform._point.getX();
+                            tmp->_y = __transform._point.getY();
                             break;
-        case RelativePoint: tmp->_x += __point._point.getX();
-                            tmp->_y += __point._point.getY();
+        case RelativePoint: tmp->_x += __transform._point.getX();
+                            tmp->_y += __transform._point.getY();
                             break;
-        case IgnorePoint: break;
+    }
+
+    switch (__transform._rotationType)
+    {
+        case AbsoluteRotation: tmp->_rotation = __transform._rotation;
+                               break;
+        case IncrementalRotation: tmp->_rotation += __transform._rotation;
+                                  break;
+    }
+
+    switch (__transform._scaleXType)
+    {
+        case AbsoluteScaleX: tmp->_scaleX = __transform._scaleX;
+                             break;
+        case IncrementalScaleX: tmp->_scaleX += __transform._scaleX;
+                                break;
+    }
+
+    switch (__transform._scaleYType)
+    {
+        case AbsoluteScaleY: tmp->_scaleY = __transform._scaleY;
+                             break;
+        case IncrementalScaleY: tmp->_scaleY += __transform._scaleY;
+                                break;
+    }
+
+    switch (__transform._alphaType)
+    {
+        case AbsoluteAlpha: tmp->_alpha = __transform._alpha;
+                             break;
+        case IncrementalAlpha: tmp->_alpha += __transform._alpha;
+                                break;
     }
 }
 

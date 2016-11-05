@@ -23,10 +23,10 @@ class SpriteProperties
     // bit 3: _scaleY;
     // bit 4: _rotation;
     private: unsigned int _property_map;
-    
+
     // Sprite Reference
     Sprite * _sprite;
-    
+
     // Initial Tween properties;
     private: float _initial_x;
     private: float _initial_y;
@@ -34,7 +34,7 @@ class SpriteProperties
     private: float _initial_scaleY;
     private: float _initial_rotation;
     private: char _initial_alpha;
-    
+
     // Final value of tween properties;
     private: float _final_x;
     private: float _final_y;
@@ -42,7 +42,7 @@ class SpriteProperties
     private: float _final_scaleY;
     private: float _final_rotation;
     private: char _final_alpha;
-    
+
     // Default Constructor
     public: SpriteProperties() : _property_map(0), _sprite(NULL), _final_x(0), _final_y(0), _final_scaleX(0), _final_scaleY(0), _final_rotation(0), _final_alpha(0){}
 
@@ -58,7 +58,7 @@ class SpriteProperties
         _initial_rotation = sprite->_rotation;
         _initial_alpha = sprite->_alpha;
     };
-    
+
     // Register Property final value in their respective internal vartibales and update the property map
     // signaling animation intention.
     // @param name: Property name;
@@ -87,7 +87,7 @@ class SpriteProperties
                 break;
         }
     }
-    
+
     // Update Property current value
     // @param name: Property name;
     // @param value: updated value of the property in the animation.
@@ -109,8 +109,8 @@ class SpriteProperties
                 break;
         }
     }
-    
-    
+
+
     // Returns value of final property
     // @param name: Property name;
     public: float GetFinalPropertyValue (SpritePropertyName name)
@@ -133,7 +133,7 @@ class SpriteProperties
         }
         return 0.0;
     }
-    
+
     // Returns value of initial property
     // @param name: Property name;
     public: float GetInitialPropertyValue (SpritePropertyName name)
@@ -177,8 +177,35 @@ class SpriteProperties
         }
         return false;
     }
-    
-    
+
+  // Swaps property initial values with final values.
+  public: void RevertValues ()
+  {
+    // Initial Tween properties;
+    float __tmp_x = _initial_x;
+    float __tmp_y = _initial_y;
+    float __tmp_scaleX = _initial_scaleX;
+    float __tmp_scaleY = _initial_scaleY;
+    float __tmp_rotation = _initial_rotation;
+    char __tmp_alpha = _initial_alpha;
+
+    // Final value of tween properties;
+    _initial_x = _final_x;
+    _initial_y = _final_y;
+    _initial_scaleX = _final_scaleX;
+    _initial_scaleY = _final_scaleY;
+    _initial_rotation = _final_rotation;
+    _initial_alpha = _final_alpha;
+
+    _final_x = __tmp_x;
+    _final_y = __tmp_y;
+    _final_scaleX = __tmp_scaleX;
+    _final_scaleY = __tmp_scaleY;
+    _final_rotation = __tmp_rotation;
+    _final_alpha = __tmp_alpha;
+  }
+
+
 };
 
 #endif // __SPRITE_PROTERTIES__

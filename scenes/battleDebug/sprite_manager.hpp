@@ -2,6 +2,9 @@
 #ifndef __SPRITE_MANAGER__
 #define __SPRITE_MANAGER__
 
+// Engine includes
+#include "../../engine/engine.hpp"
+
 // Assets
 #include "../../assets/graphics/dred.h"
 #include "../../assets/graphics/dblue.h"
@@ -170,605 +173,32 @@
 #include "../../assets/graphics/yellowBreak0010.h"
 #include "../../assets/graphics/yellowBreak0011.h"
 
-#include "../../assets/graphics/x4_0001.h"
-#include "../../assets/graphics/x4_0002.h"
-#include "../../assets/graphics/x4_0003.h"
-#include "../../assets/graphics/x4_0004.h"
-#include "../../assets/graphics/x4_0005.h"
-#include "../../assets/graphics/x4_0006.h"
-#include "../../assets/graphics/x4_0007.h"
-#include "../../assets/graphics/x4_0008.h"
-#include "../../assets/graphics/x4_0009.h"
-#include "../../assets/graphics/x4_0010.h"
-#include "../../assets/graphics/x4_0011.h"
-#include "../../assets/graphics/x4_0012.h"
-#include "../../assets/graphics/x4_0013.h"
-#include "../../assets/graphics/x4_0014.h"
-#include "../../assets/graphics/x4_0038.h"
-#include "../../assets/graphics/x4_0039.h"
-#include "../../assets/graphics/x4_0040.h"
-#include "../../assets/graphics/x4_0041.h"
-#include "../../assets/graphics/x4_0042.h"
-#include "../../assets/graphics/x4_0043.h"
-#include "../../assets/graphics/x4_0044.h"
-#include "../../assets/graphics/x4_0045.h"
-#include "../../assets/graphics/x4_0046.h"
-#include "../../assets/graphics/x4_0047.h"
-
-#include "../../assets/graphics/x5_0001.h"
-#include "../../assets/graphics/x5_0002.h"
-#include "../../assets/graphics/x5_0003.h"
-#include "../../assets/graphics/x5_0004.h"
-#include "../../assets/graphics/x5_0005.h"
-#include "../../assets/graphics/x5_0006.h"
-#include "../../assets/graphics/x5_0007.h"
-#include "../../assets/graphics/x5_0008.h"
-#include "../../assets/graphics/x5_0009.h"
-#include "../../assets/graphics/x5_0010.h"
-#include "../../assets/graphics/x5_0011.h"
-#include "../../assets/graphics/x5_0012.h"
-#include "../../assets/graphics/x5_0013.h"
-#include "../../assets/graphics/x5_0014.h"
-#include "../../assets/graphics/x5_0038.h"
-#include "../../assets/graphics/x5_0039.h"
-#include "../../assets/graphics/x5_0040.h"
-#include "../../assets/graphics/x5_0041.h"
-#include "../../assets/graphics/x5_0042.h"
-#include "../../assets/graphics/x5_0043.h"
-#include "../../assets/graphics/x5_0044.h"
-#include "../../assets/graphics/x5_0045.h"
-#include "../../assets/graphics/x5_0046.h"
-#include "../../assets/graphics/x5_0047.h"
-
-#include "../../assets/graphics/x60001.h"
-#include "../../assets/graphics/x60002.h"
-#include "../../assets/graphics/x60003.h"
-#include "../../assets/graphics/x60004.h"
-#include "../../assets/graphics/x60005.h"
-#include "../../assets/graphics/x60006.h"
-#include "../../assets/graphics/x60007.h"
-#include "../../assets/graphics/x60008.h"
-#include "../../assets/graphics/x60009.h"
-#include "../../assets/graphics/x60010.h"
-#include "../../assets/graphics/x60011.h"
-#include "../../assets/graphics/x60012.h"
-#include "../../assets/graphics/x60013.h"
-#include "../../assets/graphics/x60014.h"
-#include "../../assets/graphics/x60038.h"
-#include "../../assets/graphics/x60039.h"
-#include "../../assets/graphics/x60040.h"
-#include "../../assets/graphics/x60041.h"
-#include "../../assets/graphics/x60042.h"
-#include "../../assets/graphics/x60043.h"
-#include "../../assets/graphics/x60044.h"
-#include "../../assets/graphics/x60045.h"
-#include "../../assets/graphics/x60046.h"
-#include "../../assets/graphics/x60047.h"
-
-#include "../../assets/graphics/x7_0001.h"
-#include "../../assets/graphics/x7_0002.h"
-#include "../../assets/graphics/x7_0003.h"
-#include "../../assets/graphics/x7_0004.h"
-#include "../../assets/graphics/x7_0005.h"
-#include "../../assets/graphics/x7_0006.h"
-#include "../../assets/graphics/x7_0007.h"
-#include "../../assets/graphics/x7_0008.h"
-#include "../../assets/graphics/x7_0009.h"
-#include "../../assets/graphics/x7_0010.h"
-#include "../../assets/graphics/x7_0011.h"
-#include "../../assets/graphics/x7_0012.h"
-#include "../../assets/graphics/x7_0013.h"
-#include "../../assets/graphics/x7_0014.h"
-#include "../../assets/graphics/x7_0038.h"
-#include "../../assets/graphics/x7_0039.h"
-#include "../../assets/graphics/x7_0040.h"
-#include "../../assets/graphics/x7_0041.h"
-#include "../../assets/graphics/x7_0042.h"
-#include "../../assets/graphics/x7_0043.h"
-#include "../../assets/graphics/x7_0044.h"
-#include "../../assets/graphics/x7_0045.h"
-#include "../../assets/graphics/x7_0046.h"
-#include "../../assets/graphics/x7_0047.h"
-
-#include "../../assets/graphics/x8_0001.h"
-#include "../../assets/graphics/x8_0002.h"
-#include "../../assets/graphics/x8_0003.h"
-#include "../../assets/graphics/x8_0004.h"
-#include "../../assets/graphics/x8_0005.h"
-#include "../../assets/graphics/x8_0006.h"
-#include "../../assets/graphics/x8_0007.h"
-#include "../../assets/graphics/x8_0008.h"
-#include "../../assets/graphics/x8_0009.h"
-#include "../../assets/graphics/x8_0010.h"
-#include "../../assets/graphics/x8_0011.h"
-#include "../../assets/graphics/x8_0012.h"
-#include "../../assets/graphics/x8_0013.h"
-#include "../../assets/graphics/x8_0014.h"
-#include "../../assets/graphics/x8_0038.h"
-#include "../../assets/graphics/x8_0039.h"
-#include "../../assets/graphics/x8_0040.h"
-#include "../../assets/graphics/x8_0041.h"
-#include "../../assets/graphics/x8_0042.h"
-#include "../../assets/graphics/x8_0043.h"
-#include "../../assets/graphics/x8_0044.h"
-#include "../../assets/graphics/x8_0045.h"
-#include "../../assets/graphics/x8_0046.h"
-#include "../../assets/graphics/x8_0047.h"
-
-#include "../../assets/graphics/x9_0001.h"
-#include "../../assets/graphics/x9_0002.h"
-#include "../../assets/graphics/x9_0003.h"
-#include "../../assets/graphics/x9_0004.h"
-#include "../../assets/graphics/x9_0005.h"
-#include "../../assets/graphics/x9_0006.h"
-#include "../../assets/graphics/x9_0007.h"
-#include "../../assets/graphics/x9_0008.h"
-#include "../../assets/graphics/x9_0009.h"
-#include "../../assets/graphics/x9_0010.h"
-#include "../../assets/graphics/x9_0011.h"
-#include "../../assets/graphics/x9_0012.h"
-#include "../../assets/graphics/x9_0013.h"
-#include "../../assets/graphics/x9_0014.h"
-#include "../../assets/graphics/x9_0038.h"
-#include "../../assets/graphics/x9_0039.h"
-#include "../../assets/graphics/x9_0040.h"
-#include "../../assets/graphics/x9_0041.h"
-#include "../../assets/graphics/x9_0042.h"
-#include "../../assets/graphics/x9_0043.h"
-#include "../../assets/graphics/x9_0044.h"
-#include "../../assets/graphics/x9_0045.h"
-#include "../../assets/graphics/x9_0046.h"
-#include "../../assets/graphics/x9_0047.h"
-
-#include "../../assets/graphics/x10_0001.h"
-#include "../../assets/graphics/x10_0002.h"
-#include "../../assets/graphics/x10_0003.h"
-#include "../../assets/graphics/x10_0004.h"
-#include "../../assets/graphics/x10_0005.h"
-#include "../../assets/graphics/x10_0006.h"
-#include "../../assets/graphics/x10_0007.h"
-#include "../../assets/graphics/x10_0008.h"
-#include "../../assets/graphics/x10_0009.h"
-#include "../../assets/graphics/x10_0010.h"
-#include "../../assets/graphics/x10_0011.h"
-#include "../../assets/graphics/x10_0012.h"
-#include "../../assets/graphics/x10_0013.h"
-#include "../../assets/graphics/x10_0014.h"
-#include "../../assets/graphics/x10_0038.h"
-#include "../../assets/graphics/x10_0039.h"
-#include "../../assets/graphics/x10_0040.h"
-#include "../../assets/graphics/x10_0041.h"
-#include "../../assets/graphics/x10_0042.h"
-#include "../../assets/graphics/x10_0043.h"
-#include "../../assets/graphics/x10_0044.h"
-#include "../../assets/graphics/x10_0045.h"
-#include "../../assets/graphics/x10_0046.h"
-#include "../../assets/graphics/x10_0047.h"
-
-#include "../../assets/graphics/x110001.h"
-#include "../../assets/graphics/x110002.h"
-#include "../../assets/graphics/x110003.h"
-#include "../../assets/graphics/x110004.h"
-#include "../../assets/graphics/x110005.h"
-#include "../../assets/graphics/x110006.h"
-#include "../../assets/graphics/x110007.h"
-#include "../../assets/graphics/x110008.h"
-#include "../../assets/graphics/x110009.h"
-#include "../../assets/graphics/x110010.h"
-#include "../../assets/graphics/x110011.h"
-#include "../../assets/graphics/x110012.h"
-#include "../../assets/graphics/x110013.h"
-#include "../../assets/graphics/x110014.h"
-#include "../../assets/graphics/x110038.h"
-#include "../../assets/graphics/x110039.h"
-#include "../../assets/graphics/x110040.h"
-#include "../../assets/graphics/x110041.h"
-#include "../../assets/graphics/x110042.h"
-#include "../../assets/graphics/x110043.h"
-#include "../../assets/graphics/x110044.h"
-#include "../../assets/graphics/x110045.h"
-#include "../../assets/graphics/x110046.h"
-#include "../../assets/graphics/x110047.h"
-
-#include "../../assets/graphics/x120001.h"
-#include "../../assets/graphics/x120002.h"
-#include "../../assets/graphics/x120003.h"
-#include "../../assets/graphics/x120004.h"
-#include "../../assets/graphics/x120005.h"
-#include "../../assets/graphics/x120006.h"
-#include "../../assets/graphics/x120007.h"
-#include "../../assets/graphics/x120008.h"
-#include "../../assets/graphics/x120009.h"
-#include "../../assets/graphics/x120010.h"
-#include "../../assets/graphics/x120011.h"
-#include "../../assets/graphics/x120012.h"
-#include "../../assets/graphics/x120013.h"
-#include "../../assets/graphics/x120014.h"
-#include "../../assets/graphics/x120038.h"
-#include "../../assets/graphics/x120039.h"
-#include "../../assets/graphics/x120040.h"
-#include "../../assets/graphics/x120041.h"
-#include "../../assets/graphics/x120042.h"
-#include "../../assets/graphics/x120043.h"
-#include "../../assets/graphics/x120044.h"
-#include "../../assets/graphics/x120045.h"
-#include "../../assets/graphics/x120046.h"
-#include "../../assets/graphics/x120047.h"
-
-#include "../../assets/graphics/x130001.h"
-#include "../../assets/graphics/x130002.h"
-#include "../../assets/graphics/x130003.h"
-#include "../../assets/graphics/x130004.h"
-#include "../../assets/graphics/x130005.h"
-#include "../../assets/graphics/x130006.h"
-#include "../../assets/graphics/x130007.h"
-#include "../../assets/graphics/x130008.h"
-#include "../../assets/graphics/x130009.h"
-#include "../../assets/graphics/x130010.h"
-#include "../../assets/graphics/x130011.h"
-#include "../../assets/graphics/x130012.h"
-#include "../../assets/graphics/x130013.h"
-#include "../../assets/graphics/x130014.h"
-#include "../../assets/graphics/x130038.h"
-#include "../../assets/graphics/x130039.h"
-#include "../../assets/graphics/x130040.h"
-#include "../../assets/graphics/x130041.h"
-#include "../../assets/graphics/x130042.h"
-#include "../../assets/graphics/x130043.h"
-#include "../../assets/graphics/x130044.h"
-#include "../../assets/graphics/x130045.h"
-#include "../../assets/graphics/x130046.h"
-#include "../../assets/graphics/x130047.h"
-
-#include "../../assets/graphics/xunknown_0001.h"
-#include "../../assets/graphics/xunknown_0002.h"
-#include "../../assets/graphics/xunknown_0003.h"
-#include "../../assets/graphics/xunknown_0004.h"
-#include "../../assets/graphics/xunknown_0005.h"
-#include "../../assets/graphics/xunknown_0006.h"
-#include "../../assets/graphics/xunknown_0007.h"
-#include "../../assets/graphics/xunknown_0008.h"
-#include "../../assets/graphics/xunknown_0009.h"
-#include "../../assets/graphics/xunknown_0010.h"
-#include "../../assets/graphics/xunknown_0011.h"
-#include "../../assets/graphics/xunknown_0012.h"
-#include "../../assets/graphics/xunknown_0013.h"
-#include "../../assets/graphics/xunknown_0014.h"
-#include "../../assets/graphics/xunknown_0038.h"
-#include "../../assets/graphics/xunknown_0039.h"
-#include "../../assets/graphics/xunknown_0040.h"
-#include "../../assets/graphics/xunknown_0041.h"
-#include "../../assets/graphics/xunknown_0042.h"
-#include "../../assets/graphics/xunknown_0043.h"
-#include "../../assets/graphics/xunknown_0044.h"
-#include "../../assets/graphics/xunknown_0045.h"
-#include "../../assets/graphics/xunknown_0046.h"
-#include "../../assets/graphics/xunknown_0047.h"
-
-#include "../../assets/graphics/chainx2_0001.h"
-#include "../../assets/graphics/chainx2_0002.h"
-#include "../../assets/graphics/chainx2_0003.h"
-#include "../../assets/graphics/chainx2_0004.h"
-#include "../../assets/graphics/chainx2_0005.h"
-#include "../../assets/graphics/chainx2_0006.h"
-#include "../../assets/graphics/chainx2_0007.h"
-#include "../../assets/graphics/chainx2_0008.h"
-#include "../../assets/graphics/chainx2_0009.h"
-#include "../../assets/graphics/chainx2_0010.h"
-#include "../../assets/graphics/chainx2_0011.h"
-#include "../../assets/graphics/chainx2_0012.h"
-#include "../../assets/graphics/chainx2_0013.h"
-#include "../../assets/graphics/chainx2_0014.h"
-#include "../../assets/graphics/chainx2_0038.h"
-#include "../../assets/graphics/chainx2_0039.h"
-#include "../../assets/graphics/chainx2_0040.h"
-#include "../../assets/graphics/chainx2_0041.h"
-#include "../../assets/graphics/chainx2_0042.h"
-#include "../../assets/graphics/chainx2_0043.h"
-#include "../../assets/graphics/chainx2_0044.h"
-#include "../../assets/graphics/chainx2_0045.h"
-#include "../../assets/graphics/chainx2_0046.h"
-#include "../../assets/graphics/chainx2_0047.h"
-
-#include "../../assets/graphics/chainx3_0001.h"
-#include "../../assets/graphics/chainx3_0002.h"
-#include "../../assets/graphics/chainx3_0003.h"
-#include "../../assets/graphics/chainx3_0004.h"
-#include "../../assets/graphics/chainx3_0005.h"
-#include "../../assets/graphics/chainx3_0006.h"
-#include "../../assets/graphics/chainx3_0007.h"
-#include "../../assets/graphics/chainx3_0008.h"
-#include "../../assets/graphics/chainx3_0009.h"
-#include "../../assets/graphics/chainx3_0010.h"
-#include "../../assets/graphics/chainx3_0011.h"
-#include "../../assets/graphics/chainx3_0012.h"
-#include "../../assets/graphics/chainx3_0013.h"
-#include "../../assets/graphics/chainx3_0014.h"
-#include "../../assets/graphics/chainx3_0038.h"
-#include "../../assets/graphics/chainx3_0039.h"
-#include "../../assets/graphics/chainx3_0040.h"
-#include "../../assets/graphics/chainx3_0041.h"
-#include "../../assets/graphics/chainx3_0042.h"
-#include "../../assets/graphics/chainx3_0043.h"
-#include "../../assets/graphics/chainx3_0044.h"
-#include "../../assets/graphics/chainx3_0045.h"
-#include "../../assets/graphics/chainx3_0046.h"
-#include "../../assets/graphics/chainx3_0047.h"
-
-#include "../../assets/graphics/chainx4_0001.h"
-#include "../../assets/graphics/chainx4_0002.h"
-#include "../../assets/graphics/chainx4_0003.h"
-#include "../../assets/graphics/chainx4_0004.h"
-#include "../../assets/graphics/chainx4_0005.h"
-#include "../../assets/graphics/chainx4_0006.h"
-#include "../../assets/graphics/chainx4_0007.h"
-#include "../../assets/graphics/chainx4_0008.h"
-#include "../../assets/graphics/chainx4_0009.h"
-#include "../../assets/graphics/chainx4_0010.h"
-#include "../../assets/graphics/chainx4_0011.h"
-#include "../../assets/graphics/chainx4_0012.h"
-#include "../../assets/graphics/chainx4_0013.h"
-#include "../../assets/graphics/chainx4_0014.h"
-#include "../../assets/graphics/chainx4_0038.h"
-#include "../../assets/graphics/chainx4_0039.h"
-#include "../../assets/graphics/chainx4_0040.h"
-#include "../../assets/graphics/chainx4_0041.h"
-#include "../../assets/graphics/chainx4_0042.h"
-#include "../../assets/graphics/chainx4_0043.h"
-#include "../../assets/graphics/chainx4_0044.h"
-#include "../../assets/graphics/chainx4_0045.h"
-#include "../../assets/graphics/chainx4_0046.h"
-#include "../../assets/graphics/chainx4_0047.h"
-
-#include "../../assets/graphics/chainx5_0001.h"
-#include "../../assets/graphics/chainx5_0002.h"
-#include "../../assets/graphics/chainx5_0003.h"
-#include "../../assets/graphics/chainx5_0004.h"
-#include "../../assets/graphics/chainx5_0005.h"
-#include "../../assets/graphics/chainx5_0006.h"
-#include "../../assets/graphics/chainx5_0007.h"
-#include "../../assets/graphics/chainx5_0008.h"
-#include "../../assets/graphics/chainx5_0009.h"
-#include "../../assets/graphics/chainx5_0010.h"
-#include "../../assets/graphics/chainx5_0011.h"
-#include "../../assets/graphics/chainx5_0012.h"
-#include "../../assets/graphics/chainx5_0013.h"
-#include "../../assets/graphics/chainx5_0014.h"
-#include "../../assets/graphics/chainx5_0038.h"
-#include "../../assets/graphics/chainx5_0039.h"
-#include "../../assets/graphics/chainx5_0040.h"
-#include "../../assets/graphics/chainx5_0041.h"
-#include "../../assets/graphics/chainx5_0042.h"
-#include "../../assets/graphics/chainx5_0043.h"
-#include "../../assets/graphics/chainx5_0044.h"
-#include "../../assets/graphics/chainx5_0045.h"
-#include "../../assets/graphics/chainx5_0046.h"
-#include "../../assets/graphics/chainx5_0047.h"
-
-#include "../../assets/graphics/chainx6_0001.h"
-#include "../../assets/graphics/chainx6_0002.h"
-#include "../../assets/graphics/chainx6_0003.h"
-#include "../../assets/graphics/chainx6_0004.h"
-#include "../../assets/graphics/chainx6_0005.h"
-#include "../../assets/graphics/chainx6_0006.h"
-#include "../../assets/graphics/chainx6_0007.h"
-#include "../../assets/graphics/chainx6_0008.h"
-#include "../../assets/graphics/chainx6_0009.h"
-#include "../../assets/graphics/chainx6_0010.h"
-#include "../../assets/graphics/chainx6_0011.h"
-#include "../../assets/graphics/chainx6_0012.h"
-#include "../../assets/graphics/chainx6_0013.h"
-#include "../../assets/graphics/chainx6_0014.h"
-#include "../../assets/graphics/chainx6_0038.h"
-#include "../../assets/graphics/chainx6_0039.h"
-#include "../../assets/graphics/chainx6_0040.h"
-#include "../../assets/graphics/chainx6_0041.h"
-#include "../../assets/graphics/chainx6_0042.h"
-#include "../../assets/graphics/chainx6_0043.h"
-#include "../../assets/graphics/chainx6_0044.h"
-#include "../../assets/graphics/chainx6_0045.h"
-#include "../../assets/graphics/chainx6_0046.h"
-#include "../../assets/graphics/chainx6_0047.h"
-
-#include "../../assets/graphics/chainx7_0001.h"
-#include "../../assets/graphics/chainx7_0002.h"
-#include "../../assets/graphics/chainx7_0003.h"
-#include "../../assets/graphics/chainx7_0004.h"
-#include "../../assets/graphics/chainx7_0005.h"
-#include "../../assets/graphics/chainx7_0006.h"
-#include "../../assets/graphics/chainx7_0007.h"
-#include "../../assets/graphics/chainx7_0008.h"
-#include "../../assets/graphics/chainx7_0009.h"
-#include "../../assets/graphics/chainx7_0010.h"
-#include "../../assets/graphics/chainx7_0011.h"
-#include "../../assets/graphics/chainx7_0012.h"
-#include "../../assets/graphics/chainx7_0013.h"
-#include "../../assets/graphics/chainx7_0014.h"
-#include "../../assets/graphics/chainx7_0038.h"
-#include "../../assets/graphics/chainx7_0039.h"
-#include "../../assets/graphics/chainx7_0040.h"
-#include "../../assets/graphics/chainx7_0041.h"
-#include "../../assets/graphics/chainx7_0042.h"
-#include "../../assets/graphics/chainx7_0043.h"
-#include "../../assets/graphics/chainx7_0044.h"
-#include "../../assets/graphics/chainx7_0045.h"
-#include "../../assets/graphics/chainx7_0046.h"
-#include "../../assets/graphics/chainx7_0047.h"
-
-#include "../../assets/graphics/chainx8_0001.h"
-#include "../../assets/graphics/chainx8_0002.h"
-#include "../../assets/graphics/chainx8_0003.h"
-#include "../../assets/graphics/chainx8_0004.h"
-#include "../../assets/graphics/chainx8_0005.h"
-#include "../../assets/graphics/chainx8_0006.h"
-#include "../../assets/graphics/chainx8_0007.h"
-#include "../../assets/graphics/chainx8_0008.h"
-#include "../../assets/graphics/chainx8_0009.h"
-#include "../../assets/graphics/chainx8_0010.h"
-#include "../../assets/graphics/chainx8_0011.h"
-#include "../../assets/graphics/chainx8_0012.h"
-#include "../../assets/graphics/chainx8_0013.h"
-#include "../../assets/graphics/chainx8_0014.h"
-#include "../../assets/graphics/chainx8_0038.h"
-#include "../../assets/graphics/chainx8_0039.h"
-#include "../../assets/graphics/chainx8_0040.h"
-#include "../../assets/graphics/chainx8_0041.h"
-#include "../../assets/graphics/chainx8_0042.h"
-#include "../../assets/graphics/chainx8_0043.h"
-#include "../../assets/graphics/chainx8_0044.h"
-#include "../../assets/graphics/chainx8_0045.h"
-#include "../../assets/graphics/chainx8_0046.h"
-#include "../../assets/graphics/chainx8_0047.h"
-
-#include "../../assets/graphics/chainx9_0001.h"
-#include "../../assets/graphics/chainx9_0002.h"
-#include "../../assets/graphics/chainx9_0003.h"
-#include "../../assets/graphics/chainx9_0004.h"
-#include "../../assets/graphics/chainx9_0005.h"
-#include "../../assets/graphics/chainx9_0006.h"
-#include "../../assets/graphics/chainx9_0007.h"
-#include "../../assets/graphics/chainx9_0008.h"
-#include "../../assets/graphics/chainx9_0009.h"
-#include "../../assets/graphics/chainx9_0010.h"
-#include "../../assets/graphics/chainx9_0011.h"
-#include "../../assets/graphics/chainx9_0012.h"
-#include "../../assets/graphics/chainx9_0013.h"
-#include "../../assets/graphics/chainx9_0014.h"
-#include "../../assets/graphics/chainx9_0038.h"
-#include "../../assets/graphics/chainx9_0039.h"
-#include "../../assets/graphics/chainx9_0040.h"
-#include "../../assets/graphics/chainx9_0041.h"
-#include "../../assets/graphics/chainx9_0042.h"
-#include "../../assets/graphics/chainx9_0043.h"
-#include "../../assets/graphics/chainx9_0044.h"
-#include "../../assets/graphics/chainx9_0045.h"
-#include "../../assets/graphics/chainx9_0046.h"
-#include "../../assets/graphics/chainx9_0047.h"
-
-#include "../../assets/graphics/chainx10_0001.h"
-#include "../../assets/graphics/chainx10_0002.h"
-#include "../../assets/graphics/chainx10_0003.h"
-#include "../../assets/graphics/chainx10_0004.h"
-#include "../../assets/graphics/chainx10_0005.h"
-#include "../../assets/graphics/chainx10_0006.h"
-#include "../../assets/graphics/chainx10_0007.h"
-#include "../../assets/graphics/chainx10_0008.h"
-#include "../../assets/graphics/chainx10_0009.h"
-#include "../../assets/graphics/chainx10_0010.h"
-#include "../../assets/graphics/chainx10_0011.h"
-#include "../../assets/graphics/chainx10_0012.h"
-#include "../../assets/graphics/chainx10_0013.h"
-#include "../../assets/graphics/chainx10_0014.h"
-#include "../../assets/graphics/chainx10_0038.h"
-#include "../../assets/graphics/chainx10_0039.h"
-#include "../../assets/graphics/chainx10_0040.h"
-#include "../../assets/graphics/chainx10_0041.h"
-#include "../../assets/graphics/chainx10_0042.h"
-#include "../../assets/graphics/chainx10_0043.h"
-#include "../../assets/graphics/chainx10_0044.h"
-#include "../../assets/graphics/chainx10_0045.h"
-#include "../../assets/graphics/chainx10_0046.h"
-#include "../../assets/graphics/chainx10_0047.h"
-
-#include "../../assets/graphics/chainx11_0001.h"
-#include "../../assets/graphics/chainx11_0002.h"
-#include "../../assets/graphics/chainx11_0003.h"
-#include "../../assets/graphics/chainx11_0004.h"
-#include "../../assets/graphics/chainx11_0005.h"
-#include "../../assets/graphics/chainx11_0006.h"
-#include "../../assets/graphics/chainx11_0007.h"
-#include "../../assets/graphics/chainx11_0008.h"
-#include "../../assets/graphics/chainx11_0009.h"
-#include "../../assets/graphics/chainx11_0010.h"
-#include "../../assets/graphics/chainx11_0011.h"
-#include "../../assets/graphics/chainx11_0012.h"
-#include "../../assets/graphics/chainx11_0013.h"
-#include "../../assets/graphics/chainx11_0014.h"
-#include "../../assets/graphics/chainx11_0038.h"
-#include "../../assets/graphics/chainx11_0039.h"
-#include "../../assets/graphics/chainx11_0040.h"
-#include "../../assets/graphics/chainx11_0041.h"
-#include "../../assets/graphics/chainx11_0042.h"
-#include "../../assets/graphics/chainx11_0043.h"
-#include "../../assets/graphics/chainx11_0044.h"
-#include "../../assets/graphics/chainx11_0045.h"
-#include "../../assets/graphics/chainx11_0046.h"
-#include "../../assets/graphics/chainx11_0047.h"
-
-#include "../../assets/graphics/chainx12_0001.h"
-#include "../../assets/graphics/chainx12_0002.h"
-#include "../../assets/graphics/chainx12_0003.h"
-#include "../../assets/graphics/chainx12_0004.h"
-#include "../../assets/graphics/chainx12_0005.h"
-#include "../../assets/graphics/chainx12_0006.h"
-#include "../../assets/graphics/chainx12_0007.h"
-#include "../../assets/graphics/chainx12_0008.h"
-#include "../../assets/graphics/chainx12_0009.h"
-#include "../../assets/graphics/chainx12_0010.h"
-#include "../../assets/graphics/chainx12_0011.h"
-#include "../../assets/graphics/chainx12_0012.h"
-#include "../../assets/graphics/chainx12_0013.h"
-#include "../../assets/graphics/chainx12_0014.h"
-#include "../../assets/graphics/chainx12_0038.h"
-#include "../../assets/graphics/chainx12_0039.h"
-#include "../../assets/graphics/chainx12_0040.h"
-#include "../../assets/graphics/chainx12_0041.h"
-#include "../../assets/graphics/chainx12_0042.h"
-#include "../../assets/graphics/chainx12_0043.h"
-#include "../../assets/graphics/chainx12_0044.h"
-#include "../../assets/graphics/chainx12_0045.h"
-#include "../../assets/graphics/chainx12_0046.h"
-#include "../../assets/graphics/chainx12_0047.h"
-
-#include "../../assets/graphics/chainx13_0001.h"
-#include "../../assets/graphics/chainx13_0002.h"
-#include "../../assets/graphics/chainx13_0003.h"
-#include "../../assets/graphics/chainx13_0004.h"
-#include "../../assets/graphics/chainx13_0005.h"
-#include "../../assets/graphics/chainx13_0006.h"
-#include "../../assets/graphics/chainx13_0007.h"
-#include "../../assets/graphics/chainx13_0008.h"
-#include "../../assets/graphics/chainx13_0009.h"
-#include "../../assets/graphics/chainx13_0010.h"
-#include "../../assets/graphics/chainx13_0011.h"
-#include "../../assets/graphics/chainx13_0012.h"
-#include "../../assets/graphics/chainx13_0013.h"
-#include "../../assets/graphics/chainx13_0014.h"
-#include "../../assets/graphics/chainx13_0038.h"
-#include "../../assets/graphics/chainx13_0039.h"
-#include "../../assets/graphics/chainx13_0040.h"
-#include "../../assets/graphics/chainx13_0041.h"
-#include "../../assets/graphics/chainx13_0042.h"
-#include "../../assets/graphics/chainx13_0043.h"
-#include "../../assets/graphics/chainx13_0044.h"
-#include "../../assets/graphics/chainx13_0045.h"
-#include "../../assets/graphics/chainx13_0046.h"
-#include "../../assets/graphics/chainx13_0047.h"
-
-#include "../../assets/graphics/chainxunknown_0001.h"
-#include "../../assets/graphics/chainxunknown_0002.h"
-#include "../../assets/graphics/chainxunknown_0003.h"
-#include "../../assets/graphics/chainxunknown_0004.h"
-#include "../../assets/graphics/chainxunknown_0005.h"
-#include "../../assets/graphics/chainxunknown_0006.h"
-#include "../../assets/graphics/chainxunknown_0007.h"
-#include "../../assets/graphics/chainxunknown_0008.h"
-#include "../../assets/graphics/chainxunknown_0009.h"
-#include "../../assets/graphics/chainxunknown_0010.h"
-#include "../../assets/graphics/chainxunknown_0011.h"
-#include "../../assets/graphics/chainxunknown_0012.h"
-#include "../../assets/graphics/chainxunknown_0013.h"
-#include "../../assets/graphics/chainxunknown_0014.h"
-#include "../../assets/graphics/chainxunknown_0038.h"
-#include "../../assets/graphics/chainxunknown_0039.h"
-#include "../../assets/graphics/chainxunknown_0040.h"
-#include "../../assets/graphics/chainxunknown_0041.h"
-#include "../../assets/graphics/chainxunknown_0042.h"
-#include "../../assets/graphics/chainxunknown_0043.h"
-#include "../../assets/graphics/chainxunknown_0044.h"
-#include "../../assets/graphics/chainxunknown_0045.h"
-#include "../../assets/graphics/chainxunknown_0046.h"
-#include "../../assets/graphics/chainxunknown_0047.h"
+#include "../../assets/graphics/xAny0001.h"
+#include "../../assets/graphics/xAny0002.h"
+#include "../../assets/graphics/xAny0003.h"
+#include "../../assets/graphics/xAny0004.h"
+#include "../../assets/graphics/xAny0005.h"
+#include "../../assets/graphics/xAny0006.h"
+#include "../../assets/graphics/xAny0007.h"
+#include "../../assets/graphics/xAny0008.h"
+#include "../../assets/graphics/xAny0009.h"
+#include "../../assets/graphics/xAny0010.h"
+#include "../../assets/graphics/xAny0011.h"
+#include "../../assets/graphics/xAny0012.h"
+#include "../../assets/graphics/xAny0013.h"
+#include "../../assets/graphics/xAny0014.h"
+#include "../../assets/graphics/xAny0015.h"
+#include "../../assets/graphics/xAny0016.h"
+#include "../../assets/graphics/xAny0017.h"
+#include "../../assets/graphics/xAny0018.h"
+#include "../../assets/graphics/xAny0019.h"
+#include "../../assets/graphics/xAny0020.h"
+#include "../../assets/graphics/xAny0021.h"
+#include "../../assets/graphics/xAny0022.h"
+#include "../../assets/graphics/xAny0023.h"
+#include "../../assets/graphics/xAny0024.h"
+#include "../../assets/graphics/xAny0025.h"
+#include "../../assets/graphics/xAny0026.h"
 
 #include "../../assets/graphics/comboInterfaceAnimationP1_0001.h"
 #include "../../assets/graphics/comboInterfaceAnimationP1_0002.h"
@@ -910,7 +340,16 @@
 #include "../../assets/graphics/P2.h"
 
 // Particles
-#include "../../assets/graphics/garbage_transform_leaf.h"
+#include "../../assets/graphics/g_black.h"
+#include "../../assets/graphics/g_blue.h"
+#include "../../assets/graphics/g_gray.h"
+#include "../../assets/graphics/g_green.h"
+#include "../../assets/graphics/g_normal.h"
+#include "../../assets/graphics/g_orange.h"
+#include "../../assets/graphics/g_pink.h"
+#include "../../assets/graphics/g_purple.h"
+#include "../../assets/graphics/g_red.h"
+#include "../../assets/graphics/g_yellow.h"
 
 #include "../../assets/graphics/blue_animation0001.h"
 #include "../../assets/graphics/blue_animation0002.h"
@@ -1086,6 +525,47 @@
 #include "../../assets/graphics/xc11_normal.h"
 #include "../../assets/graphics/xc11_psy.h"
 #include "../../assets/graphics/xc11_water.h"
+
+#include "../../assets/graphics/x3_mask0008.h"
+#include "../../assets/graphics/x4_mask0008.h"
+#include "../../assets/graphics/x5_mask0008.h"
+#include "../../assets/graphics/x6_mask0008.h"
+#include "../../assets/graphics/xc1_mask0008.h"
+#include "../../assets/graphics/xc2_mask0008.h"
+#include "../../assets/graphics/xc3_mask0008.h"
+#include "../../assets/graphics/xc4_mask0008.h"
+#include "../../assets/graphics/xc5_mask0008.h"
+#include "../../assets/graphics/xc6_mask0008.h"
+#include "../../assets/graphics/xc7_mask0008.h"
+#include "../../assets/graphics/xc8_mask0008.h"
+#include "../../assets/graphics/xc9_mask0008.h"
+#include "../../assets/graphics/xc10_mask0008.h"
+#include "../../assets/graphics/blockMask0008.h"
+
+#include "../../assets/graphics/unnamed.h"
+#include "../../assets/graphics/combo_4.h"
+#include "../../assets/graphics/combo_5.h"
+#include "../../assets/graphics/combo_6.h"
+#include "../../assets/graphics/combo_7.h"
+#include "../../assets/graphics/combo_8.h"
+#include "../../assets/graphics/combo_9.h"
+#include "../../assets/graphics/combo_10.h"
+#include "../../assets/graphics/combo_11.h"
+#include "../../assets/graphics/combo_12.h"
+#include "../../assets/graphics/combo_13.h"
+#include "../../assets/graphics/chain_2.h"
+#include "../../assets/graphics/chain_3.h"
+#include "../../assets/graphics/chain_4.h"
+#include "../../assets/graphics/chain_5.h"
+#include "../../assets/graphics/chain_6.h"
+#include "../../assets/graphics/chain_7.h"
+#include "../../assets/graphics/chain_8.h"
+#include "../../assets/graphics/chain_9.h"
+#include "../../assets/graphics/chain_10.h"
+#include "../../assets/graphics/chain_11.h"
+#include "../../assets/graphics/chain_12.h"
+#include "../../assets/graphics/chain_13.h"
+#include "../../assets/graphics/chain_unknown.h"
 
 // Sprite manager class handles texture instances. It keeps a static reference to
 // each assets reference and deploy them as needed.
@@ -1271,630 +751,35 @@ class SpriteManager
     public: GRRLIB_texImg* _n9;
     public: GRRLIB_texImg* _points;
 
-    // X4 Combo
-    public: GRRLIB_texImg* _x4_0001;
-    public: GRRLIB_texImg* _x4_0002;
-    public: GRRLIB_texImg* _x4_0003;
-    public: GRRLIB_texImg* _x4_0004;
-    public: GRRLIB_texImg* _x4_0005;
-    public: GRRLIB_texImg* _x4_0006;
-    public: GRRLIB_texImg* _x4_0007;
-    public: GRRLIB_texImg* _x4_0008;
-    public: GRRLIB_texImg* _x4_0009;
-    public: GRRLIB_texImg* _x4_0010;
-    public: GRRLIB_texImg* _x4_0011;
-    public: GRRLIB_texImg* _x4_0012;
-    public: GRRLIB_texImg* _x4_0013;
-    public: GRRLIB_texImg* _x4_0014;
-    public: GRRLIB_texImg* _x4_0038;
-    public: GRRLIB_texImg* _x4_0039;
-    public: GRRLIB_texImg* _x4_0040;
-    public: GRRLIB_texImg* _x4_0041;
-    public: GRRLIB_texImg* _x4_0042;
-    public: GRRLIB_texImg* _x4_0043;
-    public: GRRLIB_texImg* _x4_0044;
-    public: GRRLIB_texImg* _x4_0045;
-    public: GRRLIB_texImg* _x4_0046;
-    public: GRRLIB_texImg* _x4_0047;
+    // Bubble (Chain)
+    public: GRRLIB_texImg* _xAny0001;
+    public: GRRLIB_texImg* _xAny0002;
+    public: GRRLIB_texImg* _xAny0003;
+    public: GRRLIB_texImg* _xAny0004;
+    public: GRRLIB_texImg* _xAny0005;
+    public: GRRLIB_texImg* _xAny0006;
+    public: GRRLIB_texImg* _xAny0007;
+    public: GRRLIB_texImg* _xAny0008;
+    public: GRRLIB_texImg* _xAny0009;
+    public: GRRLIB_texImg* _xAny0010;
+    public: GRRLIB_texImg* _xAny0011;
+    public: GRRLIB_texImg* _xAny0012;
+    public: GRRLIB_texImg* _xAny0013;
+    public: GRRLIB_texImg* _xAny0014;
+    public: GRRLIB_texImg* _xAny0015;
+    public: GRRLIB_texImg* _xAny0016;
+    public: GRRLIB_texImg* _xAny0017;
+    public: GRRLIB_texImg* _xAny0018;
+    public: GRRLIB_texImg* _xAny0019;
+    public: GRRLIB_texImg* _xAny0020;
+    public: GRRLIB_texImg* _xAny0021;
+    public: GRRLIB_texImg* _xAny0022;
+    public: GRRLIB_texImg* _xAny0023;
+    public: GRRLIB_texImg* _xAny0024;
+    public: GRRLIB_texImg* _xAny0025;
+    public: GRRLIB_texImg* _xAny0026;
 
-    // x5 Combo
-    public: GRRLIB_texImg* _x5_0001;
-    public: GRRLIB_texImg* _x5_0002;
-    public: GRRLIB_texImg* _x5_0003;
-    public: GRRLIB_texImg* _x5_0004;
-    public: GRRLIB_texImg* _x5_0005;
-    public: GRRLIB_texImg* _x5_0006;
-    public: GRRLIB_texImg* _x5_0007;
-    public: GRRLIB_texImg* _x5_0008;
-    public: GRRLIB_texImg* _x5_0009;
-    public: GRRLIB_texImg* _x5_0010;
-    public: GRRLIB_texImg* _x5_0011;
-    public: GRRLIB_texImg* _x5_0012;
-    public: GRRLIB_texImg* _x5_0013;
-    public: GRRLIB_texImg* _x5_0014;
-    public: GRRLIB_texImg* _x5_0038;
-    public: GRRLIB_texImg* _x5_0039;
-    public: GRRLIB_texImg* _x5_0040;
-    public: GRRLIB_texImg* _x5_0041;
-    public: GRRLIB_texImg* _x5_0042;
-    public: GRRLIB_texImg* _x5_0043;
-    public: GRRLIB_texImg* _x5_0044;
-    public: GRRLIB_texImg* _x5_0045;
-    public: GRRLIB_texImg* _x5_0046;
-    public: GRRLIB_texImg* _x5_0047;
-
-    // x6 Combo
-    public: GRRLIB_texImg* _x6_0001;
-    public: GRRLIB_texImg* _x6_0002;
-    public: GRRLIB_texImg* _x6_0003;
-    public: GRRLIB_texImg* _x6_0004;
-    public: GRRLIB_texImg* _x6_0005;
-    public: GRRLIB_texImg* _x6_0006;
-    public: GRRLIB_texImg* _x6_0007;
-    public: GRRLIB_texImg* _x6_0008;
-    public: GRRLIB_texImg* _x6_0009;
-    public: GRRLIB_texImg* _x6_0010;
-    public: GRRLIB_texImg* _x6_0011;
-    public: GRRLIB_texImg* _x6_0012;
-    public: GRRLIB_texImg* _x6_0013;
-    public: GRRLIB_texImg* _x6_0014;
-    public: GRRLIB_texImg* _x6_0038;
-    public: GRRLIB_texImg* _x6_0039;
-    public: GRRLIB_texImg* _x6_0040;
-    public: GRRLIB_texImg* _x6_0041;
-    public: GRRLIB_texImg* _x6_0042;
-    public: GRRLIB_texImg* _x6_0043;
-    public: GRRLIB_texImg* _x6_0044;
-    public: GRRLIB_texImg* _x6_0045;
-    public: GRRLIB_texImg* _x6_0046;
-    public: GRRLIB_texImg* _x6_0047;
-
-    // x7 Combo
-    public: GRRLIB_texImg* _x7_0001;
-    public: GRRLIB_texImg* _x7_0002;
-    public: GRRLIB_texImg* _x7_0003;
-    public: GRRLIB_texImg* _x7_0004;
-    public: GRRLIB_texImg* _x7_0005;
-    public: GRRLIB_texImg* _x7_0006;
-    public: GRRLIB_texImg* _x7_0007;
-    public: GRRLIB_texImg* _x7_0008;
-    public: GRRLIB_texImg* _x7_0009;
-    public: GRRLIB_texImg* _x7_0010;
-    public: GRRLIB_texImg* _x7_0011;
-    public: GRRLIB_texImg* _x7_0012;
-    public: GRRLIB_texImg* _x7_0013;
-    public: GRRLIB_texImg* _x7_0014;
-    public: GRRLIB_texImg* _x7_0038;
-    public: GRRLIB_texImg* _x7_0039;
-    public: GRRLIB_texImg* _x7_0040;
-    public: GRRLIB_texImg* _x7_0041;
-    public: GRRLIB_texImg* _x7_0042;
-    public: GRRLIB_texImg* _x7_0043;
-    public: GRRLIB_texImg* _x7_0044;
-    public: GRRLIB_texImg* _x7_0045;
-    public: GRRLIB_texImg* _x7_0046;
-    public: GRRLIB_texImg* _x7_0047;
-
-    // x8 Combo
-    public: GRRLIB_texImg* _x8_0001;
-    public: GRRLIB_texImg* _x8_0002;
-    public: GRRLIB_texImg* _x8_0003;
-    public: GRRLIB_texImg* _x8_0004;
-    public: GRRLIB_texImg* _x8_0005;
-    public: GRRLIB_texImg* _x8_0006;
-    public: GRRLIB_texImg* _x8_0007;
-    public: GRRLIB_texImg* _x8_0008;
-    public: GRRLIB_texImg* _x8_0009;
-    public: GRRLIB_texImg* _x8_0010;
-    public: GRRLIB_texImg* _x8_0011;
-    public: GRRLIB_texImg* _x8_0012;
-    public: GRRLIB_texImg* _x8_0013;
-    public: GRRLIB_texImg* _x8_0014;
-    public: GRRLIB_texImg* _x8_0038;
-    public: GRRLIB_texImg* _x8_0039;
-    public: GRRLIB_texImg* _x8_0040;
-    public: GRRLIB_texImg* _x8_0041;
-    public: GRRLIB_texImg* _x8_0042;
-    public: GRRLIB_texImg* _x8_0043;
-    public: GRRLIB_texImg* _x8_0044;
-    public: GRRLIB_texImg* _x8_0045;
-    public: GRRLIB_texImg* _x8_0046;
-    public: GRRLIB_texImg* _x8_0047;
-
-    // x9 Combo
-    public: GRRLIB_texImg* _x9_0001;
-    public: GRRLIB_texImg* _x9_0002;
-    public: GRRLIB_texImg* _x9_0003;
-    public: GRRLIB_texImg* _x9_0004;
-    public: GRRLIB_texImg* _x9_0005;
-    public: GRRLIB_texImg* _x9_0006;
-    public: GRRLIB_texImg* _x9_0007;
-    public: GRRLIB_texImg* _x9_0008;
-    public: GRRLIB_texImg* _x9_0009;
-    public: GRRLIB_texImg* _x9_0010;
-    public: GRRLIB_texImg* _x9_0011;
-    public: GRRLIB_texImg* _x9_0012;
-    public: GRRLIB_texImg* _x9_0013;
-    public: GRRLIB_texImg* _x9_0014;
-    public: GRRLIB_texImg* _x9_0038;
-    public: GRRLIB_texImg* _x9_0039;
-    public: GRRLIB_texImg* _x9_0040;
-    public: GRRLIB_texImg* _x9_0041;
-    public: GRRLIB_texImg* _x9_0042;
-    public: GRRLIB_texImg* _x9_0043;
-    public: GRRLIB_texImg* _x9_0044;
-    public: GRRLIB_texImg* _x9_0045;
-    public: GRRLIB_texImg* _x9_0046;
-    public: GRRLIB_texImg* _x9_0047;
-
-    // x10 Combo
-    public: GRRLIB_texImg* _x10_0001;
-    public: GRRLIB_texImg* _x10_0002;
-    public: GRRLIB_texImg* _x10_0003;
-    public: GRRLIB_texImg* _x10_0004;
-    public: GRRLIB_texImg* _x10_0005;
-    public: GRRLIB_texImg* _x10_0006;
-    public: GRRLIB_texImg* _x10_0007;
-    public: GRRLIB_texImg* _x10_0008;
-    public: GRRLIB_texImg* _x10_0009;
-    public: GRRLIB_texImg* _x10_0010;
-    public: GRRLIB_texImg* _x10_0011;
-    public: GRRLIB_texImg* _x10_0012;
-    public: GRRLIB_texImg* _x10_0013;
-    public: GRRLIB_texImg* _x10_0014;
-    public: GRRLIB_texImg* _x10_0038;
-    public: GRRLIB_texImg* _x10_0039;
-    public: GRRLIB_texImg* _x10_0040;
-    public: GRRLIB_texImg* _x10_0041;
-    public: GRRLIB_texImg* _x10_0042;
-    public: GRRLIB_texImg* _x10_0043;
-    public: GRRLIB_texImg* _x10_0044;
-    public: GRRLIB_texImg* _x10_0045;
-    public: GRRLIB_texImg* _x10_0046;
-    public: GRRLIB_texImg* _x10_0047;
-
-    // x11 Combo
-    public: GRRLIB_texImg* _x11_0001;
-    public: GRRLIB_texImg* _x11_0002;
-    public: GRRLIB_texImg* _x11_0003;
-    public: GRRLIB_texImg* _x11_0004;
-    public: GRRLIB_texImg* _x11_0005;
-    public: GRRLIB_texImg* _x11_0006;
-    public: GRRLIB_texImg* _x11_0007;
-    public: GRRLIB_texImg* _x11_0008;
-    public: GRRLIB_texImg* _x11_0009;
-    public: GRRLIB_texImg* _x11_0010;
-    public: GRRLIB_texImg* _x11_0011;
-    public: GRRLIB_texImg* _x11_0012;
-    public: GRRLIB_texImg* _x11_0013;
-    public: GRRLIB_texImg* _x11_0014;
-    public: GRRLIB_texImg* _x11_0038;
-    public: GRRLIB_texImg* _x11_0039;
-    public: GRRLIB_texImg* _x11_0040;
-    public: GRRLIB_texImg* _x11_0041;
-    public: GRRLIB_texImg* _x11_0042;
-    public: GRRLIB_texImg* _x11_0043;
-    public: GRRLIB_texImg* _x11_0044;
-    public: GRRLIB_texImg* _x11_0045;
-    public: GRRLIB_texImg* _x11_0046;
-    public: GRRLIB_texImg* _x11_0047;
-
-    // x12 Combo
-    public: GRRLIB_texImg* _x12_0001;
-    public: GRRLIB_texImg* _x12_0002;
-    public: GRRLIB_texImg* _x12_0003;
-    public: GRRLIB_texImg* _x12_0004;
-    public: GRRLIB_texImg* _x12_0005;
-    public: GRRLIB_texImg* _x12_0006;
-    public: GRRLIB_texImg* _x12_0007;
-    public: GRRLIB_texImg* _x12_0008;
-    public: GRRLIB_texImg* _x12_0009;
-    public: GRRLIB_texImg* _x12_0010;
-    public: GRRLIB_texImg* _x12_0011;
-    public: GRRLIB_texImg* _x12_0012;
-    public: GRRLIB_texImg* _x12_0013;
-    public: GRRLIB_texImg* _x12_0014;
-    public: GRRLIB_texImg* _x12_0038;
-    public: GRRLIB_texImg* _x12_0039;
-    public: GRRLIB_texImg* _x12_0040;
-    public: GRRLIB_texImg* _x12_0041;
-    public: GRRLIB_texImg* _x12_0042;
-    public: GRRLIB_texImg* _x12_0043;
-    public: GRRLIB_texImg* _x12_0044;
-    public: GRRLIB_texImg* _x12_0045;
-    public: GRRLIB_texImg* _x12_0046;
-    public: GRRLIB_texImg* _x12_0047;
-
-    // x13 Combo
-    public: GRRLIB_texImg* _x13_0001;
-    public: GRRLIB_texImg* _x13_0002;
-    public: GRRLIB_texImg* _x13_0003;
-    public: GRRLIB_texImg* _x13_0004;
-    public: GRRLIB_texImg* _x13_0005;
-    public: GRRLIB_texImg* _x13_0006;
-    public: GRRLIB_texImg* _x13_0007;
-    public: GRRLIB_texImg* _x13_0008;
-    public: GRRLIB_texImg* _x13_0009;
-    public: GRRLIB_texImg* _x13_0010;
-    public: GRRLIB_texImg* _x13_0011;
-    public: GRRLIB_texImg* _x13_0012;
-    public: GRRLIB_texImg* _x13_0013;
-    public: GRRLIB_texImg* _x13_0014;
-    public: GRRLIB_texImg* _x13_0038;
-    public: GRRLIB_texImg* _x13_0039;
-    public: GRRLIB_texImg* _x13_0040;
-    public: GRRLIB_texImg* _x13_0041;
-    public: GRRLIB_texImg* _x13_0042;
-    public: GRRLIB_texImg* _x13_0043;
-    public: GRRLIB_texImg* _x13_0044;
-    public: GRRLIB_texImg* _x13_0045;
-    public: GRRLIB_texImg* _x13_0046;
-    public: GRRLIB_texImg* _x13_0047;
-
-    // xunknown Combo
-    public: GRRLIB_texImg* _xunknown_0001;
-    public: GRRLIB_texImg* _xunknown_0002;
-    public: GRRLIB_texImg* _xunknown_0003;
-    public: GRRLIB_texImg* _xunknown_0004;
-    public: GRRLIB_texImg* _xunknown_0005;
-    public: GRRLIB_texImg* _xunknown_0006;
-    public: GRRLIB_texImg* _xunknown_0007;
-    public: GRRLIB_texImg* _xunknown_0008;
-    public: GRRLIB_texImg* _xunknown_0009;
-    public: GRRLIB_texImg* _xunknown_0010;
-    public: GRRLIB_texImg* _xunknown_0011;
-    public: GRRLIB_texImg* _xunknown_0012;
-    public: GRRLIB_texImg* _xunknown_0013;
-    public: GRRLIB_texImg* _xunknown_0014;
-    public: GRRLIB_texImg* _xunknown_0038;
-    public: GRRLIB_texImg* _xunknown_0039;
-    public: GRRLIB_texImg* _xunknown_0040;
-    public: GRRLIB_texImg* _xunknown_0041;
-    public: GRRLIB_texImg* _xunknown_0042;
-    public: GRRLIB_texImg* _xunknown_0043;
-    public: GRRLIB_texImg* _xunknown_0044;
-    public: GRRLIB_texImg* _xunknown_0045;
-    public: GRRLIB_texImg* _xunknown_0046;
-    public: GRRLIB_texImg* _xunknown_0047;
-
-    // Chain x2
-    public: GRRLIB_texImg* _chainx2_0001;
-    public: GRRLIB_texImg* _chainx2_0002;
-    public: GRRLIB_texImg* _chainx2_0003;
-    public: GRRLIB_texImg* _chainx2_0004;
-    public: GRRLIB_texImg* _chainx2_0005;
-    public: GRRLIB_texImg* _chainx2_0006;
-    public: GRRLIB_texImg* _chainx2_0007;
-    public: GRRLIB_texImg* _chainx2_0008;
-    public: GRRLIB_texImg* _chainx2_0009;
-    public: GRRLIB_texImg* _chainx2_0010;
-    public: GRRLIB_texImg* _chainx2_0011;
-    public: GRRLIB_texImg* _chainx2_0012;
-    public: GRRLIB_texImg* _chainx2_0013;
-    public: GRRLIB_texImg* _chainx2_0014;
-    public: GRRLIB_texImg* _chainx2_0038;
-    public: GRRLIB_texImg* _chainx2_0039;
-    public: GRRLIB_texImg* _chainx2_0040;
-    public: GRRLIB_texImg* _chainx2_0041;
-    public: GRRLIB_texImg* _chainx2_0042;
-    public: GRRLIB_texImg* _chainx2_0043;
-    public: GRRLIB_texImg* _chainx2_0044;
-    public: GRRLIB_texImg* _chainx2_0045;
-    public: GRRLIB_texImg* _chainx2_0046;
-    public: GRRLIB_texImg* _chainx2_0047;
-
-    // Chain x3
-    public: GRRLIB_texImg* _chainx3_0001;
-    public: GRRLIB_texImg* _chainx3_0002;
-    public: GRRLIB_texImg* _chainx3_0003;
-    public: GRRLIB_texImg* _chainx3_0004;
-    public: GRRLIB_texImg* _chainx3_0005;
-    public: GRRLIB_texImg* _chainx3_0006;
-    public: GRRLIB_texImg* _chainx3_0007;
-    public: GRRLIB_texImg* _chainx3_0008;
-    public: GRRLIB_texImg* _chainx3_0009;
-    public: GRRLIB_texImg* _chainx3_0010;
-    public: GRRLIB_texImg* _chainx3_0011;
-    public: GRRLIB_texImg* _chainx3_0012;
-    public: GRRLIB_texImg* _chainx3_0013;
-    public: GRRLIB_texImg* _chainx3_0014;
-    public: GRRLIB_texImg* _chainx3_0038;
-    public: GRRLIB_texImg* _chainx3_0039;
-    public: GRRLIB_texImg* _chainx3_0040;
-    public: GRRLIB_texImg* _chainx3_0041;
-    public: GRRLIB_texImg* _chainx3_0042;
-    public: GRRLIB_texImg* _chainx3_0043;
-    public: GRRLIB_texImg* _chainx3_0044;
-    public: GRRLIB_texImg* _chainx3_0045;
-    public: GRRLIB_texImg* _chainx3_0046;
-    public: GRRLIB_texImg* _chainx3_0047;
-
-    // Chain x4
-    public: GRRLIB_texImg* _chainx4_0001;
-    public: GRRLIB_texImg* _chainx4_0002;
-    public: GRRLIB_texImg* _chainx4_0003;
-    public: GRRLIB_texImg* _chainx4_0004;
-    public: GRRLIB_texImg* _chainx4_0005;
-    public: GRRLIB_texImg* _chainx4_0006;
-    public: GRRLIB_texImg* _chainx4_0007;
-    public: GRRLIB_texImg* _chainx4_0008;
-    public: GRRLIB_texImg* _chainx4_0009;
-    public: GRRLIB_texImg* _chainx4_0010;
-    public: GRRLIB_texImg* _chainx4_0011;
-    public: GRRLIB_texImg* _chainx4_0012;
-    public: GRRLIB_texImg* _chainx4_0013;
-    public: GRRLIB_texImg* _chainx4_0014;
-    public: GRRLIB_texImg* _chainx4_0038;
-    public: GRRLIB_texImg* _chainx4_0039;
-    public: GRRLIB_texImg* _chainx4_0040;
-    public: GRRLIB_texImg* _chainx4_0041;
-    public: GRRLIB_texImg* _chainx4_0042;
-    public: GRRLIB_texImg* _chainx4_0043;
-    public: GRRLIB_texImg* _chainx4_0044;
-    public: GRRLIB_texImg* _chainx4_0045;
-    public: GRRLIB_texImg* _chainx4_0046;
-    public: GRRLIB_texImg* _chainx4_0047;
-
-    // Chain x5
-    public: GRRLIB_texImg* _chainx5_0001;
-    public: GRRLIB_texImg* _chainx5_0002;
-    public: GRRLIB_texImg* _chainx5_0003;
-    public: GRRLIB_texImg* _chainx5_0004;
-    public: GRRLIB_texImg* _chainx5_0005;
-    public: GRRLIB_texImg* _chainx5_0006;
-    public: GRRLIB_texImg* _chainx5_0007;
-    public: GRRLIB_texImg* _chainx5_0008;
-    public: GRRLIB_texImg* _chainx5_0009;
-    public: GRRLIB_texImg* _chainx5_0010;
-    public: GRRLIB_texImg* _chainx5_0011;
-    public: GRRLIB_texImg* _chainx5_0012;
-    public: GRRLIB_texImg* _chainx5_0013;
-    public: GRRLIB_texImg* _chainx5_0014;
-    public: GRRLIB_texImg* _chainx5_0038;
-    public: GRRLIB_texImg* _chainx5_0039;
-    public: GRRLIB_texImg* _chainx5_0040;
-    public: GRRLIB_texImg* _chainx5_0041;
-    public: GRRLIB_texImg* _chainx5_0042;
-    public: GRRLIB_texImg* _chainx5_0043;
-    public: GRRLIB_texImg* _chainx5_0044;
-    public: GRRLIB_texImg* _chainx5_0045;
-    public: GRRLIB_texImg* _chainx5_0046;
-    public: GRRLIB_texImg* _chainx5_0047;
-
-    // Chain x6
-    public: GRRLIB_texImg* _chainx6_0001;
-    public: GRRLIB_texImg* _chainx6_0002;
-    public: GRRLIB_texImg* _chainx6_0003;
-    public: GRRLIB_texImg* _chainx6_0004;
-    public: GRRLIB_texImg* _chainx6_0005;
-    public: GRRLIB_texImg* _chainx6_0006;
-    public: GRRLIB_texImg* _chainx6_0007;
-    public: GRRLIB_texImg* _chainx6_0008;
-    public: GRRLIB_texImg* _chainx6_0009;
-    public: GRRLIB_texImg* _chainx6_0010;
-    public: GRRLIB_texImg* _chainx6_0011;
-    public: GRRLIB_texImg* _chainx6_0012;
-    public: GRRLIB_texImg* _chainx6_0013;
-    public: GRRLIB_texImg* _chainx6_0014;
-    public: GRRLIB_texImg* _chainx6_0038;
-    public: GRRLIB_texImg* _chainx6_0039;
-    public: GRRLIB_texImg* _chainx6_0040;
-    public: GRRLIB_texImg* _chainx6_0041;
-    public: GRRLIB_texImg* _chainx6_0042;
-    public: GRRLIB_texImg* _chainx6_0043;
-    public: GRRLIB_texImg* _chainx6_0044;
-    public: GRRLIB_texImg* _chainx6_0045;
-    public: GRRLIB_texImg* _chainx6_0046;
-    public: GRRLIB_texImg* _chainx6_0047;
-
-    // Chain x7
-    public: GRRLIB_texImg* _chainx7_0001;
-    public: GRRLIB_texImg* _chainx7_0002;
-    public: GRRLIB_texImg* _chainx7_0003;
-    public: GRRLIB_texImg* _chainx7_0004;
-    public: GRRLIB_texImg* _chainx7_0005;
-    public: GRRLIB_texImg* _chainx7_0006;
-    public: GRRLIB_texImg* _chainx7_0007;
-    public: GRRLIB_texImg* _chainx7_0008;
-    public: GRRLIB_texImg* _chainx7_0009;
-    public: GRRLIB_texImg* _chainx7_0010;
-    public: GRRLIB_texImg* _chainx7_0011;
-    public: GRRLIB_texImg* _chainx7_0012;
-    public: GRRLIB_texImg* _chainx7_0013;
-    public: GRRLIB_texImg* _chainx7_0014;
-    public: GRRLIB_texImg* _chainx7_0038;
-    public: GRRLIB_texImg* _chainx7_0039;
-    public: GRRLIB_texImg* _chainx7_0040;
-    public: GRRLIB_texImg* _chainx7_0041;
-    public: GRRLIB_texImg* _chainx7_0042;
-    public: GRRLIB_texImg* _chainx7_0043;
-    public: GRRLIB_texImg* _chainx7_0044;
-    public: GRRLIB_texImg* _chainx7_0045;
-    public: GRRLIB_texImg* _chainx7_0046;
-    public: GRRLIB_texImg* _chainx7_0047;
-
-    // Chain x8
-    public: GRRLIB_texImg* _chainx8_0001;
-    public: GRRLIB_texImg* _chainx8_0002;
-    public: GRRLIB_texImg* _chainx8_0003;
-    public: GRRLIB_texImg* _chainx8_0004;
-    public: GRRLIB_texImg* _chainx8_0005;
-    public: GRRLIB_texImg* _chainx8_0006;
-    public: GRRLIB_texImg* _chainx8_0007;
-    public: GRRLIB_texImg* _chainx8_0008;
-    public: GRRLIB_texImg* _chainx8_0009;
-    public: GRRLIB_texImg* _chainx8_0010;
-    public: GRRLIB_texImg* _chainx8_0011;
-    public: GRRLIB_texImg* _chainx8_0012;
-    public: GRRLIB_texImg* _chainx8_0013;
-    public: GRRLIB_texImg* _chainx8_0014;
-    public: GRRLIB_texImg* _chainx8_0038;
-    public: GRRLIB_texImg* _chainx8_0039;
-    public: GRRLIB_texImg* _chainx8_0040;
-    public: GRRLIB_texImg* _chainx8_0041;
-    public: GRRLIB_texImg* _chainx8_0042;
-    public: GRRLIB_texImg* _chainx8_0043;
-    public: GRRLIB_texImg* _chainx8_0044;
-    public: GRRLIB_texImg* _chainx8_0045;
-    public: GRRLIB_texImg* _chainx8_0046;
-    public: GRRLIB_texImg* _chainx8_0047;
-
-    // Chain x9
-    public: GRRLIB_texImg* _chainx9_0001;
-    public: GRRLIB_texImg* _chainx9_0002;
-    public: GRRLIB_texImg* _chainx9_0003;
-    public: GRRLIB_texImg* _chainx9_0004;
-    public: GRRLIB_texImg* _chainx9_0005;
-    public: GRRLIB_texImg* _chainx9_0006;
-    public: GRRLIB_texImg* _chainx9_0007;
-    public: GRRLIB_texImg* _chainx9_0008;
-    public: GRRLIB_texImg* _chainx9_0009;
-    public: GRRLIB_texImg* _chainx9_0010;
-    public: GRRLIB_texImg* _chainx9_0011;
-    public: GRRLIB_texImg* _chainx9_0012;
-    public: GRRLIB_texImg* _chainx9_0013;
-    public: GRRLIB_texImg* _chainx9_0014;
-    public: GRRLIB_texImg* _chainx9_0038;
-    public: GRRLIB_texImg* _chainx9_0039;
-    public: GRRLIB_texImg* _chainx9_0040;
-    public: GRRLIB_texImg* _chainx9_0041;
-    public: GRRLIB_texImg* _chainx9_0042;
-    public: GRRLIB_texImg* _chainx9_0043;
-    public: GRRLIB_texImg* _chainx9_0044;
-    public: GRRLIB_texImg* _chainx9_0045;
-    public: GRRLIB_texImg* _chainx9_0046;
-    public: GRRLIB_texImg* _chainx9_0047;
-
-    // Chain x10
-    public: GRRLIB_texImg* _chainx10_0001;
-    public: GRRLIB_texImg* _chainx10_0002;
-    public: GRRLIB_texImg* _chainx10_0003;
-    public: GRRLIB_texImg* _chainx10_0004;
-    public: GRRLIB_texImg* _chainx10_0005;
-    public: GRRLIB_texImg* _chainx10_0006;
-    public: GRRLIB_texImg* _chainx10_0007;
-    public: GRRLIB_texImg* _chainx10_0008;
-    public: GRRLIB_texImg* _chainx10_0009;
-    public: GRRLIB_texImg* _chainx10_0010;
-    public: GRRLIB_texImg* _chainx10_0011;
-    public: GRRLIB_texImg* _chainx10_0012;
-    public: GRRLIB_texImg* _chainx10_0013;
-    public: GRRLIB_texImg* _chainx10_0014;
-    public: GRRLIB_texImg* _chainx10_0038;
-    public: GRRLIB_texImg* _chainx10_0039;
-    public: GRRLIB_texImg* _chainx10_0040;
-    public: GRRLIB_texImg* _chainx10_0041;
-    public: GRRLIB_texImg* _chainx10_0042;
-    public: GRRLIB_texImg* _chainx10_0043;
-    public: GRRLIB_texImg* _chainx10_0044;
-    public: GRRLIB_texImg* _chainx10_0045;
-    public: GRRLIB_texImg* _chainx10_0046;
-    public: GRRLIB_texImg* _chainx10_0047;
-
-    // Chain x11
-    public: GRRLIB_texImg* _chainx11_0001;
-    public: GRRLIB_texImg* _chainx11_0002;
-    public: GRRLIB_texImg* _chainx11_0003;
-    public: GRRLIB_texImg* _chainx11_0004;
-    public: GRRLIB_texImg* _chainx11_0005;
-    public: GRRLIB_texImg* _chainx11_0006;
-    public: GRRLIB_texImg* _chainx11_0007;
-    public: GRRLIB_texImg* _chainx11_0008;
-    public: GRRLIB_texImg* _chainx11_0009;
-    public: GRRLIB_texImg* _chainx11_0010;
-    public: GRRLIB_texImg* _chainx11_0011;
-    public: GRRLIB_texImg* _chainx11_0012;
-    public: GRRLIB_texImg* _chainx11_0013;
-    public: GRRLIB_texImg* _chainx11_0014;
-    public: GRRLIB_texImg* _chainx11_0038;
-    public: GRRLIB_texImg* _chainx11_0039;
-    public: GRRLIB_texImg* _chainx11_0040;
-    public: GRRLIB_texImg* _chainx11_0041;
-    public: GRRLIB_texImg* _chainx11_0042;
-    public: GRRLIB_texImg* _chainx11_0043;
-    public: GRRLIB_texImg* _chainx11_0044;
-    public: GRRLIB_texImg* _chainx11_0045;
-    public: GRRLIB_texImg* _chainx11_0046;
-    public: GRRLIB_texImg* _chainx11_0047;
-
-    // Chain x12
-    public: GRRLIB_texImg* _chainx12_0001;
-    public: GRRLIB_texImg* _chainx12_0002;
-    public: GRRLIB_texImg* _chainx12_0003;
-    public: GRRLIB_texImg* _chainx12_0004;
-    public: GRRLIB_texImg* _chainx12_0005;
-    public: GRRLIB_texImg* _chainx12_0006;
-    public: GRRLIB_texImg* _chainx12_0007;
-    public: GRRLIB_texImg* _chainx12_0008;
-    public: GRRLIB_texImg* _chainx12_0009;
-    public: GRRLIB_texImg* _chainx12_0010;
-    public: GRRLIB_texImg* _chainx12_0011;
-    public: GRRLIB_texImg* _chainx12_0012;
-    public: GRRLIB_texImg* _chainx12_0013;
-    public: GRRLIB_texImg* _chainx12_0014;
-    public: GRRLIB_texImg* _chainx12_0038;
-    public: GRRLIB_texImg* _chainx12_0039;
-    public: GRRLIB_texImg* _chainx12_0040;
-    public: GRRLIB_texImg* _chainx12_0041;
-    public: GRRLIB_texImg* _chainx12_0042;
-    public: GRRLIB_texImg* _chainx12_0043;
-    public: GRRLIB_texImg* _chainx12_0044;
-    public: GRRLIB_texImg* _chainx12_0045;
-    public: GRRLIB_texImg* _chainx12_0046;
-    public: GRRLIB_texImg* _chainx12_0047;
-
-    // Chain x13
-    public: GRRLIB_texImg* _chainx13_0001;
-    public: GRRLIB_texImg* _chainx13_0002;
-    public: GRRLIB_texImg* _chainx13_0003;
-    public: GRRLIB_texImg* _chainx13_0004;
-    public: GRRLIB_texImg* _chainx13_0005;
-    public: GRRLIB_texImg* _chainx13_0006;
-    public: GRRLIB_texImg* _chainx13_0007;
-    public: GRRLIB_texImg* _chainx13_0008;
-    public: GRRLIB_texImg* _chainx13_0009;
-    public: GRRLIB_texImg* _chainx13_0010;
-    public: GRRLIB_texImg* _chainx13_0011;
-    public: GRRLIB_texImg* _chainx13_0012;
-    public: GRRLIB_texImg* _chainx13_0013;
-    public: GRRLIB_texImg* _chainx13_0014;
-    public: GRRLIB_texImg* _chainx13_0038;
-    public: GRRLIB_texImg* _chainx13_0039;
-    public: GRRLIB_texImg* _chainx13_0040;
-    public: GRRLIB_texImg* _chainx13_0041;
-    public: GRRLIB_texImg* _chainx13_0042;
-    public: GRRLIB_texImg* _chainx13_0043;
-    public: GRRLIB_texImg* _chainx13_0044;
-    public: GRRLIB_texImg* _chainx13_0045;
-    public: GRRLIB_texImg* _chainx13_0046;
-    public: GRRLIB_texImg* _chainx13_0047;
-
-    // Chain xUnknown
-    public: GRRLIB_texImg* _chainxunknown_0001;
-    public: GRRLIB_texImg* _chainxunknown_0002;
-    public: GRRLIB_texImg* _chainxunknown_0003;
-    public: GRRLIB_texImg* _chainxunknown_0004;
-    public: GRRLIB_texImg* _chainxunknown_0005;
-    public: GRRLIB_texImg* _chainxunknown_0006;
-    public: GRRLIB_texImg* _chainxunknown_0007;
-    public: GRRLIB_texImg* _chainxunknown_0008;
-    public: GRRLIB_texImg* _chainxunknown_0009;
-    public: GRRLIB_texImg* _chainxunknown_0010;
-    public: GRRLIB_texImg* _chainxunknown_0011;
-    public: GRRLIB_texImg* _chainxunknown_0012;
-    public: GRRLIB_texImg* _chainxunknown_0013;
-    public: GRRLIB_texImg* _chainxunknown_0014;
-    public: GRRLIB_texImg* _chainxunknown_0038;
-    public: GRRLIB_texImg* _chainxunknown_0039;
-    public: GRRLIB_texImg* _chainxunknown_0040;
-    public: GRRLIB_texImg* _chainxunknown_0041;
-    public: GRRLIB_texImg* _chainxunknown_0042;
-    public: GRRLIB_texImg* _chainxunknown_0043;
-    public: GRRLIB_texImg* _chainxunknown_0044;
-    public: GRRLIB_texImg* _chainxunknown_0045;
-    public: GRRLIB_texImg* _chainxunknown_0046;
-    public: GRRLIB_texImg* _chainxunknown_0047;
-
+    // Interface animations
     public: GRRLIB_texImg* _comboInterfaceAnimationP1_0001;
     public: GRRLIB_texImg* _comboInterfaceAnimationP1_0002;
     public: GRRLIB_texImg* _comboInterfaceAnimationP1_0003;
@@ -1925,6 +810,7 @@ class SpriteManager
     public: GRRLIB_texImg* _comboInterfaceAnimationP2_0013;
     public: GRRLIB_texImg* _comboInterfaceAnimationP2_0014;
 
+    // Garbage
     public: GRRLIB_texImg* _x3_dark;
     public: GRRLIB_texImg* _x3_electric;
     public: GRRLIB_texImg* _x3_fairy;
@@ -2088,7 +974,16 @@ class SpriteManager
     public: GRRLIB_texImg* _P1;
     public: GRRLIB_texImg* _P2;
 
-    public: GRRLIB_texImg* _garbage_transform_leaf;
+    public: GRRLIB_texImg* _g_black;
+    public: GRRLIB_texImg* _g_blue;
+    public: GRRLIB_texImg* _g_gray;
+    public: GRRLIB_texImg* _g_green;
+    public: GRRLIB_texImg* _g_normal;
+    public: GRRLIB_texImg* _g_orange;
+    public: GRRLIB_texImg* _g_pink;
+    public: GRRLIB_texImg* _g_purple;
+    public: GRRLIB_texImg* _g_red;
+    public: GRRLIB_texImg* _g_yellow;
 
     public: GRRLIB_texImg* _xc1_dark;
     public: GRRLIB_texImg* _xc1_electric;
@@ -2210,6 +1105,47 @@ class SpriteManager
     public: GRRLIB_texImg* _xc11_normal;
     public: GRRLIB_texImg* _xc11_psy;
     public: GRRLIB_texImg* _xc11_water;
+
+    public: GRRLIB_texImg* _x3_mask0008;
+    public: GRRLIB_texImg* _x4_mask0008;
+    public: GRRLIB_texImg* _x5_mask0008;
+    public: GRRLIB_texImg* _x6_mask0008;
+    public: GRRLIB_texImg* _xc1_mask0008;
+    public: GRRLIB_texImg* _xc2_mask0008;
+    public: GRRLIB_texImg* _xc3_mask0008;
+    public: GRRLIB_texImg* _xc4_mask0008;
+    public: GRRLIB_texImg* _xc5_mask0008;
+    public: GRRLIB_texImg* _xc6_mask0008;
+    public: GRRLIB_texImg* _xc7_mask0008;
+    public: GRRLIB_texImg* _xc8_mask0008;
+    public: GRRLIB_texImg* _xc9_mask0008;
+    public: GRRLIB_texImg* _xc10_mask0008;
+
+    public: GRRLIB_texImg* _blockMask0008;
+    public: GRRLIB_texImg* _unnamed;
+    public: GRRLIB_texImg* _combo_4;
+    public: GRRLIB_texImg* _combo_5;
+    public: GRRLIB_texImg* _combo_6;
+    public: GRRLIB_texImg* _combo_7;
+    public: GRRLIB_texImg* _combo_8;
+    public: GRRLIB_texImg* _combo_9;
+    public: GRRLIB_texImg* _combo_10;
+    public: GRRLIB_texImg* _combo_11;
+    public: GRRLIB_texImg* _combo_12;
+    public: GRRLIB_texImg* _combo_13;
+    public: GRRLIB_texImg* _chain_2;
+    public: GRRLIB_texImg* _chain_3;
+    public: GRRLIB_texImg* _chain_4;
+    public: GRRLIB_texImg* _chain_5;
+    public: GRRLIB_texImg* _chain_6;
+    public: GRRLIB_texImg* _chain_7;
+    public: GRRLIB_texImg* _chain_8;
+    public: GRRLIB_texImg* _chain_9;
+    public: GRRLIB_texImg* _chain_10;
+    public: GRRLIB_texImg* _chain_11;
+    public: GRRLIB_texImg* _chain_12;
+    public: GRRLIB_texImg* _chain_13;
+    public: GRRLIB_texImg* _chain_unknown;
 
     public: SpriteManager ()
     {
@@ -2393,617 +1329,33 @@ class SpriteManager
         _yellowBreak0010 = GRRLIB_LoadTexture(yellowBreak0010);
         _yellowBreak0011 = GRRLIB_LoadTexture(yellowBreak0011);
 
-        // x4 Combo
-        _x4_0001 = GRRLIB_LoadTexture(x4_0001);
-        _x4_0002 = GRRLIB_LoadTexture(x4_0002);
-        _x4_0003 = GRRLIB_LoadTexture(x4_0003);
-        _x4_0004 = GRRLIB_LoadTexture(x4_0004);
-        _x4_0005 = GRRLIB_LoadTexture(x4_0005);
-        _x4_0006 = GRRLIB_LoadTexture(x4_0006);
-        _x4_0007 = GRRLIB_LoadTexture(x4_0007);
-        _x4_0008 = GRRLIB_LoadTexture(x4_0008);
-        _x4_0009 = GRRLIB_LoadTexture(x4_0009);
-        _x4_0010 = GRRLIB_LoadTexture(x4_0010);
-        _x4_0011 = GRRLIB_LoadTexture(x4_0011);
-        _x4_0012 = GRRLIB_LoadTexture(x4_0012);
-        _x4_0013 = GRRLIB_LoadTexture(x4_0013);
-        _x4_0014 = GRRLIB_LoadTexture(x4_0014);
-        _x4_0038 = GRRLIB_LoadTexture(x4_0038);
-        _x4_0039 = GRRLIB_LoadTexture(x4_0039);
-        _x4_0040 = GRRLIB_LoadTexture(x4_0040);
-        _x4_0041 = GRRLIB_LoadTexture(x4_0041);
-        _x4_0042 = GRRLIB_LoadTexture(x4_0042);
-        _x4_0043 = GRRLIB_LoadTexture(x4_0043);
-        _x4_0044 = GRRLIB_LoadTexture(x4_0044);
-        _x4_0045 = GRRLIB_LoadTexture(x4_0045);
-        _x4_0046 = GRRLIB_LoadTexture(x4_0046);
-        _x4_0047 = GRRLIB_LoadTexture(x4_0047);
-
-        // x5 Combo
-        _x5_0001 = GRRLIB_LoadTexture(x5_0001);
-        _x5_0002 = GRRLIB_LoadTexture(x5_0002);
-        _x5_0003 = GRRLIB_LoadTexture(x5_0003);
-        _x5_0004 = GRRLIB_LoadTexture(x5_0004);
-        _x5_0005 = GRRLIB_LoadTexture(x5_0005);
-        _x5_0006 = GRRLIB_LoadTexture(x5_0006);
-        _x5_0007 = GRRLIB_LoadTexture(x5_0007);
-        _x5_0008 = GRRLIB_LoadTexture(x5_0008);
-        _x5_0009 = GRRLIB_LoadTexture(x5_0009);
-        _x5_0010 = GRRLIB_LoadTexture(x5_0010);
-        _x5_0011 = GRRLIB_LoadTexture(x5_0011);
-        _x5_0012 = GRRLIB_LoadTexture(x5_0012);
-        _x5_0013 = GRRLIB_LoadTexture(x5_0013);
-        _x5_0014 = GRRLIB_LoadTexture(x5_0014);
-        _x5_0038 = GRRLIB_LoadTexture(x5_0038);
-        _x5_0039 = GRRLIB_LoadTexture(x5_0039);
-        _x5_0040 = GRRLIB_LoadTexture(x5_0040);
-        _x5_0041 = GRRLIB_LoadTexture(x5_0041);
-        _x5_0042 = GRRLIB_LoadTexture(x5_0042);
-        _x5_0043 = GRRLIB_LoadTexture(x5_0043);
-        _x5_0044 = GRRLIB_LoadTexture(x5_0044);
-        _x5_0045 = GRRLIB_LoadTexture(x5_0045);
-        _x5_0046 = GRRLIB_LoadTexture(x5_0046);
-        _x5_0047 = GRRLIB_LoadTexture(x5_0047);
-
-        // x6 Combo
-        _x6_0001 = GRRLIB_LoadTexture(x60001);
-        _x6_0002 = GRRLIB_LoadTexture(x60002);
-        _x6_0003 = GRRLIB_LoadTexture(x60003);
-        _x6_0004 = GRRLIB_LoadTexture(x60004);
-        _x6_0005 = GRRLIB_LoadTexture(x60005);
-        _x6_0006 = GRRLIB_LoadTexture(x60006);
-        _x6_0007 = GRRLIB_LoadTexture(x60007);
-        _x6_0008 = GRRLIB_LoadTexture(x60008);
-        _x6_0009 = GRRLIB_LoadTexture(x60009);
-        _x6_0010 = GRRLIB_LoadTexture(x60010);
-        _x6_0011 = GRRLIB_LoadTexture(x60011);
-        _x6_0012 = GRRLIB_LoadTexture(x60012);
-        _x6_0013 = GRRLIB_LoadTexture(x60013);
-        _x6_0014 = GRRLIB_LoadTexture(x60014);
-        _x6_0038 = GRRLIB_LoadTexture(x60038);
-        _x6_0039 = GRRLIB_LoadTexture(x60039);
-        _x6_0040 = GRRLIB_LoadTexture(x60040);
-        _x6_0041 = GRRLIB_LoadTexture(x60041);
-        _x6_0042 = GRRLIB_LoadTexture(x60042);
-        _x6_0043 = GRRLIB_LoadTexture(x60043);
-        _x6_0044 = GRRLIB_LoadTexture(x60044);
-        _x6_0045 = GRRLIB_LoadTexture(x60045);
-        _x6_0046 = GRRLIB_LoadTexture(x60046);
-        _x6_0047 = GRRLIB_LoadTexture(x60047);
-
-        // x7 Combo
-        _x7_0001 = GRRLIB_LoadTexture(x7_0001);
-        _x7_0002 = GRRLIB_LoadTexture(x7_0002);
-        _x7_0003 = GRRLIB_LoadTexture(x7_0003);
-        _x7_0004 = GRRLIB_LoadTexture(x7_0004);
-        _x7_0005 = GRRLIB_LoadTexture(x7_0005);
-        _x7_0006 = GRRLIB_LoadTexture(x7_0006);
-        _x7_0007 = GRRLIB_LoadTexture(x7_0007);
-        _x7_0008 = GRRLIB_LoadTexture(x7_0008);
-        _x7_0009 = GRRLIB_LoadTexture(x7_0009);
-        _x7_0010 = GRRLIB_LoadTexture(x7_0010);
-        _x7_0011 = GRRLIB_LoadTexture(x7_0011);
-        _x7_0012 = GRRLIB_LoadTexture(x7_0012);
-        _x7_0013 = GRRLIB_LoadTexture(x7_0013);
-        _x7_0014 = GRRLIB_LoadTexture(x7_0014);
-        _x7_0038 = GRRLIB_LoadTexture(x7_0038);
-        _x7_0039 = GRRLIB_LoadTexture(x7_0039);
-        _x7_0040 = GRRLIB_LoadTexture(x7_0040);
-        _x7_0041 = GRRLIB_LoadTexture(x7_0041);
-        _x7_0042 = GRRLIB_LoadTexture(x7_0042);
-        _x7_0043 = GRRLIB_LoadTexture(x7_0043);
-        _x7_0044 = GRRLIB_LoadTexture(x7_0044);
-        _x7_0045 = GRRLIB_LoadTexture(x7_0045);
-        _x7_0046 = GRRLIB_LoadTexture(x7_0046);
-        _x7_0047 = GRRLIB_LoadTexture(x7_0047);
-
-        // x8 Combo
-        _x8_0001 = GRRLIB_LoadTexture(x8_0001);
-        _x8_0002 = GRRLIB_LoadTexture(x8_0002);
-        _x8_0003 = GRRLIB_LoadTexture(x8_0003);
-        _x8_0004 = GRRLIB_LoadTexture(x8_0004);
-        _x8_0005 = GRRLIB_LoadTexture(x8_0005);
-        _x8_0006 = GRRLIB_LoadTexture(x8_0006);
-        _x8_0007 = GRRLIB_LoadTexture(x8_0007);
-        _x8_0008 = GRRLIB_LoadTexture(x8_0008);
-        _x8_0009 = GRRLIB_LoadTexture(x8_0009);
-        _x8_0010 = GRRLIB_LoadTexture(x8_0010);
-        _x8_0011 = GRRLIB_LoadTexture(x8_0011);
-        _x8_0012 = GRRLIB_LoadTexture(x8_0012);
-        _x8_0013 = GRRLIB_LoadTexture(x8_0013);
-        _x8_0014 = GRRLIB_LoadTexture(x8_0014);
-        _x8_0038 = GRRLIB_LoadTexture(x8_0038);
-        _x8_0039 = GRRLIB_LoadTexture(x8_0039);
-        _x8_0040 = GRRLIB_LoadTexture(x8_0040);
-        _x8_0041 = GRRLIB_LoadTexture(x8_0041);
-        _x8_0042 = GRRLIB_LoadTexture(x8_0042);
-        _x8_0043 = GRRLIB_LoadTexture(x8_0043);
-        _x8_0044 = GRRLIB_LoadTexture(x8_0044);
-        _x8_0045 = GRRLIB_LoadTexture(x8_0045);
-        _x8_0046 = GRRLIB_LoadTexture(x8_0046);
-        _x8_0047 = GRRLIB_LoadTexture(x8_0047);
-
-        // x9 Combo
-        _x9_0001 = GRRLIB_LoadTexture(x9_0001);
-        _x9_0002 = GRRLIB_LoadTexture(x9_0002);
-        _x9_0003 = GRRLIB_LoadTexture(x9_0003);
-        _x9_0004 = GRRLIB_LoadTexture(x9_0004);
-        _x9_0005 = GRRLIB_LoadTexture(x9_0005);
-        _x9_0006 = GRRLIB_LoadTexture(x9_0006);
-        _x9_0007 = GRRLIB_LoadTexture(x9_0007);
-        _x9_0008 = GRRLIB_LoadTexture(x9_0008);
-        _x9_0009 = GRRLIB_LoadTexture(x9_0009);
-        _x9_0010 = GRRLIB_LoadTexture(x9_0010);
-        _x9_0011 = GRRLIB_LoadTexture(x9_0011);
-        _x9_0012 = GRRLIB_LoadTexture(x9_0012);
-        _x9_0013 = GRRLIB_LoadTexture(x9_0013);
-        _x9_0014 = GRRLIB_LoadTexture(x9_0014);
-        _x9_0038 = GRRLIB_LoadTexture(x9_0038);
-        _x9_0039 = GRRLIB_LoadTexture(x9_0039);
-        _x9_0040 = GRRLIB_LoadTexture(x9_0040);
-        _x9_0041 = GRRLIB_LoadTexture(x9_0041);
-        _x9_0042 = GRRLIB_LoadTexture(x9_0042);
-        _x9_0043 = GRRLIB_LoadTexture(x9_0043);
-        _x9_0044 = GRRLIB_LoadTexture(x9_0044);
-        _x9_0045 = GRRLIB_LoadTexture(x9_0045);
-        _x9_0046 = GRRLIB_LoadTexture(x9_0046);
-        _x9_0047 = GRRLIB_LoadTexture(x9_0047);
-
-        // x10 Combo
-        _x10_0001 = GRRLIB_LoadTexture(x10_0001);
-        _x10_0002 = GRRLIB_LoadTexture(x10_0002);
-        _x10_0003 = GRRLIB_LoadTexture(x10_0003);
-        _x10_0004 = GRRLIB_LoadTexture(x10_0004);
-        _x10_0005 = GRRLIB_LoadTexture(x10_0005);
-        _x10_0006 = GRRLIB_LoadTexture(x10_0006);
-        _x10_0007 = GRRLIB_LoadTexture(x10_0007);
-        _x10_0008 = GRRLIB_LoadTexture(x10_0008);
-        _x10_0009 = GRRLIB_LoadTexture(x10_0009);
-        _x10_0010 = GRRLIB_LoadTexture(x10_0010);
-        _x10_0011 = GRRLIB_LoadTexture(x10_0011);
-        _x10_0012 = GRRLIB_LoadTexture(x10_0012);
-        _x10_0013 = GRRLIB_LoadTexture(x10_0013);
-        _x10_0014 = GRRLIB_LoadTexture(x10_0014);
-        _x10_0038 = GRRLIB_LoadTexture(x10_0038);
-        _x10_0039 = GRRLIB_LoadTexture(x10_0039);
-        _x10_0040 = GRRLIB_LoadTexture(x10_0040);
-        _x10_0041 = GRRLIB_LoadTexture(x10_0041);
-        _x10_0042 = GRRLIB_LoadTexture(x10_0042);
-        _x10_0043 = GRRLIB_LoadTexture(x10_0043);
-        _x10_0044 = GRRLIB_LoadTexture(x10_0044);
-        _x10_0045 = GRRLIB_LoadTexture(x10_0045);
-        _x10_0046 = GRRLIB_LoadTexture(x10_0046);
-        _x10_0047 = GRRLIB_LoadTexture(x10_0047);
-
-        // x11 Combo
-        _x11_0001 = GRRLIB_LoadTexture(x110001);
-        _x11_0002 = GRRLIB_LoadTexture(x110002);
-        _x11_0003 = GRRLIB_LoadTexture(x110003);
-        _x11_0004 = GRRLIB_LoadTexture(x110004);
-        _x11_0005 = GRRLIB_LoadTexture(x110005);
-        _x11_0006 = GRRLIB_LoadTexture(x110006);
-        _x11_0007 = GRRLIB_LoadTexture(x110007);
-        _x11_0008 = GRRLIB_LoadTexture(x110008);
-        _x11_0009 = GRRLIB_LoadTexture(x110009);
-        _x11_0010 = GRRLIB_LoadTexture(x110010);
-        _x11_0011 = GRRLIB_LoadTexture(x110011);
-        _x11_0012 = GRRLIB_LoadTexture(x110012);
-        _x11_0013 = GRRLIB_LoadTexture(x110013);
-        _x11_0014 = GRRLIB_LoadTexture(x110014);
-        _x11_0038 = GRRLIB_LoadTexture(x110038);
-        _x11_0039 = GRRLIB_LoadTexture(x110039);
-        _x11_0040 = GRRLIB_LoadTexture(x110040);
-        _x11_0041 = GRRLIB_LoadTexture(x110041);
-        _x11_0042 = GRRLIB_LoadTexture(x110042);
-        _x11_0043 = GRRLIB_LoadTexture(x110043);
-        _x11_0044 = GRRLIB_LoadTexture(x110044);
-        _x11_0045 = GRRLIB_LoadTexture(x110045);
-        _x11_0046 = GRRLIB_LoadTexture(x110046);
-        _x11_0047 = GRRLIB_LoadTexture(x110047);
-
-        // x12 Combo
-        _x12_0001 = GRRLIB_LoadTexture(x120001);
-        _x12_0002 = GRRLIB_LoadTexture(x120002);
-        _x12_0003 = GRRLIB_LoadTexture(x120003);
-        _x12_0004 = GRRLIB_LoadTexture(x120004);
-        _x12_0005 = GRRLIB_LoadTexture(x120005);
-        _x12_0006 = GRRLIB_LoadTexture(x120006);
-        _x12_0007 = GRRLIB_LoadTexture(x120007);
-        _x12_0008 = GRRLIB_LoadTexture(x120008);
-        _x12_0009 = GRRLIB_LoadTexture(x120009);
-        _x12_0010 = GRRLIB_LoadTexture(x120010);
-        _x12_0011 = GRRLIB_LoadTexture(x120011);
-        _x12_0012 = GRRLIB_LoadTexture(x120012);
-        _x12_0013 = GRRLIB_LoadTexture(x120013);
-        _x12_0014 = GRRLIB_LoadTexture(x120014);
-        _x12_0038 = GRRLIB_LoadTexture(x120038);
-        _x12_0039 = GRRLIB_LoadTexture(x120039);
-        _x12_0040 = GRRLIB_LoadTexture(x120040);
-        _x12_0041 = GRRLIB_LoadTexture(x120041);
-        _x12_0042 = GRRLIB_LoadTexture(x120042);
-        _x12_0043 = GRRLIB_LoadTexture(x120043);
-        _x12_0044 = GRRLIB_LoadTexture(x120044);
-        _x12_0045 = GRRLIB_LoadTexture(x120045);
-        _x12_0046 = GRRLIB_LoadTexture(x120046);
-        _x12_0047 = GRRLIB_LoadTexture(x120047);
-
-        // x13 Combo
-        _x13_0001 = GRRLIB_LoadTexture(x130001);
-        _x13_0002 = GRRLIB_LoadTexture(x130002);
-        _x13_0003 = GRRLIB_LoadTexture(x130003);
-        _x13_0004 = GRRLIB_LoadTexture(x130004);
-        _x13_0005 = GRRLIB_LoadTexture(x130005);
-        _x13_0006 = GRRLIB_LoadTexture(x130006);
-        _x13_0007 = GRRLIB_LoadTexture(x130007);
-        _x13_0008 = GRRLIB_LoadTexture(x130008);
-        _x13_0009 = GRRLIB_LoadTexture(x130009);
-        _x13_0010 = GRRLIB_LoadTexture(x130010);
-        _x13_0011 = GRRLIB_LoadTexture(x130011);
-        _x13_0012 = GRRLIB_LoadTexture(x130012);
-        _x13_0013 = GRRLIB_LoadTexture(x130013);
-        _x13_0014 = GRRLIB_LoadTexture(x130014);
-        _x13_0038 = GRRLIB_LoadTexture(x130038);
-        _x13_0039 = GRRLIB_LoadTexture(x130039);
-        _x13_0040 = GRRLIB_LoadTexture(x130040);
-        _x13_0041 = GRRLIB_LoadTexture(x130041);
-        _x13_0042 = GRRLIB_LoadTexture(x130042);
-        _x13_0043 = GRRLIB_LoadTexture(x130043);
-        _x13_0044 = GRRLIB_LoadTexture(x130044);
-        _x13_0045 = GRRLIB_LoadTexture(x130045);
-        _x13_0046 = GRRLIB_LoadTexture(x130046);
-        _x13_0047 = GRRLIB_LoadTexture(x130047);
-
-        // xunknown Combo
-        _xunknown_0001 = GRRLIB_LoadTexture(xunknown_0001);
-        _xunknown_0002 = GRRLIB_LoadTexture(xunknown_0002);
-        _xunknown_0003 = GRRLIB_LoadTexture(xunknown_0003);
-        _xunknown_0004 = GRRLIB_LoadTexture(xunknown_0004);
-        _xunknown_0005 = GRRLIB_LoadTexture(xunknown_0005);
-        _xunknown_0006 = GRRLIB_LoadTexture(xunknown_0006);
-        _xunknown_0007 = GRRLIB_LoadTexture(xunknown_0007);
-        _xunknown_0008 = GRRLIB_LoadTexture(xunknown_0008);
-        _xunknown_0009 = GRRLIB_LoadTexture(xunknown_0009);
-        _xunknown_0010 = GRRLIB_LoadTexture(xunknown_0010);
-        _xunknown_0011 = GRRLIB_LoadTexture(xunknown_0011);
-        _xunknown_0012 = GRRLIB_LoadTexture(xunknown_0012);
-        _xunknown_0013 = GRRLIB_LoadTexture(xunknown_0013);
-        _xunknown_0014 = GRRLIB_LoadTexture(xunknown_0014);
-        _xunknown_0038 = GRRLIB_LoadTexture(xunknown_0038);
-        _xunknown_0039 = GRRLIB_LoadTexture(xunknown_0039);
-        _xunknown_0040 = GRRLIB_LoadTexture(xunknown_0040);
-        _xunknown_0041 = GRRLIB_LoadTexture(xunknown_0041);
-        _xunknown_0042 = GRRLIB_LoadTexture(xunknown_0042);
-        _xunknown_0043 = GRRLIB_LoadTexture(xunknown_0043);
-        _xunknown_0044 = GRRLIB_LoadTexture(xunknown_0044);
-        _xunknown_0045 = GRRLIB_LoadTexture(xunknown_0045);
-        _xunknown_0046 = GRRLIB_LoadTexture(xunknown_0046);
-        _xunknown_0047 = GRRLIB_LoadTexture(xunknown_0047);
-
         // Chain
-        _chainx2_0001 = GRRLIB_LoadTexture(chainx2_0001);
-        _chainx2_0002 = GRRLIB_LoadTexture(chainx2_0002);
-        _chainx2_0003 = GRRLIB_LoadTexture(chainx2_0003);
-        _chainx2_0004 = GRRLIB_LoadTexture(chainx2_0004);
-        _chainx2_0005 = GRRLIB_LoadTexture(chainx2_0005);
-        _chainx2_0006 = GRRLIB_LoadTexture(chainx2_0006);
-        _chainx2_0007 = GRRLIB_LoadTexture(chainx2_0007);
-        _chainx2_0008 = GRRLIB_LoadTexture(chainx2_0008);
-        _chainx2_0009 = GRRLIB_LoadTexture(chainx2_0009);
-        _chainx2_0010 = GRRLIB_LoadTexture(chainx2_0010);
-        _chainx2_0011 = GRRLIB_LoadTexture(chainx2_0011);
-        _chainx2_0012 = GRRLIB_LoadTexture(chainx2_0012);
-        _chainx2_0013 = GRRLIB_LoadTexture(chainx2_0013);
-        _chainx2_0014 = GRRLIB_LoadTexture(chainx2_0014);
-        _chainx2_0038 = GRRLIB_LoadTexture(chainx2_0038);
-        _chainx2_0039 = GRRLIB_LoadTexture(chainx2_0039);
-        _chainx2_0040 = GRRLIB_LoadTexture(chainx2_0040);
-        _chainx2_0041 = GRRLIB_LoadTexture(chainx2_0041);
-        _chainx2_0042 = GRRLIB_LoadTexture(chainx2_0042);
-        _chainx2_0043 = GRRLIB_LoadTexture(chainx2_0043);
-        _chainx2_0044 = GRRLIB_LoadTexture(chainx2_0044);
-        _chainx2_0045 = GRRLIB_LoadTexture(chainx2_0045);
-        _chainx2_0046 = GRRLIB_LoadTexture(chainx2_0046);
-        _chainx2_0047 = GRRLIB_LoadTexture(chainx2_0047);
-
-        _chainx3_0001 = GRRLIB_LoadTexture(chainx3_0001);
-        _chainx3_0002 = GRRLIB_LoadTexture(chainx3_0002);
-        _chainx3_0003 = GRRLIB_LoadTexture(chainx3_0003);
-        _chainx3_0004 = GRRLIB_LoadTexture(chainx3_0004);
-        _chainx3_0005 = GRRLIB_LoadTexture(chainx3_0005);
-        _chainx3_0006 = GRRLIB_LoadTexture(chainx3_0006);
-        _chainx3_0007 = GRRLIB_LoadTexture(chainx3_0007);
-        _chainx3_0008 = GRRLIB_LoadTexture(chainx3_0008);
-        _chainx3_0009 = GRRLIB_LoadTexture(chainx3_0009);
-        _chainx3_0010 = GRRLIB_LoadTexture(chainx3_0010);
-        _chainx3_0011 = GRRLIB_LoadTexture(chainx3_0011);
-        _chainx3_0012 = GRRLIB_LoadTexture(chainx3_0012);
-        _chainx3_0013 = GRRLIB_LoadTexture(chainx3_0013);
-        _chainx3_0014 = GRRLIB_LoadTexture(chainx3_0014);
-        _chainx3_0038 = GRRLIB_LoadTexture(chainx3_0038);
-        _chainx3_0039 = GRRLIB_LoadTexture(chainx3_0039);
-        _chainx3_0040 = GRRLIB_LoadTexture(chainx3_0040);
-        _chainx3_0041 = GRRLIB_LoadTexture(chainx3_0041);
-        _chainx3_0042 = GRRLIB_LoadTexture(chainx3_0042);
-        _chainx3_0043 = GRRLIB_LoadTexture(chainx3_0043);
-        _chainx3_0044 = GRRLIB_LoadTexture(chainx3_0044);
-        _chainx3_0045 = GRRLIB_LoadTexture(chainx3_0045);
-        _chainx3_0046 = GRRLIB_LoadTexture(chainx3_0046);
-        _chainx3_0047 = GRRLIB_LoadTexture(chainx3_0047);
-
-        _chainx4_0001 = GRRLIB_LoadTexture(chainx4_0001);
-        _chainx4_0002 = GRRLIB_LoadTexture(chainx4_0002);
-        _chainx4_0003 = GRRLIB_LoadTexture(chainx4_0003);
-        _chainx4_0004 = GRRLIB_LoadTexture(chainx4_0004);
-        _chainx4_0005 = GRRLIB_LoadTexture(chainx4_0005);
-        _chainx4_0006 = GRRLIB_LoadTexture(chainx4_0006);
-        _chainx4_0007 = GRRLIB_LoadTexture(chainx4_0007);
-        _chainx4_0008 = GRRLIB_LoadTexture(chainx4_0008);
-        _chainx4_0009 = GRRLIB_LoadTexture(chainx4_0009);
-        _chainx4_0010 = GRRLIB_LoadTexture(chainx4_0010);
-        _chainx4_0011 = GRRLIB_LoadTexture(chainx4_0011);
-        _chainx4_0012 = GRRLIB_LoadTexture(chainx4_0012);
-        _chainx4_0013 = GRRLIB_LoadTexture(chainx4_0013);
-        _chainx4_0014 = GRRLIB_LoadTexture(chainx4_0014);
-        _chainx4_0038 = GRRLIB_LoadTexture(chainx4_0038);
-        _chainx4_0039 = GRRLIB_LoadTexture(chainx4_0039);
-        _chainx4_0040 = GRRLIB_LoadTexture(chainx4_0040);
-        _chainx4_0041 = GRRLIB_LoadTexture(chainx4_0041);
-        _chainx4_0042 = GRRLIB_LoadTexture(chainx4_0042);
-        _chainx4_0043 = GRRLIB_LoadTexture(chainx4_0043);
-        _chainx4_0044 = GRRLIB_LoadTexture(chainx4_0044);
-        _chainx4_0045 = GRRLIB_LoadTexture(chainx4_0045);
-        _chainx4_0046 = GRRLIB_LoadTexture(chainx4_0046);
-        _chainx4_0047 = GRRLIB_LoadTexture(chainx4_0047);
-
-        _chainx5_0001 = GRRLIB_LoadTexture(chainx5_0001);
-        _chainx5_0002 = GRRLIB_LoadTexture(chainx5_0002);
-        _chainx5_0003 = GRRLIB_LoadTexture(chainx5_0003);
-        _chainx5_0004 = GRRLIB_LoadTexture(chainx5_0004);
-        _chainx5_0005 = GRRLIB_LoadTexture(chainx5_0005);
-        _chainx5_0006 = GRRLIB_LoadTexture(chainx5_0006);
-        _chainx5_0007 = GRRLIB_LoadTexture(chainx5_0007);
-        _chainx5_0008 = GRRLIB_LoadTexture(chainx5_0008);
-        _chainx5_0009 = GRRLIB_LoadTexture(chainx5_0009);
-        _chainx5_0010 = GRRLIB_LoadTexture(chainx5_0010);
-        _chainx5_0011 = GRRLIB_LoadTexture(chainx5_0011);
-        _chainx5_0012 = GRRLIB_LoadTexture(chainx5_0012);
-        _chainx5_0013 = GRRLIB_LoadTexture(chainx5_0013);
-        _chainx5_0014 = GRRLIB_LoadTexture(chainx5_0014);
-        _chainx5_0038 = GRRLIB_LoadTexture(chainx5_0038);
-        _chainx5_0039 = GRRLIB_LoadTexture(chainx5_0039);
-        _chainx5_0040 = GRRLIB_LoadTexture(chainx5_0040);
-        _chainx5_0041 = GRRLIB_LoadTexture(chainx5_0041);
-        _chainx5_0042 = GRRLIB_LoadTexture(chainx5_0042);
-        _chainx5_0043 = GRRLIB_LoadTexture(chainx5_0043);
-        _chainx5_0044 = GRRLIB_LoadTexture(chainx5_0044);
-        _chainx5_0045 = GRRLIB_LoadTexture(chainx5_0045);
-        _chainx5_0046 = GRRLIB_LoadTexture(chainx5_0046);
-        _chainx5_0047 = GRRLIB_LoadTexture(chainx5_0047);
-
-        _chainx6_0001 = GRRLIB_LoadTexture(chainx6_0001);
-        _chainx6_0002 = GRRLIB_LoadTexture(chainx6_0002);
-        _chainx6_0003 = GRRLIB_LoadTexture(chainx6_0003);
-        _chainx6_0004 = GRRLIB_LoadTexture(chainx6_0004);
-        _chainx6_0005 = GRRLIB_LoadTexture(chainx6_0005);
-        _chainx6_0006 = GRRLIB_LoadTexture(chainx6_0006);
-        _chainx6_0007 = GRRLIB_LoadTexture(chainx6_0007);
-        _chainx6_0008 = GRRLIB_LoadTexture(chainx6_0008);
-        _chainx6_0009 = GRRLIB_LoadTexture(chainx6_0009);
-        _chainx6_0010 = GRRLIB_LoadTexture(chainx6_0010);
-        _chainx6_0011 = GRRLIB_LoadTexture(chainx6_0011);
-        _chainx6_0012 = GRRLIB_LoadTexture(chainx6_0012);
-        _chainx6_0013 = GRRLIB_LoadTexture(chainx6_0013);
-        _chainx6_0014 = GRRLIB_LoadTexture(chainx6_0014);
-        _chainx6_0038 = GRRLIB_LoadTexture(chainx6_0038);
-        _chainx6_0039 = GRRLIB_LoadTexture(chainx6_0039);
-        _chainx6_0040 = GRRLIB_LoadTexture(chainx6_0040);
-        _chainx6_0041 = GRRLIB_LoadTexture(chainx6_0041);
-        _chainx6_0042 = GRRLIB_LoadTexture(chainx6_0042);
-        _chainx6_0043 = GRRLIB_LoadTexture(chainx6_0043);
-        _chainx6_0044 = GRRLIB_LoadTexture(chainx6_0044);
-        _chainx6_0045 = GRRLIB_LoadTexture(chainx6_0045);
-        _chainx6_0046 = GRRLIB_LoadTexture(chainx6_0046);
-        _chainx6_0047 = GRRLIB_LoadTexture(chainx6_0047);
-
-        _chainx7_0001 = GRRLIB_LoadTexture(chainx7_0001);
-        _chainx7_0002 = GRRLIB_LoadTexture(chainx7_0002);
-        _chainx7_0003 = GRRLIB_LoadTexture(chainx7_0003);
-        _chainx7_0004 = GRRLIB_LoadTexture(chainx7_0004);
-        _chainx7_0005 = GRRLIB_LoadTexture(chainx7_0005);
-        _chainx7_0006 = GRRLIB_LoadTexture(chainx7_0006);
-        _chainx7_0007 = GRRLIB_LoadTexture(chainx7_0007);
-        _chainx7_0008 = GRRLIB_LoadTexture(chainx7_0008);
-        _chainx7_0009 = GRRLIB_LoadTexture(chainx7_0009);
-        _chainx7_0010 = GRRLIB_LoadTexture(chainx7_0010);
-        _chainx7_0011 = GRRLIB_LoadTexture(chainx7_0011);
-        _chainx7_0012 = GRRLIB_LoadTexture(chainx7_0012);
-        _chainx7_0013 = GRRLIB_LoadTexture(chainx7_0013);
-        _chainx7_0014 = GRRLIB_LoadTexture(chainx7_0014);
-        _chainx7_0038 = GRRLIB_LoadTexture(chainx7_0038);
-        _chainx7_0039 = GRRLIB_LoadTexture(chainx7_0039);
-        _chainx7_0040 = GRRLIB_LoadTexture(chainx7_0040);
-        _chainx7_0041 = GRRLIB_LoadTexture(chainx7_0041);
-        _chainx7_0042 = GRRLIB_LoadTexture(chainx7_0042);
-        _chainx7_0043 = GRRLIB_LoadTexture(chainx7_0043);
-        _chainx7_0044 = GRRLIB_LoadTexture(chainx7_0044);
-        _chainx7_0045 = GRRLIB_LoadTexture(chainx7_0045);
-        _chainx7_0046 = GRRLIB_LoadTexture(chainx7_0046);
-        _chainx7_0047 = GRRLIB_LoadTexture(chainx7_0047);
-
-        _chainx8_0001 = GRRLIB_LoadTexture(chainx8_0001);
-        _chainx8_0002 = GRRLIB_LoadTexture(chainx8_0002);
-        _chainx8_0003 = GRRLIB_LoadTexture(chainx8_0003);
-        _chainx8_0004 = GRRLIB_LoadTexture(chainx8_0004);
-        _chainx8_0005 = GRRLIB_LoadTexture(chainx8_0005);
-        _chainx8_0006 = GRRLIB_LoadTexture(chainx8_0006);
-        _chainx8_0007 = GRRLIB_LoadTexture(chainx8_0007);
-        _chainx8_0008 = GRRLIB_LoadTexture(chainx8_0008);
-        _chainx8_0009 = GRRLIB_LoadTexture(chainx8_0009);
-        _chainx8_0010 = GRRLIB_LoadTexture(chainx8_0010);
-        _chainx8_0011 = GRRLIB_LoadTexture(chainx8_0011);
-        _chainx8_0012 = GRRLIB_LoadTexture(chainx8_0012);
-        _chainx8_0013 = GRRLIB_LoadTexture(chainx8_0013);
-        _chainx8_0014 = GRRLIB_LoadTexture(chainx8_0014);
-        _chainx8_0038 = GRRLIB_LoadTexture(chainx8_0038);
-        _chainx8_0039 = GRRLIB_LoadTexture(chainx8_0039);
-        _chainx8_0040 = GRRLIB_LoadTexture(chainx8_0040);
-        _chainx8_0041 = GRRLIB_LoadTexture(chainx8_0041);
-        _chainx8_0042 = GRRLIB_LoadTexture(chainx8_0042);
-        _chainx8_0043 = GRRLIB_LoadTexture(chainx8_0043);
-        _chainx8_0044 = GRRLIB_LoadTexture(chainx8_0044);
-        _chainx8_0045 = GRRLIB_LoadTexture(chainx8_0045);
-        _chainx8_0046 = GRRLIB_LoadTexture(chainx8_0046);
-        _chainx8_0047 = GRRLIB_LoadTexture(chainx8_0047);
-
-        _chainx9_0001 = GRRLIB_LoadTexture(chainx9_0001);
-        _chainx9_0002 = GRRLIB_LoadTexture(chainx9_0002);
-        _chainx9_0003 = GRRLIB_LoadTexture(chainx9_0003);
-        _chainx9_0004 = GRRLIB_LoadTexture(chainx9_0004);
-        _chainx9_0005 = GRRLIB_LoadTexture(chainx9_0005);
-        _chainx9_0006 = GRRLIB_LoadTexture(chainx9_0006);
-        _chainx9_0007 = GRRLIB_LoadTexture(chainx9_0007);
-        _chainx9_0008 = GRRLIB_LoadTexture(chainx9_0008);
-        _chainx9_0009 = GRRLIB_LoadTexture(chainx9_0009);
-        _chainx9_0010 = GRRLIB_LoadTexture(chainx9_0010);
-        _chainx9_0011 = GRRLIB_LoadTexture(chainx9_0011);
-        _chainx9_0012 = GRRLIB_LoadTexture(chainx9_0012);
-        _chainx9_0013 = GRRLIB_LoadTexture(chainx9_0013);
-        _chainx9_0014 = GRRLIB_LoadTexture(chainx9_0014);
-        _chainx9_0038 = GRRLIB_LoadTexture(chainx9_0038);
-        _chainx9_0039 = GRRLIB_LoadTexture(chainx9_0039);
-        _chainx9_0040 = GRRLIB_LoadTexture(chainx9_0040);
-        _chainx9_0041 = GRRLIB_LoadTexture(chainx9_0041);
-        _chainx9_0042 = GRRLIB_LoadTexture(chainx9_0042);
-        _chainx9_0043 = GRRLIB_LoadTexture(chainx9_0043);
-        _chainx9_0044 = GRRLIB_LoadTexture(chainx9_0044);
-        _chainx9_0045 = GRRLIB_LoadTexture(chainx9_0045);
-        _chainx9_0046 = GRRLIB_LoadTexture(chainx9_0046);
-        _chainx9_0047 = GRRLIB_LoadTexture(chainx9_0047);
-
-        _chainx10_0001 = GRRLIB_LoadTexture(chainx10_0001);
-        _chainx10_0002 = GRRLIB_LoadTexture(chainx10_0002);
-        _chainx10_0003 = GRRLIB_LoadTexture(chainx10_0003);
-        _chainx10_0004 = GRRLIB_LoadTexture(chainx10_0004);
-        _chainx10_0005 = GRRLIB_LoadTexture(chainx10_0005);
-        _chainx10_0006 = GRRLIB_LoadTexture(chainx10_0006);
-        _chainx10_0007 = GRRLIB_LoadTexture(chainx10_0007);
-        _chainx10_0008 = GRRLIB_LoadTexture(chainx10_0008);
-        _chainx10_0009 = GRRLIB_LoadTexture(chainx10_0009);
-        _chainx10_0010 = GRRLIB_LoadTexture(chainx10_0010);
-        _chainx10_0011 = GRRLIB_LoadTexture(chainx10_0011);
-        _chainx10_0012 = GRRLIB_LoadTexture(chainx10_0012);
-        _chainx10_0013 = GRRLIB_LoadTexture(chainx10_0013);
-        _chainx10_0014 = GRRLIB_LoadTexture(chainx10_0014);
-        _chainx10_0038 = GRRLIB_LoadTexture(chainx10_0038);
-        _chainx10_0039 = GRRLIB_LoadTexture(chainx10_0039);
-        _chainx10_0040 = GRRLIB_LoadTexture(chainx10_0040);
-        _chainx10_0041 = GRRLIB_LoadTexture(chainx10_0041);
-        _chainx10_0042 = GRRLIB_LoadTexture(chainx10_0042);
-        _chainx10_0043 = GRRLIB_LoadTexture(chainx10_0043);
-        _chainx10_0044 = GRRLIB_LoadTexture(chainx10_0044);
-        _chainx10_0045 = GRRLIB_LoadTexture(chainx10_0045);
-        _chainx10_0046 = GRRLIB_LoadTexture(chainx10_0046);
-        _chainx10_0047 = GRRLIB_LoadTexture(chainx10_0047);
-
-        _chainx11_0001 = GRRLIB_LoadTexture(chainx11_0001);
-        _chainx11_0002 = GRRLIB_LoadTexture(chainx11_0002);
-        _chainx11_0003 = GRRLIB_LoadTexture(chainx11_0003);
-        _chainx11_0004 = GRRLIB_LoadTexture(chainx11_0004);
-        _chainx11_0005 = GRRLIB_LoadTexture(chainx11_0005);
-        _chainx11_0006 = GRRLIB_LoadTexture(chainx11_0006);
-        _chainx11_0007 = GRRLIB_LoadTexture(chainx11_0007);
-        _chainx11_0008 = GRRLIB_LoadTexture(chainx11_0008);
-        _chainx11_0009 = GRRLIB_LoadTexture(chainx11_0009);
-        _chainx11_0010 = GRRLIB_LoadTexture(chainx11_0010);
-        _chainx11_0011 = GRRLIB_LoadTexture(chainx11_0011);
-        _chainx11_0012 = GRRLIB_LoadTexture(chainx11_0012);
-        _chainx11_0013 = GRRLIB_LoadTexture(chainx11_0013);
-        _chainx11_0014 = GRRLIB_LoadTexture(chainx11_0014);
-        _chainx11_0038 = GRRLIB_LoadTexture(chainx11_0038);
-        _chainx11_0039 = GRRLIB_LoadTexture(chainx11_0039);
-        _chainx11_0040 = GRRLIB_LoadTexture(chainx11_0040);
-        _chainx11_0041 = GRRLIB_LoadTexture(chainx11_0041);
-        _chainx11_0042 = GRRLIB_LoadTexture(chainx11_0042);
-        _chainx11_0043 = GRRLIB_LoadTexture(chainx11_0043);
-        _chainx11_0044 = GRRLIB_LoadTexture(chainx11_0044);
-        _chainx11_0045 = GRRLIB_LoadTexture(chainx11_0045);
-        _chainx11_0046 = GRRLIB_LoadTexture(chainx11_0046);
-        _chainx11_0047 = GRRLIB_LoadTexture(chainx11_0047);
-
-        _chainx12_0001 = GRRLIB_LoadTexture(chainx12_0001);
-        _chainx12_0002 = GRRLIB_LoadTexture(chainx12_0002);
-        _chainx12_0003 = GRRLIB_LoadTexture(chainx12_0003);
-        _chainx12_0004 = GRRLIB_LoadTexture(chainx12_0004);
-        _chainx12_0005 = GRRLIB_LoadTexture(chainx12_0005);
-        _chainx12_0006 = GRRLIB_LoadTexture(chainx12_0006);
-        _chainx12_0007 = GRRLIB_LoadTexture(chainx12_0007);
-        _chainx12_0008 = GRRLIB_LoadTexture(chainx12_0008);
-        _chainx12_0009 = GRRLIB_LoadTexture(chainx12_0009);
-        _chainx12_0010 = GRRLIB_LoadTexture(chainx12_0010);
-        _chainx12_0011 = GRRLIB_LoadTexture(chainx12_0011);
-        _chainx12_0012 = GRRLIB_LoadTexture(chainx12_0012);
-        _chainx12_0013 = GRRLIB_LoadTexture(chainx12_0013);
-        _chainx12_0014 = GRRLIB_LoadTexture(chainx12_0014);
-        _chainx12_0038 = GRRLIB_LoadTexture(chainx12_0038);
-        _chainx12_0039 = GRRLIB_LoadTexture(chainx12_0039);
-        _chainx12_0040 = GRRLIB_LoadTexture(chainx12_0040);
-        _chainx12_0041 = GRRLIB_LoadTexture(chainx12_0041);
-        _chainx12_0042 = GRRLIB_LoadTexture(chainx12_0042);
-        _chainx12_0043 = GRRLIB_LoadTexture(chainx12_0043);
-        _chainx12_0044 = GRRLIB_LoadTexture(chainx12_0044);
-        _chainx12_0045 = GRRLIB_LoadTexture(chainx12_0045);
-        _chainx12_0046 = GRRLIB_LoadTexture(chainx12_0046);
-        _chainx12_0047 = GRRLIB_LoadTexture(chainx12_0047);
-
-        _chainx13_0001 = GRRLIB_LoadTexture(chainx13_0001);
-        _chainx13_0002 = GRRLIB_LoadTexture(chainx13_0002);
-        _chainx13_0003 = GRRLIB_LoadTexture(chainx13_0003);
-        _chainx13_0004 = GRRLIB_LoadTexture(chainx13_0004);
-        _chainx13_0005 = GRRLIB_LoadTexture(chainx13_0005);
-        _chainx13_0006 = GRRLIB_LoadTexture(chainx13_0006);
-        _chainx13_0007 = GRRLIB_LoadTexture(chainx13_0007);
-        _chainx13_0008 = GRRLIB_LoadTexture(chainx13_0008);
-        _chainx13_0009 = GRRLIB_LoadTexture(chainx13_0009);
-        _chainx13_0010 = GRRLIB_LoadTexture(chainx13_0010);
-        _chainx13_0011 = GRRLIB_LoadTexture(chainx13_0011);
-        _chainx13_0012 = GRRLIB_LoadTexture(chainx13_0012);
-        _chainx13_0013 = GRRLIB_LoadTexture(chainx13_0013);
-        _chainx13_0014 = GRRLIB_LoadTexture(chainx13_0014);
-        _chainx13_0038 = GRRLIB_LoadTexture(chainx13_0038);
-        _chainx13_0039 = GRRLIB_LoadTexture(chainx13_0039);
-        _chainx13_0040 = GRRLIB_LoadTexture(chainx13_0040);
-        _chainx13_0041 = GRRLIB_LoadTexture(chainx13_0041);
-        _chainx13_0042 = GRRLIB_LoadTexture(chainx13_0042);
-        _chainx13_0043 = GRRLIB_LoadTexture(chainx13_0043);
-        _chainx13_0044 = GRRLIB_LoadTexture(chainx13_0044);
-        _chainx13_0045 = GRRLIB_LoadTexture(chainx13_0045);
-        _chainx13_0046 = GRRLIB_LoadTexture(chainx13_0046);
-        _chainx13_0047 = GRRLIB_LoadTexture(chainx13_0047);
-
-        _chainxunknown_0001 = GRRLIB_LoadTexture(chainxunknown_0001);
-        _chainxunknown_0002 = GRRLIB_LoadTexture(chainxunknown_0002);
-        _chainxunknown_0003 = GRRLIB_LoadTexture(chainxunknown_0003);
-        _chainxunknown_0004 = GRRLIB_LoadTexture(chainxunknown_0004);
-        _chainxunknown_0005 = GRRLIB_LoadTexture(chainxunknown_0005);
-        _chainxunknown_0006 = GRRLIB_LoadTexture(chainxunknown_0006);
-        _chainxunknown_0007 = GRRLIB_LoadTexture(chainxunknown_0007);
-        _chainxunknown_0008 = GRRLIB_LoadTexture(chainxunknown_0008);
-        _chainxunknown_0009 = GRRLIB_LoadTexture(chainxunknown_0009);
-        _chainxunknown_0010 = GRRLIB_LoadTexture(chainxunknown_0010);
-        _chainxunknown_0011 = GRRLIB_LoadTexture(chainxunknown_0011);
-        _chainxunknown_0012 = GRRLIB_LoadTexture(chainxunknown_0012);
-        _chainxunknown_0013 = GRRLIB_LoadTexture(chainxunknown_0013);
-        _chainxunknown_0014 = GRRLIB_LoadTexture(chainxunknown_0014);
-        _chainxunknown_0038 = GRRLIB_LoadTexture(chainxunknown_0038);
-        _chainxunknown_0039 = GRRLIB_LoadTexture(chainxunknown_0039);
-        _chainxunknown_0040 = GRRLIB_LoadTexture(chainxunknown_0040);
-        _chainxunknown_0041 = GRRLIB_LoadTexture(chainxunknown_0041);
-        _chainxunknown_0042 = GRRLIB_LoadTexture(chainxunknown_0042);
-        _chainxunknown_0043 = GRRLIB_LoadTexture(chainxunknown_0043);
-        _chainxunknown_0044 = GRRLIB_LoadTexture(chainxunknown_0044);
-        _chainxunknown_0045 = GRRLIB_LoadTexture(chainxunknown_0045);
-        _chainxunknown_0046 = GRRLIB_LoadTexture(chainxunknown_0046);
-        _chainxunknown_0047 = GRRLIB_LoadTexture(chainxunknown_0047);
+        _xAny0001 = GRRLIB_LoadTexture(xAny0001);
+        _xAny0002 = GRRLIB_LoadTexture(xAny0002);
+        _xAny0003 = GRRLIB_LoadTexture(xAny0003);
+        _xAny0004 = GRRLIB_LoadTexture(xAny0004);
+        _xAny0005 = GRRLIB_LoadTexture(xAny0005);
+        _xAny0006 = GRRLIB_LoadTexture(xAny0006);
+        _xAny0007 = GRRLIB_LoadTexture(xAny0007);
+        _xAny0008 = GRRLIB_LoadTexture(xAny0008);
+        _xAny0009 = GRRLIB_LoadTexture(xAny0009);
+        _xAny0010 = GRRLIB_LoadTexture(xAny0010);
+        _xAny0011 = GRRLIB_LoadTexture(xAny0011);
+        _xAny0012 = GRRLIB_LoadTexture(xAny0012);
+        _xAny0013 = GRRLIB_LoadTexture(xAny0013);
+        _xAny0014 = GRRLIB_LoadTexture(xAny0014);
+        _xAny0015 = GRRLIB_LoadTexture(xAny0015);
+        _xAny0016 = GRRLIB_LoadTexture(xAny0016);
+        _xAny0017 = GRRLIB_LoadTexture(xAny0017);
+        _xAny0018 = GRRLIB_LoadTexture(xAny0018);
+        _xAny0019 = GRRLIB_LoadTexture(xAny0019);
+        _xAny0020 = GRRLIB_LoadTexture(xAny0020);
+        _xAny0021 = GRRLIB_LoadTexture(xAny0021);
+        _xAny0022 = GRRLIB_LoadTexture(xAny0022);
+        _xAny0023 = GRRLIB_LoadTexture(xAny0023);
+        _xAny0024 = GRRLIB_LoadTexture(xAny0024);
+        _xAny0025 = GRRLIB_LoadTexture(xAny0025);
+        _xAny0026 = GRRLIB_LoadTexture(xAny0026);
 
         _comboInterfaceAnimationP1_0001 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0001);
         _comboInterfaceAnimationP1_0002 = GRRLIB_LoadTexture(comboInterfaceAnimationP1_0002);
@@ -3143,8 +1495,6 @@ class SpriteManager
 
         _P1 = GRRLIB_LoadTexture(P1);
         _P2 = GRRLIB_LoadTexture(P2);
-
-        _garbage_transform_leaf = GRRLIB_LoadTexture(garbage_transform_leaf);
 
         _blue_animation0001 = GRRLIB_LoadTexture(blue_animation0001);
         _blue_animation0002 = GRRLIB_LoadTexture(blue_animation0002);
@@ -3321,6 +1671,58 @@ class SpriteManager
         _xc11_psy = GRRLIB_LoadTexture(xc11_psy);
         _xc11_water = GRRLIB_LoadTexture(xc11_water);
 
+        _x3_mask0008 = GRRLIB_LoadTexture(x3_mask0008);
+        _x4_mask0008 = GRRLIB_LoadTexture(x4_mask0008);
+        _x5_mask0008 = GRRLIB_LoadTexture(x5_mask0008);
+        _x6_mask0008 = GRRLIB_LoadTexture(x6_mask0008);
+        _xc1_mask0008 = GRRLIB_LoadTexture(xc1_mask0008);
+        _xc2_mask0008 = GRRLIB_LoadTexture(xc2_mask0008);
+        _xc3_mask0008 = GRRLIB_LoadTexture(xc3_mask0008);
+        _xc4_mask0008 = GRRLIB_LoadTexture(xc4_mask0008);
+        _xc5_mask0008 = GRRLIB_LoadTexture(xc5_mask0008);
+        _xc6_mask0008 = GRRLIB_LoadTexture(xc6_mask0008);
+        _xc7_mask0008 = GRRLIB_LoadTexture(xc7_mask0008);
+        _xc8_mask0008 = GRRLIB_LoadTexture(xc8_mask0008);
+        _xc9_mask0008 = GRRLIB_LoadTexture(xc9_mask0008);
+        _xc10_mask0008 = GRRLIB_LoadTexture(xc10_mask0008);
+
+        _blockMask0008 = GRRLIB_LoadTexture(blockMask0008);
+
+        _unnamed = GRRLIB_LoadTexture(unnamed);
+        _combo_4 = GRRLIB_LoadTexture(combo_4);
+        _combo_5 = GRRLIB_LoadTexture(combo_5);
+        _combo_6 = GRRLIB_LoadTexture(combo_6);
+        _combo_7 = GRRLIB_LoadTexture(combo_7);
+        _combo_8 = GRRLIB_LoadTexture(combo_8);
+        _combo_9 = GRRLIB_LoadTexture(combo_9);
+        _combo_10 = GRRLIB_LoadTexture(combo_10);
+        _combo_11 = GRRLIB_LoadTexture(combo_11);
+        _combo_12 = GRRLIB_LoadTexture(combo_12);
+        _combo_13 = GRRLIB_LoadTexture(combo_13);
+        _chain_2 = GRRLIB_LoadTexture(chain_2);
+        _chain_3 = GRRLIB_LoadTexture(chain_3);
+        _chain_4 = GRRLIB_LoadTexture(chain_4);
+        _chain_5 = GRRLIB_LoadTexture(chain_5);
+        _chain_6 = GRRLIB_LoadTexture(chain_6);
+        _chain_7 = GRRLIB_LoadTexture(chain_7);
+        _chain_8 = GRRLIB_LoadTexture(chain_8);
+        _chain_9 = GRRLIB_LoadTexture(chain_9);
+        _chain_10 = GRRLIB_LoadTexture(chain_10);
+        _chain_11 = GRRLIB_LoadTexture(chain_11);
+        _chain_12 = GRRLIB_LoadTexture(chain_12);
+        _chain_13 = GRRLIB_LoadTexture(chain_13);
+        _chain_unknown = GRRLIB_LoadTexture(chain_unknown);
+
+        _g_black = GRRLIB_LoadTexture(g_black);
+        _g_blue = GRRLIB_LoadTexture(g_blue);
+        _g_gray = GRRLIB_LoadTexture(g_gray);
+        _g_green = GRRLIB_LoadTexture(g_green);
+        _g_normal = GRRLIB_LoadTexture(g_normal);
+        _g_orange = GRRLIB_LoadTexture(g_orange);
+        _g_pink = GRRLIB_LoadTexture(g_pink);
+        _g_purple = GRRLIB_LoadTexture(g_purple);
+        _g_red = GRRLIB_LoadTexture(g_red);
+        _g_yellow = GRRLIB_LoadTexture(g_yellow);
     }
 
     public: GRRLIB_texImg * DecodeNumber (int number)

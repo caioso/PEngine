@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     Engine::Init();
 
     // DEBUG
-    Music * __msc;
+    //Music * __msc;
     //__msc = new Music(col, col_size, 1000);
     //AudioEngine::PlayMusic(__msc, false, 128);
 
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
                                Point2D(32, 61),
                                Point2D(0,5),
                                PPL_PLAYER_1,
-                               GRASS_TYPE,
+                               ELECTRIC_TYPE,
                                _spriteManager,
                                _animationManager);
 

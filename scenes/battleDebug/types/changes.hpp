@@ -18,6 +18,9 @@ typedef uint32_t Change;
 // Extract Destination X
 #define ExtractDestinationPanelX(OP) (((OP>>8)&255)&15)
 
+// Extract Flag informing if panel is garbage source
+#define ExtractPanelIsGarbageSource(OP) ((((OP>>8)&255)>>4)&15)
+
 // Extract Panel image style
 #define ExtractPanelImageStyle(OP) (((OP>>8)&255)&15)
 
@@ -71,6 +74,9 @@ typedef uint32_t Change;
 
 // Add Destination Panel X to Change
 #define AddDestinationPanelX(OP, A) ((OP) | ((A&15)<<8))
+
+// Add Flag to inform if the panel is the garbage source
+#define AddPanelIsGarbageSource(OP, A) ((OP) | (((A&15)<<4)<<8))
 
 // Add Destination Panel X to Change
 #define AddFallDelay(OP, A) ((OP) | ((A&15)<<8))

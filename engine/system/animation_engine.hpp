@@ -28,7 +28,7 @@ class AnimationEngine
     // @param properties: Which sprite properties will be animated;
     // @param duration: Animation length in miliseconds.
     // @param completion_completion: callback called when the tween completes execution.
-    public: static void RegisterTween (Sprite * object, SpriteProperties properties, float duration, EasingTypesName easin = EaseNoneLinear, float delay = 0.0, void (*completion_completion)(void) = NULL);
+    public: static void RegisterTween (Sprite * object, SpriteProperties properties, float duration, EasingTypesName easing = EaseNoneLinear, float delay = 0.0, bool auto_revert = false, EasingTypesName revertEasing = EaseNoneLinear, bool auto_destroy = false, void (*completion_completion)(void) = NULL);
 
     // Update each animation for the given frame
     public: static void UpdateTweens ();

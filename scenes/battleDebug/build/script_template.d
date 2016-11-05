@@ -95,7 +95,7 @@ script_template.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../system/../common/constants.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../system/../common/macros.h \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../types/visibility.hpp \
- /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../types/trajectory.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../types/transformation.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../types/point2d.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/audio_engine.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/system/debug.hpp \
@@ -119,7 +119,7 @@ script_template.o: \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/utils/../system/debug.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/types/point2d.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/types/dim2D.hpp \
- /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/types/trajectory.hpp \
+ /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/types/transformation.hpp \
  /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/types/sprite_properties.hpp
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./script_template.hpp:
@@ -312,7 +312,7 @@ script_template.o: \
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../types/visibility.hpp:
 
-/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../types/trajectory.hpp:
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../types/transformation.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/base/../types/point2d.hpp:
 
@@ -360,6 +360,6 @@ script_template.o: \
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/types/dim2D.hpp:
 
-/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/types/trajectory.hpp:
+/Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/types/transformation.hpp:
 
 /Users/caiooliveira/Desktop/PPL/PPL/src/scenes/battleDebug/./../../engine/types/sprite_properties.hpp:

@@ -6,7 +6,7 @@
 
 #include "../system/debug.hpp"
 #include "../types/visibility.hpp"
-#include "../types/trajectory.hpp"
+#include "../types/transformation.hpp"
 
 using namespace std;
 
@@ -36,7 +36,7 @@ class Sprite
 
     // Animation
     public: vector<GRRLIB_texImg*> _frames;
-    public: vector<Trajectory> _trajectory;
+    public: vector<Transformation> _transformations;
     private: unsigned int _current_frame;
     private: bool _is_playing;
     private: bool _repeat;
@@ -115,11 +115,9 @@ class Sprite
 
     // Register frame in the animation list.
     // @param _frame: Frame texture reference.
-    // @param _x: Trajectory Point X coordinate.
-    // @param _y: Trajectory Point Y coordinate.
-    // @param _type: Trajectory Point Type.
+    // @param _transformation: Transfromation
     // @return inform if the operation was successful.
-    public: bool RegisterFrameWithTrajectory (GRRLIB_texImg * _frame, int _x = 0, int _y = 0, PointType _type = IgnorePoint);
+    public: bool RegisterFrameWithTransformation (GRRLIB_texImg * _frame, Transformation _transformation);
 
     // Starts animation or resume if previously paused.
     public: void Play () { _is_playing = true; }

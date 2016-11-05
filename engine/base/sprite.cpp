@@ -100,25 +100,26 @@ bool Sprite::RegisterFrame (GRRLIB_texImg * _frame)
         SetAsset (_frame, _width, _height);
     _frames.push_back(_frame);
 
-    Trajectory _tr;
-    _tr._point.setX(0);
-    _tr._point.setY(0);
-    _tr._type = IgnorePoint;
-    _trajectory.push_back(_tr);
+    Transformation _tr;
+    Point2D _point;
+    _point.setX(0);
+    _point.setY(0);
+
+    _tr.SetPoint(_point, RelativePoint);
+    _tr.SetRotation(0);
+    _tr.SetScaleX(1);
+    _tr.SetScaleY(1);
+    _tr.SetAlpha(255);
+    _transformations.push_back(_tr);
     return true;
 }
 
-bool Sprite::RegisterFrameWithTrajectory (GRRLIB_texImg * _frame, int _x, int _y, PointType _type)
+bool Sprite::RegisterFrameWithTransformation (GRRLIB_texImg * _frame, Transformation _transformation)
 {
     if (_frames.size() == 0)
         SetAsset (_frame, _width, _height);
     _frames.push_back(_frame);
-
-    Trajectory _tr;
-    _tr._point.setX(_x);
-    _tr._point.setY(_y);
-    _tr._type = _type;
-    _trajectory.push_back(_tr);
+    _transformations.push_back(_transformation);
     return true;
 
 }

@@ -2,14 +2,15 @@
 
 vector<Tween> AnimationEngine::_tween_list;
 
-void AnimationEngine::RegisterTween (Sprite * object, SpriteProperties properties, float duration, EasingTypesName easing, float delay, void (*completion_completion)(void))
+void AnimationEngine::RegisterTween (Sprite * object, SpriteProperties properties, float duration, EasingTypesName easing, float delay, bool auto_revert, EasingTypesName revertEasing, bool auto_destroy, void (*completion_completion)(void))
 {
     if (object->_isAnimating == false)
     {
-        Tween __tween;
+        Tween __tween(auto_revert, auto_destroy);
         __tween._sprite_reference = object;
         __tween._sprite_properties = properties;
         __tween._easing = easing;
+        __tween._revert_easing = revertEasing;
         __tween._duration = duration;
         __tween._delay = delay;
         __tween._total_frames = (duration/1000)*PPL_TARGET_FRAMERATE;
@@ -55,10 +56,38 @@ void AnimationEngine::UpdateTweens ()
                 (SpriteAlpha,_tween_list[i]._sprite_properties.GetFinalPropertyValue(SpriteAlpha));
 
             _tween_list[i]._sprite_reference->_isAnimating = false;
-            if (_tween_list[i]._completion != NULL)
+            if (_tween_list[i]._completion != NULL && !_tween_list[i]._auto_revert)
                 _tween_list[i]._completion();
-            _tween_list.erase(_tween_list.begin() + i);
-            i--;
+
+            // Register a new tween with auto revert is enabled
+            if (_tween_list[i]._auto_revert)
+            {
+              _tween_list[i]._sprite_reference = _tween_list[i]._sprite_reference;
+              _tween_list[i]._sprite_properties = _tween_list[i]._sprite_properties;
+              _tween_list[i]._sprite_properties.RevertValues();
+              _tween_list[i]._easing = _tween_list[i]._revert_easing;
+              _tween_list[i]._duration = _tween_list[i]._duration;
+              _tween_list[i]._delay = _tween_list[i]._delay;
+              _tween_list[i]._total_frames = _tween_list[i]._total_frames;
+              _tween_list[i]._total_delay = _tween_list[i]._total_delay;
+              _tween_list[i]._completion = _tween_list[i]._completion;
+              _tween_list[i]._sprite_reference->_isAnimating = true;
+              _tween_list[i]._current_frame = 0;
+              _tween_list[i]._auto_revert = false;
+            }
+            else
+            {
+              // Remove Tween from list.
+              bool __auto_destroy = _tween_list[i]._auto_destroy;
+              if (__auto_destroy)
+              {
+                _tween_list[i]._sprite_reference->_parent->RemoveChild(_tween_list[i]._sprite_reference);
+                _tween_list[i]._sprite_reference = NULL;
+                delete  _tween_list[i]._sprite_reference;
+              }
+              _tween_list.erase(_tween_list.begin() + i);
+              i--;
+            }
         }
         else
         {
